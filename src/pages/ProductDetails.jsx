@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import apiClient from '../api/apiClient';
+import apiClient, { API_BASE_URL } from '../api/apiClient';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../context/CartContext';
@@ -11,6 +11,7 @@ import { useWishlist } from '../context/WishlistContext';
 import RecentlyViewed from '../components/products/RecentlyViewed';
 import CountryAutocomplete from '../components/common/CountryAutocomplete';
 import ProductShareButton from '../components/common/ProductShareButton';
+import SEO from '../components/common/SEO';
 
 import {
   FiBox, FiTag, FiSend, FiShoppingCart, FiInfo, FiChevronRight,
@@ -70,7 +71,7 @@ export default function ProductDetails() {
       }
     };
 
-    // checkUserLocation();
+    checkUserLocation();
   }, []);
 
   const handleQuoteChange = (e) => {
@@ -90,12 +91,16 @@ export default function ProductDetails() {
       const res = await apiClient.post(endpoint, {
         ...quoteFormData,
         inquiryType: quoteFormType === 'checkout' ? 'Pricing Request' : 'Quote Request',
+        sourceForm: quoteFormType === 'checkout' ? 'Product Details - Checkout Request Modal' : 'Product Details - Quote Request Modal',
+        productInterested: product?.name || '',
+        chemicalName: product?.chemicalName || product?.name || '',
+        casNo: product?.casNumber || '',
         items: [{
-          productId: product._id,
-          name: product.name,
-          cas: product.casNumber,
+          productId: product?._id,
+          name: product?.name,
+          cas: product?.casNumber,
           quantity: 1,
-          unit: 'ea' // Generic placeholder for single product quote
+          unit: 'ea'
         }]
       }, {
         headers: user ? { Authorization: `Bearer ${user.token}` } : {}
@@ -116,16 +121,45 @@ export default function ProductDetails() {
     }
   };
 
-  const [pendingDownload, setPendingDownload] = useState(null);
+  const [downloadNotice, setDownloadNotice] = useState(null);
 
   const handleDownload = (docType) => {
-    if (!user) {
-      setPendingDownload(docType);
-      setShowAuthAlert(true);
-    } else {
-      // Placeholder for actual download logic
-      alert(`${docType} download started!`);
+    if (!product) return;
+
+    const rawType = (docType || '').toLowerCase();
+    let typeKey = 'msds';
+    let label = 'MSDS';
+
+    if (rawType.includes('draft')) {
+      typeKey = 'draft-coa';
+      label = 'Draft COA';
+    } else if (rawType.includes('coa')) {
+      typeKey = 'coa';
+      label = 'COA';
     }
+
+    // Check if document exists on product object
+    const docObj =
+      typeKey === 'msds'
+        ? product.documents?.msds
+        : typeKey === 'draft-coa'
+          ? product.documents?.draftCoa
+          : product.documents?.coa;
+
+    const isAvailable = Boolean(docObj?.url);
+
+    if (!isAvailable) {
+      setDownloadNotice({
+        type: 'info',
+        message: `${label} is currently not available for this product batch. You can request a quote or contact our analytical team.`,
+      });
+      setTimeout(() => setDownloadNotice(null), 6000);
+      return;
+    }
+
+    // Trigger download endpoint from backend
+    const downloadEndpoint = `${API_BASE_URL}/products/${product.slug || product._id}/download/${typeKey}`;
+    window.open(downloadEndpoint, '_blank');
   };
 
   useEffect(() => {
@@ -237,6 +271,7 @@ export default function ProductDetails() {
   if (loading) {
     return (
       <div className="min-h-screen pt-32 pb-24 flex flex-col items-center justify-center bg-[#F8FBFC]">
+        <SEO title="Loading Product..." />
         <div className="w-12 h-12 border-4 border-[#1AA3B6]/20 border-t-[#1AA3B6] rounded-full animate-spin mb-4"></div>
         <p className="text-slate-600 font-semibold text-lg">Loading product details...</p>
       </div>
@@ -246,6 +281,7 @@ export default function ProductDetails() {
   if (!product) {
     return (
       <div className="min-h-screen pt-32 pb-24 flex flex-col items-center justify-center bg-[#F8FBFC] px-4 text-center">
+        <SEO title="Product Not Found" noIndex={true} />
         <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mb-4">
           <FiBox size={32} />
         </div>
@@ -287,14 +323,25 @@ export default function ProductDetails() {
       </div>
 
       <div className="absolute top-3.5 right-3.5 z-40 pointer-events-auto">
-        <span className={`px-2.5 py-1 text-[10px] font-extrabold rounded-md uppercase tracking-wider shadow-sm flex items-center gap-1.5 ${(product.availability || 'In Stock').toLowerCase() === 'in stock'
-          ? 'bg-[#1AA3B6] text-white border-0 animate-pulse'
-          : 'bg-orange-50 text-orange-600 border border-orange-100'
-          }`}>
-          <span className={`w-1.5 h-1.5 rounded-full ${(product.availability || 'In Stock').toLowerCase() === 'in stock' ? 'bg-white' : 'bg-orange-500'
-            }`}></span>
-          {product.availability || 'In Stock'}
-        </span>
+        {(() => {
+          const avail = (product.availability || 'In Stock').toLowerCase();
+          const isStock = avail === 'in stock';
+          const isUnder = avail === 'under synthesis';
+          return (
+            <span className={`px-2.5 py-1 text-[10px] font-extrabold rounded-md uppercase tracking-wider shadow-sm flex items-center gap-1.5 ${
+              isStock
+                ? 'bg-[#1AA3B6] text-white border-0 animate-pulse'
+                : isUnder
+                ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                : 'bg-orange-50 text-orange-600 border border-orange-100'
+            }`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${
+                isStock ? 'bg-white' : isUnder ? 'bg-amber-500 animate-pulse' : 'bg-orange-500'
+              }`}></span>
+              {product.availability || 'In Stock'}
+            </span>
+          );
+        })()}
       </div>
 
       <div className="relative z-10 flex-grow flex items-center justify-center w-full mb-4 pt-8">
@@ -379,8 +426,43 @@ export default function ProductDetails() {
     </div>
   );
 
+  const casNumber = product.specifications?.casNumber || product.casNumber || '';
+  const mainDrugName = product.mainProduct?.heading || product.mainProduct?.name || '';
+  const cleanName = product.name?.split(';')[0]?.trim() || '';
+  const seoTitle = `${cleanName}${casNumber ? ` (CAS ${casNumber})` : ''}${mainDrugName ? ` | ${mainDrugName} Standards` : ''}`;
+  const seoDescription = `High-purity ${cleanName}${casNumber ? ` (CAS ${casNumber})` : ''} ${product.productType || 'impurity standard'} with certified analytical documentation (COA/MSDS). Available from GLP Pharma Standards.`;
+
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": cleanName,
+    "image": product.image || "https://glp-pharma.vercel.app/logo.png",
+    "description": seoDescription,
+    "sku": product.specifications?.catalogueNumber || product.catalogueNumber || product._id,
+    ...(casNumber ? { "mpn": casNumber } : {}),
+    "brand": {
+      "@type": "Brand",
+      "name": "GLP Pharma Standards"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "USD",
+      "availability": (product.availability || 'In Stock').toLowerCase().includes('stock')
+        ? "https://schema.org/InStock"
+        : "https://schema.org/PreOrder"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#F8FBFC] font-sans text-heading">
+      <SEO
+        title={seoTitle}
+        description={seoDescription}
+        canonical={`/product/${product.slug}`}
+        ogType="product"
+        image={product.image}
+        schema={productSchema}
+      />
 
       {/* Header Section with detailspageBG */}
       <div
@@ -507,23 +589,47 @@ export default function ProductDetails() {
             )}
 
             {/* Download Documents */}
-            <div className="flex flex-row gap-3">
-              <button
-                onClick={() => handleDownload('MSDS')}
-                className="flex-1 bg-[#E8F4F6] border border-[#1AA3B6] shadow-md hover:shadow-lg rounded-xl py-3 px-4 flex items-center justify-center gap-2 hover:bg-[#1AA3B6] hover:text-white transition-all group"
-              >
-                <BsFileEarmarkText size={18} className="text-[#1AA3B6] group-hover:text-white" />
-                <span className="text-[#0B7285] font-bold text-[13px] group-hover:text-white">Download MSDS</span>
-              </button>
-              <button
-                onClick={() => handleDownload((product.availability || 'In Stock').toLowerCase() === 'in stock' ? 'COA' : 'Draft COA')}
-                className="flex-1 bg-[#E8F4F6] border border-[#1AA3B6] shadow-md hover:shadow-lg rounded-xl py-3 px-4 flex items-center justify-center gap-2 hover:bg-[#1AA3B6] hover:text-white transition-all group"
-              >
-                <TbCertificate size={18} className="text-[#1AA3B6] group-hover:text-white" />
-                <span className="text-[#0B7285] font-bold text-[13px] group-hover:text-white">
-                  {(product.availability || 'In Stock').toLowerCase() === 'in stock' ? 'Download COA' : 'Draft COA'}
-                </span>
-              </button>
+            <div className="flex flex-col gap-2.5">
+              <div className="flex flex-row gap-3">
+                <button
+                  type="button"
+                  onClick={() => handleDownload('MSDS')}
+                  className="flex-1 bg-[#E8F4F6] border border-[#1AA3B6] shadow-md hover:shadow-lg rounded-xl py-3 px-4 flex items-center justify-center gap-2 hover:bg-[#1AA3B6] hover:text-white transition-all group cursor-pointer"
+                >
+                  <BsFileEarmarkText size={18} className="text-[#1AA3B6] group-hover:text-white" />
+                  <span className="text-[#0B7285] font-bold text-[13px] group-hover:text-white">Download MSDS</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDownload((product.availability || 'In Stock').toLowerCase() === 'in stock' ? 'COA' : 'Draft COA')}
+                  className="flex-1 bg-[#E8F4F6] border border-[#1AA3B6] shadow-md hover:shadow-lg rounded-xl py-3 px-4 flex items-center justify-center gap-2 hover:bg-[#1AA3B6] hover:text-white transition-all group cursor-pointer"
+                >
+                  <TbCertificate size={18} className="text-[#1AA3B6] group-hover:text-white" />
+                  <span className="text-[#0B7285] font-bold text-[13px] group-hover:text-white">
+                    {(product.availability || 'In Stock').toLowerCase() === 'in stock' ? 'Download COA' : 'Draft COA'}
+                  </span>
+                </button>
+              </div>
+
+              {downloadNotice && (
+                <div className="p-3 bg-amber-50/90 border border-amber-300 text-amber-900 rounded-xl text-xs flex items-center justify-between shadow-sm animate-fadeIn">
+                  <div className="flex items-center gap-2">
+                    <FiInfo className="text-amber-600 shrink-0" size={16} />
+                    <span className="leading-snug">{downloadNotice.message}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setDownloadNotice(null);
+                      setQuoteFormType('quote');
+                      setShowQuoteForm(true);
+                    }}
+                    className="ml-3 px-2.5 py-1 bg-[#0B7285] hover:bg-[#084553] text-white rounded-lg font-semibold text-[11px] whitespace-nowrap cursor-pointer transition-colors"
+                  >
+                    Request Quote
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Request a Quote / Action Card */}
@@ -587,7 +693,7 @@ export default function ProductDetails() {
                       return 'NA';
                     })(), isSimilarProducts: true
                   },
-                  { icon: <FiTag size={16} />, label: 'Synonyms', value: product.name },
+                  { icon: <FiTag size={16} />, label: 'Synonyms', value: product.synonyms || product.specifications?.synonyms || product.name },
                   { icon: <FiCommand size={16} />, label: 'Molecular Formula', value: product.molecularFormula || 'C12H19NOO' },
                   { icon: <FiLock size={16} />, label: 'Molecular Weight', value: product.molecularWeight || '260.29' },
                   { icon: <FiCheckCircle size={16} />, label: 'Purity (HPLC / GC / LCMS)', value: product.purity || '>98%', highlight: true },
@@ -700,8 +806,7 @@ export default function ProductDetails() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {relatedProducts.map(rel => (
-              <Link
-                to={`/products/${rel.slug}`}
+              <div
                 key={rel._id}
                 className="group bg-white rounded-2xl border border-[#EAF2F4] shadow-sm p-4 flex flex-col w-full mx-auto max-w-[380px]"
               >
@@ -775,68 +880,73 @@ export default function ProductDetails() {
 
                 {/* Image Area */}
                 <div className="relative w-full aspect-square max-h-[200px] mx-auto flex items-center justify-center group/img">
-                  <img
-                    src={rel.image || "/images/demoprod.gif"}
-                    alt={rel.name?.split(';')[0]}
-                    className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover/img:scale-105 transition-transform duration-500"
-                  />
+                  <Link to={`/products/${rel.slug}`} className="w-full h-full flex items-center justify-center">
+                    <img
+                      src={rel.image || "/images/demoprod.gif"}
+                      alt={rel.name?.split(';')[0]}
+                      draggable="false"
+                      className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover/img:scale-105 transition-transform duration-500 select-none pointer-events-none"
+                    />
+                  </Link>
                 </div>
 
-                <div className="text-center mb-1">
-                  <h3 className="font-extrabold text-heading text-[15px] leading-snug min-h-[40px] flex items-center justify-center line-clamp-2 transition-colors group-hover:text-[#1AA3B6]">
-                    {rel.name?.split(';')[0]}
-                  </h3>
+                <div className="text-center mb-1 select-text cursor-text">
+                  <Link to={`/products/${rel.slug}`}>
+                    <h3 className="font-extrabold text-heading text-[15px] leading-snug min-h-[40px] flex items-center justify-center line-clamp-2 transition-colors hover:text-[#1AA3B6] select-text cursor-text">
+                      {rel.name?.split(';')[0]}
+                    </h3>
+                  </Link>
                 </div>
-                <div className="border border-[#EAF2F4] rounded-[12px] overflow-hidden mb-2">
+                <div className="border border-[#EAF2F4] rounded-[12px] overflow-hidden mb-2 select-text cursor-text">
                   {/* row 0 */}
-                  <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative">
-                    <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2">
-                      <FiTag className="text-[#0B7285] text-[13px]" />
+                  <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative select-text cursor-text">
+                    <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2 select-text cursor-text">
+                      <FiTag className="text-[#0B7285] text-[13px] shrink-0" />
                       <span>CAT No.</span>
                     </div>
-                    <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2"></div>
-                    <span className="font-semibold text-heading text-left w-1/2 truncate pl-1">{rel.specifications?.catalogueNumber || rel.catalogueNumber || 'N/A'}</span>
+                    <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2 shrink-0"></div>
+                    <span className="font-semibold text-heading text-left w-1/2 truncate pl-1 select-text cursor-text selection:bg-[#1AA3B6]/20">{rel.specifications?.catalogueNumber || rel.catalogueNumber || 'N/A'}</span>
                   </div>
                   {/* row 1 */}
-                  <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative">
-                    <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2">
-                      <FaFlask className="text-[#0B7285] text-[13px]" />
+                  <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative select-text cursor-text">
+                    <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2 select-text cursor-text">
+                      <FaFlask className="text-[#0B7285] text-[13px] shrink-0" />
                       <span>CAS Number</span>
                     </div>
-                    <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2"></div>
-                    <span className="font-semibold text-heading text-left w-1/2 truncate pl-1">{rel.specifications?.casNumber || rel.casNumber || 'N/A'}</span>
+                    <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2 shrink-0"></div>
+                    <span className="font-semibold text-heading text-left w-1/2 truncate pl-1 select-text cursor-text selection:bg-[#1AA3B6]/20">{rel.specifications?.casNumber || rel.casNumber || 'N/A'}</span>
                   </div>
                   {/* row 2 */}
-                  <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative">
-                    <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2">
-                      <FiTag className="text-[#0B7285] text-[13px]" />
+                  <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative select-text cursor-text">
+                    <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2 select-text cursor-text">
+                      <FiTag className="text-[#0B7285] text-[13px] shrink-0" />
                       <span>Mol. Formula</span>
                     </div>
-                    <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2"></div>
-                    <span className="font-semibold text-heading text-left uppercase w-1/2 truncate pl-1">{rel.specifications?.molecularFormula || rel.molecularFormula || 'N/A'}</span>
+                    <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2 shrink-0"></div>
+                    <span className="font-semibold text-heading text-left uppercase w-1/2 truncate pl-1 select-text cursor-text selection:bg-[#1AA3B6]/20">{rel.specifications?.molecularFormula || rel.molecularFormula || 'N/A'}</span>
                   </div>
                   {/* row 3 */}
-                  <div className="flex items-center p-1.5 text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative">
-                    <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2">
-                      <FaBalanceScale className="text-[#0B7285] text-[13px]" />
+                  <div className="flex items-center p-1.5 text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative select-text cursor-text">
+                    <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2 select-text cursor-text">
+                      <FaBalanceScale className="text-[#0B7285] text-[13px] shrink-0" />
                       <span>Mol. Weight</span>
                     </div>
-                    <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2"></div>
-                    <span className="font-semibold text-heading text-left w-1/2 truncate pl-1">{rel.specifications?.molecularWeight || rel.molecularWeight || 'N/A'}</span>
+                    <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2 shrink-0"></div>
+                    <span className="font-semibold text-heading text-left w-1/2 truncate pl-1 select-text cursor-text selection:bg-[#1AA3B6]/20">{rel.specifications?.molecularWeight || rel.molecularWeight || 'N/A'}</span>
                   </div>
                 </div>
                 <div className="mt-auto pt-2 flex gap-3">
-                  <div className="w-full flex items-center justify-center gap-2 border border-[#1AA3B6] text-[#1AA3B6] font-bold py-2 rounded-xl hover:bg-[#DDF8FB] transition-colors text-[14px]">
-                    <FiInfo size={14} /> More info
-                  </div>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      addToCart(rel);
-                    }}
-                    className="w-full flex items-center justify-center gap-1.5 bg-[#0B7285] text-white font-bold py-2 rounded-[10px] hover:bg-[#0B7285] transition-colors text-[14px]"
+                  <Link
+                    to={`/products/${rel.slug}`}
+                    className="w-full flex items-center justify-center gap-2 border border-[#1AA3B6] text-[#1AA3B6] font-bold py-2 rounded-xl hover:bg-[#DDF8FB] transition-colors text-[14px]"
                   >
-                    {cartItems.some(item => item.id === rel._id) ? (
+                    <FiInfo size={14} /> More info
+                  </Link>
+                  <button
+                    onClick={() => addToCart(rel)}
+                    className="w-full flex items-center justify-center gap-1.5 bg-[#0B7285] text-white font-bold py-2 rounded-[10px] hover:bg-[#095c6b] transition-colors text-[14px]"
+                  >
+                    {cartItems.some(item => item.id === rel._id || item._id === rel._id) ? (
                       <>
                         <FiCheckCircle className="text-sm" /> Added to RFQ
                       </>
@@ -847,7 +957,7 @@ export default function ProductDetails() {
                     )}
                   </button>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
@@ -1043,30 +1153,30 @@ export default function ProductDetails() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-3xl bg-white rounded-2xl shadow-2xl overflow-y-auto max-h-[90vh] border border-[#EAF2F4]"
+              className="relative w-full max-w-3xl bg-white rounded-2xl shadow-2xl overflow-y-auto max-h-[90vh] border border-[#EAF2F4] m-2 sm:m-0"
             >
               {/* Top Accent */}
               <div className="h-2 w-full bg-gradient-to-r from-primary to-[#0B7285] sticky top-0 z-10"></div>
 
-              <div className="flex items-center justify-between p-[24px_30px] border-b border-[#D9E8EC] sticky top-2 bg-white z-10">
-                <div className="flex items-center gap-3">
-                  <FiClipboard className="text-[26px] text-[#1AA3B6]" strokeWidth={1.5} />
+              <div className="flex items-center justify-between p-4 sm:p-[24px_30px] border-b border-[#D9E8EC] sticky top-2 bg-white z-10">
+                <div className="flex items-center gap-2.5 sm:gap-3">
+                  <FiClipboard className="text-[22px] sm:text-[26px] text-[#1AA3B6] shrink-0" strokeWidth={1.5} />
                   <div>
-                    <h2 className="text-[#12344D] text-[18px] font-[750]">
+                    <h2 className="text-[#12344D] text-[16px] sm:text-[18px] font-[750]">
                       {quoteFormType === 'checkout' ? 'Checkout Request' : 'Get a Quote / Product Inquiry'}
                     </h2>
-                    <p className="text-[#5B7280] text-[13px] mt-0.5">Fill in the details below for <span className="font-bold">{product.name}</span>.</p>
+                    <p className="text-[#5B7280] text-[12px] sm:text-[13px] mt-0.5">Fill in the details below for <span className="font-bold">{product.name}</span>.</p>
                   </div>
                 </div>
                 <button
                   onClick={() => setShowQuoteForm(false)}
-                  className="text-slate-400 hover:text-[#12344D] transition-colors bg-slate-100 hover:bg-slate-200 p-2 rounded-full shrink-0"
+                  className="text-slate-400 hover:text-[#12344D] transition-colors bg-slate-100 hover:bg-slate-200 p-1.5 sm:p-2 rounded-full shrink-0"
                 >
-                  <FiX size={20} />
+                  <FiX size={18} />
                 </button>
               </div>
 
-              <form className="p-[25px_30px]" onSubmit={handleQuoteSubmit}>
+              <form className="p-4 sm:p-[25px_30px]" onSubmit={handleQuoteSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[20px] gap-y-[18px]">
                   <div>
                     <label className="block text-[#12344D] text-[12.5px] font-[700] mb-1.5">

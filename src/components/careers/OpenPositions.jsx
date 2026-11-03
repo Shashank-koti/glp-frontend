@@ -42,9 +42,12 @@ export default function OpenPositions() {
                 <div className="flex items-center gap-1.5"><FiBriefcase /> {t('careers.open.minExp')}</div>
               </div>
             </div>
-            <button className="bg-background hover:bg-primary text-body hover:text-white px-8 py-3 rounded-xl font-medium transition-colors whitespace-nowrap">
+            <a
+              href={`mailto:info@glppharmastandards.com?subject=${encodeURIComponent(`Job Application: ${job.title} (${job.department})`)}&body=${encodeURIComponent(`Dear HR Team,\n\nI would like to apply for the position of ${job.title} (${job.department}) in ${job.location}.\n\nPlease find my details and attached resume below:\n\nFull Name:\nPhone / Mobile:\nCurrent Location:\nYears of Experience:\n`)}`}
+              className="bg-background hover:bg-primary text-body hover:text-white px-8 py-3 rounded-xl font-medium transition-colors whitespace-nowrap inline-block text-center"
+            >
               {t('careers.open.apply')}
-            </button>
+            </a>
           </motion.div>
         ))}
       </div>
@@ -54,9 +57,12 @@ export default function OpenPositions() {
         <p className="text-body mb-8 max-w-2xl mx-auto">
           {t('careers.open.noFitDesc')}
         </p>
-        <button className="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-md">
+        <a
+          href={`mailto:info@glppharmastandards.com?subject=${encodeURIComponent('Job Application - General Resume Submission')}&body=${encodeURIComponent(`Dear HR Team,\n\nI would like to submit my resume for upcoming opportunities at GLP Pharma Standards.\n\nFull Name:\nPhone / Mobile:\nArea of Expertise:\nTotal Experience:\n`)}`}
+          className="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-md inline-block"
+        >
           {t('careers.open.submit')}
-        </button>
+        </a>
       </div>
     </div>
   );

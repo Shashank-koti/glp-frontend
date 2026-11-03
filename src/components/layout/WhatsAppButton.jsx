@@ -8,7 +8,7 @@ export default function WhatsAppButton() {
       href={`https://wa.me/${phoneNumber}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-20 right-6 sm:bottom-24 sm:right-4 z-50 bg-[#25D366] text-white p-2 sm:p-3 rounded-full shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.5)] transition-all duration-300 flex items-center justify-center group"
+      className="fixed bottom-20 right-3.5 sm:bottom-24 sm:right-4 z-50 bg-[#25D366] text-white p-2.5 sm:p-3 rounded-full shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.5)] transition-all duration-300 flex items-center justify-center group"
       aria-label="Chat on WhatsApp"
     >
       <FaWhatsapp className="text-[20px] sm:text-[24px]" />

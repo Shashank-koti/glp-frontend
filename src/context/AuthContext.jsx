@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import apiClient from '../api/apiClient';
 
 const AuthContext = createContext();
 
@@ -27,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const res = await axios.post('https://glp-pharma-backend.vercel.app/api/auth/login', { email, password });
+      const res = await apiClient.post('/auth/login', { email, password });
       if (res.data.success) {
         setUser(res.data.data);
         localStorage.setItem('glp_user', JSON.stringify(res.data.data));
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (userData) => {
     try {
-      const res = await axios.post('https://glp-pharma-backend.vercel.app/api/auth/register', userData);
+      const res = await apiClient.post('/auth/register', userData);
       if (res.data.success) {
         setUser(res.data.data);
         localStorage.setItem('glp_user', JSON.stringify(res.data.data));
@@ -53,7 +54,7 @@ export const AuthProvider = ({ children }) => {
 
   const googleLogin = async (credential) => {
     try {
-      const res = await axios.post('https://glp-pharma-backend.vercel.app/api/auth/google', { credential });
+      const res = await apiClient.post('/auth/google', { credential });
       if (res.data.success) {
         setUser(res.data.data);
         localStorage.setItem('glp_user', JSON.stringify(res.data.data));
@@ -66,7 +67,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await axios.post('https://glp-pharma-backend.vercel.app/api/auth/logout');
+      await apiClient.post('/auth/logout');
     } catch (error) {
       console.error("Logout error", error);
     } finally {

@@ -51,7 +51,7 @@ const Whislist = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FBFC] font-sans pb-24 pt-8 px-4 sm:px-6 lg:px-8 flex flex-col">
+    <div className="min-h-screen bg-[#F8FBFC] font-sans pb-24 pt-8 px-3 sm:px-6 lg:px-8 flex flex-col">
       <div className="max-w-[1600px] w-full mx-auto flex-1 flex flex-col">
 
         {/* Top Breadcrumbs / Back Navigation */}
@@ -66,9 +66,9 @@ const Whislist = () => {
         </div>
 
         {/* Page Header Bar */}
-        <div className="bg-white rounded-2xl border border-[#D9E8EC] p-6 sm:p-8 mb-8 shadow-[0_4px_20px_rgba(26,163,182,0.04)] flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 bg-[#DDF8FB] rounded-2xl flex items-center justify-center text-[#1AA3B6] shadow-sm shrink-0">
+        <div className="bg-white rounded-2xl border border-[#D9E8EC] p-4 sm:p-8 mb-6 sm:mb-8 shadow-[0_4px_20px_rgba(26,163,182,0.04)] flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#DDF8FB] rounded-2xl flex items-center justify-center text-[#1AA3B6] shadow-sm shrink-0">
               <FiHeart size={28} className="fill-[#1AA3B6]/20" />
             </div>
             <div>

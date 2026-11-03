@@ -29,19 +29,19 @@ export default function NewsInsights() {
   ];
 
   return (
-    <section className="py-24 lg:py-32 bg-background relative overflow-hidden">
+    <section className="py-12 sm:py-20 lg:py-32 bg-background relative overflow-hidden">
       {/* Decorative blobs */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-200/40 rounded-full blur-[100px] -z-10 mix-blend-multiply opacity-50 translate-x-1/3 -translate-y-1/3"></div>
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-200/40 rounded-full blur-[100px] -z-10 mix-blend-multiply opacity-50 -translate-x-1/3 translate-y-1/3"></div>
+      <div className="absolute top-0 right-0 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-blue-200/40 rounded-full blur-[80px] sm:blur-[100px] -z-10 mix-blend-multiply opacity-50 translate-x-1/3 -translate-y-1/3"></div>
+      <div className="absolute bottom-0 left-0 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-cyan-200/40 rounded-full blur-[80px] sm:blur-[100px] -z-10 mix-blend-multiply opacity-50 -translate-x-1/3 translate-y-1/3"></div>
 
-      <div className="max-w-[1300px] mx-auto px-6 lg:px-12 relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+      <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 sm:mb-16 gap-6">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100/50 border border-blue-200 mb-4">
               <span className="w-2 h-2 rounded-full bg-primary"></span>
               <h4 className="text-[#084553] font-bold tracking-widest uppercase text-xs">{t('home.newsInsights.knowledgeHub')}</h4>
             </div>
-            <h3 className="font-extrabold text-heading leading-tight text-4xl md:text-5xl">
+            <h3 className="font-extrabold text-heading leading-tight text-3xl sm:text-4xl md:text-5xl">
               {t('home.newsInsights.industryInsights')}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-500">{t('home.newsInsights.andNews')}</span>
             </h3>
@@ -54,17 +54,17 @@ export default function NewsInsights() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {news.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
               className="group bg-white rounded-3xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(37,99,235,0.12)] transition-all duration-500 border border-border flex flex-col cursor-pointer hover:-translate-y-2"
             >
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-56 sm:h-64 overflow-hidden">
                 <img
                   src={item.image}
                   alt={item.title}
@@ -76,9 +76,9 @@ export default function NewsInsights() {
                 </div>
               </div>
 
-              <div className="p-8 flex flex-col flex-grow relative">
+              <div className="p-6 sm:p-8 flex flex-col flex-grow relative">
                 {/* Floating Date Badge */}
-                <div className="absolute -top-6 right-8 bg-primary text-white px-4 py-3 rounded-2xl shadow-lg shadow-blue-600/30 flex flex-col items-center justify-center transform group-hover:-translate-y-1 transition-transform duration-300">
+                <div className="absolute -top-6 right-6 sm:right-8 bg-primary text-white px-3 sm:px-4 py-2 sm:py-3 rounded-2xl shadow-lg shadow-blue-600/30 flex flex-col items-center justify-center transform group-hover:-translate-y-1 transition-transform duration-300">
                   <span className="font-bold leading-none mb-1 text-xl">{item.date.split(' ')[1].replace(',', '')}</span>
                   <span className="uppercase font-medium tracking-wider text-xs">{item.date.split(' ')[0]}</span>
                 </div>

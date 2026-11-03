@@ -16,14 +16,14 @@ export default function Gallery() {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-10">
         {/* Filter Buttons */}
-        <div className="flex flex-wrap justify-center gap-4 pt-10 sm:pt-0 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 pt-6 sm:pt-0 mb-8 sm:mb-12">
           {links.map((link, idx) => (
             <NavLink
               key={idx}
               to={link.path}
               end={link.path === '/gallery'}
               className={({ isActive }) =>
-                `px-6 py-2 rounded-full font-medium transition-colors ${isActive
+                `px-3.5 sm:px-6 py-1.5 sm:py-2 text-xs sm:text-sm rounded-full font-medium transition-colors ${isActive
                   ? 'bg-primary text-white'
                   : 'bg-white text-body border border-border hover:bg-background'
                 }`

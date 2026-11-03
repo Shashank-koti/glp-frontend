@@ -40,12 +40,12 @@ export default function Login() {
 
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center bg-[#F8FBFC] overflow-hidden py-10 px-6 pb-[60px]">
+    <section className="relative min-h-screen flex flex-col items-center justify-center bg-[#F8FBFC] overflow-hidden py-8 sm:py-10 px-3 sm:px-6 pb-[60px]">
       <div className="absolute inset-0 bg-[url('/images/credBG.png')] bg-center bg-cover bg-no-repeat -z-20" />
       <div className="absolute inset-0 bg-white/5 -z-10" />
 
       <motion.div
-        className="w-full max-w-[480px] border border-white/60 sm:border-[#D9E8EC] rounded-[14px] bg-white/95 shadow-[0_10px_28px_rgba(26,163,182,0.12)] p-[45px_30px] sm:p-[50px_58px_45px]"
+        className="w-full max-w-[480px] border border-white/60 sm:border-[#D9E8EC] rounded-[14px] bg-white/95 shadow-[0_10px_28px_rgba(26,163,182,0.12)] p-5 sm:p-[50px_58px_45px]"
         initial={{ opacity: 0, y: 22, scale: 0.985 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
@@ -68,7 +68,7 @@ export default function Login() {
           </div>
         </div>
 
-        <h1 className="text-[#12344D] text-[34px] font-[750] tracking-[-0.038em] leading-[1.2] mt-[40px] mb-[10px] text-center">
+        <h1 className="text-[#12344D] text-[26px] sm:text-[34px] font-[750] tracking-[-0.038em] leading-[1.2] mt-6 sm:mt-[40px] mb-[10px] text-center">
           Welcome <span className="text-[#1AA3B6]">Back</span>
         </h1>
         <p className="text-[#5B7280] text-[14px] font-medium leading-[1.6] max-w-[320px] mx-auto text-center mb-6">

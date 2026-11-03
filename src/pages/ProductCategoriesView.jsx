@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import apiClient, { API_BASE_URL } from '../api/apiClient';
 import {
   FiChevronRight,
   FiShield,
@@ -10,6 +11,7 @@ import {
   FiAlertCircle
 } from 'react-icons/fi';
 import LiquidVialIcon from '../components/common/LiquidVialIcon';
+import SEO from '../components/common/SEO';
 import { useTranslation } from 'react-i18next';
 
 const alphabet = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''), '#'];
@@ -31,7 +33,7 @@ export default function ProductCategoriesView() {
       try {
         setLoading(true);
         // Fetch category details for the header
-        const catRes = await axios.get(`https://glp-pharma-backend.vercel.app/api/categories/${categorySlug}`);
+        const catRes = await axios.get(`${API_BASE_URL}/categories/${categorySlug}`);
         if (catRes.data.success) {
           let catName = catRes.data.data.categoryName || '';
           catName = catName.replace('API IMPURITIES & REFERENCE STANDARDS', 'API Impurities & Reference Standards')
@@ -42,7 +44,7 @@ export default function ProductCategoriesView() {
         }
 
         // Fetch groups
-        const res = await axios.get(`https://glp-pharma-backend.vercel.app/api/categories/${categorySlug}/products`);
+        const res = await axios.get(`${API_BASE_URL}/categories/${categorySlug}/products`);
         if (res.data.success) {
           setGroups(res.data.data);
         }
@@ -84,13 +86,18 @@ export default function ProductCategoriesView() {
 
   return (
     <div className="min-h-screen bg-[#F8FBFC] font-sans">
+      <SEO
+        title={categoryName}
+        description={categoryDescription}
+        canonical={`/product-categories-view/${categorySlug}`}
+      />
 
       {/* 1. Hero Section */}
       <div
-        className="w-full min-h-[420px] bg-cover bg-center bg-no-repeat relative bg-white"
+        className="w-full min-h-[360px] sm:min-h-[420px] bg-cover bg-center bg-no-repeat relative bg-white"
         style={{ backgroundImage: "url('/images/productsBG.png')" }}
       >
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 md:pt-20">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-24 pb-14 sm:pb-20">
           <div className="max-w-[900px]">
             {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-[15px] text-[#5B7280] font-medium mb-6 flex-wrap">
@@ -161,11 +168,11 @@ export default function ProductCategoriesView() {
       </div>
 
       {/* 2. Alphabet Navigation */}
-      <div className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-6 -mt-12 relative z-20">
-        <div className="bg-white/40 backdrop-blur-xl rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.08)] p-3 md:p-4 border border-white/60">
+      <div className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-6 -mt-6 sm:-mt-12 relative z-20">
+        <div className="bg-white/40 backdrop-blur-xl rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.08)] p-2.5 sm:p-4 border border-white/60">
           <div className="flex flex-col gap-3">
             <div className="flex items-center">
-              <div className="flex-1 flex items-center gap-3 overflow-x-auto scrollbar-hide min-w-0 px-2 pb-1">
+              <div className="flex-1 flex items-center gap-2 sm:gap-3 overflow-x-auto scrollbar-hide min-w-0 px-1 sm:px-2 pb-1">
                 <button
                   onClick={() => handleLetterClick('All')}
                   className={`flex-shrink-0 flex items-center gap-1 px-5 h-[42px] rounded-full text-[14.5px] font-extrabold transition-all duration-300 backdrop-blur-md ${currentLetter === 'All'
@@ -228,7 +235,7 @@ export default function ProductCategoriesView() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
             {sortedGroups.map((group, idx) => (
               <Link
                 to={`/products-view/${group.p_link}`}

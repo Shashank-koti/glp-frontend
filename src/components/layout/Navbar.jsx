@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { LuFlaskConical, LuShare2, LuAtom, LuHexagon, LuNetwork, LuDna, LuTestTubeDiagonal, LuLeaf, LuChevronRight, LuBriefcase, LuPhone, LuInfo, LuSettings, LuZap, LuMicroscope, LuSprout, LuPanelRightDashed, LuBeaker } from 'react-icons/lu';
 import navImg from "/navImg.png";
 import axios from 'axios';
+import { API_BASE_URL } from '../../api/apiClient';
 import { useTranslation } from 'react-i18next';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
@@ -89,7 +90,7 @@ export default function Navbar() {
       try {
         const escapeRegex = (str) => str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
         const escapedQuery = escapeRegex(searchQuery.trim());
-        const res = await axios.get(`https://glp-pharma-backend.vercel.app/api/products?search=${encodeURIComponent(escapedQuery)}&limit=5`);
+        const res = await axios.get(`${API_BASE_URL}/products?search=${encodeURIComponent(escapedQuery)}&limit=5`);
         if (res.data.success) {
           setSearchResults(res.data.data);
         }
@@ -127,7 +128,7 @@ export default function Navbar() {
 
       {/* Top Bar - Visible on all screens */}
       <div className="w-full relative z-50 transition-all duration-500 border-b bg-primary/90 border-border/60 text-black">
-        <div className="w-full mx-auto px-4 sm:px-6 lg:px-4 xl:px-6">
+        <div className="w-full mx-auto px-2.5 sm:px-6 lg:px-4 xl:px-6">
           <div className="flex justify-between items-center h-[40px] lg:h-[50px] text-[12px] lg:text-[13px] font-lg antialiased tracking-wide">
             {/* Left Side: Contact Info */}
             <div className="hidden lg:flex items-center gap-6">
@@ -144,16 +145,16 @@ export default function Navbar() {
 
 
             {/* Right Side: Auth Links, Cart, & Language */}
-            <div className="flex items-center justify-between w-full lg:w-auto lg:justify-end gap-3 lg:gap-4">
-              <div className="flex items-center gap-3 lg:gap-4">
+            <div className="flex items-center justify-between w-full lg:w-auto lg:justify-end gap-2 sm:gap-3 lg:gap-4">
+              <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
                 {user ? (
                   <>
-                    <div className="flex items-center gap-1 sm:gap-1.5 transition-colors group hover:text-primary">
-                      <FiUser size={15} className="transition-colors text-primary" />
+                    <div className="flex items-center gap-1 sm:gap-1.5 transition-colors group text-white cursor-pointer">
+                      <FiUser size={15} className="transition-colors text-white" />
                       <span>{user.clientName || 'Profile'}</span>
                     </div>
                     <div className="w-px h-3.5 bg-slate-300"></div>
-                    <button onClick={logout} className="transition-colors hover:text-primary">
+                    <button onClick={logout} className="transition-colors text-white cursor-pointer">
                       Logout
                     </button>
                   </>
@@ -171,7 +172,7 @@ export default function Navbar() {
                 )}
               </div>
 
-              <div className="flex items-center gap-3 lg:gap-4">
+              <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
                 <div className="w-px h-3.5 bg-slate-300"></div>
 
                 {/* Top Bar Compare */}

@@ -38,18 +38,18 @@ export default function OurLegacy() {
   const { t } = useTranslation();
   return (
     <section className="py-12 md:py-24 lg:py-32 bg-white relative overflow-hidden border-t border-border/50">
-      <div className="max-w-[1300px] mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center">
 
           {/* Visual Side */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
             whileInView={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.8, type: "tween" }}
             className="relative order-1 lg:order-2"
           >
-            <div className="aspect-square md:aspect-[4/3] lg:aspect-square rounded-[2.5rem] overflow-hidden shadow-2xl relative group">
+            <div className="aspect-square md:aspect-[4/3] lg:aspect-square rounded-2xl sm:rounded-[2.5rem] overflow-hidden shadow-2xl relative group">
               <img
                 src="/images/about_legacy_research.png"
                 alt="Scientific Research"
@@ -62,10 +62,10 @@ export default function OurLegacy() {
                 variants={floatVariants}
                 initial="initial"
                 animate="animate"
-                className="absolute bottom-8 left-8 bg-white/90 backdrop-blur-xl p-6 rounded-3xl shadow-2xl border border-white max-w-xs transform hover:-translate-y-2 transition-transform duration-300"
+                className="absolute bottom-4 left-4 sm:bottom-8 sm:left-8 bg-white/90 backdrop-blur-xl p-4 sm:p-6 rounded-2xl sm:rounded-3xl shadow-2xl border border-white max-w-xs transform hover:-translate-y-2 transition-transform duration-300"
               >
-                <div className="font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent mb-1 inline-block text-4xl">{t('about.legacy.years')}</div>
-                <div className="text-heading font-bold uppercase tracking-wider text-sm">{t('about.legacy.yearsText')}</div>
+                <div className="font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent mb-1 inline-block text-3xl sm:text-4xl">{t('about.legacy.years')}</div>
+                <div className="text-heading font-bold uppercase tracking-wider text-xs sm:text-sm">{t('about.legacy.yearsText')}</div>
               </motion.div>
             </div>
 
@@ -87,10 +87,10 @@ export default function OurLegacy() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, amount: 0.1 }}
             className="order-2 lg:order-1"
           >
-            <motion.h2 variants={itemVariants} className="font-extrabold text-heading mb-8 leading-tight text-2xl md:text-4xl">
+            <motion.h2 variants={itemVariants} className="font-extrabold text-heading mb-6 sm:mb-8 leading-tight text-2xl sm:text-3xl md:text-4xl">
               {t('about.legacy.title1')} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">{t('about.legacy.title2')}</span>
             </motion.h2>

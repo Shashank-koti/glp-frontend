@@ -23,18 +23,18 @@ export default function News() {
   ];
 
   return (
-    <section className="relative min-h-screen bg-[#F8FBFC] overflow-hidden pt-[110px] pb-[90px] px-4 md:px-6">
+    <section className="relative min-h-screen bg-[#F8FBFC] overflow-hidden pt-20 sm:pt-[110px] pb-14 sm:pb-[90px] px-3 sm:px-6">
       {/* Background accents */}
       <div className="absolute top-0 left-0 w-full h-[400px] bg-gradient-to-b from-[#D9E8EC] to-transparent -z-10" />
       <div className="absolute inset-0 bg-[url('/images/credBG.png')] bg-center bg-cover bg-no-repeat -z-20 opacity-40" />
 
       {/* Header */}
-      <div className="text-center mb-[50px] max-w-[800px] mx-auto">
+      <div className="text-center mb-8 sm:mb-[50px] max-w-[800px] mx-auto">
         <motion.h1
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-primary text-[28px] sm:text-[38px] font-[800] tracking-[-0.03em] leading-[1.2] mb-[16px] uppercase"
+          className="text-primary text-2xl sm:text-[38px] font-[800] tracking-[-0.03em] leading-[1.2] mb-3 sm:mb-[16px] uppercase"
         >
           {t('newsPage.banner.title') || 'Latest News & Insights'}
         </motion.h1>
@@ -42,15 +42,15 @@ export default function News() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-[#5B7280] text-[15px] sm:text-[17px] font-medium leading-[1.6]"
+          className="text-[#5B7280] text-sm sm:text-[17px] font-medium leading-[1.6]"
         >
           {t('newsPage.banner.desc') || 'Stay updated with the latest developments, research findings, and company announcements from GLP Pharma.'}
         </motion.p>
       </div>
 
-      <div className="w-full max-w-[1300px] mx-auto grid grid-cols-1 xl:grid-cols-[1fr_380px] gap-[30px] xl:gap-[40px]">
+      <div className="w-full max-w-[1300px] mx-auto grid grid-cols-1 xl:grid-cols-[1fr_380px] gap-6 sm:gap-[30px] xl:gap-[40px]">
         {/* Main Content: News List */}
-        <div className="flex flex-col gap-[30px]">
+        <div className="flex flex-col gap-6 sm:gap-[30px]">
           {news.map((item, idx) => (
             <motion.article
               key={item.id}
@@ -61,7 +61,7 @@ export default function News() {
             >
 
 
-              <div className="p-[25px_30px] sm:p-[30px_35px] flex-1 flex flex-col justify-center">
+              <div className="p-5 sm:p-[30px_35px] flex-1 flex flex-col justify-center">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="bg-[#E8F4F6] text-[#1AA3B6] text-[11px] font-[750] uppercase tracking-[0.05em] px-[10px] py-[4px] rounded-[4px]">
                     {item.category}

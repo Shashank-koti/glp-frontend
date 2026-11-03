@@ -9,6 +9,7 @@ import {
 } from 'react-icons/lu';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
+import apiClient from '../api/apiClient';
 import CountryAutocomplete from '../components/common/CountryAutocomplete';
 
 export default function QuickEnquiry() {
@@ -46,13 +47,17 @@ export default function QuickEnquiry() {
     setSubmitSuccess(false);
 
     try {
-      const res = await axios.post('https://glp-pharma-backend.vercel.app/api/inquiries/quick', {
+      const res = await apiClient.post('/inquiries/quick', {
         ...formData,
-        inquiryType: 'quick',
+        inquiryType: 'Quick Enquiry',
+        sourceForm: 'Quick Enquiry Page',
         customerName: formData.fullName,
         phone: formData.contactNumber,
-        productInterested: formData.productName,
-        message: `Chemical: ${formData.chemicalName}, CAS: ${formData.casNo}, Qty: ${formData.quantity}`
+        productInterested: formData.productName || formData.chemicalName,
+        chemicalName: formData.chemicalName,
+        casNo: formData.casNo,
+        quantity: formData.quantity,
+        message: formData.message || `Chemical: ${formData.chemicalName || 'N/A'}, CAS: ${formData.casNo || 'N/A'}, Qty: ${formData.quantity || 'N/A'}`
       }, {
         headers: {
           Authorization: `Bearer ${user.token}`
@@ -91,7 +96,7 @@ export default function QuickEnquiry() {
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-extrabold text-[#1AA3B6] mb-4 tracking-tight text-4xl md:text-5xl"
+            className="font-extrabold text-[#1AA3B6] mb-3 sm:mb-4 tracking-tight text-3xl sm:text-4xl md:text-5xl"
           >
             Quick Inquiry
           </motion.h1>
@@ -99,7 +104,7 @@ export default function QuickEnquiry() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="font-bold text-heading mb-3 tracking-tight text-3xl md:text-4xl"
+            className="font-bold text-heading mb-3 tracking-tight text-xl sm:text-3xl md:text-4xl"
           >
             Precision. Purity. Performance.
           </motion.h2>

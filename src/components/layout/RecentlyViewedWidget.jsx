@@ -43,7 +43,7 @@ export default function RecentlyViewedWidget() {
       {/* Floating Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-36 right-6 sm:bottom-40 sm:right-4 z-50 bg-white text-[#1AA3B6] border border-[#1AA3B6]/20 p-2 sm:p-3 rounded-full shadow-[0_4px_14px_0_rgba(26,163,182,0.15)] hover:shadow-[0_6px_20px_rgba(26,163,182,0.3)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center group"
+        className="fixed bottom-36 right-3.5 sm:bottom-40 sm:right-4 z-50 bg-white text-[#1AA3B6] border border-[#1AA3B6]/20 p-2.5 sm:p-3 rounded-full shadow-[0_4px_14px_0_rgba(26,163,182,0.15)] hover:shadow-[0_6px_20px_rgba(26,163,182,0.3)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center group"
         aria-label="Recently Viewed Products"
       >
         <FiEye className="text-[20px] sm:text-[24px]" />

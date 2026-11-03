@@ -33,22 +33,22 @@ export default function ServiceProcess() {
 
   return (
     <section className="py-12 md:py-24 lg:py-32 bg-white relative overflow-hidden border-t border-border">
-      <div className="max-w-[1300px] mx-auto px-6 lg:px-12">
-        <div className="text-center max-w-3xl mx-auto mb-20">
+      <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 md:mb-20">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            className="font-extrabold text-heading mb-6 text-3xl md:text-5xl"
+            viewport={{ once: true, amount: 0.1 }}
+            className="font-extrabold text-heading mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-5xl"
           >
             {t('services.process.title1')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">{t('services.process.title2')}</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ delay: 0.1 }}
-            className="text-body font-medium text-lg"
+            className="text-body font-medium text-base sm:text-lg"
           >
             {t('services.process.desc')}
           </motion.p>
@@ -58,7 +58,7 @@ export default function ServiceProcess() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, amount: 0.1 }}
           className="relative"
         >
           {/* Connecting Line */}
@@ -72,19 +72,19 @@ export default function ServiceProcess() {
             ></motion.div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-8 relative z-10">
             {steps.map((step, idx) => (
               <motion.div
                 key={idx}
                 variants={itemVariants}
                 className="relative group"
               >
-                <div className="bg-white border-2 border-transparent group-hover:border-primary/20 p-8 rounded-3xl shadow-lg group-hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col relative z-10">
-                  <div className="font-black text-transparent bg-clip-text bg-gradient-to-br from-border to-body/30 mb-6 group-hover:from-primary group-hover:to-accent transition-all duration-500 text-5xl">
+                <div className="bg-white border-2 border-transparent group-hover:border-primary/20 p-6 sm:p-8 rounded-3xl shadow-lg group-hover:shadow-xl transition-all duration-300 hover:-translate-y-2 h-full flex flex-col relative z-10">
+                  <div className="font-black text-transparent bg-clip-text bg-gradient-to-br from-border to-body/30 mb-4 sm:mb-6 group-hover:from-primary group-hover:to-accent transition-all duration-500 text-4xl sm:text-5xl">
                     {step.num}
                   </div>
-                  <h3 className="font-bold text-heading mb-4 text-xl">{step.title}</h3>
-                  <p className="text-body leading-relaxed font-medium text-sm">{step.desc}</p>
+                  <h3 className="font-bold text-heading mb-3 sm:mb-4 text-lg sm:text-xl">{step.title}</h3>
+                  <p className="text-body leading-relaxed font-medium text-xs sm:text-sm">{step.desc}</p>
                 </div>
 
               </motion.div>

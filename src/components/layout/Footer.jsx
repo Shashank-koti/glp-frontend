@@ -79,7 +79,7 @@ export default function Footer() {
                 <div className="mt-0.5 w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">
                   <FiMapPin size={13} />
                 </div>
-                <span className="text-[14.5px] leading-relaxed text-slate-200 group-hover:text-white transition-colors">
+                <span className="text-[14px] sm:text-[14.5px] leading-relaxed text-slate-200 group-hover:text-white transition-colors break-words">
                   Plot No:1, Shakti Puram Phase-2, Prashanti Nagar,<br />Industrial Estate(IE), Kukatpally, Hyderabad,<br />Telangana State, India, PIN: 500072
                 </span>
               </li>
@@ -87,19 +87,19 @@ export default function Footer() {
                 <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">
                   <FiPhone size={13} />
                 </div>
-                <a href="tel:+919866074638" className="text-[15px] text-slate-200 group-hover:text-white transition-colors">+91 9866074638</a>
+                <a href="tel:+919866074638" className="text-[14px] sm:text-[15px] text-slate-200 group-hover:text-white transition-colors">+91 9866074638</a>
               </li>
               <li className="flex items-center gap-3 group cursor-pointer">
                 <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">
                   <FiMail size={13} />
                 </div>
-                <a href="mailto:info@glppharmastandards.com" className="text-[15px] text-slate-200 group-hover:text-white transition-colors">info@glppharmastandards.com</a>
+                <a href="mailto:info@glppharmastandards.com" className="text-[13px] sm:text-[15px] text-slate-200 group-hover:text-white transition-colors break-all sm:break-normal">info@glppharmastandards.com</a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-4 flex flex-col md:flex-row justify-between items-center gap-3 text-[14.5px] text-slate-300 font-medium">
+        <div className="border-t border-white/10 pt-4 flex flex-col md:flex-row justify-between items-center gap-3 text-xs sm:text-[14.5px] text-slate-300 font-medium text-center md:text-left">
           <p>&copy; {new Date().getFullYear()} GLP Pharma. All Rights Reserved.</p>
           <div className="flex space-x-6">
             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>

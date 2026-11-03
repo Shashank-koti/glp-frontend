@@ -41,7 +41,7 @@ function App() {
         <CartProvider>
           <Router>
             <ScrollToTop />
-            <div className="flex flex-col min-h-screen bg-background font-sans text-text-main">
+            <div className="flex flex-col min-h-screen bg-background font-sans text-text-main overflow-x-hidden w-full">
               <Navbar />
 
               <main className="flex-grow pt-[54px] lg:pt-[110px]">

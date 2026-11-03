@@ -24,24 +24,24 @@ export default function Careers() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl mx-auto"
           >
-            <h1 className="font-bold text-[#084553] mb-4 text-4xl pt-8 sm:pt-0 md:text-5xl">{t('careers.banner.title')}</h1>
-            <p className="text-body leading-relaxed text-lg">
+            <h1 className="font-bold text-[#084553] mb-3 sm:mb-4 text-3xl sm:text-4xl md:text-5xl pt-8 sm:pt-0">{t('careers.banner.title')}</h1>
+            <p className="text-body leading-relaxed text-base sm:text-lg">
               {t('careers.banner.desc')}
             </p>
           </motion.div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-12 ">
+      <div className="container mx-auto px-4 py-8 sm:py-12">
         {/* Navigation Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-8 border-b border-border pb-4 max-w-4xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-6 sm:mb-8 border-b border-border pb-3 sm:pb-4 max-w-4xl mx-auto">
           {tabs.map((tab, idx) => (
             <NavLink
               key={idx}
               to={tab.path}
               end={tab.path === '/careers'}
               className={({ isActive }) =>
-                `px-6 py-3 rounded-t-xl font-bold transition-colors ${isActive
+                `px-3.5 sm:px-6 py-2 sm:py-3 text-sm sm:text-base rounded-t-xl font-bold transition-colors ${isActive
                   ? 'text-primary border-b-2 border-primary bg-primary/5'
                   : 'text-body hover:text-primary hover:bg-background'
                 }`

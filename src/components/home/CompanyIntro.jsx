@@ -5,28 +5,28 @@ import { useTranslation } from 'react-i18next';
 export default function CompanyIntro() {
   const { t } = useTranslation();
   return (
-    <section className="py-24 lg:py-32 bg-background relative overflow-hidden">
+    <section className="py-12 sm:py-20 lg:py-32 bg-background relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-50 to-transparent skew-x-12 translate-x-20 z-0 opacity-70"></div>
       <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
       <div className="absolute -top-32 -right-32 w-96 h-96 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
 
-      <div className="container mx-auto px-6 lg:px-12 relative z-10 max-w-[1300px]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 max-w-[1300px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center">
 
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8"
           >
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100/50 border border-blue-200 mt-10 mb-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100/50 border border-blue-200 mt-4 sm:mt-10 mb-2">
                 <span className="w-2 h-2 rounded-full bg-primary"></span>
                 <h4 className="text-[#084553] font-bold tracking-widest uppercase text-xs">{t('home.companyIntro.about')}</h4>
               </div>
-              <h1 className="font-extrabold text-heading leading-[1.15] text-3xl md:text-4xl">
+              <h1 className="font-extrabold text-heading leading-[1.15] text-2xl sm:text-3xl md:text-4xl">
                 {t('home.companyIntro.pioneering')} <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-500">
                   {t('home.companyIntro.pharmaceuticals')}
@@ -34,11 +34,11 @@ export default function CompanyIntro() {
               </h1>
             </div>
 
-            <p className="text-body leading-relaxed font-medium text-lg">
+            <p className="text-body leading-relaxed font-medium text-base sm:text-lg">
               {t('home.companyIntro.desc')}
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 sm:gap-y-5 gap-x-4">
               {t('home.companyIntro.points', { returnObjects: true }).map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3 group">
                   <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-[#084553] flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
@@ -50,7 +50,7 @@ export default function CompanyIntro() {
             </div>
 
             <div className="">
-              <a href="/about" className="group inline-flex items-center gap-2 text-primary font-bold hover:text-blue-800 transition-colors text-lg">
+              <a href="/about" className="group inline-flex items-center gap-2 text-primary font-bold hover:text-blue-800 transition-colors text-base sm:text-lg">
                 {t('home.companyIntro.readOurStory')}
                 <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
@@ -60,7 +60,7 @@ export default function CompanyIntro() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
@@ -77,16 +77,16 @@ export default function CompanyIntro() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="absolute bottom-6 left-6 right-6 p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-xl"
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 p-4 sm:p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-xl"
               >
                 <div className="flex items-center gap-4 mb-2">
-                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-lg">
-                    <span className="text-white font-bold text-xl">20+</span>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary flex items-center justify-center shadow-lg shrink-0">
+                    <span className="text-white font-bold text-lg sm:text-xl">20+</span>
                   </div>
                   <div>
-                    <h4 className="text-white font-bold leading-tight text-lg">{t('home.companyIntro.yearsOfExcellence')}</h4>
-                    <p className="text-blue-200 text-sm">{t('home.companyIntro.inGlobalPharma')}</p>
+                    <h4 className="text-white font-bold leading-tight text-base sm:text-lg">{t('home.companyIntro.yearsOfExcellence')}</h4>
+                    <p className="text-blue-200 text-xs sm:text-sm">{t('home.companyIntro.inGlobalPharma')}</p>
                   </div>
                 </div>
               </motion.div>

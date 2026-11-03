@@ -95,11 +95,11 @@ export default function Hero() {
                   </p>
 
                   {/* Buttons */}
-                  <div className="flex flex-row flex-nowrap gap-2 sm:gap-4 mt-2">
-                    <a href="/product-categories-view/api-impurities-and-reference-standards" className="flex-1 sm:flex-none inline-flex items-center justify-center px-2 py-2.5 sm:px-5 sm:py-3 text-[11px] sm:text-base bg-primary hover:bg-primary text-white font-semibold rounded-lg transition-all duration-300 gap-1.5 hover:-translate-y-0.5 whitespace-nowrap">
+                  <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-4 mt-2 max-w-md sm:max-w-none">
+                    <a href="/product-categories-view/api-impurities-and-reference-standards" className="inline-flex items-center justify-center px-4 py-2.5 sm:px-5 sm:py-3 text-[12px] sm:text-base bg-primary hover:bg-primary text-white font-semibold rounded-lg transition-all duration-300 gap-1.5 hover:-translate-y-0.5 whitespace-nowrap">
                       {t('home.hero.exploreProducts')} <FiArrowRight className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                     </a>
-                    <a href="/contact" className="flex-1 sm:flex-none inline-flex items-center justify-center px-2 py-2.5 sm:px-5 sm:py-3 text-[11px] sm:text-base bg-white/10 hover:bg-white/20 border border-white/30 backdrop-blur-md text-white font-semibold rounded-lg transition-all duration-300 gap-1.5 hover:-translate-y-0.5 whitespace-nowrap">
+                    <a href="/contact" className="inline-flex items-center justify-center px-4 py-2.5 sm:px-5 sm:py-3 text-[12px] sm:text-base bg-white/10 hover:bg-white/20 border border-white/30 backdrop-blur-md text-white font-semibold rounded-lg transition-all duration-300 gap-1.5 hover:-translate-y-0.5 whitespace-nowrap">
                       {t('home.hero.getInTouch')} <FiArrowRight className="w-3.5 h-3.5 sm:w-5 sm:h-5" />
                     </a>
                   </div>

@@ -60,25 +60,25 @@ export default function ServiceList() {
         <div className="absolute bottom-[10%] -right-[10%] w-[50vw] h-[50vw] rounded-full bg-accent/5 blur-[120px] mix-blend-multiply"></div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
 
-        <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-20 gap-6 sm:gap-8">
           <div className="max-w-2xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              className="flex items-center gap-3 mb-6"
+              viewport={{ once: true, amount: 0.1 }}
+              className="flex items-center gap-3 mb-4 sm:mb-6"
             >
               <div className="h-[2px] w-12 bg-primary"></div>
-              <span className="text-primary font-bold uppercase tracking-widest text-sm">{t('services.list.ourExpertise')}</span>
+              <span className="text-primary font-bold uppercase tracking-widest text-xs sm:text-sm">{t('services.list.ourExpertise')}</span>
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: 0.1 }}
-              className="font-extrabold text-heading leading-tight text-2xl md:text-4xl"
+              className="font-extrabold text-heading leading-tight text-2xl sm:text-3xl md:text-4xl"
             >
               {t('services.list.excellence')} <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent"> {t('services.list.stage')}</span>
             </motion.h2>
@@ -86,15 +86,15 @@ export default function ServiceList() {
           <motion.p
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ delay: 0.2 }}
-            className="text-body text-center font-medium max-w-md pb-2 text-lg"
+            className="text-body text-left md:text-right font-medium max-w-md pb-2 text-base sm:text-lg"
           >
             {t('services.list.desc')}
           </motion.p>
         </div>
 
-        <div className="flex flex-col gap-24 lg:gap-32">
+        <div className="flex flex-col gap-16 sm:gap-24 lg:gap-32">
           {services.map((service, index) => (
             <ServiceCard key={service.id} service={service} index={index} t={t} />
           ))}
@@ -109,35 +109,35 @@ function ServiceCard({ service, index, t }) {
   const isEven = index % 2 === 1;
 
   return (
-    <div className={`flex flex-col ${isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-12 lg:gap-20 items-center`}>
+    <div className={`flex flex-col ${isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-8 sm:gap-12 lg:gap-20 items-center`}>
       {/* Content */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
+        viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="w-full lg:w-1/2 flex flex-col relative"
       >
         <div className="relative z-10">
-          <div className="flex items-center gap-4 mb-4">
-            <div className={`w-14 h-14 rounded-2xl bg-white border border-border shadow-sm flex items-center justify-center flex-shrink-0 ${service.textColor}`}>
-              <service.icon className="text-2xl" />
+          <div className="flex items-center gap-3 sm:gap-4 mb-4">
+            <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white border border-border shadow-sm flex items-center justify-center flex-shrink-0 ${service.textColor}`}>
+              <service.icon className="text-xl sm:text-2xl" />
             </div>
-            <h3 className="font-bold text-heading text-3xl md:text-4xl">{service.title}</h3>
+            <h3 className="font-bold text-heading text-2xl sm:text-3xl md:text-4xl">{service.title}</h3>
           </div>
 
-          <p className={`text-lg font-semibold ${service.textColor} mb-6`}>{service.subtitle}</p>
-          <p className="text-body leading-relaxed mb-10 text-lg">
+          <p className={`text-base sm:text-lg font-semibold ${service.textColor} mb-4 sm:mb-6`}>{service.subtitle}</p>
+          <p className="text-body leading-relaxed mb-6 sm:mb-10 text-base sm:text-lg">
             {service.desc}
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-10">
             {service.features.map((feature, idx) => (
               <div key={idx} className="flex items-center gap-3">
                 <div className={`w-6 h-6 rounded-full bg-white border border-border flex items-center justify-center flex-shrink-0 ${service.textColor} shadow-sm`}>
                   <FiCheck className="w-3.5 h-3.5" />
                 </div>
-                <span className="font-semibold text-heading/90">{feature}</span>
+                <span className="font-semibold text-heading/90 text-sm sm:text-base">{feature}</span>
               </div>
             ))}
           </div>
@@ -149,11 +149,11 @@ function ServiceCard({ service, index, t }) {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
+        viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         className="w-full lg:w-1/2"
       >
-        <div className="relative rounded-[2.5rem] overflow-hidden group aspect-[4/3] shadow-2xl bg-white/5 border border-border/50">
+        <div className="relative rounded-2xl sm:rounded-[2.5rem] overflow-hidden group aspect-[4/3] shadow-2xl bg-white/5 border border-border/50">
           <div className={`absolute inset-0 bg-gradient-to-tr ${service.color} opacity-40 z-10 mix-blend-overlay`}></div>
           <img
             src={service.image}

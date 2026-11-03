@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useState } from 'react';
 import axios from 'axios';
+import apiClient from '../api/apiClient';
 
 export default function Contact() {
   const { t } = useTranslation();
@@ -16,15 +17,18 @@ export default function Contact() {
     setIsSubmitting(true);
     setSubmitStatus(null);
     try {
-      const res = await axios.post('https://glp-pharma-backend.vercel.app/api/contact', {
+      const res = await apiClient.post('/contact', {
         name: data.name,
         email: data.email,
-        companyName: data.companyName,
-        subject: data.subject,
-        message: data.message
+        phone: data.phone || '',
+        companyName: data.companyName || '',
+        subject: data.subject || 'Website Contact Form Inquiry',
+        message: data.message,
+        sourceForm: 'Contact Us Page',
+        inquiryType: 'Contact Form',
       });
       if (res.data.success) {
-        setSubmitStatus({ type: 'success', message: 'Message sent successfully!' });
+        setSubmitStatus({ type: 'success', message: 'Message sent successfully! Our team will contact you shortly.' });
         reset();
       } else {
         setSubmitStatus({ type: 'error', message: res.data.message || 'Failed to send message.' });
@@ -59,10 +63,10 @@ export default function Contact() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
             >
-              <h1 className="lg:text-[3rem] font-bold text-heading mb-1 tracking-tight text-5xl">
+              <h1 className="text-3xl sm:text-4xl lg:text-[3rem] font-bold text-heading mb-1 tracking-tight">
                 {t('contact.getIn')} <span className="text-primary">{t('contact.touch')}</span>
               </h1>
-              <h2 className="lg:text-[2rem] font-bold text-heading mb-8 tracking-tight text-4xl">
+              <h2 className="text-xl sm:text-2xl lg:text-[2rem] font-bold text-heading mb-6 sm:mb-8 tracking-tight">
                 {t('contact.weAreHere')}
               </h2>
             </motion.div>
@@ -128,8 +132,8 @@ export default function Contact() {
         <div className="bg-white rounded-[1.5rem] shadow-[0_15px_40px_rgba(0,0,0,0.06)] flex flex-col lg:flex-row overflow-hidden border border-[#EAF2F4]">
 
           {/* Left Column: Form */}
-          <div className="lg:w-[60%] p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-[#EAF2F4] bg-white">
-            <h3 className="text-[22px] mb-6 font-bold text-heading mb-1 relative inline-block">
+          <div className="lg:w-[60%] p-5 sm:p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-[#EAF2F4] bg-white">
+            <h3 className="text-[20px] sm:text-[22px] mb-4 sm:mb-6 font-bold text-heading relative inline-block">
               {t('contact.sendUsMessage')}
             </h3>
 
@@ -155,12 +159,22 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div>
-                <input
-                  {...register("companyName")}
-                  className="w-full px-4 py-4 bg-[#F9FAFB] border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-[15px] text-heading placeholder-slate-400"
-                  placeholder={t('contact.companyName')}
-                />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <input
+                    {...register("companyName")}
+                    className="w-full px-4 py-4 bg-[#F9FAFB] border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-[15px] text-heading placeholder-slate-400"
+                    placeholder={t('contact.companyName')}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="tel"
+                    {...register("phone")}
+                    className="w-full px-4 py-4 bg-[#F9FAFB] border border-border rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-[15px] text-heading placeholder-slate-400"
+                    placeholder="Phone / Mobile Number (Optional)"
+                  />
+                </div>
               </div>
 
               <div>
@@ -204,13 +218,13 @@ export default function Contact() {
           </div>
 
           {/* Right Column: Contact Info */}
-          <div className="lg:w-[40%] p-8 lg:p-12 bg-white">
-            <h3 className="text-[22px] font-bold text-heading mb-1 relative inline-block mb-10">
+          <div className="lg:w-[40%] p-5 sm:p-8 lg:p-12 bg-white">
+            <h3 className="text-[20px] sm:text-[22px] font-bold text-heading relative inline-block mb-6 sm:mb-10">
               {t('contact.contactInfo')}
             </h3>
 
 
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {/* Location */}
               <div className="flex items-start gap-4">
                 <div className="w-11 h-11 rounded-full bg-[#F8FBFC] flex items-center justify-center text-primary shrink-0 mt-0.5">

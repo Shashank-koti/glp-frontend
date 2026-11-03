@@ -59,11 +59,11 @@ export default function ChatbotWidget() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 sm:bottom-8 sm:right-4 z-50 flex flex-col items-end">
+    <div className="fixed bottom-6 right-3.5 sm:bottom-8 sm:right-4 z-50 flex flex-col items-end">
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] w-[90vw] sm:w-[400px] h-[500px] max-h-[80vh] flex flex-col mb-4 overflow-hidden border border-gray-100 transform transition-all duration-300 origin-bottom-right">
+        <div className="bg-white rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] w-[calc(100vw-28px)] sm:w-[400px] h-[500px] max-h-[80vh] flex flex-col mb-4 overflow-hidden border border-gray-100 transform transition-all duration-300 origin-bottom-right">
           {/* Header */}
           <div className="bg-[#1AA3B6] text-white p-4 flex justify-between items-center shadow-md z-10">
             <div className="flex items-center gap-3">

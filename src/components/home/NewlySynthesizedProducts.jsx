@@ -7,6 +7,7 @@ import 'swiper/css/navigation';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../../api/apiClient';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
 import { useCompare } from '../../context/CompareContext';
@@ -29,7 +30,7 @@ export default function NewlySynthesizedProducts() {
     const fetchPopularProducts = async () => {
       try {
         setLoading(true);
-        const res = await axios.get('https://glp-pharma-backend.vercel.app/api/products?sort=-viewsCount&limit=8');
+        const res = await axios.get(`${API_BASE_URL}/products?sort=-viewsCount&limit=8`);
         if (res.data.success) {
           setProducts(res.data.data);
         }
@@ -65,6 +66,8 @@ export default function NewlySynthesizedProducts() {
               loop={true}
               navigation={{ prevEl, nextEl }}
               autoplay={{ delay: 3500, disableOnInteraction: false }}
+              noSwiping={true}
+              noSwipingClass="swiper-no-swiping"
               breakpoints={{
                 640: { slidesPerView: 2 },
                 768: { slidesPerView: 3 },
@@ -148,57 +151,76 @@ export default function NewlySynthesizedProducts() {
 
                     {/* Image Area */}
                     <div className="relative w-full aspect-square max-h-[250px] mx-auto flex items-center justify-center group/img">
-                      <img
-                        src={product.image || "/images/demoprod.gif"}
-                        alt={product.name}
-                        className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover/card:scale-110 transition-transform duration-500"
-                      />
+                      <Link to={`/products/${product.slug}`} className="w-full h-full flex items-center justify-center">
+                        <img
+                          src={product.image || "/images/demoprod.gif"}
+                          alt={product.name}
+                          draggable="false"
+                          className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover/card:scale-110 transition-transform duration-500 select-none pointer-events-none"
+                        />
+                      </Link>
                     </div>
 
                     {/* Title */}
-                    <div className="text-center mb-1">
-                      <h3 className="font-bold text-[#1AA3B6] text-[15px] leading-snug min-h-[40px] flex items-center justify-center line-clamp-2 hover:text-heading">
+                    <div
+                      className="text-center mb-1 swiper-no-swiping select-text cursor-text"
+                      onMouseDown={(e) => e.stopPropagation()}
+                      onTouchStart={(e) => e.stopPropagation()}
+                    >
+                      <h3 className="font-bold text-[#1AA3B6] text-[15px] leading-snug min-h-[40px] flex items-center justify-center line-clamp-2 hover:text-heading select-text cursor-text">
                         {product.name?.split(';')[0]}
                       </h3>
                     </div>
 
                     {/* Details Table */}
-                    <div className="border border-[#EAF2F4] rounded-[12px] overflow-hidden mb-2 mt-auto">
+                    <div
+                      className="border border-[#EAF2F4] rounded-[12px] overflow-hidden mb-2 mt-auto swiper-no-swiping select-text cursor-text"
+                      onMouseDown={(e) => e.stopPropagation()}
+                      onTouchStart={(e) => e.stopPropagation()}
+                    >
                       {/* row 0 */}
-                      <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative">
-                        <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2">
-                          <FiTag className="text-[#0B7285] text-[13px]" />
+                      <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative select-text cursor-text">
+                        <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2 select-text cursor-text">
+                          <FiTag className="text-[#0B7285] text-[13px] shrink-0" />
                           <span>CAT No.</span>
                         </div>
-                        <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2"></div>
-                        <span className="font-semibold text-heading text-left w-1/2 truncate pl-1">{product.specifications?.catalogueNumber || product.catalogueNumber || 'N/A'}</span>
+                        <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2 shrink-0"></div>
+                        <span className="font-semibold text-heading text-left w-1/2 truncate pl-1 select-text cursor-text selection:bg-[#1AA3B6]/20">
+                          {product.specifications?.catalogueNumber || product.catalogueNumber || 'N/A'}
+                        </span>
                       </div>
                       {/* row 1 */}
-                      <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative">
-                        <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2">
-                          <FaFlask className="text-[#0B7285] text-[13px]" />
+                      <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative select-text cursor-text">
+                        <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2 select-text cursor-text">
+                          <FaFlask className="text-[#0B7285] text-[13px] shrink-0" />
                           <span>CAS Number</span>
                         </div>
-                        <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2"></div>
-                        <span className="font-semibold text-heading text-left w-1/2 truncate pl-1">{product.specifications?.casNumber || product.casNumber || 'N/A'}</span>
+                        <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2 shrink-0"></div>
+                        <span className="font-semibold text-heading text-left w-1/2 truncate pl-1 select-text cursor-text selection:bg-[#1AA3B6]/20">
+                          {product.specifications?.casNumber || product.casNumber || 'N/A'}
+                        </span>
                       </div>
                       {/* row 2 */}
-                      <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative">
-                        <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2">
-                          <FiTag className="text-[#0B7285] text-[13px]" />
+                      <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative select-text cursor-text">
+                        <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2 select-text cursor-text">
+                          <FiTag className="text-[#0B7285] text-[13px] shrink-0" />
                           <span>Mol. Formula</span>
                         </div>
-                        <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2"></div>
-                        <span className="font-semibold text-heading text-left uppercase w-1/2 truncate pl-1">{product.specifications?.molecularFormula || product.molecularFormula || 'N/A'}</span>
+                        <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2 shrink-0"></div>
+                        <span className="font-semibold text-heading text-left uppercase w-1/2 truncate pl-1 select-text cursor-text selection:bg-[#1AA3B6]/20">
+                          {product.specifications?.molecularFormula || product.molecularFormula || 'N/A'}
+                        </span>
                       </div>
                       {/* row 3 */}
-                      <div className="flex items-center p-1.5 text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative">
-                        <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2">
-                          <FaBalanceScale className="text-[#0B7285] text-[13px]" />
+                      <div className="flex items-center p-1.5 text-[12px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative select-text cursor-text">
+                        <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2 select-text cursor-text">
+                          <FaBalanceScale className="text-[#0B7285] text-[13px] shrink-0" />
                           <span>Mol. Weight</span>
                         </div>
-                        <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2"></div>
-                        <span className="font-semibold text-heading text-left w-1/2 truncate pl-1">{product.specifications?.molecularWeight || product.molecularWeight || 'N/A'}</span>
+                        <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2 shrink-0"></div>
+                        <span className="font-semibold text-heading text-left w-1/2 truncate pl-1 select-text cursor-text selection:bg-[#1AA3B6]/20">
+                          {product.specifications?.molecularWeight || product.molecularWeight || 'N/A'}
+                        </span>
                       </div>
                     </div>
 
@@ -239,7 +261,7 @@ export default function NewlySynthesizedProducts() {
           {/* Navigation Arrows */}
           <button
             ref={(node) => setPrevEl(node)}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-border hover:bg-background w-10 h-10 rounded-full flex items-center justify-center shadow-lg text-body cursor-pointer -ml-4"
+            className="absolute left-1 sm:left-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-border hover:bg-background w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-lg text-body cursor-pointer sm:-ml-4"
             aria-label="Previous slide"
           >
             <FaChevronLeft size={14} />
@@ -247,7 +269,7 @@ export default function NewlySynthesizedProducts() {
 
           <button
             ref={(node) => setNextEl(node)}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-border hover:bg-background w-10 h-10 rounded-full flex items-center justify-center shadow-lg text-body cursor-pointer -mr-4"
+            className="absolute right-1 sm:right-0 top-1/2 -translate-y-1/2 z-10 bg-white border border-border hover:bg-background w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-lg text-body cursor-pointer sm:-mr-4"
             aria-label="Next slide"
           >
             <FaChevronRight size={14} />

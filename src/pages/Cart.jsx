@@ -10,6 +10,7 @@ import RecentlyViewed from '../components/products/RecentlyViewed';
 import CountryAutocomplete from '../components/common/CountryAutocomplete';
 
 import axios from 'axios';
+import apiClient from '../api/apiClient';
 import { useAuth } from '../context/AuthContext';
 
 export default function Cart() {
@@ -44,9 +45,11 @@ export default function Cart() {
     setSubmitStatus(null);
 
     try {
-      const res = await axios.post('https://glp-pharma-backend.vercel.app/api/inquiries', {
+      const res = await apiClient.post('/inquiries', {
         ...formData,
         inquiryType: 'Quote Request',
+        sourceForm: 'Cart Page - Multi-Product Quote Request',
+        productInterested: cartItems.map(item => item.name).join(', '),
         items: cartItems.map(item => ({
           productId: item.id,
           name: item.name,
@@ -71,25 +74,25 @@ export default function Cart() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center bg-[#F8FBFC] overflow-hidden py-[70px] px-4 md:px-6 pb-[90px]">
+    <section className="relative min-h-screen flex flex-col items-center bg-[#F8FBFC] overflow-hidden py-8 sm:py-[70px] px-3 sm:px-6 pb-14 sm:pb-[90px]">
       <div className="absolute inset-0 bg-[url('/images/credBG.png')] bg-center bg-cover bg-no-repeat -z-20 opacity-80" />
       <div className="absolute inset-0 bg-white/40 -z-10" />
 
       {/* Header */}
-      <div className="text-center mb-[40px] pt-6 sm:pt-0 max-w-[1000px]">
-        <h1 className="text-[#084553] sm:text-[34px] font-[800] tracking-[-0.03em] leading-[1.2] mb-[12px]  uppercase text-xl">
+      <div className="text-center mb-6 sm:mb-[40px] pt-4 sm:pt-0 max-w-[1000px]">
+        <h1 className="text-[#084553] text-xl sm:text-[34px] font-[800] tracking-[-0.03em] leading-[1.2] mb-2 sm:mb-[12px] uppercase">
           CART & PRODUCT INQUIRY
         </h1>
-        <p className="text-[#5B7280] text-[15px] sm:text-[16px] font-medium leading-[1.6]">
+        <p className="text-[#5B7280] text-sm sm:text-[16px] font-medium leading-[1.6]">
           Users can add products to cart and submit an inquiry to get detailed information, pricing, availability & more.
         </p>
       </div>
 
       {/* Main Content Grid */}
-      <div className="w-full max-w-[1440px] grid grid-cols-1 lg:grid-cols-[1fr_480px] xl:grid-cols-[1fr_520px] gap-[30px]">
+      <div className="w-full max-w-[1440px] grid grid-cols-1 lg:grid-cols-[1fr_480px] xl:grid-cols-[1fr_520px] gap-6 sm:gap-[30px]">
 
         {/* Left Panel: Cart */}
-        <div className="flex flex-col gap-[30px]">
+        <div className="flex flex-col gap-6 sm:gap-[30px]">
           <motion.div
             className="border border-[#D9E8EC] rounded-[16px] bg-white shadow-[0_10px_30px_rgba(26,163,182,0.06)] overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
@@ -97,11 +100,11 @@ export default function Cart() {
             transition={{ duration: 0.4 }}
           >
             {/* Box Header */}
-            <div className="flex items-center gap-3 p-[24px_30px] border-b border-[#D9E8EC]">
-              <FiShoppingCart className="text-[28px] text-[#1AA3B6]" strokeWidth={1.5} />
+            <div className="flex items-center gap-3 p-4 sm:p-[24px_30px] border-b border-[#D9E8EC]">
+              <FiShoppingCart className="text-[24px] sm:text-[28px] text-[#1AA3B6] shrink-0" strokeWidth={1.5} />
               <div>
-                <h2 className="text-[#12344D] text-[18px] font-[750]">Your Cart</h2>
-                <p className="text-[#5B7280] text-[13px] mt-0.5">Review the products you have added.</p>
+                <h2 className="text-[#12344D] text-[16px] sm:text-[18px] font-[750]">Your Cart</h2>
+                <p className="text-[#5B7280] text-[12px] sm:text-[13px] mt-0.5">Review the products you have added.</p>
               </div>
             </div>
 
@@ -195,28 +198,28 @@ export default function Cart() {
             </div>
 
             {/* Cart Footer */}
-            <div className="p-[20px] flex flex-wrap items-center justify-between border-t border-[#D9E8EC] bg-[#FFFFFF]">
-              <Link to="/product-categories-view/api-impurities-and-reference-standards" className="inline-flex items-center gap-2 text-[#5B7280] hover:text-[#1AA3B6] font-[650] text-[14px] px-[16px] h-[40px] rounded-[6px] border border-[#D9E8EC] hover:border-[#1AA3B6]/50 bg-white transition-all">
-                <FiArrowLeft className="text-[15px]" /> Continue browsing
+            <div className="p-3 sm:p-[20px] flex flex-wrap items-center justify-between border-t border-[#D9E8EC] bg-[#FFFFFF] gap-3">
+              <Link to="/product-categories-view/api-impurities-and-reference-standards" className="inline-flex items-center gap-2 text-[#5B7280] hover:text-[#1AA3B6] font-[650] text-[13px] sm:text-[14px] px-3 sm:px-[16px] h-[38px] sm:h-[40px] rounded-[6px] border border-[#D9E8EC] hover:border-[#1AA3B6]/50 bg-white transition-all">
+                <FiArrowLeft className="text-[14px] sm:text-[15px]" /> Continue browsing
               </Link>
               <div className="flex items-center gap-3">
-                <button onClick={clearCart} className="inline-flex items-center gap-2 text-[#5B7280] hover:text-[#e04545] font-[600] text-[13px] px-[16px] h-[40px] rounded-[6px] border border-[#D9E8EC] hover:border-[#e04545]/30 bg-white transition-all cursor-pointer">
-                  <FiTrash2 className="text-[14px]" /> Clear Cart
+                <button onClick={clearCart} className="inline-flex items-center gap-2 text-[#5B7280] hover:text-[#e04545] font-[600] text-[12px] sm:text-[13px] px-3 sm:px-[16px] h-[38px] sm:h-[40px] rounded-[6px] border border-[#D9E8EC] hover:border-[#e04545]/30 bg-white transition-all cursor-pointer">
+                  <FiTrash2 className="text-[13px] sm:text-[14px]" /> Clear Cart
                 </button>
               </div>
             </div>
           </motion.div>
 
           {/* Badges */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-[15px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-[15px]">
             {[
               { icon: FiCheckCircle, title: '1000+', sub: 'High Quality Products' },
               { icon: FiFileText, title: 'COA & Analytical', sub: 'Supporting Documents' },
               { icon: FiGlobe, title: 'Global Shipping', sub: 'Discreet & Secure' },
               { icon: FiHeadphones, title: 'Expert Support', sub: 'Quick Response' },
             ].map((badge, idx) => (
-              <div key={idx} className="flex items-center gap-3 border border-[#D9E8EC] rounded-[10px] bg-white p-[16px] shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
-                <badge.icon className="text-[24px] text-[#1AA3B6] shrink-0" strokeWidth={1.5} />
+              <div key={idx} className="flex items-center gap-3 border border-[#D9E8EC] rounded-[10px] bg-white p-3.5 sm:p-[16px] shadow-[0_4px_12px_rgba(0,0,0,0.02)]">
+                <badge.icon className="text-[22px] sm:text-[24px] text-[#1AA3B6] shrink-0" strokeWidth={1.5} />
                 <div className="leading-[1.3]">
                   <strong className="block text-[#12344D] text-[13px] font-[750]">{badge.title}</strong>
                   <span className="text-[#5B7280] text-[11px] font-medium">{badge.sub}</span>
@@ -233,15 +236,15 @@ export default function Cart() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
         >
-          <div className="flex items-center gap-3 p-[24px_30px] border-b border-[#D9E8EC]">
-            <FiClipboard className="text-[26px] text-[#1AA3B6]" strokeWidth={1.5} />
+          <div className="flex items-center gap-3 p-4 sm:p-[24px_30px] border-b border-[#D9E8EC]">
+            <FiClipboard className="text-[24px] sm:text-[26px] text-[#1AA3B6] shrink-0" strokeWidth={1.5} />
             <div>
-              <h2 className="text-[#12344D] text-[18px] font-[750]">Get a Quote / Product Inquiry</h2>
-              <p className="text-[#5B7280] text-[13px] mt-0.5">Fill in the details below and our team will get back to you shortly.</p>
+              <h2 className="text-[#12344D] text-[16px] sm:text-[18px] font-[750]">Get a Quote / Product Inquiry</h2>
+              <p className="text-[#5B7280] text-[12px] sm:text-[13px] mt-0.5">Fill in the details below and our team will get back to you shortly.</p>
             </div>
           </div>
 
-          <form className="p-[25px_30px]" onSubmit={handleSubmit}>
+          <form className="p-4 sm:p-[25px_30px]" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[20px] gap-y-[18px]">
               <div>
                 <label className="block text-[#12344D] text-[12.5px] font-[700] mb-1.5">

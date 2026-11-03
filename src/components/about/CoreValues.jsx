@@ -39,16 +39,16 @@ export default function CoreValues() {
       {/* Background Grid */}
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)', backgroundSize: '40px 40px', color: '#1AA3B6' }}></div>
       
-      <div className="max-w-[1300px] mx-auto px-6 lg:px-12 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-20">
+      <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16 md:mb-20">
           <motion.div
             variants={titleVariants}
             initial="hidden"
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, amount: 0.1 }}
           >
-            <h2 className="font-extrabold text-heading mb-6 text-3xl md:text-5xl">{t('about.values.title')}</h2>
-            <p className="text-body font-medium text-lg">
+            <h2 className="font-extrabold text-heading mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-5xl">{t('about.values.title')}</h2>
+            <p className="text-body font-medium text-base sm:text-lg">
               {t('about.values.desc')}
             </p>
           </motion.div>
@@ -58,8 +58,8 @@ export default function CoreValues() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
         >
           {[
             { icon: FiTarget, title: t('about.values.v1Title'), desc: t('about.values.v1Desc') },
@@ -75,8 +75,8 @@ export default function CoreValues() {
               className="group relative h-full cursor-pointer"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative bg-background backdrop-blur-xl p-10 rounded-3xl h-full border border-border group-hover:border-primary/50 group-hover:bg-white transition-all duration-500 shadow-[0_8px_30px_rgb(0,0,0,0.04)] group-hover:shadow-[0_20px_40px_rgba(26,163,182,0.15)]">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-8 relative overflow-hidden group-hover:from-primary/20 group-hover:to-accent/20 transition-colors duration-500">
+              <div className="relative bg-background backdrop-blur-xl p-6 sm:p-8 md:p-10 rounded-3xl h-full border border-border group-hover:border-primary/50 group-hover:bg-white transition-all duration-500 shadow-[0_8px_30px_rgb(0,0,0,0.04)] group-hover:shadow-[0_20px_40px_rgba(26,163,182,0.15)]">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-6 sm:mb-8 relative overflow-hidden group-hover:from-primary/20 group-hover:to-accent/20 transition-colors duration-500">
                   <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
                   <motion.div
                     whileHover={{ rotate: [0, -10, 10, -10, 10, 0] }}

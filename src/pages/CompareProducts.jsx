@@ -62,17 +62,17 @@ export default function CompareProducts() {
           </button>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-md border border-[#EAF2F4] overflow-x-auto md:overflow-hidden relative flex mx-auto w-fit max-w-full">
+        <div className="bg-white rounded-2xl shadow-md border border-[#EAF2F4] overflow-x-auto relative flex mx-auto w-full max-w-full">
           {/* Sticky Left Column for Labels */}
-          <div className="w-40 md:w-56 shrink-0 border-r border-[#EAF2F4] bg-white z-10 static md:sticky md:left-0 shadow-none md:shadow-[4px_0_15px_rgba(0,0,0,0.03)]">
+          <div className="w-36 sm:w-44 md:w-56 shrink-0 border-r border-[#EAF2F4] bg-white z-20 sticky left-0 shadow-[2px_0_10px_rgba(0,0,0,0.06)] md:shadow-[4px_0_15px_rgba(0,0,0,0.03)]">
             {/* Header placeholder */}
-            <div className="h-[280px] p-4 flex items-end justify-center border-b border-[#EAF2F4] bg-[#F8FBFC]">
-              <span className="font-extrabold text-heading tracking-wide text-lg">Features</span>
+            <div className="h-[280px] p-3 sm:p-4 flex items-end justify-center border-b border-[#EAF2F4] bg-[#F8FBFC]">
+              <span className="font-extrabold text-heading tracking-wide text-base sm:text-lg">Features</span>
             </div>
 
             {/* Rows labels */}
             {rows.map((row, idx) => (
-              <div key={idx} className={`h-16 px-4 flex items-center font-bold text-heading text-sm border-b border-[#EAF2F4] ${idx % 2 === 0 ? 'bg-white' : 'bg-[#F8FBFC]/50'}`}>
+              <div key={idx} className={`h-16 px-3 sm:px-4 flex items-center font-bold text-heading text-xs sm:text-sm border-b border-[#EAF2F4] ${idx % 2 === 0 ? 'bg-white' : 'bg-[#F8FBFC]/50'}`}>
                 {row.label}
               </div>
             ))}
@@ -82,15 +82,15 @@ export default function CompareProducts() {
           </div>
 
           {/* Horizontally Scrollable Content Area */}
-          <div className="flex-1 overflow-visible md:overflow-x-auto scrollbar-hide bg-white flex w-max md:w-auto">
+          <div className="flex-1 overflow-visible bg-white flex w-max">
             {compareItems.map((product) => (
-              <div key={product._id} className="w-64 shrink-0 border-r border-[#EAF2F4] flex flex-col hover:bg-slate-50/50 transition-colors">
+              <div key={product._id} className="w-56 sm:w-64 shrink-0 border-r border-[#EAF2F4] flex flex-col hover:bg-slate-50/50 transition-colors">
 
                 {/* Product Header Card */}
-                <div className="h-[280px] p-5 flex flex-col items-center justify-between border-b border-[#EAF2F4] relative group">
+                <div className="h-[280px] p-4 sm:p-5 flex flex-col items-center justify-between border-b border-[#EAF2F4] relative group">
                   <button
                     onClick={() => removeFromCompare(product._id)}
-                    className="absolute top-3 right-3 w-8 h-8 rounded-full bg-slate-100 text-slate-400 hover:bg-red-50 hover:text-red-500 flex items-center justify-center transition-colors opacity-0 group-hover:opacity-100"
+                    className="absolute top-3 right-3 w-8 h-8 rounded-full bg-slate-100 text-slate-400 hover:bg-red-50 hover:text-red-500 flex items-center justify-center transition-colors opacity-100 md:opacity-0 md:group-hover:opacity-100 z-10"
                     title="Remove from compare"
                   >
                     <FiX size={16} />

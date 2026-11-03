@@ -53,8 +53,7 @@ export default function RecentlyViewed({ currentProductId }) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
         {recentProducts.slice(0, 5).map(product => (
-          <Link
-            to={`/products/${product.slug}`}
+          <div
             key={product._id}
             className="group bg-white rounded-2xl border border-[#D9E8EC] shadow-[0_10px_30px_rgba(26,163,182,0.03)] hover:shadow-[0_15px_40px_rgba(26,163,182,0.08)] hover:border-[#1AA3B6]/20 transition-all duration-300 p-4 flex flex-col"
           >
@@ -109,65 +108,81 @@ export default function RecentlyViewed({ currentProductId }) {
 
             {/* Image Area */}
             <div className="relative w-full aspect-square max-h-[220px] mx-auto flex items-center justify-center p-2">
-              <img
-                src={product.image || "/images/demoprod.gif"}
-                alt={product.name}
-                className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover:scale-105 transition-transform duration-500"
-              />
+              <Link to={`/products/${product.slug}`} className="w-full h-full flex items-center justify-center">
+                <img
+                  src={product.image || "/images/demoprod.gif"}
+                  alt={product.name}
+                  draggable="false"
+                  className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover:scale-105 transition-transform duration-500 select-none pointer-events-none"
+                />
+              </Link>
             </div>
 
-            <div className="text-center mb-1">
-              <h3 className="font-extrabold text-heading text-[14px] leading-snug line-clamp-2 transition-colors group-hover:text-[#1AA3B6]">
-                {product.name?.split(';')[0]}
-              </h3>
+            <div className="text-center mb-1 select-text cursor-text">
+              <Link to={`/products/${product.slug}`}>
+                <h3 className="font-extrabold text-heading text-[14px] leading-snug line-clamp-2 transition-colors hover:text-[#1AA3B6] select-text cursor-text">
+                  {product.name?.split(';')[0]}
+                </h3>
+              </Link>
             </div>
 
-            <div className="border border-[#EAF2F4] rounded-[12px] overflow-hidden mb-2">
+            <div className="border border-[#EAF2F4] rounded-[12px] overflow-hidden mb-2 select-text cursor-text">
               {/* row 0 */}
-              <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[11px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative">
-                <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2">
+              <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[11px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative select-text cursor-text">
+                <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2 select-text cursor-text">
                   <span className="truncate">CAT No.</span>
                 </div>
-                <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2"></div>
-                <span className="font-semibold text-heading text-left w-1/2 truncate pl-1">{product.specifications?.catalogueNumber || product.catalogueNumber || 'N/A'}</span>
+                <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2 shrink-0"></div>
+                <span className="font-semibold text-heading text-left w-1/2 truncate pl-1 select-text cursor-text selection:bg-[#1AA3B6]/20">
+                  {product.specifications?.catalogueNumber || product.catalogueNumber || 'N/A'}
+                </span>
               </div>
               {/* row 1 */}
-              <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[11px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative">
-                <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2">
+              <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[11px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative select-text cursor-text">
+                <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2 select-text cursor-text">
                   <span className="truncate">CAS</span>
                 </div>
-                <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2"></div>
-                <span className="font-semibold text-heading text-left w-1/2 truncate pl-1">{product.casNumber || product.specifications?.casNumber || 'N/A'}</span>
+                <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2 shrink-0"></div>
+                <span className="font-semibold text-heading text-left w-1/2 truncate pl-1 select-text cursor-text selection:bg-[#1AA3B6]/20">
+                  {product.casNumber || product.specifications?.casNumber || 'N/A'}
+                </span>
               </div>
               {/* row 2 */}
-              <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[11px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative">
-                <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2">
+              <div className="flex items-center p-1.5 border-b border-[#EAF2F4] text-[11px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative select-text cursor-text">
+                <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2 select-text cursor-text">
                   <span className="truncate">Mol. Formula</span>
                 </div>
-                <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2"></div>
-                <span className="font-semibold text-heading text-left uppercase w-1/2 truncate pl-1">{product.molecularFormula || 'N/A'}</span>
+                <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2 shrink-0"></div>
+                <span className="font-semibold text-heading text-left uppercase w-1/2 truncate pl-1 select-text cursor-text selection:bg-[#1AA3B6]/20">
+                  {product.molecularFormula || 'N/A'}
+                </span>
               </div>
               {/* row 3 */}
-              <div className="flex items-center p-1.5 text-[11px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative">
-                <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2">
+              <div className="flex items-center p-1.5 text-[11px] bg-white group/row hover:bg-[#F8FAFC] transition-colors relative select-text cursor-text">
+                <div className="flex items-center gap-2 text-slate-700 font-bold tracking-wide w-1/2 select-text cursor-text">
                   <span className="truncate">Mol. Weight</span>
                 </div>
-                <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2"></div>
-                <span className="font-semibold text-heading text-left w-1/2 truncate pl-1">{product.molecularWeight || 'N/A'}</span>
+                <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-2 shrink-0"></div>
+                <span className="font-semibold text-heading text-left w-1/2 truncate pl-1 select-text cursor-text selection:bg-[#1AA3B6]/20">
+                  {product.molecularWeight || 'N/A'}
+                </span>
               </div>
             </div>
 
-            <div className="mt-auto">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  addToCart(product);
-                }}
-                className="w-full flex items-center justify-center gap-1.5 bg-[#E8F4F6] text-[#1AA3B6] border border-[#D9E8EC] font-bold py-2 rounded-xl hover:bg-[#1AA3B6] hover:text-white transition-colors text-[12.5px]"
+            <div className="mt-auto flex gap-2">
+              <Link
+                to={`/products/${product.slug}`}
+                className="flex-1 flex items-center justify-center gap-1 border border-[#0B7285] text-[#0B7285] font-bold py-2 rounded-xl hover:bg-[#F8FBFC] transition-colors text-[12.5px]"
               >
-                {cartItems.some(item => item.id === product._id) ? (
+                More Info
+              </Link>
+              <button
+                onClick={() => addToCart(product)}
+                className="flex-1 flex items-center justify-center gap-1.5 bg-[#0B7285] text-white font-bold py-2 rounded-xl hover:bg-[#095c6b] transition-colors text-[12.5px]"
+              >
+                {cartItems.some(item => item.id === product._id || item._id === product._id) ? (
                   <>
-                    <FiCheckCircle className="text-[14px]" /> Added to RFQ
+                    <FiCheckCircle className="text-[14px]" /> Added
                   </>
                 ) : (
                   <>
@@ -176,7 +191,7 @@ export default function RecentlyViewed({ currentProductId }) {
                 )}
               </button>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>
