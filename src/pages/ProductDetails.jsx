@@ -328,16 +328,14 @@ export default function ProductDetails() {
           const isStock = avail === 'in stock';
           const isUnder = avail === 'under synthesis';
           return (
-            <span className={`px-2.5 py-1 text-[10px] font-extrabold rounded-md uppercase tracking-wider shadow-sm flex items-center gap-1.5 ${
-              isStock
-                ? 'bg-[#1AA3B6] text-white border-0 animate-pulse'
-                : isUnder
+            <span className={`px-2.5 py-1 text-[10px] font-extrabold rounded-md uppercase tracking-wider shadow-sm flex items-center gap-1.5 ${isStock
+              ? 'bg-[#1AA3B6] text-white border-0 animate-pulse'
+              : isUnder
                 ? 'bg-amber-50 text-amber-700 border border-amber-200'
                 : 'bg-orange-50 text-orange-600 border border-orange-100'
-            }`}>
-              <span className={`w-1.5 h-1.5 rounded-full ${
-                isStock ? 'bg-white' : isUnder ? 'bg-amber-500 animate-pulse' : 'bg-orange-500'
-              }`}></span>
+              }`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${isStock ? 'bg-white' : isUnder ? 'bg-amber-500 animate-pulse' : 'bg-orange-500'
+                }`}></span>
               {product.availability || 'In Stock'}
             </span>
           );
@@ -466,7 +464,7 @@ export default function ProductDetails() {
 
       {/* Header Section with detailspageBG */}
       <div
-        className="relative overflow-hidden pt-20 md:pt-12 pb-32 border-b border-border/60 shadow-sm bg-white"
+        className="relative overflow-hidden pt-10 md:pt-12 pb-28 border-b border-border/60 shadow-sm bg-white"
         style={{
           backgroundImage: "url('/images/detailspageBG.png')",
           backgroundSize: 'cover',

@@ -22,7 +22,6 @@ import Manufacturing from './components/gallery/Manufacturing';
 import Research from './components/gallery/Research';
 import Quality from './components/gallery/Quality';
 import Corporate from './components/gallery/Corporate';
-import News from './pages/News';
 import QuickEnquiry from './pages/QuickEnquiry';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
@@ -44,7 +43,7 @@ function App() {
             <div className="flex flex-col min-h-screen bg-background font-sans text-text-main overflow-x-hidden w-full">
               <Navbar />
 
-              <main className="flex-grow pt-[54px] lg:pt-[110px]">
+              <main className="flex-grow pt-[104px] sm:pt-[110px] lg:pt-[110px]">
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/about" element={<About />} />
@@ -65,7 +64,6 @@ function App() {
                     <Route path="quality" element={<Quality />} />
                     <Route path="corporate" element={<Corporate />} />
                   </Route>
-                  <Route path="/news" element={<News />} />
                   <Route path="/quick-enquiry" element={<QuickEnquiry />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />

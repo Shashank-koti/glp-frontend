@@ -463,17 +463,6 @@ export default function Navbar() {
                       transition={{ duration: 0.2, ease: "easeOut" }}
                       className="absolute top-full right-0 mt-2 w-[260px] bg-white shadow-2xl rounded-[20px] py-1 px-3 flex flex-col z-50 before:absolute before:-top-2 before:right-10 before:w-4 before:h-4 before:bg-white before:rotate-45"
                     >
-                      <Link to="/news" onClick={() => setContactOpen(false)} className="group flex items-center justify-between px-3 py-1.5 border-b border-[#EAF2F4] last:border-b-0 hover:bg-primary/10 transition-all rounded-t-lg">
-                        <div className="flex items-center gap-3">
-                          <div className="w-[28px] h-[28px] rounded-md bg-[#E8F4F6] flex items-center justify-center text-[#1AA3B6] transition-colors shrink-0">
-                            <LuInfo size={15} strokeWidth={2} />
-                          </div>
-                          <span className="text-body font-bold text-[12.5px] leading-tight group-hover:text-black transition-colors">
-                            News
-                          </span>
-                        </div>
-                        <LuChevronRight className="text-[#1AA3B6] transition-transform shrink-0 ml-2" size={14} strokeWidth={2.5} />
-                      </Link>
                       <Link to="/careers" onClick={() => setContactOpen(false)} className="group flex items-center justify-between px-3 py-1.5 border-b border-[#EAF2F4] last:border-b-0 hover:bg-primary/10 transition-all">
                         <div className="flex items-center gap-3">
                           <div className="w-[28px] h-[28px] rounded-md bg-[#E8F4F6] flex items-center justify-center text-[#1AA3B6] transition-colors shrink-0">

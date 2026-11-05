@@ -276,31 +276,31 @@ export default function ProductsView() {
       />
 
       {/* Alphabet Navigation */}
-      <div className="max-w-[1600px] w-full mx-auto px-2 sm:px-4 lg:px-6 pt-4 sm:pt-8 pb-4 relative z-20">
-        <div className="bg-white/80 backdrop-blur-xl rounded-[20px] shadow-[0_8px_30px_rgba(0,0,0,0.08)] p-2.5 sm:p-4 border border-white/60">
-          <div className="flex flex-col gap-3">
+      <div className="max-w-[1600px] w-full mx-auto px-2 sm:px-4 lg:px-6 pt-2 sm:pt-6 pb-2 sm:pb-4 relative z-20">
+        <div className="bg-white/90 backdrop-blur-xl rounded-[18px] sm:rounded-[20px] shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-2 sm:p-3.5 border border-white/60">
+          <div className="flex flex-col gap-2">
             <div className="flex items-center">
-              <div className="flex-1 flex items-center gap-2 sm:gap-3 overflow-x-auto scrollbar-hide min-w-0 px-1 sm:px-2 pb-1">
+              <div className="flex-1 flex items-center gap-1.5 sm:gap-2.5 overflow-x-auto scrollbar-hide min-w-0 px-0.5 sm:px-2 py-0.5" style={{ WebkitOverflowScrolling: 'touch' }}>
                 <button
                   onClick={() => handleLetterClick('All')}
-                  className={`flex-shrink-0 flex items-center gap-1 px-4 h-[42px] rounded-full text-[14.5px] font-extrabold transition-all duration-300 backdrop-blur-md ${currentLetter === 'All'
-                    ? 'bg-gradient-to-r from-[#1AA3B6] to-[#0B7285] text-white shadow-[0_4px_15px_rgba(26,163,182,0.3)] border-0 scale-105'
-                    : 'bg-white hover:bg-[#F8FBFC] text-[#12344D] border border-gray-200 shadow-sm hover:shadow-md hover:text-[#1AA3B6]'
+                  className={`flex-shrink-0 flex items-center justify-center gap-1 px-3.5 sm:px-4 h-[36px] sm:h-[42px] rounded-xl sm:rounded-full text-[13px] sm:text-[14.5px] font-extrabold transition-all duration-300 backdrop-blur-md cursor-pointer ${currentLetter === 'All'
+                    ? 'bg-gradient-to-r from-[#1AA3B6] to-[#0B7285] text-white shadow-[0_4px_15px_rgba(26,163,182,0.3)] border-0 scale-102 sm:scale-105'
+                    : 'bg-white hover:bg-[#F8FBFC] text-[#12344D] border border-gray-200 shadow-xs hover:shadow-sm hover:text-[#1AA3B6]'
                     }`}
                 >
-                  <FiGrid size={16} /> All
+                  <FiGrid size={15} /> All
                 </button>
 
-                <div className="flex items-center flex-1 justify-between min-w-[1050px] px-1 gap-1.5">
+                <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
                   {alphabet.map(letter => {
                     const isActive = currentLetter === letter;
                     return (
                       <button
                         key={letter}
                         onClick={() => handleLetterClick(letter)}
-                        className={`flex-shrink-0 w-[42px] h-[42px] flex items-center justify-center rounded-[14px] text-[17px] font-extrabold transition-all duration-300 backdrop-blur-md ${isActive
-                          ? 'bg-gradient-to-br from-[#1AA3B6] to-[#0B7285] text-white shadow-[0_4px_15px_rgba(26,163,182,0.3)] border-0 scale-110'
-                          : 'bg-white hover:bg-[#F8FBFC] text-[#12344D] border border-gray-200 shadow-sm hover:shadow-md hover:text-[#1AA3B6] hover:-translate-y-0.5'
+                        className={`flex-shrink-0 w-[36px] h-[36px] sm:w-[42px] sm:h-[42px] flex items-center justify-center rounded-xl sm:rounded-[14px] text-[15px] sm:text-[17px] font-extrabold transition-all duration-300 backdrop-blur-md cursor-pointer ${isActive
+                          ? 'bg-gradient-to-br from-[#1AA3B6] to-[#0B7285] text-white shadow-[0_4px_15px_rgba(26,163,182,0.3)] border-0 scale-105 sm:scale-110'
+                          : 'bg-white hover:bg-[#F8FBFC] text-[#12344D] border border-gray-200 shadow-xs hover:shadow-sm hover:text-[#1AA3B6] hover:-translate-y-0.5'
                           }`}
                       >
                         {letter}
@@ -315,17 +315,17 @@ export default function ProductsView() {
       </div>
 
       {/* Hero & Filters Grid */}
-      <div className="w-full xl:w-[98%] 2xl:w-[100%] max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-16 flex flex-col lg:flex-row gap-12 lg:gap-8 items-center mb-8">
+      <div className="w-full xl:w-[98%] 2xl:w-[100%] max-w-[1700px] mx-auto px-3 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-8 sm:pb-16 flex flex-col lg:flex-row gap-6 lg:gap-8 items-center mb-4 sm:mb-8">
 
         {/* Left Side: Premium Hero Content */}
-        <div className="w-full lg:w-[48%] flex flex-col items-start px-2 lg:px-8">
+        <div className="w-full lg:w-[46%] xl:w-[48%] flex flex-col items-start px-1 sm:px-2 lg:px-4 xl:px-8">
 
           {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-[15px] text-[#5B7280] font-medium mb-6 flex-wrap">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-[13px] sm:text-[15px] text-[#5B7280] font-medium mb-3 sm:mb-6 flex-wrap">
             <Link to="/" className="hover:text-[#1AA3B6] transition-colors">Home</Link>
             {!isRedundant && (
               <>
-                <FiChevronRight className="text-slate-400 text-[14px] mt-0.5" />
+                <FiChevronRight className="text-slate-400 text-[13px] sm:text-[14px] mt-0.5" />
                 <Link
                   to={isApiImpurities
                     ? `/product-categories-view/api-impurities-and-reference-standards`
@@ -337,26 +337,15 @@ export default function ProductsView() {
                 </Link>
               </>
             )}
-            <FiChevronRight className="text-slate-400 text-[14px] mt-0.5" />
+            <FiChevronRight className="text-slate-400 text-[13px] sm:text-[14px] mt-0.5" />
             <span className="text-[#1AA3B6] font-semibold">{displaySubCategoryStr}</span>
           </div>
 
           {/* Main Heading */}
-          <h1 className="mb-6">
+          <h1 className="mb-4 sm:mb-6">
 
             {/* Product Name */}
-            <span
-              className="
-        block
-        text-[#084553]
-        text-[24px]
-        md:text-[38px]
-        lg:text-[48px]
-        leading-[1.05]
-        tracking-[-0.025em]
-        font-extrabold
-      "
-            >
+            <span className="block text-[#084553] text-[26px] sm:text-[36px] md:text-[38px] lg:text-[48px] leading-[1.1] tracking-[-0.025em] font-extrabold">
               {displaySubCategoryStr}
             </span>
 
@@ -365,13 +354,15 @@ export default function ProductsView() {
               <span
                 className="
                     block
-                    mt-3
+                    mt-1.5
+                    sm:mt-3
                     text-[#12344D]
-                    text-[16px]
+                    text-[15px]
+                    sm:text-[18px]
                     md:text-[20px]
                     lg:text-[24px]
                     leading-[1.2]
-                    tracking-[f-0.015em]
+                    tracking-[-0.015em]
                     font-bold"
               >
                 {displayCategoryName}
@@ -380,17 +371,18 @@ export default function ProductsView() {
 
           </h1>
 
-
-
           {/* Description */}
           <p
             className="
       text-[#5B7280]
-      text-[16px]
+      text-[14px]
+      sm:text-[16px]
       md:text-[17px]
       max-w-[560px]
-      mb-8
-      leading-[1.75]
+      mb-5
+      sm:mb-8
+      leading-[1.65]
+      sm:leading-[1.75]
       font-normal
       tracking-[0.005em]
     "
@@ -401,29 +393,29 @@ export default function ProductsView() {
           </p>
 
           {/* Features Row */}
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 overflow-x-auto scrollbar-hide pb-2 lg:pb-0 ">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2.5 sm:gap-4 w-full pb-1 lg:pb-0">
 
             {/* Feature 1 */}
-            <div className="flex items-center gap-3">
-              <div className="w-[32px] h-[32px] rounded-full bg-[#084553] flex items-center justify-center text-white shrink-0 border border-[#D9E8EC]">
-                <FiShield size={18} className="stroke-[2.5]" />
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <div className="w-[30px] h-[30px] sm:w-[32px] sm:h-[32px] rounded-full bg-[#084553] flex items-center justify-center text-white shrink-0 border border-[#D9E8EC]">
+                <FiShield size={16} className="stroke-[2.5]" />
               </div>
               <div>
-                <h4 className="text-[14px] font-bold text-[#12344D]">Reliable Quality</h4>
-                <p className="text-[12px] text-[#5B7280] font-medium mt-0.5">Stringent quality control processes</p>
+                <h4 className="text-[13px] sm:text-[14px] font-bold text-[#12344D]">Reliable Quality</h4>
+                <p className="text-[11.5px] sm:text-[12px] text-[#5B7280] font-medium mt-0.5">Stringent quality control processes</p>
               </div>
             </div>
 
-            <div className="hidden md:block w-px h-10 bg-[#EAF2F4]"></div>
+            <div className="hidden sm:block w-px h-8 bg-[#EAF2F4]"></div>
 
             {/* Feature 2 */}
-            <div className="flex items-center gap-3">
-              <div className="w-[32px] h-[32px] rounded-full bg-[#084553] flex items-center justify-center text-white shrink-0 border border-[#D9E8EC]">
-                <FaFlask size={18} />
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <div className="w-[30px] h-[30px] sm:w-[32px] sm:h-[32px] rounded-full bg-[#084553] flex items-center justify-center text-white shrink-0 border border-[#D9E8EC]">
+                <FaFlask size={16} />
               </div>
               <div>
-                <h4 className="text-[14px] font-bold text-[#12344D]">Analytical Excellence</h4>
-                <p className="text-[12px] text-[#5B7280] font-medium mt-0.5">Ensuring accurate results</p>
+                <h4 className="text-[13px] sm:text-[14px] font-bold text-[#12344D]">Analytical Excellence</h4>
+                <p className="text-[11.5px] sm:text-[12px] text-[#5B7280] font-medium mt-0.5">Ensuring accurate results</p>
               </div>
             </div>
           </div>
@@ -431,63 +423,71 @@ export default function ProductsView() {
         </div>
 
         {/* Right Side: Filters */}
-        <div className="w-full lg:w-[52%] lg:pr-8">
-          <div className="bg-white rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 p-5 md:p-5">
+        <div className="w-full lg:w-[54%] xl:w-[52%]">
+          <div className="bg-white rounded-[20px] sm:rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 p-3.5 sm:p-5 md:p-6">
 
-            {/* Top Row: Count & Availability */}
-            <div className={`flex flex-col sm:flex-row items-center justify-between gap-4 ${isApiImpurities ? 'mb-8' : 'mb-0'}`}>
-              <div className="shrink-0 bg-[#F8FBFC] text-[#084553] px-5 py-2 rounded-xl flex items-center gap-2.5 font-bold border border-[#EAF2F4] shadow-sm w-full md:w-auto justify-center text-[13px] relative z-10">
-                <FaFlask className="text-[16px]" />
+            {/* Top Row: Count & Stock Status Filter */}
+            <div className={`flex flex-col sm:flex-row sm:flex-wrap xl:flex-nowrap sm:items-center justify-between gap-3 sm:gap-4 ${isApiImpurities ? 'mb-4 sm:mb-6' : 'mb-0'}`}>
+              
+              {/* Product Count Pill */}
+              <div className="shrink-0 bg-[#F8FBFC] text-[#084553] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl flex items-center gap-2 font-bold border border-[#EAF2F4] shadow-xs w-full sm:w-auto justify-center text-[12.5px] sm:text-[13px]">
+                <FaFlask className="text-[14px] sm:text-[15px] text-[#1AA3B6]" />
                 <span>{filteredProducts.length} {filteredProducts.length === 1 ? 'Product' : 'Products'} Found</span>
               </div>
 
-              <div className="flex overflow-x-auto scrollbar-hide sm:flex-nowrap bg-white rounded-xl p-1 border border-gray-200 w-full sm:w-auto shadow-sm max-w-full">
-                {['All', 'In Stock', 'Custom Synthesis', 'Under Synthesis'].map((filterType) => (
-                  <button
-                    key={filterType}
-                    onClick={() => setAvailabilityFilter(filterType)}
-                    className={`flex-shrink-0 sm:flex-none flex items-center justify-center gap-2.5 px-2 sm:px-2 py-1 sm:py-1.5 text-[11px] sm:text-[12px] font-bold rounded-lg transition-all duration-300 ${availabilityFilter === filterType
-                      ? 'bg-[#25D366] text-white shadow-md'
-                      : 'text-black hover:bg-[#084553]/10'
-                      }`}
-                  >
-                    {filterType === 'All' && <FiBox size={14} />}
-                    {filterType === 'In Stock' && <FiCheckCircle size={14} />}
-                    {filterType === 'Custom Synthesis' && <FiTool size={14} />}
-                    {filterType === 'Under Synthesis' && <FiClock size={14} />}
-                    <span className="whitespace-nowrap">{filterType}</span>
-                  </button>
-                ))}
+              {/* Stock Status Filter Buttons: Mobile 2x2 Grid, Tablet/Desktop Flex Row */}
+              <div className="grid grid-cols-2 gap-1.5 w-full sm:flex sm:flex-row sm:w-auto bg-[#F8FBFC] sm:bg-white rounded-xl p-1.5 sm:p-1 border border-gray-200 shadow-xs shrink-0">
+                {[
+                  { type: 'All', icon: <FiBox size={14} /> },
+                  { type: 'In Stock', icon: <FiCheckCircle size={14} /> },
+                  { type: 'Custom Synthesis', icon: <FiTool size={14} /> },
+                  { type: 'Under Synthesis', icon: <FiClock size={14} /> },
+                ].map(({ type, icon }) => {
+                  const isActive = availabilityFilter === type;
+                  return (
+                    <button
+                      key={type}
+                      onClick={() => setAvailabilityFilter(type)}
+                      className={`shrink-0 flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-2 sm:py-1.5 text-[11.5px] sm:text-[12px] font-bold rounded-lg transition-all duration-200 cursor-pointer whitespace-nowrap ${isActive
+                        ? 'bg-[#1AA3B6] text-white shadow-sm'
+                        : 'text-[#12344D] hover:bg-white sm:hover:bg-[#084553]/10'
+                        }`}
+                    >
+                      <span className="shrink-0">{icon}</span>
+                      <span className="whitespace-nowrap">{type}</span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
             {/* Category Filters List (Only for API Impurities & Reference Standards) */}
             {isApiImpurities && (
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-2.5 sm:gap-3">
                 {[
-                  { key: 'All', label: 'Pharmaceutical Reference Standards', icon: <FaFlask size={18} />, count: categoryCounts.All },
-                  { key: 'nitroso', label: 'Possible Nitroso Standards', icon: <TbTestPipe size={18} />, count: categoryCounts.nitroso },
-                  { key: 'isotope', label: 'Stable Isotopes', icon: <TbAtom size={18} />, count: categoryCounts.isotope },
+                  { key: 'All', label: 'Pharmaceutical Reference Standards', icon: <FaFlask size={17} />, count: categoryCounts.All },
+                  { key: 'nitroso', label: 'Possible Nitroso Standards', icon: <TbTestPipe size={17} />, count: categoryCounts.nitroso },
+                  { key: 'isotope', label: 'Stable Isotopes', icon: <TbAtom size={17} />, count: categoryCounts.isotope },
                 ].map((filter) => {
                   const isActive = categoryFilter === filter.key;
                   return (
                     <button
                       key={filter.key}
                       onClick={() => setCategoryFilter(filter.key)}
-                      className={`w-full flex items-center justify-between px-5 py-2 rounded-[16px] transition-all duration-300 border-2 ${isActive
+                      className={`w-full flex items-center justify-between px-3 sm:px-4 py-2 sm:py-2.5 rounded-[14px] sm:rounded-[16px] transition-all duration-300 border-2 cursor-pointer ${isActive
                         ? 'bg-white border-[#084553] shadow-sm'
                         : 'bg-white border-gray-100 hover:border-gray-200'
                         }`}
                     >
-                      <div className="flex items-center gap-4">
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center ${isActive ? 'bg-transparent text-[#084553] shadow-md' : 'bg-transparent text-[#084553]'}`}>
+                      <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0 pr-2">
+                        <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shrink-0 ${isActive ? 'bg-[#084553]/10 text-[#084553]' : 'bg-slate-50 text-[#084553]'}`}>
                           {filter.icon}
                         </div>
-                        <span className={`text-[14px] font-extrabold ${isActive ? 'text-[#084553]' : 'text-slate-600'}`}>
+                        <span className={`text-[12px] sm:text-[14px] font-extrabold text-left truncate sm:whitespace-normal ${isActive ? 'text-[#084553]' : 'text-slate-600'}`}>
                           {filter.label}
                         </span>
                       </div>
-                      <span className={`text-[13px] font-black px-4 py-1.5 rounded-full ${isActive ? 'bg-[#084553] text-white' : 'bg-slate-100 text-slate-500'}`}>
+                      <span className={`shrink-0 text-[11px] sm:text-[12.5px] font-black px-2.5 sm:px-3.5 py-1 rounded-full ${isActive ? 'bg-[#084553] text-white' : 'bg-slate-100 text-slate-500'}`}>
                         {filter.count}
                       </span>
                     </button>
@@ -546,12 +546,6 @@ export default function ProductsView() {
                           <span className={`w-1.5 h-1.5 rounded-full ${dotClass}`}></span>
                           {product.availability || 'In Stock'}
                         </span>
-                        {product._categoryType === 'nitroso' && (
-                          <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 border border-purple-200 tracking-wide shadow-2xs flex items-center gap-1">
-                            <TbTestPipe size={11} className="text-purple-600" />
-                            Nitroso
-                          </span>
-                        )}
                         {product._categoryType === 'isotope' && (
                           <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800 border border-cyan-200 tracking-wide shadow-2xs flex items-center gap-1">
                             <TbAtom size={11} className="text-cyan-600" />

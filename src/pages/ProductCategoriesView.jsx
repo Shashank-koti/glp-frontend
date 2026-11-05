@@ -37,8 +37,8 @@ export default function ProductCategoriesView() {
         if (catRes.data.success) {
           let catName = catRes.data.data.categoryName || '';
           catName = catName.replace('API IMPURITIES & REFERENCE STANDARDS', 'API Impurities & Reference Standards')
-                           .replace('API IMPURITIES AND REFERENCE STANDARDS', 'API Impurities and Reference Standards')
-                           .replace('API IMPURITIES', 'API Impurities');
+            .replace('API IMPURITIES AND REFERENCE STANDARDS', 'API Impurities and Reference Standards')
+            .replace('API IMPURITIES', 'API Impurities');
           setCategoryName(catName);
           if (catRes.data.data.description) setCategoryDescription(catRes.data.data.description);
         }
@@ -94,10 +94,10 @@ export default function ProductCategoriesView() {
 
       {/* 1. Hero Section */}
       <div
-        className="w-full min-h-[360px] sm:min-h-[420px] bg-cover bg-center bg-no-repeat relative bg-white"
+        className="w-full min-h-[360px] sm:min-h-[360px] bg-cover bg-center bg-no-repeat relative bg-white"
         style={{ backgroundImage: "url('/images/productsBG.png')" }}
       >
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-14 sm:pt-24 pb-14 sm:pb-20">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-18 sm:pt-12 pb-14 sm:pb-20">
           <div className="max-w-[900px]">
             {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-[15px] text-[#5B7280] font-medium mb-6 flex-wrap">
@@ -169,30 +169,30 @@ export default function ProductCategoriesView() {
 
       {/* 2. Alphabet Navigation */}
       <div className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-6 -mt-6 sm:-mt-12 relative z-20">
-        <div className="bg-white/40 backdrop-blur-xl rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.08)] p-2.5 sm:p-4 border border-white/60">
-          <div className="flex flex-col gap-3">
+        <div className="bg-white/80 backdrop-blur-xl rounded-[18px] sm:rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.06)] p-2 sm:p-3.5 border border-white/60">
+          <div className="flex flex-col gap-2">
             <div className="flex items-center">
-              <div className="flex-1 flex items-center gap-2 sm:gap-3 overflow-x-auto scrollbar-hide min-w-0 px-1 sm:px-2 pb-1">
+              <div className="flex-1 flex items-center gap-1.5 sm:gap-2.5 overflow-x-auto scrollbar-hide min-w-0 px-0.5 sm:px-2 py-0.5" style={{ WebkitOverflowScrolling: 'touch' }}>
                 <button
                   onClick={() => handleLetterClick('All')}
-                  className={`flex-shrink-0 flex items-center gap-1 px-5 h-[42px] rounded-full text-[14.5px] font-extrabold transition-all duration-300 backdrop-blur-md ${currentLetter === 'All'
-                    ? 'bg-gradient-to-r from-[#1AA3B6] to-[#0B7285] text-white shadow-[0_4px_15px_rgba(26,163,182,0.3)] border-0 scale-105'
-                    : 'bg-white/60 hover:bg-white text-[#12344D] border border-white/80 shadow-sm hover:shadow-md hover:text-[#1AA3B6]'
+                  className={`flex-shrink-0 flex items-center justify-center gap-1 px-3.5 sm:px-5 h-[36px] sm:h-[42px] rounded-xl sm:rounded-full text-[13px] sm:text-[14.5px] font-extrabold transition-all duration-300 backdrop-blur-md cursor-pointer ${currentLetter === 'All'
+                    ? 'bg-gradient-to-r from-[#1AA3B6] to-[#0B7285] text-white shadow-[0_4px_15px_rgba(26,163,182,0.3)] border-0 scale-102 sm:scale-105'
+                    : 'bg-white hover:bg-[#F8FBFC] text-[#12344D] border border-gray-200 shadow-xs hover:shadow-sm hover:text-[#1AA3B6]'
                     }`}
                 >
-                  <FiGrid size={16} /> All
+                  <FiGrid size={15} /> All
                 </button>
 
-                <div className="flex items-center flex-1 justify-between min-w-[1050px] px-1 gap-1.5">
+                <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
                   {alphabet.map(letter => {
                     const isActive = currentLetter === letter;
                     return (
                       <button
                         key={letter}
                         onClick={() => handleLetterClick(letter)}
-                        className={`flex-shrink-0 w-[42px] h-[42px] flex items-center justify-center rounded-[14px] text-[17px] font-extrabold transition-all duration-300 backdrop-blur-md ${isActive
-                          ? 'bg-gradient-to-br from-[#1AA3B6] to-[#0B7285] text-white shadow-[0_4px_15px_rgba(26,163,182,0.3)] border-0 scale-110'
-                          : 'bg-white/50 hover:bg-white text-[#12344D] border border-white/80 shadow-sm hover:shadow-md hover:text-[#1AA3B6] hover:-translate-y-0.5'
+                        className={`flex-shrink-0 w-[36px] h-[36px] sm:w-[42px] sm:h-[42px] flex items-center justify-center rounded-xl sm:rounded-[14px] text-[15px] sm:text-[17px] font-extrabold transition-all duration-300 backdrop-blur-md cursor-pointer ${isActive
+                          ? 'bg-gradient-to-br from-[#1AA3B6] to-[#0B7285] text-white shadow-[0_4px_15px_rgba(26,163,182,0.3)] border-0 scale-105 sm:scale-110'
+                          : 'bg-white hover:bg-[#F8FBFC] text-[#12344D] border border-gray-200 shadow-xs hover:shadow-sm hover:text-[#1AA3B6] hover:-translate-y-0.5'
                           }`}
                       >
                         {letter}

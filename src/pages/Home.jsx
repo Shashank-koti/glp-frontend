@@ -5,7 +5,6 @@ import Services from '../components/home/Services';
 import LogisticsPartners from '../components/home/LogisticsPartners';
 import OurClients from '../components/home/OurClients';
 import GlobalTrust from '../components/home/GlobalTrust';
-import NewsInsights from '../components/home/NewsInsights';
 import SEO from '../components/common/SEO';
 
 export default function Home() {
@@ -23,7 +22,6 @@ export default function Home() {
       <GlobalTrust />
       <LogisticsPartners />
       <OurClients />
-      <NewsInsights />
     </div>
   );
 }
