@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiEye, FiShoppingCart, FiCheckCircle, FiHeart } from 'react-icons/fi';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaWhatsapp, FaFlask } from 'react-icons/fa';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
 import ProductShareButton from '../common/ProductShareButton';
@@ -10,7 +10,7 @@ export default function RecentlyViewed({ currentProductId }) {
   const [recentProducts, setRecentProducts] = useState([]);
   const { addToCart, cartItems } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
-
+   
   const loadRecentlyViewed = () => {
     try {
       const stored = localStorage.getItem('recentlyViewed');
@@ -109,12 +109,19 @@ export default function RecentlyViewed({ currentProductId }) {
             {/* Image Area */}
             <div className="relative w-full aspect-square max-h-[220px] mx-auto flex items-center justify-center p-2">
               <Link to={`/products/${product.slug}`} className="w-full h-full flex items-center justify-center">
-                <img
-                  src={product.image || "/images/demoprod.gif"}
-                  alt={product.name}
-                  draggable="false"
-                  className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover:scale-105 transition-transform duration-500 select-none pointer-events-none"
-                />
+                {product.image ? (
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    draggable="false"
+                    className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover:scale-105 transition-transform duration-500 select-none pointer-events-none"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-slate-50/80 rounded-xl border border-dashed border-slate-200 text-slate-300 p-4">
+                    <FaFlask size={28} className="text-slate-300 mb-1" />
+                    <span className="text-[10px] font-semibold text-slate-400">Structure Pending</span>
+                  </div>
+                )}
               </Link>
             </div>
 

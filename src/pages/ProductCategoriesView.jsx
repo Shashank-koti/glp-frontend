@@ -23,7 +23,9 @@ export default function ProductCategoriesView() {
   const [groups, setGroups] = useState([]);
   // Initial fallback text matching the image structure
   const [categoryName, setCategoryName] = useState('API Impurities and Reference Standards');
+  const [categorySubtitle, setCategorySubtitle] = useState('');
   const [categoryDescription, setCategoryDescription] = useState('High-quality pharmaceutical impurities and reference standards for accurate research and analysis.');
+  const [isDescExpanded, setIsDescExpanded] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const currentLetter = searchParams.get('letter') || 'All';
@@ -40,6 +42,7 @@ export default function ProductCategoriesView() {
             .replace('API IMPURITIES AND REFERENCE STANDARDS', 'API Impurities and Reference Standards')
             .replace('API IMPURITIES', 'API Impurities');
           setCategoryName(catName);
+          if (catRes.data.data.subtitle) setCategorySubtitle(catRes.data.data.subtitle);
           if (catRes.data.data.description) setCategoryDescription(catRes.data.data.description);
         }
 
@@ -108,21 +111,32 @@ export default function ProductCategoriesView() {
               <span className="text-[#1AA3B6] font-semibold">{categoryName}</span>
             </div>
 
-            <h1 className="text-[24px] md:text-[36px] lg:text-[44px] font-[900] leading-[1.15] tracking-tight text-[#12344D] mb-5 uppercase">
-              {categoryName.toUpperCase().includes(' AND ') ? (
-                <>
-                  {categoryName.toUpperCase().split(' AND ')[0]} AND <br />
-                  <span className="text-[#084553]">
-                    {categoryName.toUpperCase().split(' AND ').slice(1).join(' AND ')}
-                  </span>
-                </>
-              ) : (
-                <span className="text-[#084553]">{categoryName}</span>
-              )}
+            <h1 className="text-[24px] md:text-[34px] lg:text-[40px] font-[900] leading-[1.15] tracking-tight text-[#12344D] mb-4">
+              {categoryName}
             </h1>
-            <p className="text-body text-[15px] md:text-[16px] max-w-[500px] mb-8 leading-relaxed font-medium">
-              {categoryDescription}
-            </p>
+
+            <div className="text-body text-[14.5px] md:text-[15.5px] max-w-[850px] mb-8 leading-relaxed font-normal">
+              {categoryDescription && categoryDescription.length > 280 ? (
+                <div>
+                  <div className="space-y-2.5">
+                    {(isDescExpanded ? categoryDescription : `${categoryDescription.slice(0, 260)}...`)
+                      .split('\n\n')
+                      .map((para, pIdx) => (
+                        <p key={pIdx}>{para}</p>
+                      ))}
+                  </div>
+                  <button
+                    onClick={() => setIsDescExpanded(!isDescExpanded)}
+                    className="inline-flex items-center gap-1 text-[#1AA3B6] hover:text-[#0B7285] font-semibold text-xs mt-2.5 transition-colors cursor-pointer"
+                  >
+                    {isDescExpanded ? 'Show Less' : 'Read Full Overview'}
+                    <FiChevronRight className={`transition-transform duration-200 ${isDescExpanded ? '-rotate-90' : 'rotate-90'}`} />
+                  </button>
+                </div>
+              ) : (
+                <p>{categoryDescription}</p>
+              )}
+            </div>
 
 
             <div className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-10 overflow-x-auto scrollbar-hide pb-2 lg:pb-0">

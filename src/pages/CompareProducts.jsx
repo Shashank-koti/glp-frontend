@@ -3,6 +3,7 @@ import { useCompare } from '../context/CompareContext';
 import { useCart } from '../context/CartContext';
 import { FiX, FiCheckCircle, FiShoppingCart, FiAlertCircle, FiArrowLeft } from 'react-icons/fi';
 import { LuPanelRightDashed, LuArrowLeftRight } from 'react-icons/lu';
+import { FaFlask } from 'react-icons/fa';
 
 export default function CompareProducts() {
   const { compareItems, removeFromCompare, clearCompare } = useCompare();
@@ -97,11 +98,15 @@ export default function CompareProducts() {
                   </button>
 
                   <div className="w-32 h-32 relative mb-4 flex items-center justify-center">
-                    <img
-                      src={product.image || "/images/demoprod.gif"}
-                      alt={product.name}
-                      className="w-full h-full object-contain mix-blend-multiply"
-                    />
+                    {product.image ? (
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-contain mix-blend-multiply"
+                      />
+                    ) : (
+                      <FaFlask size={28} className="text-slate-300" />
+                    )}
                   </div>
 
                   <Link to={`/products/${product.slug}`} className="text-center w-full">

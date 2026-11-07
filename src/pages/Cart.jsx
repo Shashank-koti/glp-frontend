@@ -84,7 +84,7 @@ export default function Cart() {
           CART & PRODUCT INQUIRY
         </h1>
         <p className="text-[#5B7280] text-sm sm:text-[16px] font-medium leading-[1.6]">
-          Users can add products to cart and submit an inquiry to get detailed information, pricing, availability & more.
+          Add products to cart and submit an inquiry to get detailed information, pricing, availability & more.
         </p>
       </div>
 
@@ -213,7 +213,7 @@ export default function Cart() {
           {/* Badges */}
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-[15px]">
             {[
-              { icon: FiCheckCircle, title: '1000+', sub: 'High Quality Products' },
+              { icon: FiCheckCircle, title: '20000+', sub: 'High Quality Products' },
               { icon: FiFileText, title: 'COA & Analytical', sub: 'Supporting Documents' },
               { icon: FiGlobe, title: 'Global Shipping', sub: 'Discreet & Secure' },
               { icon: FiHeadphones, title: 'Expert Support', sub: 'Quick Response' },
@@ -240,7 +240,7 @@ export default function Cart() {
             <FiClipboard className="text-[24px] sm:text-[26px] text-[#1AA3B6] shrink-0" strokeWidth={1.5} />
             <div>
               <h2 className="text-[#12344D] text-[16px] sm:text-[18px] font-[750]">Get a Quote / Product Inquiry</h2>
-              <p className="text-[#5B7280] text-[12px] sm:text-[13px] mt-0.5">Fill in the details below and our team will get back to you shortly.</p>
+              <p className="text-[#5B7280] text-[12px] sm:text-[13px] mt-0.5">Fill in the details below and submit your inquiry</p>
             </div>
           </div>
 

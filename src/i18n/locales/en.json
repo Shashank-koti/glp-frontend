@@ -41,7 +41,7 @@
     "businessHours": "Business Hours"
   },
   "footer": {
-    "desc": "Advancing global healthcare through innovative pharmaceutical solutions, uncompromising quality, and scientific excellence.",
+    "desc": "GLP Pharma Standards, based in Hyderabad, India, is a specialized manufacturer and supplier of high-quality API impurities, pharmaceutical reference standards, working standards, secondary standards and nitrosamine impurities, serving over 1,100 clients across 50+ countries.",
     "quickLinks": "Quick Links",
     "aboutUs": "About Us",
     "careers": "Careers",
@@ -53,8 +53,9 @@
     "impurities": "Impurity Standards",
     "catalogue": "Product Catalogue",
     "technicalDocs": "Technical Documents",
+    "disclaimer": "Research & Analytical Use Only: All products are intended exclusively for research, laboratory and analytical applications. Not intended for human or animal consumption.",
     "address": "Plot No:1, Shakti Puram Phase-2, Prashanti Nagar,<br />Industrial Estate(IE), Kukatpally,<br />Hyderabad, Telangana State, India, PIN: 500072",
-    "allRightsReserved": "GLP Pharma. All rights reserved.",
+    "allRightsReserved": "GLP Pharma Standards. All rights reserved.",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service"
   },
@@ -66,14 +67,14 @@
       "viewAllArticles": "View All Articles",
       "readFullStory": "Read Full Story",
       "n1Category": "Company News",
-      "n1Title": "GLP Pharma Announces Expansion of API Manufacturing Facility",
-      "n1Date": "Oct 15, 2024",
+      "n1Title": "GLP Pharma Expands Chemical Synthesis and Analytical Testing Capabilities",
+      "n1Date": "Oct 15, 2026",
       "n2Category": "Regulatory Update",
-      "n2Title": "Navigating the New ISO 17034:2016 Requirements for Reference Materials",
-      "n2Date": "Sep 28, 2024",
+      "n2Title": "Navigating FDA & EMA Cohort of Concern Guidelines for Nitrosamine Impurities (NDSRIs)",
+      "n2Date": "Sep 28, 2026",
       "n3Category": "Research",
-      "n3Title": "Breakthrough in Green Synthesis Routes for Complex Intermediates",
-      "n3Date": "Sep 12, 2024"
+      "n3Title": "Advanced Structure Elucidation Techniques for Complex Pharmaceutical Intermediates",
+      "n3Date": "Sep 12, 2026"
     },
     "quality": {
       "uncompromisingStandards": "Uncompromising Standards",
@@ -96,35 +97,35 @@
       "desc": "Our commitment to excellence transcends borders. With a robust global distribution network, we ensure seamless delivery of high-quality standards to top pharmaceutical companies, CROs, and research institutions across 50+ countries.",
       "countriesServed": "Countries Served",
       "productsAvailable": "Products Available",
-      "c1Title": "US FDA",
-      "c1Desc": "Approved Manufacturing Facilities ensuring top-tier regulatory compliance.",
-      "c2Title": "EU GMP",
-      "c2Desc": "Certified processes guaranteeing safety and quality for the European market.",
-      "c3Title": "ISO 9001",
-      "c3Desc": "Quality Management Systems ensuring consistent product standards.",
-      "c4Title": "ISO 17034",
-      "c4Desc": "Accreditation for competence of Reference Material Producers."
+      "c1Title": "US FDA Compliant",
+      "c1Desc": "Analytical standards supporting stringent DMF filings and ANDA submissions.",
+      "c2Title": "Global Pharmacopoeia",
+      "c2Desc": "Materials characterized against USP, Ph. Eur. (EP), BP, and IP specifications.",
+      "c3Title": "ISO Certified Quality",
+      "c3Desc": "Strict Quality Management Systems ensuring consistent purity and accuracy.",
+      "c4Title": "Comprehensive CoA",
+      "c4Desc": "Complete analytical data including HPLC, GC, LC-MS/MS, 1H/13C NMR, and SER."
     },
     "services": {
-      "ourExpertise": "Our Expertise",
-      "title1": "Comprehensive",
-      "title2": "Pharmaceutical Solutions",
-      "viewAll": "View All Services",
+      "ourExpertise": "Our Specialized Capabilities",
+      "title1": "Specialized Scientific Solutions for",
+      "title2": "Complex Pharmaceutical Challenges",
+      "viewAll": "Explore All Services",
       "s1": {
-        "title": "API Impurities",
-        "desc": "High-quality APIs and impurity standards manufactured in state-of-the-art facilities compliant with global standards."
+        "title": "Custom Synthesis of Molecules",
+        "desc": "Tailored chemical synthesis for specialized research requirements, developing practical synthetic pathways for compounds not readily available commercially."
       },
       "s2": {
-        "title": "Custom Synthesis",
-        "desc": "Tailored synthesis of complex molecules and reference standards to meet your precise specifications."
+        "title": "Complex Chiral Compounds",
+        "desc": "Advanced stereoselective synthesis, chiral resolution, and enantiomeric characterization for structurally complex molecules and stereoisomeric impurities."
       },
       "s3": {
-        "title": "Quality Control",
-        "desc": "Rigorous testing protocols ensuring absolute purity, consistency, and compliance in every batch."
+        "title": "Unknown Impurity Investigation",
+        "desc": "Scientific isolation, identification, and structural characterization of unknown pharmaceutical impurities using chromatographic isolation, LC-MS/MS, and NMR."
       },
       "s4": {
-        "title": "Regulatory Support",
-        "desc": "Comprehensive documentation and support navigating complex global regulatory landscapes."
+        "title": "Structure Elucidation Reports (SER)",
+        "desc": "Comprehensive structural characterization interpreting HRMS, 1H NMR, 13C NMR, 2D NMR, and FT-IR to establish definitive molecular assignments."
       }
     },
     "newProducts": {
@@ -135,94 +136,132 @@
       "enquire": "Enquire"
     },
     "companyIntro": {
-      "about": "About GLP Pharma",
-      "pioneering": "Pioneering the Future of",
-      "pharmaceuticals": "Pharmaceuticals",
-      "desc": "With over two decades of uncompromising dedication to quality, GLP Pharma has established itself as a premier global manufacturer.",
+      "about": "About GLP Pharma Standards",
+      "pioneering": "Advancing Pharmaceutical Research Through",
+      "pharmaceuticals": " Precision, Purity and Integrity",
+      "desc": "Established in 2015 and headquartered in Hyderabad, India, GLP Pharma Standards is a research-based manufacturer and supplier of pharmaceutical impurity standards, analytical reference materials and advanced research compounds for the global pharmaceutical industry.",
       "points": [
-        "US FDA Approved Facilities",
-        "EU GMP Certified",
-        "Advanced R&D Centers",
-        "Sustainable Manufacturing"
+        "20,000+ API Impurities & Reference Standards in Ready Stock",
+        "5,000+ Intermediate Impurities & Analytical-Grade Substances",
+        "Over 1,100 Clients Across 50+ Countries Worldwide",
+        "Complete CoA: HPLC, GC, LC-MS/MS, 1H/13C NMR, FT-IR, TGA & XRD"
       ],
       "readOurStory": "Read Our Full Story",
-      "yearsOfExcellence": "Years of Excellence",
-      "inGlobalPharma": "in Global Pharma"
+      "yearsOfExcellence": "Founded in 2015",
+      "inGlobalPharma": "Hyderabad, India • Serving 50+ Countries"
     },
     "hero": {
       "slide1": {
-        "label": "Research Based. Quality Driven.",
-        "title": "Pioneering Research",
-        "highlight": "in Pharma Standards",
-        "desc": "Setting global benchmarks with our state-of-the-art facilities and cutting-edge pharmaceutical research."
+        "label": "Research Based • Quality Driven",
+        "title": "Your Trusted Source for",
+        "highlight": "API Impurities & Pharmaceutical Reference Standards",
+        "desc": "GLP Pharma Standards, based in Hyderabad, India, is a specialized manufacturer and supplier of high-quality API impurities, pharmaceutical reference standards, working standards, secondary standards and nitrosamine impurities."
       },
       "slide2": {
-        "label": "Globally Trusted",
-        "title": "Global Reach &",
-        "highlight": "Unwavering Trust",
-        "desc": "Connecting innovations worldwide. A trusted partner for high-quality API Impurities and Reference Standards globally."
+        "label": "Comprehensive Product Portfolio",
+        "title": "Advanced Research Compounds &",
+        "highlight": "Specialized Custom Synthesis",
+        "desc": "Our comprehensive product portfolio also includes peptides, drug metabolites, stable isotope labelled compounds, catalysts, pharmaceutical intermediates and custom-synthesized molecules."
       },
       "slide3": {
-        "label": "Uncompromising Standards",
-        "title": "Absolute Quality",
-        "highlight": "& Precision",
-        "desc": "Manufactured in pristine environments to ensure the highest purity and compliance with global regulatory standards."
+        "label": "Global Regulatory Compliance",
+        "title": "Releasing Safer, Purer &",
+        "highlight": "Fully Compliant Products",
+        "desc": "We support global drug manufacturers in releasing safer, purer, and fully compliant products, with impurity standards they can trust for regulatory filings, which will help the world become healthier."
       },
       "exploreProducts": "Explore Products",
       "getInTouch": "Get in Touch",
-      "feature1": "10+ Years",
-      "feature1Sub": "of Expertise",
-      "feature2": "Wide Range of",
-      "feature2Sub": "Quality Products",
-      "feature3": "Complete Analytical",
-      "feature3Sub": "Support",
+      "feature1": "20,000+ Standards",
+      "feature1Sub": "Ready Stock for Dispatch",
+      "feature2": "1,100+ Clients",
+      "feature2Sub": "Across 50+ Countries",
+      "feature3": "11+ Years",
+      "feature3Sub": "Synthesis Experience",
       "certified": "CERTIFIED"
     }
   },
   "about": {
-    "infra": {
-      "title": "Global Infrastructure",
-      "worldClass": "World-Class",
-      "manufacturing": "Manufacturing industry",
-      "desc": "Our cutting-edge manufacturing facilities are designed to meet and exceed cGMP standards. Equipped with fully automated control systems and sophisticated containment technologies, we handle complex chemical syntheses with absolute precision and safety.",
-      "p1": "Zero-discharge environmental capabilities",
-      "p2": "Class 100,000 clean rooms for final API processing",
-      "p3": "Dedicated high-potency API (HPAPI) blocks",
-      "p4": "Continuous monitoring and DCS automation",
-      "s1": "Advanced Facilities",
-      "s2": "Products Developed",
-      "s3": "Countries Served",
-      "s4": "Expert Scientists"
+    "hero": {
+      "title": "Advancing Pharmaceutical Research Through Precision, Purity and Integrity",
+      "desc": "Established in 2015 and headquartered in Hyderabad, India, GLP Pharma Standards is a research-based manufacturer and supplier of pharmaceutical impurity standards, analytical reference materials and advanced research compounds for the global pharmaceutical industry.",
+      "established": "Established 2015 • Hyderabad, India",
+      "card1Val": "50+",
+      "card1Text": "Countries utilizing our high-purity standards globally.",
+      "card2Val": "20,000+",
+      "card2Text": "API Impurities & Pharmaceutical Reference Standards catalogue."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "desc": "To support pharmaceutical research and analytical excellence by providing high-quality impurity standards, accurately characterized reference materials and customized chemical research solutions with integrity, reliability and scientific precision."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "desc": "To become a globally preferred partner for pharmaceutical impurity standards, advanced research compounds and specialized chemical synthesis through continuous innovation, technical expertise and customer-focused service."
     },
     "values": {
-      "title": "Our Core Values",
-      "desc": "The principles that guide our research, govern our manufacturing, and shape our culture.",
+      "title": "Our Core Values: Precision, Purity & Integrity",
+      "desc": "At GLP Pharma Standards, we recognize that reliable analytical results begin with the quality and identity of the reference materials used. We therefore emphasize compound purity, structural confirmation, analytical characterization and transparent documentation.",
       "v1Title": "Precision",
-      "v1Desc": "Scientific accuracy and exactitude in every molecule we synthesize and every process we design.",
-      "v2Title": "Quality",
-      "v2Desc": "Uncompromising standards that consistently exceed global regulatory requirements.",
-      "v3Title": "Global Reach",
-      "v3Desc": "Breaking down geographical barriers to make critical medications accessible worldwide.",
-      "v4Title": "Patient First",
-      "v4Desc": "Every strategic decision is driven by the ultimate impact on patient lives and health outcomes."
+      "v1Desc": "Maintaining scientific accuracy in every compound identification, synthesis, characterization and documentation.",
+      "v2Title": "Purity",
+      "v2Desc": "Striving to deliver high-purity research materials suitable for their intended R&D and analytical applications.",
+      "v3Title": "Integrity",
+      "v3Desc": "Building lasting customer confidence through transparent communication, responsible business practices and reliable technical support.",
+      "v4Title": "Scientific Excellence",
+      "v4Desc": "Adapting to changing regulations, customer demands and technological innovations that challenge the pharma industry."
     },
     "legacy": {
-      "years": "20+",
-      "yearsText": "Years of Scientific Excellence",
-      "title1": "A Legacy Built on",
-      "title2": "Uncompromising Quality",
-      "p1": "Since our inception, GLP Pharma has been driven by a singular mission: to enhance global healthcare outcomes through the power of advanced pharmaceutical chemistry.",
-      "p2": "We don't just manufacture ingredients; we engineer solutions. Our state-of-the-art facilities and brilliant scientific minds work in synergy to solve complex synthetic challenges, ensuring that every molecule we produce meets the most stringent global standards.",
-      "certTitle": "ISO & GMP Certified",
-      "certSub": "Meeting global regulatory standards"
+      "years": "2015",
+      "yearsText": "Founded in Hyderabad, India",
+      "title1": "Precision, Purity and",
+      "title2": "Scientific Excellence",
+      "p1": "We support pharmaceutical API manufacturers, formulation companies, contract research organizations (CROs), research institutions and analytical testing laboratories with high-purity compounds and scientifically characterized materials essential for pharmaceutical research, impurity profiling, analytical method development, method validation and quality control.",
+      "p2": "Our extensive product portfolio comprises 20,000+ API impurities and reference standards, along with 5,000+ intermediate impurities and analytical-grade substances. Our capabilities extend to nitrosamine impurities, pharmaceutical working standards, secondary standards, isotope-labelled compounds, peptides, metabolites, complex intermediates and custom-synthesized molecules.",
+      "p3": "Depending on the product and analytical requirements, GLP Pharma Standards supplies its impurity standards and reference compounds with Certificate of Analysis (CoA) and relevant analytical data, including HPLC, GC, LC-MS/MS or mass spectrometry, 1H NMR, 13C NMR, FT-IR, CHNS, moisture analysis, TGA and XRD. Detailed Structure Elucidation Reports (SER) can also be provided for compounds requiring additional structural confirmation.",
+      "p4": "Our commitment to scientific accuracy, comprehensive analytical characterization and responsive technical support has helped us serve over 1,100 clients across more than 50 countries. We continue to build long-term relationships through technical competence, dependable service and a commitment to scientific excellence.",
+      "certTitle": "1,100+ Global Clients",
+      "certSub": "Serving over 50 countries with export-quality compounds"
     },
-    "hero": {
-      "title": "A Legacy Built on Uncompromising Quality",
-      "desc": "We are a research-driven global leader dedicated to developing, manufacturing, and delivering high-quality active pharmaceutical ingredients to healthcare providers worldwide.",
-      "card1Val": "50+",
-      "card1Text": "Countries utilizing our high-grade APIs globally.",
-      "card2Val": "99.9%",
-      "card2Text": "Purity rate across our entire impurity standards catalog."
+    "whyChoose": {
+      "badge": "Key Advantages",
+      "title": "Why Choose GLP Pharma Standards?",
+      "subtitle": "11+ Years of Experience in Synthesizing & Supplying Impurity Standards",
+      "desc": "Our commitment to scientific accuracy, comprehensive analytical characterization and responsive technical support has helped us serve over 1,100 clients across more than 50 countries.",
+      "points": [
+        "11+ years of experience in synthesizing and supplying impurity standards",
+        "Extensive portfolio of 20K+ API impurities and pharmaceutical reference standards available in ready stock for immediate dispatch",
+        "Specialized capabilities in nitrosamine impurities and custom synthesis",
+        "Comprehensive analytical characterization and documentation (CoA, SER, NMR, MS/MS)",
+        "Expertise in complex molecules, impurity isolation and structural elucidation",
+        "Prompt and responsive support from our experienced technical team for all queries received from clients",
+        "Serving clients across more than 50 countries with export-quality compounds"
+      ]
+    },
+    "infra": {
+      "title": "Why Choose GLP Pharma Standards?",
+      "worldClass": "Scientific Capabilities &",
+      "manufacturing": "Comprehensive Characterization",
+      "desc": "Our commitment to scientific accuracy, comprehensive analytical characterization and responsive technical support has helped us serve over 1,100 clients across more than 50 countries.",
+      "p1": "11+ years of experience in synthesizing and supplying impurity standards.",
+      "p2": "Extensive portfolio of 20,000+ API impurities and pharmaceutical reference standards in ready stock.",
+      "p3": "Specialized capabilities in nitrosamine impurities, NDSRIs, and custom synthesis.",
+      "p4": "Comprehensive analytical characterization (CoA, SER, NMR, LC-MS/MS, TGA, XRD).",
+      "p5": "Expertise in complex molecules, impurity isolation and structural elucidation.",
+      "p6": "Prompt and responsive technical support for pharmaceutical R&D.",
+      "p7": "Serving clients across more than 50 countries with export-quality compounds.",
+      "s1": "20,000+ Standards",
+      "s2": "5,000+ Intermediates",
+      "s3": "50+ Countries",
+      "s4": "1,100+ Clients"
+    },
+    "policies": {
+      "badge": "Compliance & Regulations",
+      "title": "Regulatory Compliance & Usage Policies",
+      "desc": "GLP Pharma Standards adheres to rigorous international quality, ethical, and legal frameworks.",
+      "researchTitle": "Research & Analytical Use Only",
+      "researchDesc": "All products supplied by GLP Pharma Standards are intended exclusively for research, laboratory and analytical applications. They are not intended for human or animal consumption, therapeutic use, clinical administration or any other unauthorized application.",
+      "complianceTitle": "Regulated & Controlled Substances Policy",
+      "complianceDesc": "GLP Pharma Standards does not manufacture, supply, export or otherwise deal in restricted, narcotic, psychotropic, addictive, prohibited or other regulated chemical substances without the applicable licenses, authorizations and regulatory approvals. All transactions involving regulated substances are subject to applicable laws, licensing requirements and internal compliance review."
     }
   },
   "services": {
@@ -240,44 +279,72 @@
       "p4Desc": "Full-scale manufacturing under strict quality control, ensuring timely delivery of high-grade APIs."
     },
     "list": {
-      "ourExpertise": "Our Expertise",
-      "excellence": "Excellence at every",
-      "stage": "stage of the lifecycle.",
-      "desc": "We deliver customized, scalable, and compliant service models tailored to your most complex pharmaceutical challenges.",
-      "exploreCapability": "Explore Capability",
-      "s1Title": "Contract Manufacturing",
-      "s1Sub": "Commercial-scale API manufacturing",
-      "s1Desc": "Uncompromising quality and absolute regulatory compliance for your commercial-scale API manufacturing needs. Our facilities are designed to handle complex synthetic routes with exceptional efficiency.",
-      "s1f1": "cGMP Compliant Facilities",
-      "s1f2": "Scale-up Capabilities",
-      "s1f3": "Technology Transfer",
-      "s1f4": "Continuous Processing",
-      "s2Title": "Custom Synthesis",
-      "s2Sub": "Tailored synthesis of complex molecules",
-      "s2Desc": "Expertise in the tailored synthesis of complex organic molecules, intermediates, and proprietary APIs. We deliver scalable and robust processes from milligrams to multi-kilograms.",
-      "s2f1": "Route Scouting",
-      "s2f2": "Process Optimization",
-      "s2f3": "Multi-step Synthesis",
-      "s2f4": "Isotope Labeling",
-      "s3Title": "Analytical Testing",
-      "s3Sub": "Comprehensive quality control",
-      "s3Desc": "Utilizing state-of-the-art instrumentation for comprehensive impurity profiling, stability studies, and quality control to ensure product integrity and compliance.",
-      "s3f1": "Method Development",
-      "s3f2": "Stability Testing (ICH)",
-      "s3f3": "Impurity Isolation",
-      "s3f4": "Genotoxic Evaluation",
-      "s4Title": "Regulatory Support",
-      "s4Sub": "Seamless global approvals",
-      "s4Desc": "Expert guidance traversing complex global regulatory landscapes. Our dedicated team ensures your filings are precise, comprehensive, and ready for seamless approvals.",
-      "s4f1": "DMF Compilation (eCTD)",
-      "s4f2": "Regulatory Strategy",
-      "s4f3": "Audit Readiness",
-      "s4f4": "Query Response"
+      "ourExpertise": "Our Specialized Capabilities",
+      "excellence": "Tailored Chemistry & Analytical",
+      "stage": "Solutions for Global Pharma",
+      "desc": "We work collaboratively with customers to understand their scientific objectives, technical specifications, and project timelines, providing customized solutions for challenging chemical research requirements.",
+      "exploreCapability": "Inquire About Service",
+      "s1Title": "Custom Synthesis of Molecules",
+      "s1Sub": "Tailored Chemical Synthesis for Specialized Research Requirements",
+      "s1Desc": "GLP Pharma Standards provides custom synthesis services for pharmaceutical research compounds, complex organic molecules, impurity standards, advanced intermediates and specialized analytical materials. Our research approach focuses on developing practical synthetic pathways for compounds that are not readily available through conventional commercial sources. From route evaluation and multistep synthesis to purification and analytical characterization, we support projects involving challenging molecular structures and customer-specific specifications. Our custom synthesis services are particularly valuable for pharmaceutical manufacturers, CROs and analytical laboratories requiring specialized compounds in research quantities.",
+      "s1f1": "Route Evaluation & Synthesis Design",
+      "s1f2": "Multistep Organic Synthesis",
+      "s1f3": "Isolation & High-Grade Purification",
+      "s1f4": "Comprehensive Analytical Characterization",
+      "s2Title": "Complex Chiral Compounds",
+      "s2Sub": "Advanced Synthesis of Stereochemically Complex Molecules",
+      "s2Desc": "Chiral compounds play a critical role in pharmaceutical development because different stereoisomers can exhibit distinct chemical, biological and pharmacological properties. GLP Pharma Standards offers specialized synthesis support for complex chiral molecules, stereoisomeric impurities, chiral intermediates and structurally challenging research compounds. Our capabilities include multistep synthetic strategies, stereoselective transformations, chiral resolution and purification approaches, depending on project requirements. We support pharmaceutical research teams in obtaining compounds with defined stereochemical characteristics for analytical method development, impurity identification and research applications.",
+      "s2f1": "Stereoselective Transformations",
+      "s2f2": "Chiral Resolution & Separation",
+      "s2f3": "Stereoisomeric Impurity Profiling",
+      "s2f4": "Enantiomeric Purity Assessment",
+      "s3Title": "Isolation, Identification & Characterization of Unknown Impurities",
+      "s3Sub": "Scientific Investigation of Unidentified Pharmaceutical Impurities",
+      "s3Desc": "Unknown impurities can emerge during API synthesis, pharmaceutical formulation, stability studies, degradation investigations and routine analytical testing. Identifying these impurities is important for understanding product quality, evaluating degradation pathways and developing effective impurity control strategies. GLP Pharma Standards provides research support for the isolation, identification and structural characterization of unknown pharmaceutical impurities. Depending on the project, our approach may involve impurity enrichment, chromatographic isolation, purification, mass spectrometric analysis, NMR spectroscopy and other appropriate analytical techniques. Where feasible, we also support the synthesis of identified impurities to obtain characterized reference materials for further analytical evaluation.",
+      "s3f1": "Impurity Enrichment & Chromatographic Isolation",
+      "s3f2": "High-Resolution Mass Spectrometry (LC-MS/MS)",
+      "s3f3": "NMR Spectroscopy (1H, 13C, 2D NMR)",
+      "s3f4": "Re-synthesis of Identified Impurities",
+      "s4Title": "Structure Elucidation Reports (SER)",
+      "s4Sub": "Comprehensive Structural Characterization of Pharmaceutical Compounds",
+      "s4Desc": "Accurate structural identification is essential when investigating pharmaceutical impurities, degradation products, unknown intermediates and newly synthesized research compounds. GLP Pharma Standards offers Structure Elucidation Reports (SER) based on the interpretation of relevant analytical data to establish or support the proposed molecular structure of a compound. Depending on the compound and analytical requirements, the investigation may include mass spectrometry, 1H NMR, 13C NMR, two-dimensional NMR techniques, FT-IR and other suitable characterization methods. Our reports provide scientific interpretation of available experimental evidence, helping customers understand structural assignments and evaluate compound identity.",
+      "s4f1": "1D & 2D NMR Analysis (COSY, HSQC, HMBC, NOESY)",
+      "s4f2": "High-Resolution Mass Spectrometry (HRMS)",
+      "s4f3": "FT-IR Spectroscopy & Thermal Characterization",
+      "s4f4": "Definitive Scientific Structural Interpretation",
+      "s5Title": "NDSRI Formation & Non-Formation Studies",
+      "s5Sub": "Experimental Nitrosamine Formation Assessment and Scientific Reporting",
+      "s5Desc": "Nitrosamine Drug Substance-Related Impurities (NDSRIs) are an important consideration in pharmaceutical impurity risk assessment and regulatory evaluation. Although certain drug substances or related chemical structures may present a theoretical potential for nitrosamine formation, actual formation depends on factors such as molecular structure, nitrosating agents, reaction conditions, formulation components and storage environment. GLP Pharma Standards offers specialized research support for investigating the formation or non-detection of potential NDSRIs through scientifically designed experimental studies. Where a suspected NDSRI is not detected, we provide a scientifically supported NDSRI Non-Formation Assessment Report to support DMF filings.",
+      "s5f1": "Targeted Nitrosation Experiments",
+      "s5f2": "Forced-Degradation Investigations",
+      "s5f3": "Trace-Level Analytical Screening",
+      "s5f4": "NDSRI Non-Formation Assessment Reports for DMF",
+      "s6Title": "Contract Research & Process R&D",
+      "s6Sub": "Collaborative Chemical Research and Synthetic Process Development",
+      "s6Desc": "GLP Pharma Standards provides contract research and process research services for pharmaceutical companies, CROs and specialty chemical organizations seeking customized chemistry solutions. Our research activities may include synthetic route exploration, feasibility studies, reaction optimization, multistep organic synthesis, intermediate development and characterization of research compounds. We offer project-based collaboration and dedicated Full-Time (FT) research support, subject to agreed project scope, resources and technical requirements. By combining synthetic chemistry expertise with a flexible project approach, we help customers investigate complex molecular targets and develop practical research solutions.",
+      "s6f1": "Synthetic Route Exploration & Feasibility",
+      "s6f2": "Reaction Condition Optimization",
+      "s6f3": "Dedicated Full-Time (FT) Research Chemist Support",
+      "s6f4": "Confidential & IP-Protected Execution",
+      "s7Title": "API Process Optimization & Scale-Up Services",
+      "s7Sub": "Improving Synthetic Efficiency and Process Understanding",
+      "s7Desc": "Process optimization plays an important role in improving the efficiency, consistency and practicality of pharmaceutical chemical synthesis. GLP Pharma Standards offers research support for evaluating and optimizing API synthetic processes, including reaction conditions, reagent selection, impurity formation, intermediate purification and synthetic route performance. Our process R&D approach focuses on identifying opportunities to improve reaction conversion, selectivity, yield and reproducibility while understanding potential process-related impurities. We also support laboratory-scale process development and scale-up feasibility assessments for selected synthetic routes.",
+      "s7f1": "Reaction Conversion, Yield & Selectivity Improvement",
+      "s7f2": "Process-Related Impurity Mitigation",
+      "s7f3": "Reagent & Solvent Optimization",
+      "s7f4": "Laboratory-Scale Scale-Up Feasibility",
+      "s8Title": "Stability Studies & Regulatory Documentation Support",
+      "s8Sub": "Analytical Research and Documentation for Pharmaceutical Development",
+      "s8Desc": "Stability investigations help pharmaceutical researchers understand how chemical compounds behave under different environmental and storage conditions and identify potential degradation pathways. GLP Pharma Standards offers analytical research support for selected stability-related investigations, degradation studies and impurity characterization requirements. Depending on project scope, our services may include stress-degradation investigations, identification of degradation products, preparation of impurity reference materials and interpretation of relevant analytical findings. We also provide scientific documentation support, including Certificates of Analysis, Structure Elucidation Reports and study-specific technical reports.",
+      "s8f1": "Forced Degradation & Stress Studies",
+      "s8f2": "Degradation Product Identification",
+      "s8f3": "Certificate of Analysis (CoA) Generation",
+      "s8f4": "Technical Reports for Regulatory Submissions"
     },
     "hero": {
-      "title1": "Accelerating",
-      "title2": "Pharmaceutical Innovation",
-      "desc": "From complex custom synthesis to commercial-scale contract manufacturing, we provide end-to-end services powered by cutting-edge technology and unparalleled scientific expertise."
+      "title1": "Specialized Scientific Solutions for",
+      "title2": "Complex Pharmaceutical Challenges",
+      "desc": "GLP Pharma Standards offers specialized research and development services to support pharmaceutical manufacturers, CROs, analytical laboratories and chemical research organizations. Our capabilities encompass custom molecular synthesis, complex chiral chemistry, unknown impurity investigations, structure elucidation, nitrosamine formation studies, process research and analytical documentation support. We work collaboratively with customers to understand their scientific objectives, technical specifications and project timelines, providing customized solutions for challenging chemical research requirements."
     }
   },
   "careers": {
@@ -376,20 +443,20 @@
       "subscribe": "Subscribe"
     },
     "articles": {
-      "n1Title": "GLP Pharma Announces Expansion of API Manufacturing Facility",
-      "n1Desc": "To meet growing global demand, we are expanding our primary manufacturing facility, adding 50,000 sq ft of cGMP compliant space.",
+      "n1Title": "GLP Pharma Expands Chemical Synthesis & Analytical Testing Capabilities",
+      "n1Desc": "To meet growing global demand, we have expanded our synthesis and analytical characterization suites in Hyderabad, India.",
       "n1Cat": "Company News",
       "n1Date": "October 15, 2026",
-      "n2Title": "New Breakthrough in Green Chemistry Synthesis",
-      "n2Desc": "Our R&D team has successfully developed a novel, environmentally friendly synthesis route for a key cardiovascular API.",
+      "n2Title": "Navigating Nitrosamine Impurity (NDSRI) Testing Protocols",
+      "n2Desc": "Our R&D team provides specialized NDSRI formation assessments and targeted trace-level analytical screening.",
       "n2Cat": "Research",
       "n2Date": "September 28, 2026",
-      "n3Title": "Successfully Completed US FDA Inspection",
-      "n3Desc": "We are pleased to announce the successful completion of a routine FDA inspection with zero 483 observations.",
+      "n3Title": "Comprehensive Structure Elucidation for Complex Intermediates",
+      "n3Desc": "Detailed SER reports integrating 1D/2D NMR, HRMS, and FT-IR for regulatory submissions.",
       "n3Cat": "Regulatory",
       "n3Date": "August 12, 2026",
-      "n4Title": "GLP Pharma Exhibits at CPHI Worldwide 2026",
-      "n4Desc": "Join us at our booth to discuss our latest active pharmaceutical ingredients and custom synthesis capabilities.",
+      "n4Title": "GLP Pharma at Global Pharmaceutical Exhibitions",
+      "n4Desc": "Discussing active reference materials, impurity standards, and dedicated CRO synthesis programs.",
       "n4Cat": "Events",
       "n4Date": "July 05, 2026"
     }

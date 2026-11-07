@@ -344,16 +344,24 @@ export default function ProductDetails() {
 
       <div className="relative z-10 flex-grow flex items-center justify-center w-full mb-4 pt-8">
         <div className="w-full flex items-center justify-center transition-all duration-300">
-          <img
-            src={product.image || "/images/demoprod.gif"}
-            alt={product.name?.split(';')[0] || "Product Image"}
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowImageZoom(true);
-            }}
-            className="max-w-full w-auto h-auto max-h-[350px] md:max-h-[450px] object-contain mix-blend-multiply drop-shadow-lg cursor-pointer transition-transform duration-300 hover:scale-[1.03]"
-            title="Click to zoom"
-          />
+          {product.image ? (
+            <img
+              src={product.image}
+              alt={product.name?.split(';')[0] || "Product Image"}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowImageZoom(true);
+              }}
+              className="max-w-full w-auto h-auto max-h-[350px] md:max-h-[450px] object-contain mix-blend-multiply drop-shadow-lg cursor-pointer transition-transform duration-300 hover:scale-[1.03]"
+              title="Click to zoom"
+            />
+          ) : (
+            <div className="w-full h-[260px] md:h-[340px] flex flex-col items-center justify-center bg-slate-50/70 rounded-2xl border border-dashed border-slate-200 text-slate-400 p-6">
+              <FaFlask size={44} className="text-slate-300 mb-2" />
+              <span className="text-xs font-semibold text-slate-500">Chemical Structure Pending</span>
+              <span className="text-[11px] text-slate-400 mt-0.5">Available on request</span>
+            </div>
+          )}
         </div>
       </div>
 
@@ -477,19 +485,19 @@ export default function ProductDetails() {
               {/* Breadcrumb */}
               <div className="flex justify-center items-center gap-2 text-[15px] text-[#5B7280] font-medium mb-6 flex-wrap">
                 <Link to="/" className="hover:text-[#1AA3B6] transition-colors">Home</Link>
-                <FiChevronRight className="text-slate-400 text-[14px] mt-0.5" />
+                <FiChevronRight className="text-slate-400 text-[14px] " />
                 <Link to={`/product-categories-view/${product.category?.slug || 'api-impurities-and-reference-standards'}`} className="hover:text-[#1AA3B6] transition-colors">{(typeof product.category === 'string' ? product.category : product.category?.categoryName || 'API Impurities').replace('API IMPURITIES & REFERENCE STANDARDS', 'API Impurities & Reference Standards').replace('API IMPURITIES AND REFERENCE STANDARDS', 'API Impurities and Reference Standards').replace('API IMPURITIES', 'API Impurities')}</Link>
                 {product.mainProduct && typeof product.mainProduct === 'object' && (product.mainProduct.heading || product.mainProduct.name) && (
                   <>
-                    <FiChevronRight className="text-slate-400 text-[14px] mt-0.5" />
+                    <FiChevronRight className="text-slate-400 text-[14px] " />
                     <Link to={`/products-view/${product.mainProduct.p_link || product.mainProduct.slug}`} className="hover:text-[#1AA3B6] transition-colors">{product.mainProduct.heading || product.mainProduct.name}</Link>
                   </>
                 )}
-                <FiChevronRight className="text-slate-400 text-[14px] mt-0.5" />
+                <FiChevronRight className="text-slate-400 text-[14px]" />
                 <span className="text-[#1AA3B6] font-semibold truncate max-w-[200px] sm:max-w-[400px]">{product.name?.split(';')[0]}</span>
               </div>
 
-              <h1 className="font-extrabold text-heading mb-4 text-center tracking-tight drop-shadow-sm text-3xl md:text-4xl w-full">
+              <h1 className="font-extrabold text-heading mb-2 text-center tracking-tight drop-shadow-sm text-3xl md:text-4xl w-full">
                 {product.name?.split(';')[0]}&nbsp;|&nbsp;{product.casNumber.split(';')[0]}
               </h1>
             </div>
@@ -668,8 +676,8 @@ export default function ProductDetails() {
             <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-md border border-[#EAF2F4] p-4">
               <div className="flex items-center mb-6 border-b border-[#EAF2F4]">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#1AA3B6] flex items-center justify-center text-white shadow-sm mb-1">
-                    <BsFileEarmarkText size={20} />
+                  <div className="w-8 h-8 rounded-xl bg-[#1AA3B6] flex items-center justify-center text-white shadow-sm mb-1">
+                    <BsFileEarmarkText size={16} />
                   </div>
                   <h2 className="font-bold text-heading text-lg">Technical Specifications</h2>
                 </div>
@@ -879,12 +887,19 @@ export default function ProductDetails() {
                 {/* Image Area */}
                 <div className="relative w-full aspect-square max-h-[200px] mx-auto flex items-center justify-center group/img">
                   <Link to={`/products/${rel.slug}`} className="w-full h-full flex items-center justify-center">
-                    <img
-                      src={rel.image || "/images/demoprod.gif"}
-                      alt={rel.name?.split(';')[0]}
-                      draggable="false"
-                      className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover/img:scale-105 transition-transform duration-500 select-none pointer-events-none"
-                    />
+                    {rel.image ? (
+                      <img
+                        src={rel.image}
+                        alt={rel.name?.split(';')[0]}
+                        draggable="false"
+                        className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover/img:scale-105 transition-transform duration-500 select-none pointer-events-none"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex flex-col items-center justify-center bg-slate-50/80 rounded-xl border border-dashed border-slate-200 text-slate-300 p-4">
+                        <FaFlask size={28} className="text-slate-300 mb-1" />
+                        <span className="text-[10px] font-semibold text-slate-400">No Image</span>
+                      </div>
+                    )}
                   </Link>
                 </div>
 
@@ -1320,11 +1335,13 @@ export default function ProductDetails() {
                 </button>
               </div>
               <div className="flex-1 flex items-center justify-center p-8 md:p-12 overflow-auto bg-[url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M20 3L37.32 13V33L20 43L2.68 33V13L20 3Z\' fill=\'none\' stroke=\'%23e2e8f0\' stroke-width=\'0.5\'/%3E%3C/svg%3E')]">
-                <img
-                  src={product.image || "/images/demoprod.gif"}
-                  alt={product.name?.split(';')[0]}
-                  className="w-full h-auto max-h-[75vh] object-contain drop-shadow-2xl mix-blend-multiply"
-                />
+                {product.image && (
+                  <img
+                    src={product.image}
+                    alt={product.name?.split(';')[0]}
+                    className="w-full h-auto max-h-[75vh] object-contain drop-shadow-2xl mix-blend-multiply"
+                  />
+                )}
               </div>
             </motion.div>
           </div>

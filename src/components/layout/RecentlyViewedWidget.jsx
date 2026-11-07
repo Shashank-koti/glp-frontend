@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FiEye, FiX, FiShoppingCart, FiHeart } from 'react-icons/fi';
+import { FaFlask } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useWishlist } from '../../context/WishlistContext';
@@ -86,12 +87,16 @@ export default function RecentlyViewedWidget() {
         <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50">
           {recentProducts.map(product => (
             <div key={product._id} className="bg-white border border-gray-100 rounded-2xl p-3 flex gap-4 hover:shadow-md transition-shadow">
-              <div className="w-20 h-20 bg-gray-50 rounded-xl flex items-center justify-center p-2 shrink-0 border border-gray-50">
-                <img 
-                  src={product.image || "/images/demoprod.gif"} 
-                  alt={product.name} 
-                  className="w-full h-full object-contain mix-blend-multiply"
-                />
+              <div className="w-20 h-20 bg-gray-50 rounded-xl flex items-center justify-center p-2 shrink-0 border border-gray-100">
+                {product.image ? (
+                  <img 
+                    src={product.image} 
+                    alt={product.name} 
+                    className="w-full h-full object-contain mix-blend-multiply"
+                  />
+                ) : (
+                  <FaFlask size={22} className="text-slate-300" />
+                )}
               </div>
               <div className="flex flex-col justify-between flex-1 min-w-0">
                 <div>

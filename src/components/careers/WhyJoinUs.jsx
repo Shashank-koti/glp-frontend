@@ -33,32 +33,9 @@ export default function WhyJoinUs() {
   ];
 
   return (
-    <div className="py-20 bg-[#F8FBFC] relative overflow-hidden">
-
+    <div className="py-10 bg-[#F8FBFC] relative overflow-hidden">
 
       <div className="w-full xl:w-[95%] 2xl:w-[92%] max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className="text-[#1AA3B6] font-extrabold tracking-widest uppercase mb-3 block text-sm">Perks & Benefits</span>
-            <h2 className="font-extrabold text-[#12344D] tracking-tight mb-6 text-4xl md:text-5xl">
-              {t('careers.why.title')}
-            </h2>
-          </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-[#5B7280] max-w-2xl mx-auto leading-relaxed font-medium text-lg md:text-xl"
-          >
-            {t('careers.why.desc')}
-          </motion.p>
-        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
           {benefits.map((benefit, idx) => (

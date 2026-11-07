@@ -82,7 +82,7 @@ export default function Hero() {
                 >
 
                   {/* Main Heading */}
-                  <h1 className="font-extrabold text-white leading-[1.1] mb-6 drop-shadow-lg text-2xl md:text-4xl">
+                  <h1 className="font-extrabold text-white leading-[1.1] mt-4 mb-4 drop-shadow-lg text-2xl md:text-4xl">
                     {slide.title}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
                       {" " + slide.highlight}

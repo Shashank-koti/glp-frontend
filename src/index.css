@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 :root {
+  --font-heading: 'Manrope', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
   --primary: #1AA3B6;
   --primary-dark: #0B7285;
   --primary-light: #DDF8FB;
@@ -46,7 +48,9 @@
   --shadow-xl: 0 20px 25px -5px var(--shadow-color), 0 8px 10px -6px rgba(26, 163, 182, 0.1);
   --shadow-2xl: 0 25px 50px -12px rgba(26, 163, 182, 0.25);
 
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-heading: 'Manrope', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-sans: 'DM Sans', sans-serif;
 }
 
 @layer base {
@@ -66,6 +70,7 @@
   }
 
   body {
+    font-family: var(--font-body);
     @apply text-body bg-background selection:bg-accent selection:text-white;
     -webkit-font-smoothing: antialiased !important;
     -moz-osx-font-smoothing: grayscale !important;
@@ -89,6 +94,7 @@
   h4,
   h5,
   h6 {
+    font-family: var(--font-heading);
     @apply font-bold tracking-tight text-heading;
   }
 }

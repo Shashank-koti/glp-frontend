@@ -66,9 +66,6 @@ export default function Contact() {
               <h1 className="text-3xl sm:text-4xl lg:text-[3rem] font-bold text-heading mb-1 tracking-tight">
                 {t('contact.getIn')} <span className="text-primary">{t('contact.touch')}</span>
               </h1>
-              <h2 className="text-xl sm:text-2xl lg:text-[2rem] font-bold text-heading mb-6 sm:mb-8 tracking-tight">
-                {t('contact.weAreHere')}
-              </h2>
             </motion.div>
 
             {/* Paragraph */}

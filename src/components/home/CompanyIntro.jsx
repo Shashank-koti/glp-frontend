@@ -5,13 +5,13 @@ import { useTranslation } from 'react-i18next';
 export default function CompanyIntro() {
   const { t } = useTranslation();
   return (
-    <section className="py-12 sm:py-20 lg:py-32 bg-background relative overflow-hidden">
+    <section className="py-12 sm:py-20 lg:py-38 bg-background relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-50 to-transparent skew-x-12 translate-x-20 z-0 opacity-70"></div>
       <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
       <div className="absolute -top-32 -right-32 w-96 h-96 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 max-w-[1300px]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 max-w-[1500px]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center">
 
           <motion.div
@@ -22,19 +22,15 @@ export default function CompanyIntro() {
             className="space-y-6 sm:space-y-8"
           >
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100/50 border border-blue-200 mt-4 sm:mt-10 mb-2">
-                <span className="w-2 h-2 rounded-full bg-primary"></span>
-                <h4 className="text-[#084553] font-bold tracking-widest uppercase text-xs">{t('home.companyIntro.about')}</h4>
-              </div>
-              <h1 className="font-extrabold text-heading leading-[1.15] text-2xl sm:text-3xl md:text-4xl">
-                {t('home.companyIntro.pioneering')} <br />
+              <h1 className="font-extrabold text-heading leading-[1.15] text-1xl sm:text-1xl md:text-3xl">
+                {t('home.companyIntro.pioneering')}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-500">
                   {t('home.companyIntro.pharmaceuticals')}
                 </span>
               </h1>
             </div>
 
-            <p className="text-body leading-relaxed font-medium text-base sm:text-lg">
+            <p className="text-body leading-relaxed font-sm text-md sm:text-md">
               {t('home.companyIntro.desc')}
             </p>
 
@@ -44,7 +40,7 @@ export default function CompanyIntro() {
                   <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-[#084553] flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
                     <FiCheckCircle className="text-white group-hover:text-white transition-colors duration-300 w-4 h-4" />
                   </div>
-                  <span className="text-body font-semibold">{item}</span>
+                  <span className="text-body font-semibold text-sm">{item}</span>
                 </div>
               ))}
             </div>
@@ -71,25 +67,6 @@ export default function CompanyIntro() {
                 style={{ backgroundImage: `url('/images/hero/pharma_hero_lab.png')` }}
               ></div>
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
-
-              {/* Floating Glass Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 p-4 sm:p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-xl"
-              >
-                <div className="flex items-center gap-4 mb-2">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary flex items-center justify-center shadow-lg shrink-0">
-                    <span className="text-white font-bold text-lg sm:text-xl">20+</span>
-                  </div>
-                  <div>
-                    <h4 className="text-white font-bold leading-tight text-base sm:text-lg">{t('home.companyIntro.yearsOfExcellence')}</h4>
-                    <p className="text-blue-200 text-xs sm:text-sm">{t('home.companyIntro.inGlobalPharma')}</p>
-                  </div>
-                </div>
-              </motion.div>
             </div>
 
             {/* Decorative dots behind image */}

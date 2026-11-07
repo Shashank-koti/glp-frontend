@@ -1,14 +1,79 @@
 import { motion } from 'framer-motion';
 
 export default function OurClients() {
-  // Replace these placeholder URLs with your actual client image paths in the public folder (e.g. '/images/clients/client1.png')
   const clientLogos = [
-    { name: "Client 1", url: "https://via.placeholder.com/200x100/EAF2F4/1AA3B6?text=Client+1" },
-    { name: "Client 2", url: "https://via.placeholder.com/200x100/EAF2F4/1AA3B6?text=Client+2" },
-    { name: "Client 3", url: "https://via.placeholder.com/200x100/EAF2F4/1AA3B6?text=Client+3" },
-    { name: "Client 4", url: "https://via.placeholder.com/200x100/EAF2F4/1AA3B6?text=Client+4" },
-    { name: "Client 5", url: "https://via.placeholder.com/200x100/EAF2F4/1AA3B6?text=Client+5" },
-    { name: "Client 6", url: "https://via.placeholder.com/200x100/EAF2F4/1AA3B6?text=Client+6" },
+    { name: "Therapiva", url: "/images/clients/1_therapiva.png" },
+    { name: "CTX", url: "/images/clients/2_ctx.png" },
+    { name: "Laurus Lab", url: "/images/clients/3_laurus_lab.png" },
+    { name: "Macleods", url: "/images/clients/4_macleods.jpeg" },
+    { name: "Srini", url: "/images/clients/5_srini.jpeg" },
+    { name: "Smruthi", url: "/images/clients/6_smruthi.png" },
+    { name: "Tyche", url: "/images/clients/7_tyche.png" },
+    { name: "BDR", url: "/images/clients/8_bdr.png" },
+    { name: "Accord", url: "/images/clients/9_accord.jpeg" },
+    { name: "MSN", url: "/images/clients/10_msn.png" },
+    { name: "Lupin", url: "/images/clients/11_lupin.png" },
+    { name: "Glenmark", url: "/images/clients/12_glenmark.png" },
+    { name: "Amneal", url: "/images/clients/13_amneal.jpeg" },
+    { name: "Caplin", url: "/images/clients/14_caplin.jpeg" },
+    { name: "Neuland", url: "/images/clients/15_neuland.png" },
+    { name: "Windlas", url: "/images/clients/16_windlas.jpeg" },
+    { name: "Natco", url: "/images/clients/17_natco.jpeg" },
+    { name: "Advanced", url: "/images/clients/18_advanced.png" },
+    { name: "Akron", url: "/images/clients/19_akron.png" },
+    { name: "Titan", url: "/images/clients/20_titan.png" },
+    { name: "Gland", url: "/images/clients/21_gland.jpeg" },
+    { name: "Shodhana", url: "/images/clients/22_shodhana.png" },
+    { name: "Randox", url: "/images/clients/23_randox.png" },
+    { name: "Hetero", url: "/images/clients/24_hetero.png" },
+    { name: "Edithgen", url: "/images/clients/25_edithgen.jpeg" },
+    { name: "Intas Pharmaceuticals", url: "/images/clients/26_intas_pharmaceuticals.jpeg" },
+    { name: "Aquatic", url: "/images/clients/27_aquatic.png" },
+    { name: "Chem-Impex", url: "/images/clients/28_chem_impex.png" },
+    { name: "Cipla", url: "/images/clients/29_cipla.png" },
+    { name: "Dr. Reddy's", url: "/images/clients/30_dr_reddy_s.jpeg" },
+    { name: "Teva", url: "/images/clients/31_teva.png" },
+    { name: "Wanbury", url: "/images/clients/32_wanbury.png" },
+    { name: "Torrent", url: "/images/clients/33_torrent.png" },
+    { name: "Granules", url: "/images/clients/34_granules.jpeg" },
+    { name: "Tagoor", url: "/images/clients/35_tagoor.png" },
+    { name: "Emcure", url: "/images/clients/36_emcure.jpeg" },
+    { name: "Solara", url: "/images/clients/37_solara.jpeg" },
+    { name: "PharmaZell / Axplora", url: "/images/clients/38_pharmazell_axplora.png" },
+    { name: "Masung", url: "/images/clients/39_masung.jpeg" },
+    { name: "SMS Pharmaceuticals Ltd.", url: "/images/clients/40_sms_pharmaceuticals_ltd.jpeg" },
+    { name: "Shilpa Therapeutics", url: "/images/clients/41_shilpa_therapeutics.jpeg" },
+    { name: "Samchun Chemical Co., Ltd.", url: "/images/clients/42_samchun_chemical_co_ltd.png" },
+    { name: "VWR International", url: "/images/clients/43_vwr_international.png" },
+    { name: "Lek Pharmaceuticals D.D", url: "/images/clients/44_lek_pharmaceuticals_d_d.png" },
+    { name: "QbD Pharmaceuticals Pvt. Ltd", url: "/images/clients/45_qbd_pharmaceuticals_pvt_ltd.png" },
+    { name: "Scientific Products S.A.S", url: "/images/clients/46_scientific_products_s_a_s.jpeg" },
+    { name: "Inovexa AD", url: "/images/clients/47_inovexa_ad.png" },
+    { name: "CHEMONE", url: "/images/clients/48_chemone.jpeg" },
+    { name: "Novugen Pharma Sdn. Bhd.", url: "/images/clients/49_novugen_pharma_sdn_bhd.jpeg" },
+    { name: "Pharmavit Limited", url: "/images/clients/50_pharmavit_limited.jpeg" },
+    { name: "Saneca Pharmaceuticals", url: "/images/clients/51_saneca_pharmaceuticals.jpeg" },
+    { name: "Chembio Co., LTD", url: "/images/clients/52_chembio_co_ltd.jpeg" },
+    { name: "Bachem SA", url: "/images/clients/53_bachem_sa.png" },
+    { name: "Novartis D.O.O (Slovenia)", url: "/images/clients/54_novartis_d_o_o_slovenia.png" },
+    { name: "Revive Pharma Limited (Uganda)", url: "/images/clients/55_revive_pharma_limited_uganda.png" },
+    { name: "Avéma Pharma Solutions", url: "/images/clients/56_av_ma_pharma_solutions.jpeg" },
+    { name: "Abhilash Chemicals And Pharmaceuticals Pvt. Ltd", url: "/images/clients/57_abhilash_chemicals_and_pharmaceuticals_pvt_ltd.jpeg" },
+    { name: "Glochem Industries", url: "/images/clients/58_glochem_industries.png" },
+    { name: "Shaanxi Boaxin Pharmaceuticals Co. Ltd", url: "/images/clients/59_shaanxi_boaxin_pharmaceuticals_co_ltd.jpeg" },
+    { name: "Micro Labs Limited", url: "/images/clients/60_micro_labs_limited.png" },
+    { name: "Evertogen Life Sciences Ltd", url: "/images/clients/61_evertogen_life_sciences_ltd.jpeg" },
+    { name: "Gracure Pharmaceuticals Ltd", url: "/images/clients/62_gracure_pharmaceuticals_ltd.jpeg" },
+    { name: "Marksans Pharma Ltd", url: "/images/clients/63_marksans_pharma_ltd.png" },
+    { name: "Natural Biogenex", url: "/images/clients/64_natural_biogenex.png" },
+    { name: "NGL Fine Chem Limited", url: "/images/clients/65_ngl_fine_chem_limited.png" },
+    { name: "Zim Labs", url: "/images/clients/66_zim_labs.png" },
+    { name: "Harman Finochem Ltd.", url: "/images/clients/67_harman_finochem_ltd.jpeg" },
+    { name: "Hi Tech BioSciences India Pvt. Ltd.", url: "/images/clients/68_hi_tech_biosciences_india_pvt_ltd.jpeg" },
+    { name: "Azurity Pharmaceuticals India LLP", url: "/images/clients/69_azurity_pharmaceuticals_india_llp.jpeg" },
+    { name: "CVR Life Sciences Pvt. Ltd", url: "/images/clients/70_cvr_life_sciences_pvt_ltd.png" },
+    { name: "Elixir Pharma Chem Pvt. Ltd.", url: "/images/clients/71_elixir_pharma_chem_pvt_ltd.png" },
+    { name: "Optimus Pharma Pvt Ltd", url: "/images/clients/72_optimus_pharma_pvt_ltd.jpeg" }
   ];
 
   // We duplicate the list to create a seamless infinite scrolling effect
@@ -60,18 +125,28 @@ export default function OurClients() {
         <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-white to-transparent z-20 pointer-events-none"></div>
 
         {/* The scrolling track */}
-        <div className="flex w-[200%] animate-marquee">
+        <div className="flex w-max animate-marquee" style={{ animationDuration: '95s' }}>
           {marqueeItems.map((client, index) => (
             <div 
               key={index} 
-              className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 px-4 flex-shrink-0 flex items-center justify-center group cursor-pointer"
+              className="w-48 sm:w-56 px-3 flex-shrink-0 flex items-center justify-center"
             >
-              <div className="bg-white border border-[#EAF2F4] rounded-xl p-4 w-full h-24 flex items-center justify-center shadow-sm hover:shadow-[0_10px_30px_rgba(26,163,182,0.12)] hover:border-primary/30 transition-all duration-300">
+              <div className="bg-white border border-[#EAF2F4] rounded-xl p-3 w-full h-24 flex items-center justify-center shadow-sm">
                 <img 
                   src={client.url} 
                   alt={client.name} 
-                  className="max-h-full max-w-full object-contain filter grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500 scale-95 group-hover:scale-105"
+                  loading="lazy"
+                  className="max-h-full max-w-full object-contain"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    if (e.currentTarget.nextElementSibling) {
+                      e.currentTarget.nextElementSibling.classList.remove('hidden');
+                    }
+                  }}
                 />
+                <span className="hidden font-extrabold text-[#12344D] text-center text-sm sm:text-[14.5px] leading-snug tracking-tight px-1">
+                  {client.name}
+                </span>
               </div>
             </div>
           ))}

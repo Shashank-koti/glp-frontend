@@ -99,8 +99,18 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Regulatory Disclaimer Banner */}
+        <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 sm:p-4 text-center sm:text-left flex flex-col sm:flex-row items-center gap-3">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#5CE1E6] bg-[#1AA3B6]/20 border border-[#1AA3B6]/30 px-2.5 py-1 rounded shrink-0">
+            Research Use Only
+          </span>
+          <p className="text-[12px] sm:text-[13px] text-slate-300 leading-relaxed font-normal">
+            All products supplied by GLP Pharma Standards are intended exclusively for research, laboratory and analytical applications. Not for human or animal consumption, therapeutic use, clinical administration, or unauthorized applications.
+          </p>
+        </div>
+
         <div className="border-t border-white/10 pt-4 flex flex-col md:flex-row justify-between items-center gap-3 text-xs sm:text-[14.5px] text-slate-300 font-medium text-center md:text-left">
-          <p>&copy; {new Date().getFullYear()} GLP Pharma. All Rights Reserved.</p>
+          <p>&copy; {new Date().getFullYear()} GLP Pharma Standards. All Rights Reserved.</p>
           <div className="flex space-x-6">
             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>

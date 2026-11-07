@@ -619,11 +619,18 @@ export default function ProductsView() {
                 </div>
 
                 <div className="relative w-full aspect-square max-h-[250px] mx-auto flex items-center justify-center group/img">
-                  <img
-                    src={product.image || "/images/demoprod.gif"}
-                    alt={product.name}
-                    className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover/img:scale-105 transition-transform duration-500"
-                  />
+                  {product.image ? (
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover/img:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center bg-slate-50/80 rounded-xl border border-dashed border-slate-200 text-slate-300 p-4">
+                      <FaFlask size={36} className="text-slate-300 mb-1" />
+                      <span className="text-[11px] font-semibold text-slate-400">Structure Not Available</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Title */}
