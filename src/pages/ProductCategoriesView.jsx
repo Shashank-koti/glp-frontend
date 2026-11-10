@@ -13,6 +13,7 @@ import {
 import LiquidVialIcon from '../components/common/LiquidVialIcon';
 import SEO from '../components/common/SEO';
 import { useTranslation } from 'react-i18next';
+import { getCategoryContent } from '../data/categoryContent';
 
 const alphabet = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''), '#'];
 
@@ -29,6 +30,10 @@ export default function ProductCategoriesView() {
   const [loading, setLoading] = useState(true);
 
   const currentLetter = searchParams.get('letter') || 'All';
+  const matchedCategory = getCategoryContent(categorySlug) || getCategoryContent(categoryName);
+  const displayTitle = matchedCategory?.title || categoryName;
+  const displaySubtitle = matchedCategory?.subtitle || categorySubtitle;
+  const allParagraphs = matchedCategory?.paragraphs || [categoryDescription];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -108,33 +113,27 @@ export default function ProductCategoriesView() {
               <FiChevronRight className="text-slate-400 text-[14px] mt-0.5" />
               <span className="text-slate-500">Our Products</span>
               <FiChevronRight className="text-slate-400 text-[14px] mt-0.5" />
-              <span className="text-[#1AA3B6] font-semibold">{categoryName}</span>
+              <span className="text-[#1AA3B6] font-semibold">{displayTitle}</span>
             </div>
 
-            <h1 className="text-[24px] md:text-[34px] lg:text-[40px] font-[900] leading-[1.15] tracking-tight text-[#12344D] mb-4">
-              {categoryName}
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#084553] mb-3">
+              {displayTitle}
             </h1>
 
-            <div className="text-body text-[14.5px] md:text-[15.5px] max-w-[850px] mb-8 leading-relaxed font-normal">
-              {categoryDescription && categoryDescription.length > 280 ? (
-                <div>
-                  <div className="space-y-2.5">
-                    {(isDescExpanded ? categoryDescription : `${categoryDescription.slice(0, 260)}...`)
-                      .split('\n\n')
-                      .map((para, pIdx) => (
-                        <p key={pIdx}>{para}</p>
-                      ))}
-                  </div>
-                  <button
-                    onClick={() => setIsDescExpanded(!isDescExpanded)}
-                    className="inline-flex items-center gap-1 text-[#1AA3B6] hover:text-[#0B7285] font-semibold text-xs mt-2.5 transition-colors cursor-pointer"
-                  >
-                    {isDescExpanded ? 'Show Less' : 'Read Full Overview'}
-                    <FiChevronRight className={`transition-transform duration-200 ${isDescExpanded ? '-rotate-90' : 'rotate-90'}`} />
-                  </button>
-                </div>
-              ) : (
-                <p>{categoryDescription}</p>
+            <div className="text-slate-700 text-xs sm:text-[13.5px] max-w-[850px] mb-6 leading-relaxed font-normal">
+              <div className="space-y-2.5">
+                {(isDescExpanded ? allParagraphs : allParagraphs.slice(0, 2)).map((para, pIdx) => (
+                  <p key={pIdx} className="leading-relaxed text-slate-700">{para}</p>
+                ))}
+              </div>
+              {allParagraphs.length > 2 && (
+                <button
+                  onClick={() => setIsDescExpanded(!isDescExpanded)}
+                  className="inline-flex items-center gap-1.5 text-[#0B7285] hover:text-[#084553] font-bold text-xs mt-3 transition-colors cursor-pointer"
+                >
+                  <span>{isDescExpanded ? 'Show Less' : 'Read Full Overview & Technical Details'}</span>
+                  <FiChevronRight className={`transition-transform duration-200 ${isDescExpanded ? '-rotate-90' : 'rotate-90'}`} />
+                </button>
               )}
             </div>
 
@@ -275,6 +274,23 @@ export default function ProductCategoriesView() {
           </div>
         )}
       </div>
+
+      {/* Category In-Depth Overview from Word Document */}
+      {matchedCategory && (
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-4">
+          <div className="bg-white rounded-2xl p-5 sm:p-7 border border-[#EAF2F4] shadow-sm">
+            <h2 className="font-bold text-[#084553] text-lg sm:text-xl mb-3">
+              {matchedCategory.title}
+            </h2>
+
+            <div className="space-y-2.5 text-slate-700 leading-relaxed text-xs sm:text-[13.5px]">
+              {matchedCategory.paragraphs.map((p, idx) => (
+                <p key={idx} className="leading-relaxed">{p}</p>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       <style dangerouslySetInnerHTML={{
         __html: `

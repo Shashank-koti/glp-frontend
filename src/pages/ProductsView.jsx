@@ -13,6 +13,7 @@ import { useWishlist } from '../context/WishlistContext';
 import { LuPanelRightDashed } from 'react-icons/lu';
 import ProductShareButton from '../components/common/ProductShareButton';
 import SEO from '../components/common/SEO';
+import { getCategoryContent } from '../data/categoryContent';
 
 const alphabet = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''), '#'];
 
@@ -53,6 +54,7 @@ export default function ProductsView() {
   const searchQueryParam = searchParams.get('q') || '';
 
   const [pageMeta, setPageMeta] = useState(null);
+  const [isDescExpanded, setIsDescExpanded] = useState(false);
 
 
 
@@ -259,13 +261,17 @@ export default function ProductsView() {
   const displayCategoryName = subCategory === 'search' ? `"${searchQueryParam}"` : (categoryName || 'API Impurities and Reference Standards');
   const isRedundant = displaySubCategoryStr.toLowerCase() === displayCategoryName.toLowerCase();
 
+  const categoryData = subCategory !== 'search'
+    ? (getCategoryContent(subCategory) || (isRedundant ? getCategoryContent(displayCategoryName) : null))
+    : null;
+
   const pageTitle = subCategory === 'search'
     ? `Search Results for "${searchQueryParam}"`
-    : `${displaySubCategoryStr} Impurities & Standards | ${displayCategoryName}`;
+    : (categoryData ? `${categoryData.title} | GLP Pharma Standards` : `${displaySubCategoryStr} Impurities & Standards | ${displayCategoryName}`);
 
   const pageDescription = subCategory === 'search'
     ? `Search results for pharmaceutical impurity standards matching "${searchQueryParam}" from GLP Pharma Standards.`
-    : `Buy high-purity ${displaySubCategoryStr} impurity standards, metabolites, and analytical reference standards under ${displayCategoryName} from GLP Pharma Standards.`;
+    : (categoryData ? `${categoryData.subtitle}. ${categoryData.paragraphs[0]}` : `Buy high-purity ${displaySubCategoryStr} impurity standards, metabolites, and analytical reference standards under ${displayCategoryName} from GLP Pharma Standards.`);
 
   return (
     <div className="min-h-screen bg-[#fafbfc] font-sans pb-16 ">
@@ -342,55 +348,66 @@ export default function ProductsView() {
           </div>
 
           {/* Main Heading */}
-          <h1 className="mb-4 sm:mb-6">
+          <div className="mb-3 sm:mb-4">
+            <h1 className="block text-[#084553] text-xl sm:text-2xl md:text-3xl leading-[1.2] tracking-[-0.015em] font-extrabold">
+              {categoryData?.title || displaySubCategoryStr}
+            </h1>
 
-            {/* Product Name */}
-            <span className="block text-[#084553] text-[26px] sm:text-[36px] md:text-[38px] lg:text-[48px] leading-[1.1] tracking-[-0.025em] font-extrabold">
-              {displaySubCategoryStr}
-            </span>
-
-            {/* Category */}
-            {!isRedundant && (
-              <span
-                className="
-                    block
-                    mt-1.5
-                    sm:mt-3
-                    text-[#12344D]
-                    text-[15px]
-                    sm:text-[18px]
-                    md:text-[20px]
-                    lg:text-[24px]
-                    leading-[1.2]
-                    tracking-[-0.015em]
-                    font-bold"
-              >
+            {!isRedundant && !categoryData && (
+              <span className="block mt-1 sm:mt-1.5 text-[#12344D] text-sm sm:text-base font-bold">
                 {displayCategoryName}
               </span>
             )}
-
-          </h1>
+          </div>
 
           {/* Description */}
-          <p
-            className="
-      text-[#5B7280]
-      text-[14px]
-      sm:text-[16px]
-      md:text-[17px]
-      max-w-[560px]
-      mb-5
-      sm:mb-8
-      leading-[1.65]
-      sm:leading-[1.75]
-      font-normal
-      tracking-[0.005em]
-    "
-          >
-            {pageMeta?.mainProduct?.content ||
-              pageMeta?.category?.description ||
-              "Explore our comprehensive range of high-quality pharmaceutical impurities and reference standards designed for precise analytical research."}
-          </p>
+          <div className="text-slate-700 text-xs sm:text-[13.5px] max-w-[580px] mb-5 sm:mb-6 leading-relaxed font-normal">
+            {categoryData ? (
+              <div>
+                <div className="space-y-2.5">
+                  {(isDescExpanded ? categoryData.paragraphs : categoryData.paragraphs.slice(0, 2)).map((para, idx) => (
+                    <p key={idx} className="leading-relaxed text-slate-700">{para}</p>
+                  ))}
+                </div>
+
+                {categoryData.specialSection && isDescExpanded && (
+                  <div className="mt-3.5 p-3.5 sm:p-4 rounded-xl bg-[#F0F7F9] border border-[#1AA3B6]/20">
+                    <h4 className="font-bold text-[#084553] text-xs sm:text-sm mb-1.5">
+                      {categoryData.specialSection.heading}
+                    </h4>
+                    <div className="space-y-1.5 text-xs text-slate-700">
+                      {categoryData.specialSection.paragraphs.map((sp, sIdx) => (
+                        <p key={sIdx}>{sp}</p>
+                      ))}
+                    </div>
+                    {categoryData.specialSection.points && (
+                      <ul className="mt-2 space-y-1 text-xs text-slate-700 list-disc list-inside">
+                        {categoryData.specialSection.points.map((pt, ptIdx) => (
+                          <li key={ptIdx} className="font-medium">{pt}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                )}
+
+                {categoryData.paragraphs.length > 2 && (
+                  <button
+                    onClick={() => setIsDescExpanded(!isDescExpanded)}
+                    className="inline-flex items-center gap-1.5 text-[#0B7285] hover:text-[#084553] font-bold text-xs mt-2.5 transition-colors cursor-pointer"
+                  >
+                    <span>{isDescExpanded ? 'Show Less' : 'Read Full Overview & Technical Details'}</span>
+                    <FiChevronRight className={`transition-transform duration-200 ${isDescExpanded ? '-rotate-90' : 'rotate-90'}`} />
+                  </button>
+                )}
+              </div>
+            ) : (
+              <p className="leading-relaxed text-slate-700">
+                {pageMeta?.mainProduct?.content ||
+                  pageMeta?.category?.description ||
+                  "Explore our comprehensive range of high-quality pharmaceutical impurities and reference standards designed for precise analytical research."}
+              </p>
+            )}
+          </div>
 
           {/* Features Row */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2.5 sm:gap-4 w-full pb-1 lg:pb-0">
@@ -711,6 +728,54 @@ export default function ProductsView() {
           </div>
         )}
       </div>
-    </div >
+
+      {/* Category In-Depth Overview from Word Document */}
+      {categoryData && (
+        <div className="max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
+          <div className="bg-white rounded-2xl p-5 sm:p-7 border border-[#EAF2F4] shadow-sm">
+            <h2 className="font-bold text-[#084553] text-lg sm:text-xl mb-3">
+              {categoryData.title}
+            </h2>
+
+            <div className="space-y-2.5 text-slate-700 leading-relaxed text-xs sm:text-[13.5px] font-normal mb-4">
+              {categoryData.paragraphs.map((p, idx) => (
+                <p key={idx} className="leading-relaxed text-slate-700">
+                  {p}
+                </p>
+              ))}
+            </div>
+
+            {/* Special Section if any (e.g. Nitrosamines Cohort of Concern, CRO dedicated support) */}
+            {categoryData.specialSection && (
+              <div className="mt-4 p-4 rounded-xl bg-[#F0F7F9] border border-[#1AA3B6]/20">
+                <h3 className="font-bold text-[#084553] text-xs sm:text-sm mb-2">
+                  {categoryData.specialSection.heading}
+                </h3>
+                <div className="space-y-2 text-xs text-slate-700 leading-relaxed">
+                  {categoryData.specialSection.paragraphs.map((sp, sIdx) => (
+                    <p key={sIdx} className="leading-relaxed">{sp}</p>
+                  ))}
+                </div>
+                {categoryData.specialSection.subheading && (
+                  <h4 className="font-bold text-[#084553] text-xs sm:text-[13px] mt-3 mb-1.5">
+                    {categoryData.specialSection.subheading}
+                  </h4>
+                )}
+                {categoryData.specialSection.points && (
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+                    {categoryData.specialSection.points.map((pt, ptIdx) => (
+                      <li key={ptIdx} className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#1AA3B6] shrink-0"></span>
+                        <span>{pt}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
