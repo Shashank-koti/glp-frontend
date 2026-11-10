@@ -365,7 +365,7 @@ export default function ProductsView() {
             {categoryData ? (
               <div>
                 <div className="space-y-2.5">
-                  {(isDescExpanded ? categoryData.paragraphs : categoryData.paragraphs.slice(0, 2)).map((para, idx) => (
+                  {(isDescExpanded ? categoryData.paragraphs : categoryData.paragraphs.slice(0, 1)).map((para, idx) => (
                     <p key={idx} className="leading-relaxed text-slate-700">{para}</p>
                   ))}
                 </div>
@@ -445,7 +445,7 @@ export default function ProductsView() {
 
             {/* Top Row: Count & Stock Status Filter */}
             <div className={`flex flex-col sm:flex-row sm:flex-wrap xl:flex-nowrap sm:items-center justify-between gap-3 sm:gap-4 ${isApiImpurities ? 'mb-4 sm:mb-6' : 'mb-0'}`}>
-              
+
               {/* Product Count Pill */}
               <div className="shrink-0 bg-[#F8FBFC] text-[#084553] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl flex items-center gap-2 font-bold border border-[#EAF2F4] shadow-xs w-full sm:w-auto justify-center text-[12.5px] sm:text-[13px]">
                 <FaFlask className="text-[14px] sm:text-[15px] text-[#1AA3B6]" />

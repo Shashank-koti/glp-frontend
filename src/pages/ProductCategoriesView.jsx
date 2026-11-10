@@ -122,7 +122,7 @@ export default function ProductCategoriesView() {
 
             <div className="text-slate-700 text-xs sm:text-[13.5px] max-w-[850px] mb-6 leading-relaxed font-normal">
               <div className="space-y-2.5">
-                {(isDescExpanded ? allParagraphs : allParagraphs.slice(0, 2)).map((para, pIdx) => (
+                {(isDescExpanded ? allParagraphs : allParagraphs.slice(0, 1)).map((para, pIdx) => (
                   <p key={pIdx} className="leading-relaxed text-slate-700">{para}</p>
                 ))}
               </div>
