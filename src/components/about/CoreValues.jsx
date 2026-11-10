@@ -89,15 +89,9 @@ export default function CoreValues() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-4">
-              Core Principles
-            </div>
             <h2 className="font-extrabold text-[#12344D] mb-4 text-2xl sm:text-3xl md:text-4xl tracking-tight">
               {t('about.values.title')}
             </h2>
-            <p className="text-body font-medium text-base sm:text-lg leading-relaxed">
-              {t('about.values.desc')}
-            </p>
           </motion.div>
         </div>
 

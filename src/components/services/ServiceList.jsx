@@ -1,16 +1,13 @@
 import { motion } from 'framer-motion';
 import {
-  FiActivity,
-  FiTool,
+  FiTarget,
   FiShield,
   FiFileText,
   FiArrowRight,
-  FiCheck,
   FiLayers,
   FiTrendingUp,
   FiClipboard
 } from 'react-icons/fi';
-import { FaFlask } from 'react-icons/fa';
 import { TbAtom, TbTestPipe } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -21,152 +18,129 @@ export default function ServiceList() {
   const services = [
     {
       id: "01",
-      title: t('services.list.s1Title'),
-      subtitle: t('services.list.s1Sub'),
-      desc: t('services.list.s1Desc'),
-      features: [
-        t('services.list.s1f1'),
-        t('services.list.s1f2'),
-        t('services.list.s1f3'),
-        t('services.list.s1f4')
+      title: "Custom Synthesis of Molecules",
+      subtitle: "Tailored Chemical Synthesis for Specialized Research Requirements",
+      paragraphs: [
+        "GLP Pharma Standards provides custom synthesis services for pharmaceutical research compounds, complex organic molecules, impurity standards, advanced intermediates and specialized analytical materials.",
+        "Our research approach focuses on developing practical synthetic pathways for compounds that are not readily available through conventional commercial sources.",
+        "From route evaluation and multistep synthesis to purification and analytical characterization, we support projects involving challenging molecular structures and customer-specific specifications.",
+        "Our custom synthesis services are particularly valuable for pharmaceutical manufacturers, CROs and analytical laboratories requiring specialized compounds in research quantities."
       ],
+      actionText: "Enquire About Custom Synthesis",
       image: "/images/services_cmo.png",
-      color: "from-cyan-500/20 to-transparent",
-      accentBg: "bg-cyan-50",
-      textColor: "text-[#084553]",
-      badgeColor: "bg-[#1AA3B6] text-white",
-      icon: FiTool
+      icon: FiTarget
     },
     {
       id: "02",
-      title: t('services.list.s2Title'),
-      subtitle: t('services.list.s2Sub'),
-      desc: t('services.list.s2Desc'),
-      features: [
-        t('services.list.s2f1'),
-        t('services.list.s2f2'),
-        t('services.list.s2f3'),
-        t('services.list.s2f4')
+      title: "Complex Chiral Compounds",
+      subtitle: "Advanced Synthesis of Stereochemically Complex Molecules",
+      paragraphs: [
+        "Chiral compounds play a critical role in pharmaceutical development because different stereoisomers can exhibit distinct chemical, biological and pharmacological properties.",
+        "GLP Pharma Standards offers specialized synthesis support for complex chiral molecules, stereoisomeric impurities, chiral intermediates and structurally challenging research compounds.",
+        "Our capabilities include multistep synthetic strategies, stereoselective transformations, chiral resolution and purification approaches, depending on project requirements.",
+        "We support pharmaceutical research teams in obtaining compounds with defined stereochemical characteristics for analytical method development, impurity identification and research applications."
       ],
+      actionText: "Enquire About Complex Chiral Synthesis",
       image: "/images/services_synthesis.png",
-      color: "from-teal-500/20 to-transparent",
-      accentBg: "bg-teal-50",
-      textColor: "text-[#0B7285]",
-      badgeColor: "bg-[#0B7285] text-white",
       icon: TbAtom
     },
     {
       id: "03",
-      title: t('services.list.s3Title'),
-      subtitle: t('services.list.s3Sub'),
-      desc: t('services.list.s3Desc'),
-      features: [
-        t('services.list.s3f1'),
-        t('services.list.s3f2'),
-        t('services.list.s3f3'),
-        t('services.list.s3f4')
+      title: "Isolation, Identification & Characterization of Unknown Impurities",
+      subtitle: "Scientific Investigation of Unidentified Pharmaceutical Impurities",
+      paragraphs: [
+        "Unknown impurities can emerge during API synthesis, pharmaceutical formulation, stability studies, degradation investigations and routine analytical testing.",
+        "Identifying these impurities is important for understanding product quality, evaluating degradation pathways and developing effective impurity control strategies.",
+        "GLP Pharma Standards provides research support for the isolation, identification and structural characterization of unknown pharmaceutical impurities.",
+        "Depending on the project, our approach may involve impurity enrichment, chromatographic isolation, purification, mass spectrometric analysis, NMR spectroscopy and other appropriate analytical techniques.",
+        "Where feasible, we also support the synthesis of identified impurities to obtain characterized reference materials for further analytical evaluation.",
+        "Our services help pharmaceutical manufacturers and analytical laboratories investigate complex impurity profiles and support method development, impurity qualification and regulatory documentation."
       ],
+      actionText: "Submit Your Unknown Impurity Inquiry",
       image: "/images/services_analytical.png",
-      color: "from-blue-500/20 to-transparent",
-      accentBg: "bg-blue-50",
-      textColor: "text-[#084553]",
-      badgeColor: "bg-blue-600 text-white",
       icon: FiShield
     },
     {
       id: "04",
-      title: t('services.list.s4Title'),
-      subtitle: t('services.list.s4Sub'),
-      desc: t('services.list.s4Desc'),
-      features: [
-        t('services.list.s4f1'),
-        t('services.list.s4f2'),
-        t('services.list.s4f3'),
-        t('services.list.s4f4')
+      title: "Structure Elucidation Reports (SER)",
+      subtitle: "Comprehensive Structural Characterization of Pharmaceutical Compounds",
+      paragraphs: [
+        "Accurate structural identification is essential when investigating pharmaceutical impurities, degradation products, unknown intermediates and newly synthesized research compounds.",
+        "GLP Pharma Standards offers Structure Elucidation Reports (SER) based on the interpretation of relevant analytical data to establish or support the proposed molecular structure of a compound.",
+        "Depending on the compound and analytical requirements, the investigation may include mass spectrometry, ¹H NMR, ¹³C NMR, two-dimensional NMR techniques, FT-IR and other suitable characterization methods.",
+        "Our reports are designed to provide scientific interpretation of available experimental evidence, helping customers understand structural assignments and evaluate compound identity.",
+        "These reports are valuable for impurity investigations, research documentation, analytical development and technical submissions."
       ],
+      actionText: "Request a Structure Elucidation Report",
       image: "/images/services_regulatory.png",
-      color: "from-emerald-500/20 to-transparent",
-      accentBg: "bg-emerald-50",
-      textColor: "text-emerald-800",
-      badgeColor: "bg-emerald-600 text-white",
       icon: FiFileText
     },
     {
       id: "05",
-      title: t('services.list.s5Title'),
-      subtitle: t('services.list.s5Sub'),
-      desc: t('services.list.s5Desc'),
-      features: [
-        t('services.list.s5f1'),
-        t('services.list.s5f2'),
-        t('services.list.s5f3'),
-        t('services.list.s5f4')
+      title: "NDSRI Formation & Non-Formation Studies",
+      subtitle: "Experimental Nitrosamine Formation Assessment and Scientific Reporting",
+      paragraphs: [
+        "Nitrosamine Drug Substance-Related Impurities (NDSRIs) are an important consideration in pharmaceutical impurity risk assessment and regulatory evaluation.",
+        "Although certain drug substances or related chemical structures may present a theoretical potential for nitrosamine formation, actual formation depends on factors such as molecular structure, nitrosating agents, reaction conditions, formulation components and storage environment.",
+        "GLP Pharma Standards offers specialized research support for investigating the formation or non-detection of potential NDSRIs through scientifically designed experimental studies.",
+        "Our services may include targeted nitrosation experiments, forced-degradation investigations, analytical screening, structural assessment and evaluation of experimental findings under defined study conditions.",
+        "Where a suspected NDSRI is not detected, we can provide a scientifically supported NDSRI Non-Formation Assessment Report, documenting the experimental approach, analytical methods, detection limits, observations and conclusions.",
+        "Such reports may assist pharmaceutical manufacturers and regulatory teams in preparing technical justifications, impurity risk assessments and supporting documentation for Drug Master Files (DMFs) and other regulatory submissions.",
+        "We also investigate cases in which nitrosamine formation is observed, supporting further identification, characterization and analytical evaluation.",
+        "The report may support a customer's regulatory justification, but acceptance depends on the complete risk assessment, supporting data and applicable regulator requirements. It should not be described as an FDA-approved certificate or a substitute for product-specific confirmatory testing."
       ],
+      actionText: "Request an NDSRI Formation or Non-Formation Study",
       image: "/images/services_analytical.png",
-      color: "from-rose-500/20 to-transparent",
-      accentBg: "bg-rose-50",
-      textColor: "text-rose-900",
-      badgeColor: "bg-rose-600 text-white",
       icon: TbTestPipe
     },
     {
       id: "06",
-      title: t('services.list.s6Title'),
-      subtitle: t('services.list.s6Sub'),
-      desc: t('services.list.s6Desc'),
-      features: [
-        t('services.list.s6f1'),
-        t('services.list.s6f2'),
-        t('services.list.s6f3'),
-        t('services.list.s6f4')
+      title: "Contract Research & Process R&D",
+      subtitle: "Collaborative Chemical Research and Synthetic Process Development",
+      paragraphs: [
+        "GLP Pharma Standards provides contract research and process research services for pharmaceutical companies, CROs and specialty chemical organizations seeking customized chemistry solutions.",
+        "Our research activities may include synthetic route exploration, feasibility studies, reaction optimization, multistep organic synthesis, intermediate development and characterization of research compounds.",
+        "We offer project-based collaboration and dedicated Full-Time (FT) research support, subject to agreed project scope, resources and technical requirements.",
+        "By combining synthetic chemistry expertise with a flexible project approach, we help customers investigate complex molecular targets and develop practical research solutions."
       ],
+      actionText: "Explore Contract Research Opportunities",
       image: "/images/services_synthesis.png",
-      color: "from-indigo-500/20 to-transparent",
-      accentBg: "bg-indigo-50",
-      textColor: "text-indigo-900",
-      badgeColor: "bg-indigo-600 text-white",
       icon: FiLayers
     },
     {
       id: "07",
-      title: t('services.list.s7Title'),
-      subtitle: t('services.list.s7Sub'),
-      desc: t('services.list.s7Desc'),
-      features: [
-        t('services.list.s7f1'),
-        t('services.list.s7f2'),
-        t('services.list.s7f3'),
-        t('services.list.s7f4')
+      title: "API Process Optimization & Scale-Up Services",
+      subtitle: "Improving Synthetic Efficiency and Process Understanding",
+      paragraphs: [
+        "Process optimization plays an important role in improving the efficiency, consistency and practicality of pharmaceutical chemical synthesis.",
+        "GLP Pharma Standards offers research support for evaluating and optimizing API synthetic processes, including reaction conditions, reagent selection, impurity formation, intermediate purification and synthetic route performance.",
+        "Our process R&D approach focuses on identifying opportunities to improve reaction conversion, selectivity, yield and reproducibility while understanding potential process-related impurities.",
+        "We also support laboratory-scale process development and scale-up feasibility assessments for selected synthetic routes, subject to technical capabilities and project requirements.",
+        "These services help pharmaceutical research teams assess process improvements and prepare suitable technical information for further development activities."
       ],
+      actionText: "Inquire About Process Optimization",
       image: "/images/services_cmo.png",
-      color: "from-amber-500/20 to-transparent",
-      accentBg: "bg-amber-50",
-      textColor: "text-amber-900",
-      badgeColor: "bg-amber-600 text-white",
       icon: FiTrendingUp
     },
     {
       id: "08",
-      title: t('services.list.s8Title'),
-      subtitle: t('services.list.s8Sub'),
-      desc: t('services.list.s8Desc'),
-      features: [
-        t('services.list.s8f1'),
-        t('services.list.s8f2'),
-        t('services.list.s8f3'),
-        t('services.list.s8f4')
+      title: "Stability Studies & Regulatory Documentation Support",
+      subtitle: "Analytical Research and Documentation for Pharmaceutical Development",
+      paragraphs: [
+        "Stability investigations help pharmaceutical researchers understand how chemical compounds behave under different environmental and storage conditions and identify potential degradation pathways.",
+        "GLP Pharma Standards offers analytical research support for selected stability-related investigations, degradation studies and impurity characterization requirements.",
+        "Depending on project scope, our services may include stress-degradation investigations, identification of degradation products, preparation of impurity reference materials and interpretation of relevant analytical findings.",
+        "We also provide scientific documentation support, including Certificates of Analysis, analytical characterization data, Structure Elucidation Reports and study-specific technical reports.",
+        "These services are intended to assist pharmaceutical manufacturers, CROs and analytical teams with research documentation and the preparation of supporting information for regulatory submissions."
       ],
+      actionText: "Enquire About Stability & Documentation Support",
       image: "/images/services_regulatory.png",
-      color: "from-sky-500/20 to-transparent",
-      accentBg: "bg-sky-50",
-      textColor: "text-sky-900",
-      badgeColor: "bg-sky-600 text-white",
       icon: FiClipboard
     }
   ];
 
   return (
-    <section className="py-10 md:py-18 lg:py-20 bg-[#F8FBFC] relative overflow-hidden">
+    <section className="py-10 md:py-16 lg:py-20 bg-[#F8FBFC] relative overflow-hidden">
       {/* Background abstract elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[5%] -left-[10%] w-[50vw] h-[50vw] rounded-full bg-[#1AA3B6]/5 blur-[120px] mix-blend-multiply"></div>
@@ -175,35 +149,44 @@ export default function ServiceList() {
 
       <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 sm:mb-6 gap-6 sm:gap-8 border-b border-[#EAF2F4] pb-6">
-          <div className="max-w-4xl">
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ delay: 0.1 }}
-              className="font-extrabold text-[#084553] leading-tight text-2xl sm:text-3xl md:text-4xl"
-            >
-              Specialized Scientific Solutions for &nbsp;
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1AA3B6] to-[#0B7285]">
-                Complex Pharmaceutical Challenges
-              </span>
-            </motion.h2>
+        {/* Page Intro from Word Document */}
+        <div className="mb-10 sm:mb-14 border-b border-[#EAF2F4] pb-8">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1AA3B6]/10 border border-[#1AA3B6]/20 mb-4">
+            <span className="w-2 h-2 rounded-full bg-[#1AA3B6] animate-pulse"></span>
+            <span className="text-[#084553] font-bold tracking-wider uppercase text-xs">
+              Services & Capabilities
+            </span>
           </div>
-          <motion.p
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ delay: 0.2 }}
-            className="text-[#5B7280] text-left md:text-right font-medium max-w-lg text-sm sm:text-base leading-relaxed"
+
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="font-extrabold text-[#084553] leading-tight text-2xl sm:text-3xl md:text-4xl mb-5 max-w-4xl"
           >
-            {t('services.list.desc')}
-          </motion.p>
+            Specialized Scientific Solutions for{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1AA3B6] to-[#0B7285]">
+              Complex Pharmaceutical Challenges
+            </span>
+          </motion.h1>
+
+          <div className="space-y-3 max-w-4xl text-slate-700 text-sm sm:text-base leading-relaxed font-normal">
+            <p>
+              GLP Pharma Standards offers specialized research and development services to support pharmaceutical manufacturers, CROs, analytical laboratories and chemical research organizations.
+            </p>
+            <p>
+              Our capabilities encompass custom molecular synthesis, complex chiral chemistry, unknown impurity investigations, structure elucidation, nitrosamine formation studies, process research and analytical documentation support.
+            </p>
+            <p>
+              We work collaboratively with customers to understand their scientific objectives, technical specifications and project timelines, providing customized solutions for challenging chemical research requirements.
+            </p>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-12 sm:gap-16 lg:gap-20">
+        {/* Services List */}
+        <div className="flex flex-col gap-10 sm:gap-14 lg:gap-16">
           {services.map((service, index) => (
-            <ServiceCard key={service.id} service={service} index={index} t={t} />
+            <ServiceCard key={service.id} service={service} index={index} />
           ))}
         </div>
 
@@ -221,44 +204,31 @@ function ServiceCard({ service, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-[#EAF2F4] shadow-[0_10px_35px_rgba(8,69,83,0.04)] hover:shadow-[0_16px_45px_rgba(8,69,83,0.08)] transition-all duration-300 flex flex-col ${isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'
-        } gap-8 lg:gap-14 items-center`}
+      className={`bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-[#EAF2F4] shadow-[0_8px_30px_rgba(8,69,83,0.04)] hover:shadow-[0_16px_45px_rgba(8,69,83,0.08)] transition-all duration-300 flex flex-col ${
+        isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'
+      } gap-8 lg:gap-12 items-center`}
     >
       {/* Content */}
-      <div className="w-full lg:w-[58%] flex flex-col">
-        <div className="flex items-center justify-between gap-3 mb-4">
-          <div className="flex items-center gap-3">
-            <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-[#F0F7F9] border border-[#1AA3B6]/20 flex items-center justify-center text-[#1AA3B6] shadow-xs shrink-0`}>
-              <service.icon className="text-lg sm:text-xl" />
-            </div>
-            <h3 className="font-extrabold text-[#084553] text-xl sm:text-2xl md:text-[26px] leading-tight mb-2">
-              {service.title}
-            </h3>
+      <div className="w-full lg:w-[60%] flex flex-col">
+        <div className="flex items-center gap-3 mb-2.5">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#F0F7F9] border border-[#1AA3B6]/20 flex items-center justify-center text-[#1AA3B6] shadow-xs shrink-0">
+            <service.icon className="text-lg sm:text-xl" />
           </div>
+          <h2 className="font-extrabold text-[#084553] text-xl sm:text-2xl md:text-[25px] leading-tight">
+            {service.title}
+          </h2>
         </div>
 
-        <p className="text-sm sm:text-base font-bold text-[#1AA3B6] mb-3">
+        <p className="text-sm sm:text-base font-bold text-[#0B7285] mb-4">
           {service.subtitle}
         </p>
 
-        <p className="text-[#5B7280] leading-relaxed mb-6 text-sm sm:text-[15px] font-medium">
-          {service.desc}
-        </p>
-
-        {/* Feature Pills */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-6">
-          {service.features.map((feature, idx) => (
-            <div
-              key={idx}
-              className="flex items-center gap-2.5 p-2 rounded-xl bg-[#F8FBFC] border border-[#EAF2F4]"
-            >
-              <div className="w-5 h-5 rounded-full bg-[#1AA3B6]/15 text-[#0B7285] flex items-center justify-center shrink-0">
-                <FiCheck className="w-3 h-3 stroke-[2.5]" />
-              </div>
-              <span className="font-semibold text-[#12344D] text-xs sm:text-sm truncate">
-                {feature}
-              </span>
-            </div>
+        {/* Paragraphs with rich, high-contrast text color */}
+        <div className="space-y-3.5 mb-6 text-slate-700 leading-relaxed text-sm sm:text-[15px] font-normal">
+          {service.paragraphs.map((para, pIdx) => (
+            <p key={pIdx} className="leading-relaxed text-slate-700">
+              {para}
+            </p>
           ))}
         </div>
 
@@ -268,29 +238,21 @@ function ServiceCard({ service, index }) {
             to={`/contact?subject=${encodeURIComponent(service.title)}`}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#084553] hover:bg-[#1AA3B6] text-white font-bold text-xs sm:text-sm shadow-sm transition-all duration-300 group cursor-pointer"
           >
-            <span>Inquire About This Service</span>
+            <span>{service.actionText}</span>
             <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>
 
       {/* Image */}
-      <div className="w-full lg:w-[42%]">
-        <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-md border border-[#EAF2F4] group">
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10"></div>
+      <div className="w-full lg:w-[40%] self-stretch flex items-center">
+        <div className="relative w-full rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-full min-h-[260px] max-h-[460px] shadow-md border border-[#EAF2F4] group">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10 pointer-events-none"></div>
           <img
             src={service.image}
             alt={service.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
           />
-          <div className="absolute bottom-3 left-3 right-3 z-20 flex items-center justify-between text-white/90 text-xs">
-            <span className="font-bold tracking-wide backdrop-blur-md bg-black/40 px-3 py-1 rounded-lg border border-white/10">
-              GLP Scientific Capabilities
-            </span>
-            <span className="font-bold backdrop-blur-md bg-[#1AA3B6]/80 px-2.5 py-1 rounded-lg">
-              CoA & SER Supported
-            </span>
-          </div>
         </div>
       </div>
     </motion.div>

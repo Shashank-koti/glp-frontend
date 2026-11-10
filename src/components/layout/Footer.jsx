@@ -11,6 +11,20 @@ export default function Footer() {
     return null;
   }
 
+  const productCategories = [
+    { name: 'API Impurities & Reference Standards', path: '/product-categories-view/api-impurities-and-reference-standards' },
+    { name: 'Nitrosamine Impurities', path: '/products-view/Nitroso-Impurities' },
+    { name: 'Peptides', path: '/products-view/Peptides' },
+    { name: 'Isotope Labelled Compounds', path: '/products-view/Isotope-Labelled-Compounds' },
+    { name: 'Drug Metabolites', path: '/products-view/Metabolites' },
+    { name: 'CRO Molecules', path: '/products-view/Cro-Molecules' },
+    { name: 'Phytochemicals', path: '/products-view/Phytochemicals' },
+    { name: 'Pharmaceutical Intermediates', path: '/products-view/Intermediates' },
+    { name: 'Catalysts', path: '/products-view/Catalysts' },
+    { name: 'Fine Chemicals', path: '/products-view/Fine-Chemicals' },
+    { name: 'Agro Chemicals', path: '/products-view/Agro-Chemicals' },
+  ];
+
   return (
     <footer className="relative bg-gradient-to-r from-[#031525] via-[#07243D] to-[#0E3A5D] pt-12 pb-6 border-t border-[#1AA3B6]/30 shadow-[0_-12px_40px_rgba(3,21,37,0.2)] overflow-hidden text-white">
 
@@ -49,7 +63,6 @@ export default function Footer() {
             <ul className="space-y-3.5">
               <li><Link to="/about" className="text-slate-200 hover:text-white hover:translate-x-1.5 transition-all duration-200 text-[15px] font-medium inline-block">{t('footer.aboutUs')}</Link></li>
               <li><Link to="/careers" className="text-slate-200 hover:text-white hover:translate-x-1.5 transition-all duration-200 text-[15px] font-medium inline-block">{t('footer.careers')}</Link></li>
-              <li><Link to="/news" className="text-slate-200 hover:text-white hover:translate-x-1.5 transition-all duration-200 text-[15px] font-medium inline-block">{t('footer.latestNews')}</Link></li>
               <li><Link to="/gallery" className="text-slate-200 hover:text-white hover:translate-x-1.5 transition-all duration-200 text-[15px] font-medium inline-block">{t('footer.gallery')}</Link></li>
               <li><Link to="/contact" className="text-slate-200 hover:text-white hover:translate-x-1.5 transition-all duration-200 text-[15px] font-medium inline-block">{t('footer.contactUs')}</Link></li>
             </ul>
@@ -58,14 +71,19 @@ export default function Footer() {
           {/* Products */}
           <div>
             <div className="mb-5">
-              <h4 className="text-white font-extrabold text-lg tracking-wide">{t('footer.products')}</h4>
+              <h4 className="text-white font-extrabold text-lg tracking-wide">{t('footer.products', 'Product Categories')}</h4>
             </div>
-            <ul className="space-y-3.5">
-              <li className="text-slate-200 hover:text-white hover:translate-x-1.5 transition-all duration-200 text-[15px] font-medium cursor-pointer inline-block">{t('footer.api')}</li>
-              <li className="text-slate-200 hover:text-white hover:translate-x-1.5 transition-all duration-200 text-[15px] font-medium cursor-pointer block">Certificate of Analysis</li>
-              <li className="text-slate-200 hover:text-white hover:translate-x-1.5 transition-all duration-200 text-[15px] font-medium cursor-pointer block">{t('footer.impurities')}</li>
-              <li className="text-slate-200 hover:text-white hover:translate-x-1.5 transition-all duration-200 text-[15px] font-medium cursor-pointer block">{t('footer.catalogue')}</li>
-              <li className="text-slate-200 hover:text-white hover:translate-x-1.5 transition-all duration-200 text-[15px] font-medium cursor-pointer block">{t('footer.technicalDocs')}</li>
+            <ul className="space-y-2.5">
+              {productCategories.map((cat, idx) => (
+                <li key={idx}>
+                  <Link
+                    to={cat.path}
+                    className="text-slate-200 hover:text-[#5CE1E6] hover:translate-x-1.5 transition-all duration-200 text-[14px] font-medium inline-block"
+                  >
+                    {cat.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -80,7 +98,7 @@ export default function Footer() {
                   <FiMapPin size={13} />
                 </div>
                 <span className="text-[14px] sm:text-[14.5px] leading-relaxed text-slate-200 group-hover:text-white transition-colors break-words">
-                  Plot No:1, Shakti Puram Phase-2, Prashanti Nagar,<br />Industrial Estate(IE), Kukatpally, Hyderabad,<br />Telangana State, India, PIN: 500072
+                  Plot No:1, Shakti Puram Phase-2, Prashanti Nagar,<br />Industrial Estate(IE), Kukatpally, Hyderabad,<br />Telangana, India, PIN: 500072
                 </span>
               </li>
               <li className="flex items-center gap-3 group cursor-pointer">

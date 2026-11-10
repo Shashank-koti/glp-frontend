@@ -232,7 +232,7 @@ export default function Contact() {
                   <p className="text-[15px] text-body leading-relaxed">
                     Plot No:1, Shakti Puram Phase-2,<br />
                     Prashanti Nagar, Industrial Estate(IE), Kukatpally,<br />
-                    Hyderabad, Telangana State, India, PIN: 500072
+                    Hyderabad, Telangana, India, PIN: 500072
                   </p>
                 </div>
               </div>
