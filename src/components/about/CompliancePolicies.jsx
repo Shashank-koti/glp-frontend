@@ -56,21 +56,6 @@ export default function CompliancePolicies() {
                 {t('about.policies.researchDesc', 'All products supplied by GLP Pharma Standards are intended exclusively for research, laboratory and analytical applications. They are not intended for human or animal consumption, therapeutic use, clinical administration or any other unauthorized application.')}
               </p>
             </div>
-
-            <div className="bg-[#F8FBFC] rounded-2xl p-4 border border-slate-100 space-y-2.5">
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#12344D]">
-                <FiCheckCircle className="text-primary shrink-0" />
-                <span>Analytical Method Development & Validation Only</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#12344D]">
-                <FiCheckCircle className="text-primary shrink-0" />
-                <span>Strictly In Vitro Laboratory Testing & Profiling</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-rose-600">
-                <FiLock className="text-rose-500 shrink-0" />
-                <span>Prohibited for Clinical or Direct Therapeutic Administration</span>
-              </div>
-            </div>
           </motion.div>
 
           {/* Card 2: Regulated & Controlled Substances Policy */}
@@ -98,21 +83,6 @@ export default function CompliancePolicies() {
               <p className="text-body leading-relaxed text-[14px] sm:text-[16px] font-normal mb-6">
                 {t('about.policies.complianceDesc', 'GLP Pharma Standards does not manufacture, supply, export or otherwise deal in restricted, narcotic, psychotropic, addictive, prohibited or other regulated chemical substances without the applicable licenses, authorizations and regulatory approvals. All transactions involving regulated substances are subject to applicable laws, licensing requirements and internal compliance review.')}
               </p>
-            </div>
-
-            <div className="bg-[#F8FBFC] rounded-2xl p-4 border border-slate-100 space-y-2.5">
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#12344D]">
-                <FiCheckCircle className="text-primary shrink-0" />
-                <span>Pre-Shipment Compliance & End-User Verification</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#12344D]">
-                <FiCheckCircle className="text-primary shrink-0" />
-                <span>Zero Tolerance for Prohibited or Narcotic Substances</span>
-              </div>
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-[#084553]">
-                <FiFileText className="text-[#084553] shrink-0" />
-                <span>Full Audit Trails & Regulatory Authorization Records</span>
-              </div>
             </div>
           </motion.div>
 

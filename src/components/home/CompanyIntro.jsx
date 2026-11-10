@@ -26,19 +26,22 @@ export default function CompanyIntro() {
             <div>
               <h2 className="font-extrabold text-heading  text-xl sm:text-2xl md:text-3xl">
                 {t('home.companyIntro.title', 'Your Trusted Source for')}{' '}
-                {/* <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-500">
-                  {t('home.companyIntro.highlight', 'High-Quality API Impurities & Pharmaceutical Reference Standards')}
-                </span> */}
               </h2>
             </div>
 
             {/* Body Paragraphs */}
-            <div className="space-y-3.5 sm:space-y-4 text-body leading-relaxed text-[15px] sm:text-[16px]">
+            <div className="space-y-3.5 text-slate-700 sm:space-y-4  leading-relaxed text-[15px] sm:text-[16px]">
               <p>
                 {t('home.companyIntro.p1', 'GLP Pharma Standards, based in Hyderabad, India, is a specialized manufacturer and supplier of high-quality API impurities, pharmaceutical reference standards, working standards, secondary standards and nitrosamine impurities.')}
               </p>
               <p>
                 {t('home.companyIntro.p2', 'Our comprehensive product portfolio also includes peptides, drug metabolites, stable isotope labelled compounds, catalysts, pharmaceutical intermediates and custom-synthesized molecules.')}
+              </p>
+              <p>
+                {t('home.companyIntro.p3', 'Our comprehensive product portfolio also includes peptides, drug metabolites, stable isotope labelled compounds, catalysts, pharmaceutical intermediates and custom-synthesized molecules.')}
+              </p>
+              <p>
+                {t('home.companyIntro.p4', 'Our comprehensive product portfolio also includes peptides, drug metabolites, stable isotope labelled compounds, catalysts, pharmaceutical intermediates and custom-synthesized molecules.')}
               </p>
             </div>
 

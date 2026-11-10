@@ -37,7 +37,7 @@ const floatVariants = {
 export default function AboutHero() {
   const { t } = useTranslation();
   return (
-    <section className="relative pt-24 pb-32 lg:pt-4 lg:pb-40 bg-white overflow-hidden">
+    <section className="relative pt-24 pb-12 lg:pt-4 lg:pb-20 bg-white overflow-hidden">
       {/* Premium Abstract Background Elements */}
       <motion.div
         animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}

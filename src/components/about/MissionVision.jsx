@@ -22,7 +22,7 @@ export default function MissionVision() {
             className="group relative bg-gradient-to-br from-[#F8FBFC] to-white rounded-3xl p-8 sm:p-10 border border-[#EAF2F4] shadow-[0_8px_30px_rgba(8,69,83,0.04)] hover:shadow-[0_16px_45px_rgba(8,69,83,0.1)] transition-all duration-300"
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-[#084553] text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
+              <div className="w-10 h-10 rounded-2xl bg-[#084553] text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
                 <FiTarget size={28} />
               </div>
               <div>
@@ -57,7 +57,7 @@ export default function MissionVision() {
             className="group relative bg-gradient-to-br from-[#F8FBFC] to-white rounded-3xl p-8 sm:p-10 border border-[#EAF2F4] shadow-[0_8px_30px_rgba(8,69,83,0.04)] hover:shadow-[0_16px_45px_rgba(8,69,83,0.1)] transition-all duration-300"
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 rounded-2xl bg-[#1AA3B6] text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
+              <div className="w-10 h-10 rounded-2xl bg-[#1AA3B6] text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
                 <FiCompass size={28} />
               </div>
               <div>
