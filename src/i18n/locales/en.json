@@ -104,7 +104,7 @@
       "c3Title": "ISO Certified Quality",
       "c3Desc": "Strict Quality Management Systems ensuring consistent purity and accuracy.",
       "c4Title": "Comprehensive CoA",
-      "c4Desc": "Complete analytical data including HPLC, GC, LC-MS/MS, 1H/13C NMR, and SER."
+      "c4Desc": "Complete analytical data including HPLC, GC, LC-MS/MS, FT-IR, 1H/13C NMR, and SER."
     },
     "services": {
       "ourExpertise": "Our Specialized Capabilities",
@@ -211,7 +211,7 @@
       "v1Title": "Precision",
       "v1Desc": "Maintaining scientific accuracy in every compound identification, synthesis, characterization and documentation.",
       "v2Title": "Purity",
-      "v2Desc": "Striving to deliver high-purity research materials suitable for their intended R&D and analytical applications.",
+      "v2Desc": "Purity Striving to deliver high-purity research materials suitable for our client’s intended R&D and analytical applications ",
       "v3Title": "Integrity",
       "v3Desc": "Building lasting customer confidence through transparent communication, responsible business practices and reliable technical support.",
       "v4Title": "Scientific Excellence",
@@ -499,8 +499,8 @@
     "prodFound": "Products Found",
     "prodSingleFound": "Product Found",
     "loadingProd": "Loading products...",
-    "noProdFound": "No Products Found",
-    "noProdDesc": "We couldn't find any products matching your criteria.",
+    "noProdFound": "We Are Uploading Our Products",
+    "noProdDesc": "Working on this products category. Our team is actively uploading and cataloguing standards for this section. You can enquiry directly for custom synthesis or immediate availability.",
     "clearFilter": "Clear Filters",
     "commonName": "Common Name",
     "casNo": "CAS Number",

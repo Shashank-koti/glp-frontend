@@ -424,7 +424,7 @@ export default function ProductDetails() {
       <div className={`transition-all duration-300 ease-in-out ${isDescOpen ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
         <div className="p-4 pt-0">
           <div className="w-full h-px bg-[#F0F6F8] mb-3"></div>
-          <p className="text-body text-[13px] leading-relaxed font-medium">
+          <p className="text-slate-700 text-[13px] leading-relaxed font-normal">
             <span className="font-bold text-heading">{product.name}</span> is a premium-grade reference standard synthesized specifically for advanced analytical research, method validation, and quality control. This highly purified compound undergoes rigorous characterization to ensure consistent reliability in demanding laboratory environments.
           </p>
         </div>
@@ -483,10 +483,10 @@ export default function ProductDetails() {
           <div className="flex flex-col md:flex-row justify-center items-center w-full">
             <div className="w-full flex flex-col items-center">
               {/* Breadcrumb */}
-              <div className="flex justify-center items-center gap-2 text-[15px] text-[#5B7280] font-medium mb-6 flex-wrap">
-                <Link to="/" className="hover:text-[#1AA3B6] transition-colors">Home</Link>
+              <div className="flex justify-center items-center gap-2 text-[15px] text-slate-700 font-medium mb-6 flex-wrap">
+                <Link to="/" className="text-slate-600 hover:text-[#1AA3B6] transition-colors">Home</Link>
                 <FiChevronRight className="text-slate-400 text-[14px] " />
-                <Link to={`/product-categories-view/${product.category?.slug || 'api-impurities-and-reference-standards'}`} className="hover:text-[#1AA3B6] transition-colors">{(typeof product.category === 'string' ? product.category : product.category?.categoryName || 'API Impurities').replace('API IMPURITIES & REFERENCE STANDARDS', 'API Impurities & Reference Standards').replace('API IMPURITIES AND REFERENCE STANDARDS', 'API Impurities and Reference Standards').replace('API IMPURITIES', 'API Impurities')}</Link>
+                <Link to={`/product-categories-view/${product.category?.slug || 'api-impurities-and-reference-standards'}`} className="text-slate-600 hover:text-[#1AA3B6] transition-colors">{(typeof product.category === 'string' ? product.category : product.category?.categoryName || 'API Impurities').replace('API IMPURITIES & REFERENCE STANDARDS', 'API Impurities & Reference Standards').replace('API IMPURITIES AND REFERENCE STANDARDS', 'API Impurities and Reference Standards').replace('API IMPURITIES', 'API Impurities')}</Link>
                 {product.mainProduct && typeof product.mainProduct === 'object' && (product.mainProduct.heading || product.mainProduct.name) && (
                   <>
                     <FiChevronRight className="text-slate-400 text-[14px] " />
@@ -577,7 +577,7 @@ export default function ProductDetails() {
                             </span>
                           )}
                         </div>
-                        <span className="text-[#5B7280] text-[12px] font-medium mt-0.5">{tier.desc}</span>
+                        <span className="text-slate-700 text-[12px] font-medium mt-0.5">{tier.desc}</span>
                       </div>
 
                       <div className="flex flex-col items-end pr-2">
@@ -791,7 +791,7 @@ export default function ProductDetails() {
                   </div>
                   <div>
                     <h3 className="font-bold text-heading text-[12px] mb-1">{feat.title}</h3>
-                    <p className="text-[11px] text-body leading-tight pr-1">{feat.desc}</p>
+                    <p className="text-[11px] text-slate-700 leading-tight pr-1">{feat.desc}</p>
                   </div>
                 </div>
               ))}
@@ -1178,7 +1178,7 @@ export default function ProductDetails() {
                     <h2 className="text-[#12344D] text-[16px] sm:text-[18px] font-[750]">
                       {quoteFormType === 'checkout' ? 'Checkout Request' : 'Get a Quote / Product Inquiry'}
                     </h2>
-                    <p className="text-[#5B7280] text-[12px] sm:text-[13px] mt-0.5">Fill in the details below for <span className="font-bold">{product.name}</span>.</p>
+                    <p className="text-slate-700 text-[12px] sm:text-[13px] mt-0.5">Fill in the details below for <span className="font-bold">{product.name}</span>.</p>
                   </div>
                 </div>
                 <button
@@ -1208,14 +1208,14 @@ export default function ProductDetails() {
                       Email Address <span className="text-[#e04545]">*</span>
                     </label>
                     <input name="email" value={quoteFormData.email} onChange={handleQuoteChange} type="email" placeholder="Enter your email" className="w-full h-[44px] bg-white border border-[#D9E8EC] rounded-[6px] text-[13.5px] px-[14px] outline-none transition-colors focus:border-[#1AA3B6]/70 focus:ring-[3px] focus:ring-[#1AA3B6]/10 placeholder:text-[#5B7280]" required />
-                    <p className="text-[11px] text-[#5B7280] mt-1.5 ml-1">* Must be a valid email address</p>
+                    <p className="text-[11px] text-slate-700 mt-1.5 ml-1">* Must be a valid email address</p>
                   </div>
                   <div>
                     <label className="block text-[#12344D] text-[12.5px] font-[700] mb-1.5">
                       Phone Number <span className="text-[#e04545]">*</span>
                     </label>
                     <input name="phone" value={quoteFormData.phone} onChange={handleQuoteChange} type="tel" placeholder="Enter your phone number" className="w-full h-[44px] bg-white border border-[#D9E8EC] rounded-[6px] text-[13.5px] px-[14px] outline-none transition-colors focus:border-[#1AA3B6]/70 focus:ring-[3px] focus:ring-[#1AA3B6]/10 placeholder:text-[#5B7280]" required />
-                    <p className="text-[11px] text-[#5B7280] mt-1.5 ml-1">* Please include country code</p>
+                    <p className="text-[11px] text-slate-700 mt-1.5 ml-1">* Please include country code</p>
                   </div>
                   <div className="relative z-50">
                     <label className="block text-[#12344D] text-[12.5px] font-[700] mb-1.5">
@@ -1276,7 +1276,7 @@ export default function ProductDetails() {
                     <span className="text-[#12344D] text-[12.5px] font-[750] flex items-center gap-1.5 mb-2.5">
                       <span className="text-[#1AA3B6] text-[14px]">›</span> Product in Inquiry
                     </span>
-                    <ul className="text-[#5B7280] text-[12px] font-medium leading-[1.6] space-y-1 list-disc pl-[20px]">
+                    <ul className="text-slate-700 text-[12px] font-medium leading-[1.6] space-y-1 list-disc pl-[20px]">
                       <li>
                         {product.name?.split(';')[0]} (CAS: {product.casNumber || 'N/A'})
                       </li>
@@ -1284,7 +1284,7 @@ export default function ProductDetails() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2 mt-[18px] mb-[20px] text-[#5B7280] text-[11.5px] font-medium">
+                <div className="flex items-center gap-2 mt-[18px] mb-[20px] text-slate-700 text-[11.5px] font-medium">
                   <FiLock className="text-[#9ABAC0] shrink-0" />
                   Your information is secure and will only be used to {quoteFormType === 'checkout' ? 'process your checkout request' : 'respond to your inquiry'}.
                 </div>

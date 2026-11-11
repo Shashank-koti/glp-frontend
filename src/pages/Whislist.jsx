@@ -35,7 +35,7 @@ const Whislist = () => {
           <h2 className="font-extrabold text-[#084553] text-2xl sm:text-3xl mb-3 tracking-tight">
             Your Wishlist is Empty
           </h2>
-          <p className="text-[#5B7280] text-sm sm:text-base leading-relaxed mb-8">
+          <p className="text-slate-700 text-sm sm:text-base leading-relaxed mb-8">
             You haven't saved any pharmaceutical standards or impurities yet. Browse our catalog to bookmark products for quick enquiry.
           </p>
           <Link
@@ -58,7 +58,7 @@ const Whislist = () => {
         <div className="mb-6">
           <Link
             to="/product-categories-view/api-impurities-and-reference-standards"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[#5B7280] hover:text-[#1AA3B6] transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-[#1AA3B6] transition-colors"
           >
             <FiArrowLeft size={16} />
             Back to Products
@@ -80,7 +80,7 @@ const Whislist = () => {
                   {displayItems.length} {displayItems.length === 1 ? 'item' : 'items'}
                 </span>
               </div>
-              <p className="text-[#5B7280] text-sm mt-1">
+              <p className="text-slate-700 text-sm mt-1">
                 Keep track of reference standards, peptides, and impurities of your interest.
               </p>
             </div>
@@ -274,7 +274,7 @@ const Whislist = () => {
             <h4 className="font-bold text-[#084553] text-base">
               Need custom synthesis or bulk quantities?
             </h4>
-            <p className="text-xs sm:text-sm text-[#5B7280] mt-0.5">
+            <p className="text-xs sm:text-sm text-slate-700 mt-0.5">
               Contact our technical team for custom synthesis and bulk quotation for all items in your wishlist.
             </p>
           </div>

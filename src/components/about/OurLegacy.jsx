@@ -64,9 +64,8 @@ export default function OurLegacy() {
           {/* Characterization Data Showcase */}
           <div className="pt-2 border-t border-[#EAF2F4]/80">
             <div className="flex items-center gap-2 mb-3">
-              <FaFlask className="text-[#1AA3B6]" size={15} />
               <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#084553]">
-                Comprehensive CoA & Analytical Characterization:
+                Our Comprehensive CoA & Analytical Characterization:
               </h4>
             </div>
             <div className="flex flex-wrap gap-2">

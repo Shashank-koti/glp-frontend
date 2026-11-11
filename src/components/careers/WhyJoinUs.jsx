@@ -55,7 +55,7 @@ export default function WhyJoinUs() {
                   <benefit.icon size={28} />
                 </div>
                 <h3 className="font-bold text-[#12344D] mb-4 group-hover:text-[#1AA3B6] transition-colors text-2xl">{benefit.title}</h3>
-                <p className="text-[#5B7280] text-[15px] leading-relaxed font-medium">
+                <p className="text-slate-700 text-[15px] leading-relaxed font-normal">
                   {benefit.desc}
                 </p>
               </div>

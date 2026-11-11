@@ -48,7 +48,7 @@ export default function CoreValues() {
     {
       icon: FiDroplet,
       title: t('about.values.v2Title', 'Purity'),
-      desc: t('about.values.v2Desc', 'Striving to deliver high-purity research materials suitable for their intended R&D and analytical applications.'),
+      desc: t('about.values.v2Desc', 'Purity Striving to deliver high-purity research materials suitable for our client’s intended R&D and analytical applications.'),
       tag: 'Analytical Quality',
       accentColor: 'from-[#0B7285] to-[#12344D]',
       iconBg: 'bg-[#0B7285]/10 text-[#0B7285] border-[#0B7285]/30',
@@ -127,14 +127,9 @@ export default function CoreValues() {
                     <h3 className="font-bold text-[#12344D] mb-3 text-xl group-hover:text-primary transition-colors">
                       {val.title}
                     </h3>
-                    <p className="text-body leading-relaxed text-sm sm:text-[14.5px] font-normal">
+                    <p className="text-slate-700 leading-relaxed text-sm sm:text-[14.5px] font-normal">
                       {val.desc}
                     </p>
-                  </div>
-
-                  {/* Bottom Accent Line */}
-                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-xs font-semibold text-slate-400">Value {idx + 1}</span>
                   </div>
                 </div>
               </motion.div>

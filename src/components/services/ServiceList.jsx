@@ -151,12 +151,6 @@ export default function ServiceList() {
 
         {/* Page Intro from Word Document */}
         <div className="mb-10 sm:mb-14 border-b border-[#EAF2F4] pb-8">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#1AA3B6]/10 border border-[#1AA3B6]/20 mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#1AA3B6] animate-pulse"></span>
-            <span className="text-[#084553] font-bold tracking-wider uppercase text-xs">
-              Services & Capabilities
-            </span>
-          </div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -204,9 +198,8 @@ function ServiceCard({ service, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-[#EAF2F4] shadow-[0_8px_30px_rgba(8,69,83,0.04)] hover:shadow-[0_16px_45px_rgba(8,69,83,0.08)] transition-all duration-300 flex flex-col ${
-        isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'
-      } gap-8 lg:gap-12 items-center`}
+      className={`bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-[#EAF2F4] shadow-[0_8px_30px_rgba(8,69,83,0.04)] hover:shadow-[0_16px_45px_rgba(8,69,83,0.08)] transition-all duration-300 flex flex-col ${isEven ? 'lg:flex-row-reverse' : 'lg:flex-row'
+        } gap-8 lg:gap-12 items-center`}
     >
       {/* Content */}
       <div className="w-full lg:w-[60%] flex flex-col">

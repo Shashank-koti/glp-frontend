@@ -80,8 +80,8 @@ export default function Cart() {
 
       {/* Header */}
       <div className="text-center mb-6 sm:mb-[40px] pt-4 sm:pt-0 max-w-[1000px]">
-        <h1 className="text-[#084553] text-xl sm:text-[34px] font-[800] tracking-[-0.03em] leading-[1.2] mb-2 sm:mb-[12px] uppercase">
-          CART & PRODUCT INQUIRY
+        <h1 className="text-[#084553] text-xl sm:text-[34px] font-[800] tracking-[-0.03em] leading-[1.2] mb-2 sm:mb-[12px]">
+          Cart & Product Inquiry
         </h1>
         <p className="text-[#5B7280] text-sm sm:text-[16px] font-medium leading-[1.6]">
           Add products to cart and submit an inquiry to get detailed information, pricing, availability & more.

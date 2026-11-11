@@ -20,8 +20,8 @@ export default function Home() {
       <NewlySynthesizedProducts />
       <Services />
       <GlobalTrust />
-      <LogisticsPartners />
       <OurClients />
+      <LogisticsPartners />
     </div>
   );
 }

@@ -103,7 +103,7 @@ export default function GlobalInfrastructure() {
           <h2 className="font-extrabold text-[#12344D] text-2xl sm:text-3xl md:text-4xl tracking-tight mb-4">
             Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#084553]">GLP Pharma Standards?</span>
           </h2>
-          <p className="text-body font-medium text-base sm:text-lg leading-relaxed">
+          <p className="text-slate-700 font-medium text-base sm:text-lg leading-relaxed">
             Our commitment to scientific accuracy, comprehensive analytical characterization and responsive technical support has helped us earn the trust of over 1,100 clients across more than 50 countries.
           </p>
         </div>
@@ -125,7 +125,7 @@ export default function GlobalInfrastructure() {
               <div className="text-[#12344D] font-bold text-sm sm:text-md leading-tight">
                 {stat.label}
               </div>
-              <div className="text-slate-400 text-xs mt-1 font-medium">
+              <div className="text-slate-600 text-xs mt-1 font-medium">
                 {stat.sub}
               </div>
             </motion.div>
@@ -162,7 +162,7 @@ export default function GlobalInfrastructure() {
                     {adv.title}
                   </h3>
 
-                  <p className="text-body text-sm sm:text-[14.5px] leading-relaxed font-normal">
+                  <p className="text-slate-700 text-sm sm:text-[14.5px] leading-relaxed font-normal">
                     {adv.desc}
                   </p>
                 </div>

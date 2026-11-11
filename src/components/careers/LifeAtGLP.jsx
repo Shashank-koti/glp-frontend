@@ -20,23 +20,12 @@ export default function LifeAtGLP() {
               {t('careers.life.title')}
             </h2>
 
-            <p className="text-[#5B7280] leading-relaxed mb-6 font-medium text-lg">
+            <p className="text-slate-700 leading-relaxed mb-6 font-normal text-base sm:text-lg">
               {t('careers.life.p1')}
             </p>
-            <p className="text-[#5B7280] leading-relaxed font-medium text-lg">
+            <p className="text-slate-700 leading-relaxed font-normal text-base sm:text-lg">
               {t('careers.life.p2')}
             </p>
-
-            <div className="mt-10 grid grid-cols-2 gap-6">
-              <div className="border-l-4 border-[#1AA3B6] pl-4">
-                <h4 className="font-extrabold text-[#12344D] mb-1 text-3xl">500+</h4>
-                <p className="text-[#5B7280] font-semibold uppercase tracking-wide text-sm">Global Team Members</p>
-              </div>
-              <div className="border-l-4 border-[#1AA3B6] pl-4">
-                <h4 className="font-extrabold text-[#12344D] mb-1 text-3xl">40+</h4>
-                <p className="text-[#5B7280] font-semibold uppercase tracking-wide text-sm">Nationalities</p>
-              </div>
-            </div>
           </motion.div>
 
           {/* Image Collage / Masonry */}

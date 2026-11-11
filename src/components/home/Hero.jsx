@@ -124,7 +124,7 @@ export default function Hero() {
               <div className="p-2.5 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-sm">
                 <FaFlask className="w-4 h-4 md:w-5 md:h-5" />
               </div>
-              <p className="text-[10px] font-bold text-heading leading-tight md:text-xs">{t('home.hero.feature1')}<br /><span className="text-[9px] md:text-[10px] font-normal text-body">{t('home.hero.feature1Sub')}</span></p>
+              <p className="text-[10px] font-bold text-heading leading-tight md:text-xs">{t('home.hero.feature1')}<br /><span className="text-[9px] md:text-[10px] font-normal text-slate-700">{t('home.hero.feature1Sub')}</span></p>
             </div>
 
             {/* Divider */}
@@ -135,7 +135,7 @@ export default function Hero() {
               <div className="p-2.5 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-sm">
                 <FaVials className="w-4 h-4 md:w-5 md:h-5" />
               </div>
-              <p className="text-[10px] font-bold text-heading leading-tight md:text-xs">{t('home.hero.feature2')}<br /><span className="text-[9px] md:text-[10px] font-normal text-body">{t('home.hero.feature2Sub')}</span></p>
+              <p className="text-[10px] font-bold text-heading leading-tight md:text-xs">{t('home.hero.feature2')}<br /><span className="text-[9px] md:text-[10px] font-normal text-slate-700">{t('home.hero.feature2Sub')}</span></p>
             </div>
 
             {/* Divider */}
@@ -146,7 +146,7 @@ export default function Hero() {
               <div className="p-2.5 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300 shadow-sm">
                 <HiOutlineDocumentSearch className="w-4 h-4 md:w-5 md:h-5" />
               </div>
-              <p className="text-[10px] font-bold text-heading leading-tight md:text-xs">{t('home.hero.feature3')}<br /><span className="text-[9px] md:text-[10px] font-normal text-body">{t('home.hero.feature3Sub')}</span></p>
+              <p className="text-[10px] font-bold text-heading leading-tight md:text-xs">{t('home.hero.feature3')}<br /><span className="text-[9px] md:text-[10px] font-normal text-slate-700">{t('home.hero.feature3Sub')}</span></p>
             </div>
           </div>
 

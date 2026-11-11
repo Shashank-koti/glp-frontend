@@ -35,7 +35,7 @@ export default function MissionVision() {
               </div>
             </div>
 
-            <p className="text-[#5B7280] leading-relaxed text-base sm:text-md font-sm">
+            <p className="text-slate-700 leading-relaxed text-base sm:text-md font-normal">
               {t(
                 'about.mission.desc',
                 'To support pharmaceutical research and analytical excellence by providing high-quality impurity standards, accurately characterized reference materials and customized chemical research solutions with integrity, reliability and scientific precision.'
@@ -70,7 +70,7 @@ export default function MissionVision() {
               </div>
             </div>
 
-            <p className="text-[#5B7280] leading-relaxed text-base sm:text-md font-sm">
+            <p className="text-slate-700 leading-relaxed text-base sm:text-md font-normal">
               {t(
                 'about.vision.desc',
                 'To become a globally preferred partner for pharmaceutical impurity standards, advanced research compounds and specialized chemical synthesis through continuous innovation, technical expertise and customer-focused service.'
@@ -79,7 +79,7 @@ export default function MissionVision() {
 
             <div className="mt-3 pt-2 border-t border-[#EAF2F4] flex items-center gap-2 text-xs font-bold text-[#084553]">
               <FiAward className="text-[#1AA3B6]" size={16} />
-              <span>Global Reach (50+ Countries) • 20,000+ Standards • Trusted Partner</span>
+              <span>Global Reach • Trusted Partner</span>
             </div>
           </motion.div>
         </div>

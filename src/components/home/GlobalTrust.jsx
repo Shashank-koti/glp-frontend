@@ -38,7 +38,7 @@ export default function GlobalTrust() {
               {t('home.globalTrust.trustedBy')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">{t('home.globalTrust.worldwide')}</span>
             </h3>
 
-            <p className="text-body leading-relaxed mb-6 sm:mb-8 font-normal max-w-xl text-sm sm:text-base">
+            <p className="text-slate-700 leading-relaxed mb-6 sm:mb-8 font-normal max-w-xl text-sm sm:text-base">
               {t('home.globalTrust.desc')}
             </p>
 
@@ -66,14 +66,14 @@ export default function GlobalTrust() {
             <div className="bg-background border border-border p-5 sm:p-6 rounded-2xl hover:bg-white hover:border-primary/30 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
               <FaAward className="text-primary mb-3 sm:mb-4 text-2xl sm:text-3xl" />
               <h4 className="font-bold text-heading mb-1.5 text-base sm:text-lg">{t('home.globalTrust.c1Title')}</h4>
-              <p className="text-body text-xs sm:text-[13px] leading-relaxed">{t('home.globalTrust.c1Desc')}</p>
+              <p className="text-slate-700 text-xs sm:text-[13px] leading-relaxed">{t('home.globalTrust.c1Desc')}</p>
             </div>
 
             {/* Certificate 2 */}
             <div className="bg-background border border-border p-5 sm:p-6 rounded-2xl hover:bg-white hover:border-primary/30 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg sm:translate-y-4">
               <FaCertificate className="text-primary mb-3 sm:mb-4 text-2xl sm:text-3xl" />
               <h4 className="font-bold text-heading mb-1.5 text-base sm:text-lg">{t('home.globalTrust.c2Title')}</h4>
-              <p className="text-body text-xs sm:text-[13px] leading-relaxed">{t('home.globalTrust.c2Desc')}</p>
+              <p className="text-slate-700 text-xs sm:text-[13px] leading-relaxed">{t('home.globalTrust.c2Desc')}</p>
             </div>
 
             {/* Certificate 3 */}
@@ -84,7 +84,7 @@ export default function GlobalTrust() {
                 </div>
               </div>
               <h4 className="font-bold text-heading mb-1.5 text-base sm:text-lg">{t('home.globalTrust.c3Title')}</h4>
-              <p className="text-body text-xs sm:text-[13px] leading-relaxed">{t('home.globalTrust.c3Desc')}</p>
+              <p className="text-slate-700 text-xs sm:text-[13px] leading-relaxed">{t('home.globalTrust.c3Desc')}</p>
             </div>
 
             {/* Certificate 4 */}
@@ -95,7 +95,7 @@ export default function GlobalTrust() {
                 </div>
               </div>
               <h4 className="font-bold text-heading mb-1.5 text-base sm:text-lg">{t('home.globalTrust.c4Title')}</h4>
-              <p className="text-body text-xs sm:text-[13px] leading-relaxed">{t('home.globalTrust.c4Desc')}</p>
+              <p className="text-slate-700 text-xs sm:text-[13px] leading-relaxed">{t('home.globalTrust.c4Desc')}</p>
             </div>
           </motion.div>
 

@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { FiMail, FiPhone, FiMapPin, FiLinkedin, FiTwitter, FiFacebook } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiLinkedin, FiInstagram, FiFacebook } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import navImg from "/navImg.png";
 
@@ -49,8 +49,8 @@ export default function Footer() {
               <a href="#" aria-label="LinkedIn" className="w-9 h-9 rounded-xl bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-white/90 hover:bg-[#1AA3B6] hover:text-white hover:scale-110 transition-all duration-300">
                 <FiLinkedin size={16} />
               </a>
-              <a href="#" aria-label="Twitter" className="w-9 h-9 rounded-xl bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-white/90 hover:bg-[#1AA3B6] hover:text-white hover:scale-110 transition-all duration-300">
-                <FiTwitter size={16} />
+              <a href="#" aria-label="Instagram" className="w-9 h-9 rounded-xl bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-white/90 hover:bg-[#1AA3B6] hover:text-white hover:scale-110 transition-all duration-300">
+                <FiInstagram size={16} />
               </a>
               <a href="#" aria-label="Facebook" className="w-9 h-9 rounded-xl bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-white/90 hover:bg-[#1AA3B6] hover:text-white hover:scale-110 transition-all duration-300">
                 <FiFacebook size={16} />
@@ -135,12 +135,12 @@ export default function Footer() {
         </div>
 
         {/* Regulatory Disclaimer Banner */}
-        <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 sm:p-4 text-center sm:text-left flex flex-col sm:flex-row items-center gap-3">
+        <div className="p-1.5 sm:p-2 text-center sm:text-left flex flex-col sm:flex-row items-center gap-2">
           <span className="text-[11px] font-bold uppercase tracking-wider text-white bg-red-600 border border-red-500 px-2.5 py-1 rounded shrink-0 shadow-xs">
             NOTE :
           </span>
           <p className="text-[12px] sm:text-[13px] text-slate-300 leading-relaxed font-normal">
-            All products supplied by GLP Pharma Standards are intended exclusively for research, laboratory and analytical applications. Not for human or animal consumption, therapeutic use, clinical administration, or unauthorized applications.
+            All products supplied by GLP Pharma Standards are intended exclusively for research, laboratory and analytical applications only. Not for human or animal consumption, therapeutic use, clinical administration, or unauthorized applications.
           </p>
         </div>
 

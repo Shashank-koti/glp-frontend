@@ -8,7 +8,9 @@ import {
   FiDroplet,
   FiGlobe,
   FiGrid,
-  FiAlertCircle
+  FiAlertCircle,
+  FiBox,
+  FiMail
 } from 'react-icons/fi';
 import LiquidVialIcon from '../components/common/LiquidVialIcon';
 import SEO from '../components/common/SEO';
@@ -108,10 +110,10 @@ export default function ProductCategoriesView() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pt-18 sm:pt-12 pb-14 sm:pb-20">
           <div className="max-w-[900px]">
             {/* Breadcrumb */}
-            <div className="flex items-center gap-2 text-[15px] text-[#5B7280] font-medium mb-6 flex-wrap">
-              <Link to="/" className="hover:text-[#1AA3B6] transition-colors">Home</Link>
+            <div className="flex items-center gap-2 text-[15px] text-slate-700 font-medium mb-6 flex-wrap">
+              <Link to="/" className="text-slate-600 hover:text-[#1AA3B6] transition-colors">Home</Link>
               <FiChevronRight className="text-slate-400 text-[14px] mt-0.5" />
-              <span className="text-slate-500">Our Products</span>
+              <span className="text-slate-700 font-semibold">Our Products</span>
               <FiChevronRight className="text-slate-400 text-[14px] mt-0.5" />
               <span className="text-[#1AA3B6] font-semibold">{displayTitle}</span>
             </div>
@@ -146,7 +148,7 @@ export default function ProductCategoriesView() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-bold text-[#12344D]">Trusted Quality</h4>
-                  <p className="text-[12px] text-body font-medium mt-0.5">Stringent Testing</p>
+                  <p className="text-[12px] text-slate-700 font-medium mt-0.5">Stringent Testing</p>
                 </div>
               </div>
 
@@ -159,7 +161,7 @@ export default function ProductCategoriesView() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-bold text-[#12344D]">Research Grade</h4>
-                  <p className="text-[12px] text-body font-medium mt-0.5">High Purity Standards</p>
+                  <p className="text-[12px] text-slate-700 font-medium mt-0.5">High Purity Standards</p>
                 </div>
               </div>
 
@@ -172,7 +174,7 @@ export default function ProductCategoriesView() {
                 </div>
                 <div>
                   <h4 className="text-[14px] font-bold text-[#12344D]">Global Compliance</h4>
-                  <p className="text-[12px] text-body font-medium mt-0.5">ISO, GMP & Regulatory</p>
+                  <p className="text-[12px] text-slate-700 font-medium mt-0.5">ISO, GMP & Regulatory</p>
                 </div>
               </div>
             </div>
@@ -232,21 +234,54 @@ export default function ProductCategoriesView() {
             <span className="mt-4 text-body font-medium">{t('products.loadingCat')}</span>
           </div>
         ) : sortedGroups.length === 0 ? (
-          <div className="py-20 flex flex-col items-center justify-center text-center max-w-2xl mx-auto">
-            <div className="w-20 h-20 bg-background rounded-full flex items-center justify-center mb-6">
-              <FiAlertCircle className="text-slate-300 text-4xl" />
+          groups.length === 0 ? (
+            <div className="py-16 sm:py-20 px-6 sm:px-10 flex flex-col items-center justify-center text-center bg-white rounded-2xl border border-[#EAF2F4] shadow-sm max-w-2xl mx-auto my-8">
+              <div className="w-16 h-16 rounded-2xl bg-[#E8F7F9] text-[#1AA3B6] flex items-center justify-center mb-5 shadow-xs border border-[#D0F0F5]">
+                <FiBox className="text-3xl" />
+              </div>
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#1AA3B6]/10 text-[#0B7285] text-xs font-bold uppercase tracking-wider mb-3">
+                <span className="w-2 h-2 rounded-full bg-[#1AA3B6] animate-pulse"></span>
+                Working on this products category
+              </span>
+              <h3 className="font-extrabold text-[#084553] text-2xl sm:text-3xl mb-2 tracking-tight">
+                We Are Uploading Our Products
+              </h3>
+              <p className="text-slate-700 text-sm sm:text-[15px] max-w-lg mb-6 leading-relaxed">
+                Our scientific team is actively cataloguing and uploading pharmaceutical reference standards, intermediate impurities, and documentation for this category.
+              </p>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <Link
+                  to="/quick-enquiry"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1AA3B6] hover:bg-[#0B7285] text-white font-bold text-xs sm:text-sm transition-all shadow-sm hover:shadow"
+                >
+                  <FiMail size={16} />
+                  Enquire About This Category
+                </Link>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#F8FBFC] hover:bg-[#EAF2F4] border border-[#D9E8EC] text-[#084553] font-semibold text-xs sm:text-sm transition-all"
+                >
+                  Contact Technical Team
+                </Link>
+              </div>
             </div>
-            <h3 className="font-bold text-heading mb-2 text-2xl">{t('products.noCatFound')}</h3>
-            <p className="text-body mb-8 max-w-md text-lg">
-              {t('products.noCatDesc')}
-            </p>
-            <button
-              onClick={() => handleLetterClick('All')}
-              className="bg-[#1AA3B6] hover:bg-[#0B7285] text-white px-8 py-3.5 rounded-xl font-bold transition-all"
-            >
-              {t('products.viewAll')}
-            </button>
-          </div>
+          ) : (
+            <div className="py-20 flex flex-col items-center justify-center text-center max-w-2xl mx-auto">
+              <div className="w-20 h-20 bg-background rounded-full flex items-center justify-center mb-6">
+                <FiAlertCircle className="text-slate-300 text-4xl" />
+              </div>
+              <h3 className="font-bold text-[#084553] mb-2 text-2xl">{t('products.noCatFound', 'No Categories Found')}</h3>
+              <p className="text-slate-700 mb-8 max-w-md text-base leading-relaxed">
+                {t('products.noCatDesc', "We couldn't find any categories matching your selected letter.")}
+              </p>
+              <button
+                onClick={() => handleLetterClick('All')}
+                className="bg-[#1AA3B6] hover:bg-[#0B7285] text-white px-8 py-3.5 rounded-xl font-bold transition-all cursor-pointer shadow-sm"
+              >
+                {t('products.viewAll', 'View All')}
+              </button>
+            </div>
+          )
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
             {sortedGroups.map((group, idx) => (
@@ -263,7 +298,7 @@ export default function ProductCategoriesView() {
                     <h3 className="text-[#12344D] text-[16px] font-bold leading-tight mb-0.5 group-hover:text-[#1AA3B6] transition-colors line-clamp-1">
                       {group.heading || group.name}
                     </h3>
-                    <p className="text-slate-400 text-[11px] font-medium">Explore Products</p>
+                    <p className="text-slate-600 text-[11px] font-medium">Explore Products</p>
                   </div>
                 </div>
                 <div className="w-7 h-7 rounded-full bg-background flex items-center justify-center text-slate-400 shrink-0 group-hover:bg-[#1AA3B6] group-hover:text-white transition-colors">

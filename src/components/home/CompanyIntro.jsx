@@ -38,10 +38,10 @@ export default function CompanyIntro() {
                 {t('home.companyIntro.p2', 'Our comprehensive product portfolio also includes peptides, drug metabolites, stable isotope labelled compounds, catalysts, pharmaceutical intermediates and custom-synthesized molecules.')}
               </p>
               <p>
-                {t('home.companyIntro.p3', 'Our comprehensive product portfolio also includes peptides, drug metabolites, stable isotope labelled compounds, catalysts, pharmaceutical intermediates and custom-synthesized molecules.')}
+                {t('home.companyIntro.p3', 'We support global drug manufacturers in releasing safer, purer, and fully compliant products, with impurity standards they can trust for regulatory filings, which will help the world become healthier.')}
               </p>
               <p>
-                {t('home.companyIntro.p4', 'Our comprehensive product portfolio also includes peptides, drug metabolites, stable isotope labelled compounds, catalysts, pharmaceutical intermediates and custom-synthesized molecules.')}
+                {t('home.companyIntro.p4', 'At GLP Pharma Standards, we excel at adapting to the changing regulations, customer demands and technological innovations that challenge the pharma industry.')}
               </p>
             </div>
 

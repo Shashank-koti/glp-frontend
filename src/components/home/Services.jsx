@@ -83,7 +83,7 @@ export default function Services() {
               <h4 className="font-bold text-heading mb-4 group-hover:text-primary transition-colors duration-300 text-xl">
                 {service.title}
               </h4>
-              <p className="text-body leading-relaxed font-medium text-sm">
+              <p className="text-slate-700 leading-relaxed font-normal text-sm">
                 {service.description}
               </p>
 

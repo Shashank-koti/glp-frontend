@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 
 const benefits = [
-  { icon: FiFileText, title: '1000+', lines: ['High Quality', 'Products'] },
+  { icon: FiFileText, title: '20+', lines: ['High Quality', 'Products'] },
   { icon: FiStar, title: 'COA & Analytical', lines: ['Support &', 'Documents'] },
   { icon: FiGlobe, title: 'Global Delivery', lines: ['Discreet &', 'Secure'] },
   { icon: FiShield, title: 'Quality Assured', lines: ['Highest Purity', 'Standards'] },
@@ -50,25 +50,7 @@ export default function Login() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.48, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="flex items-center justify-center gap-[9px] text-[#1AA3B6]">
-          <svg className="w-[52px] h-[52px] shrink-0" viewBox="0 0 56 56" aria-hidden="true">
-            <path d="M28 7.5 42.5 16v16L28 40.5 13.5 32V16L28 7.5Z" fill="none" stroke="currentColor" strokeWidth="2.15" strokeLinejoin="round" />
-            <path d="M28 7.5V24m14.5-8L28 24m14.5 8L28 24m0 16.5V24m-14.5 8L28 24m-14.5-8L28 24" fill="none" stroke="currentColor" strokeWidth="1.85" strokeLinecap="round" />
-            <circle cx="28" cy="7.5" r="4.7" fill="currentColor" />
-            <circle cx="42.5" cy="16" r="4.7" fill="currentColor" />
-            <circle cx="42.5" cy="32" r="4.7" fill="currentColor" />
-            <circle cx="28" cy="40.5" r="4.7" fill="currentColor" />
-            <circle cx="13.5" cy="32" r="4.7" fill="currentColor" />
-            <circle cx="13.5" cy="16" r="4.7" fill="currentColor" />
-            <circle cx="28" cy="24" r="3.7" fill="white" stroke="currentColor" strokeWidth="2" />
-          </svg>
-          <div className="flex flex-col text-left leading-none">
-            <strong className="text-[#1AA3B6] text-[24px] font-extrabold tracking-[0.035em]">GLP PHARMA</strong>
-            <small className="text-[#12344D] text-[12.5px] font-bold tracking-[0.16em] mt-1">GLOBAL STANDARDS</small>
-          </div>
-        </div>
-
-        <h1 className="text-[#12344D] text-[26px] sm:text-[34px] font-[750] tracking-[-0.038em] leading-[1.2] mt-6 sm:mt-[40px] mb-[10px] text-center">
+        <h1 className="text-[#12344D] text-[26px] sm:text-[34px] font-[750] tracking-[-0.038em] leading-[1.2] mb-[10px] text-center">
           Welcome <span className="text-[#1AA3B6]">Back</span>
         </h1>
         <p className="text-[#5B7280] text-[14px] font-medium leading-[1.6] max-w-[320px] mx-auto text-center mb-6">

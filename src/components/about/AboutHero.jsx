@@ -53,23 +53,6 @@ export default function AboutHero() {
 
       <div className="max-w-[1300px] mx-auto px-6 lg:px-12 relative z-10 w-full">
 
-        {/* Centered Typography Section */}
-        <div className="text-center max-w-4xl mx-auto">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.h1 variants={itemVariants} className="font-bold text-heading mb-2 pt-8 text-primary leading-[1.15] tracking-tight text-2xl md:text-4xl">
-              {t('about.hero.title')}
-            </motion.h1>
-
-            <motion.p variants={itemVariants} className="text-body leading-relaxed max-w-2xl mx-auto font-medium text-lg">
-              {t('about.hero.desc')}
-            </motion.p>
-          </motion.div>
-        </div>
-
         {/* Stunning Visual Composition */}
         <motion.div
           initial={{ opacity: 0, y: 60, scale: 0.95 }}
@@ -100,7 +83,7 @@ export default function AboutHero() {
                 <FiGlobe className="text-xl" />
               </div>
               <div className="font-black text-heading mb-1 text-3xl">{t('about.hero.card1Val')}</div>
-              <div className="text-body font-medium leading-tight text-sm">{t('about.hero.card1Text')}</div>
+              <div className="text-slate-700 font-medium leading-tight text-sm">{t('about.hero.card1Text')}</div>
             </motion.div>
           </motion.div>
 
@@ -116,7 +99,7 @@ export default function AboutHero() {
                 <FiActivity className="text-xl" />
               </div>
               <div className="font-black text-heading mb-1 text-3xl">{t('about.hero.card2Val')}</div>
-              <div className="text-body font-medium leading-tight text-sm">{t('about.hero.card2Text')}</div>
+              <div className="text-slate-700 font-medium leading-tight text-sm">{t('about.hero.card2Text')}</div>
             </motion.div>
           </motion.div>
 
@@ -130,7 +113,7 @@ export default function AboutHero() {
             </div>
             <div>
               <div className="font-black text-heading text-xl">{t('about.hero.card1Val')}</div>
-              <div className="text-body font-medium text-[13px]">{t('about.hero.card1Text')}</div>
+              <div className="text-slate-700 font-medium text-[13px]">{t('about.hero.card1Text')}</div>
             </div>
           </div>
           <div className="bg-white/90 p-5 rounded-2xl shadow-lg border border-[#EAF2F4] flex items-center gap-4">
@@ -139,7 +122,7 @@ export default function AboutHero() {
             </div>
             <div>
               <div className="font-black text-heading text-xl">{t('about.hero.card2Val')}</div>
-              <div className="text-body font-medium text-[13px]">{t('about.hero.card2Text')}</div>
+              <div className="text-slate-700 font-medium text-[13px]">{t('about.hero.card2Text')}</div>
             </div>
           </div>
         </div>

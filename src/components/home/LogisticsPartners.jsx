@@ -7,25 +7,25 @@ export default function LogisticsPartners() {
   const partners = [
     {
       name: "DHL",
-      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHE7nLF7XxXI9aaBedOBfhEsTKXpqqJ6g_hQIE3HKFcg&s=10",
+      logo: "/images/delLogo/dhl-logo.jpg",
       url: "https://www.dhl.com/en/express/tracking.html",
       delay: 0.2
     },
     {
       name: "FedEx",
-      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqUyFIWSxoy7JfgeqEpmrlyKvbMj2Ba2qz_UVVnipsrg&s=10",
+      logo: "/images/delLogo/Fedex-logo.png",
       url: "https://www.fedex.com/en-us/tracking.html",
       delay: 0.3
     },
     {
       name: "DTDC",
-      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGFruJIOc2SVCvobu8vurFe2yO3i5cV_hw1V7duBEPYQ&s=10",
+      logo: "/images/delLogo/dtdc-logo.jpg",
       url: "https://www.dtdc.in/tracking/shipment-tracking.asp",
       delay: 0.4
     },
     {
       name: "Blue Dart",
-      logo: "https://images.seeklogo.com/logo-png/2/1/blue-dart-express-logo-png_seeklogo-20437.png",
+      logo: "/images/delLogo/blueDart-logo.png",
       url: "https://www.bluedart.com/tracking",
       delay: 0.5
     }

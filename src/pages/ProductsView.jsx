@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link, useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import apiClient, { API_BASE_URL } from '../api/apiClient';
-import { FiChevronRight, FiGrid, FiInfo, FiStar, FiTag, FiAlertCircle, FiShoppingCart, FiCheck, FiBox, FiCheckCircle, FiTool, FiClock, FiFilter, FiShield, FiGlobe, FiHeart } from 'react-icons/fi';
+import { FiChevronRight, FiGrid, FiInfo, FiStar, FiTag, FiAlertCircle, FiShoppingCart, FiCheck, FiBox, FiCheckCircle, FiTool, FiClock, FiFilter, FiShield, FiGlobe, FiHeart, FiMail } from 'react-icons/fi';
 import { TbAtom, TbTestPipe } from 'react-icons/tb';
 import { FaFlask, FaBalanceScale, FaWhatsapp } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
@@ -327,8 +327,8 @@ export default function ProductsView() {
         <div className="w-full lg:w-[46%] xl:w-[48%] flex flex-col items-start px-1 sm:px-2 lg:px-4 xl:px-8">
 
           {/* Breadcrumb */}
-          <div className="flex items-center gap-1.5 sm:gap-2 text-[13px] sm:text-[15px] text-[#5B7280] font-medium mb-3 sm:mb-6 flex-wrap">
-            <Link to="/" className="hover:text-[#1AA3B6] transition-colors">Home</Link>
+          <div className="flex items-center gap-1.5 sm:gap-2 text-[13px] sm:text-[15px] text-slate-700 font-medium mb-3 sm:mb-6 flex-wrap">
+            <Link to="/" className="text-slate-600 hover:text-[#1AA3B6] transition-colors">Home</Link>
             {!isRedundant && (
               <>
                 <FiChevronRight className="text-slate-400 text-[13px] sm:text-[14px] mt-0.5" />
@@ -337,7 +337,7 @@ export default function ProductsView() {
                     ? `/product-categories-view/api-impurities-and-reference-standards`
                     : `/products-view/${pageMeta?.category?.slug || subCategory}`
                   }
-                  className="hover:text-[#1AA3B6] transition-colors"
+                  className="text-slate-600 hover:text-[#1AA3B6] transition-colors"
                 >
                   {displayCategoryName}
                 </Link>
@@ -364,48 +364,102 @@ export default function ProductsView() {
           <div className="text-slate-700 text-xs sm:text-[13.5px] max-w-[580px] mb-5 sm:mb-6 leading-relaxed font-normal">
             {categoryData ? (
               <div>
-                <div className="space-y-2.5">
-                  {(isDescExpanded ? categoryData.paragraphs : categoryData.paragraphs.slice(0, 1)).map((para, idx) => (
-                    <p key={idx} className="leading-relaxed text-slate-700">{para}</p>
-                  ))}
-                </div>
-
-                {categoryData.specialSection && isDescExpanded && (
-                  <div className="mt-3.5 p-3.5 sm:p-4 rounded-xl bg-[#F0F7F9] border border-[#1AA3B6]/20">
-                    <h4 className="font-bold text-[#084553] text-xs sm:text-sm mb-1.5">
-                      {categoryData.specialSection.heading}
-                    </h4>
-                    <div className="space-y-1.5 text-xs text-slate-700">
-                      {categoryData.specialSection.paragraphs.map((sp, sIdx) => (
-                        <p key={sIdx}>{sp}</p>
-                      ))}
-                    </div>
-                    {categoryData.specialSection.points && (
-                      <ul className="mt-2 space-y-1 text-xs text-slate-700 list-disc list-inside">
-                        {categoryData.specialSection.points.map((pt, ptIdx) => (
-                          <li key={ptIdx} className="font-medium">{pt}</li>
-                        ))}
-                      </ul>
+                {!isDescExpanded ? (
+                  <>
+                    <p className="leading-relaxed text-slate-700">
+                      {categoryData.paragraphs[0]}
+                    </p>
+                    {(categoryData.paragraphs.length > 1 || categoryData.specialSection) && (
+                      <button
+                        onClick={() => setIsDescExpanded(true)}
+                        className="inline-flex items-center gap-1 text-[#0B7285] hover:text-[#084553] font-bold text-xs mt-2 transition-colors cursor-pointer"
+                      >
+                        <span>See More</span>
+                        <FiChevronRight className="transition-transform duration-200 rotate-90" />
+                      </button>
                     )}
-                  </div>
-                )}
+                  </>
+                ) : (
+                  <>
+                    <div className="max-h-[220px] sm:max-h-[260px] overflow-y-auto pr-2 space-y-2.5 [scrollbar-width:thin] [scrollbar-color:#1AA3B6_#F1F5F9]">
+                      {categoryData.paragraphs.map((para, idx) => (
+                        <p key={idx} className="leading-relaxed text-slate-700">
+                          {para}
+                        </p>
+                      ))}
 
-                {categoryData.paragraphs.length > 2 && (
-                  <button
-                    onClick={() => setIsDescExpanded(!isDescExpanded)}
-                    className="inline-flex items-center gap-1.5 text-[#0B7285] hover:text-[#084553] font-bold text-xs mt-2.5 transition-colors cursor-pointer"
-                  >
-                    <span>{isDescExpanded ? 'Show Less' : 'Read Full Overview & Technical Details'}</span>
-                    <FiChevronRight className={`transition-transform duration-200 ${isDescExpanded ? '-rotate-90' : 'rotate-90'}`} />
-                  </button>
+                      {categoryData.specialSection && (
+                        <div className="space-y-2 pt-1 text-slate-700">
+                          <h4 className="font-bold text-[#084553] text-[13px] sm:text-sm">
+                            {categoryData.specialSection.heading}
+                          </h4>
+                          {categoryData.specialSection.paragraphs && categoryData.specialSection.paragraphs.map((sp, sIdx) => (
+                            <p key={sIdx} className="leading-relaxed text-slate-700">{sp}</p>
+                          ))}
+                          {categoryData.specialSection.subheading && (
+                            <h5 className="font-bold text-[#084553] text-xs sm:text-[13px] pt-1">
+                              {categoryData.specialSection.subheading}
+                            </h5>
+                          )}
+                          {categoryData.specialSection.points && (
+                            <ul className="space-y-1 text-slate-700 list-disc list-inside">
+                              {categoryData.specialSection.points.map((pt, ptIdx) => (
+                                <li key={ptIdx}>{pt}</li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                    <button
+                      onClick={() => setIsDescExpanded(false)}
+                      className="inline-flex items-center gap-1 text-[#0B7285] hover:text-[#084553] font-bold text-xs mt-2 transition-colors cursor-pointer"
+                    >
+                      <span>See Less</span>
+                      <FiChevronRight className="transition-transform duration-200 -rotate-90" />
+                    </button>
+                  </>
                 )}
               </div>
             ) : (
-              <p className="leading-relaxed text-slate-700">
-                {pageMeta?.mainProduct?.content ||
+              (() => {
+                const fallbackParas = (pageMeta?.mainProduct?.content ||
                   pageMeta?.category?.description ||
-                  "Explore our comprehensive range of high-quality pharmaceutical impurities and reference standards designed for precise analytical research."}
-              </p>
+                  "Explore our comprehensive range of high-quality pharmaceutical impurities and reference standards designed for precise analytical research."
+                ).split(/\n+/).filter(Boolean);
+
+                if (fallbackParas.length <= 1) {
+                  return <p className="leading-relaxed text-slate-700">{fallbackParas[0]}</p>;
+                }
+
+                return !isDescExpanded ? (
+                  <>
+                    <p className="leading-relaxed text-slate-700">{fallbackParas[0]}</p>
+                    <button
+                      onClick={() => setIsDescExpanded(true)}
+                      className="inline-flex items-center gap-1 text-[#0B7285] hover:text-[#084553] font-bold text-xs mt-2 transition-colors cursor-pointer"
+                    >
+                      <span>See More</span>
+                      <FiChevronRight className="transition-transform duration-200 rotate-90" />
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <div className="max-h-[220px] sm:max-h-[260px] overflow-y-auto pr-2 space-y-2.5 [scrollbar-width:thin] [scrollbar-color:#1AA3B6_#F1F5F9]">
+                      {fallbackParas.map((para, idx) => (
+                        <p key={idx} className="leading-relaxed text-slate-700">{para}</p>
+                      ))}
+                    </div>
+                    <button
+                      onClick={() => setIsDescExpanded(false)}
+                      className="inline-flex items-center gap-1 text-[#0B7285] hover:text-[#084553] font-bold text-xs mt-2 transition-colors cursor-pointer"
+                    >
+                      <span>See Less</span>
+                      <FiChevronRight className="transition-transform duration-200 -rotate-90" />
+                    </button>
+                  </>
+                );
+              })()
             )}
           </div>
 
@@ -419,7 +473,7 @@ export default function ProductsView() {
               </div>
               <div>
                 <h4 className="text-[13px] sm:text-[14px] font-bold text-[#12344D]">Reliable Quality</h4>
-                <p className="text-[11.5px] sm:text-[12px] text-[#5B7280] font-medium mt-0.5">Stringent quality control processes</p>
+                <p className="text-[11.5px] sm:text-[12px] text-slate-700 font-medium mt-0.5">Stringent quality control processes</p>
               </div>
             </div>
 
@@ -432,7 +486,7 @@ export default function ProductsView() {
               </div>
               <div>
                 <h4 className="text-[13px] sm:text-[14px] font-bold text-[#12344D]">Analytical Excellence</h4>
-                <p className="text-[11.5px] sm:text-[12px] text-[#5B7280] font-medium mt-0.5">Ensuring accurate results</p>
+                <p className="text-[11.5px] sm:text-[12px] text-slate-700 font-medium mt-0.5">Ensuring accurate results</p>
               </div>
             </div>
           </div>
@@ -524,13 +578,58 @@ export default function ProductsView() {
             <span className="mt-3 text-body font-medium text-sm">{t('products.loadingProd')}</span>
           </div>
         ) : filteredProducts.length === 0 ? (
-          <div className="py-16 flex flex-col items-center justify-center text-center bg-white rounded-xl border border-border shadow-sm max-w-xl mx-auto">
-            <div className="w-16 h-16 bg-background rounded-full flex items-center justify-center mb-4">
-              <FiAlertCircle className="text-slate-300 text-3xl" />
+          products.length === 0 ? (
+            <div className="py-14 sm:py-18 px-6 sm:px-10 flex flex-col items-center justify-center text-center bg-white rounded-2xl border border-[#EAF2F4] shadow-sm max-w-2xl mx-auto my-4">
+              <div className="w-16 h-16 rounded-2xl bg-[#E8F7F9] text-[#1AA3B6] flex items-center justify-center mb-4 shadow-xs border border-[#D0F0F5]">
+                <FiBox className="text-3xl" />
+              </div>
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#1AA3B6]/10 text-[#0B7285] text-xs font-bold uppercase tracking-wider mb-3">
+                <span className="w-2 h-2 rounded-full bg-[#1AA3B6] animate-pulse"></span>
+                Working on this products category
+              </span>
+              <h3 className="font-extrabold text-[#084553] text-2xl sm:text-3xl mb-2 tracking-tight">
+                We Are Uploading Our Products
+              </h3>
+              <p className="text-slate-700 text-sm sm:text-[15px] max-w-lg mb-6 leading-relaxed">
+                Our scientific team is actively cataloguing and uploading high-purity reference standards, impurities, and CoA analytical documentation for this category. In the meantime, custom synthesis, batch documentation, and immediate supply are available upon request.
+              </p>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <Link
+                  to="/quick-enquiry"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1AA3B6] hover:bg-[#0B7285] text-white font-bold text-xs sm:text-sm transition-all shadow-sm hover:shadow"
+                >
+                  <FiMail size={16} />
+                  Enquire About This Category
+                </Link>
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#F8FBFC] hover:bg-[#EAF2F4] border border-[#D9E8EC] text-[#084553] font-semibold text-xs sm:text-sm transition-all"
+                >
+                  Contact Technical Team
+                </Link>
+              </div>
             </div>
-            <h3 className="font-bold text-heading mb-1 text-xl">{t('products.noProdFound')}</h3>
-            <p className="text-body text-sm">{t('products.noProdDesc')}</p>
-          </div>
+          ) : (
+            <div className="py-16 sm:py-20 px-6 flex flex-col items-center justify-center text-center bg-white rounded-2xl border border-[#EAF2F4] shadow-sm max-w-xl mx-auto my-8">
+              <div className="w-16 h-16 bg-slate-50 text-slate-400 rounded-full flex items-center justify-center mb-4 border border-slate-100">
+                <FiAlertCircle className="text-3xl" />
+              </div>
+              <h3 className="font-bold text-[#084553] mb-1.5 text-xl">No Products Matched</h3>
+              <p className="text-slate-600 text-sm max-w-md mb-5 leading-relaxed">
+                We couldn't find any products matching your current search or active filter criteria.
+              </p>
+              <button
+                onClick={() => {
+                  searchParams.delete('letter');
+                  setSearchParams(searchParams);
+                  setAvailabilityFilter('All');
+                }}
+                className="px-5 py-2.5 rounded-xl bg-[#084553] hover:bg-[#0B7285] text-white text-xs sm:text-sm font-bold transition-all shadow-xs cursor-pointer"
+              >
+                Reset Filters
+              </button>
+            </div>
+          )
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
             {filteredProducts.map((product, idx) => (
@@ -728,54 +827,6 @@ export default function ProductsView() {
           </div>
         )}
       </div>
-
-      {/* Category In-Depth Overview from Word Document */}
-      {categoryData && (
-        <div className="max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-12">
-          <div className="bg-white rounded-2xl p-5 sm:p-7 border border-[#EAF2F4] shadow-sm">
-            <h2 className="font-bold text-[#084553] text-lg sm:text-xl mb-3">
-              {categoryData.title}
-            </h2>
-
-            <div className="space-y-2.5 text-slate-700 leading-relaxed text-xs sm:text-[13.5px] font-normal mb-4">
-              {categoryData.paragraphs.map((p, idx) => (
-                <p key={idx} className="leading-relaxed text-slate-700">
-                  {p}
-                </p>
-              ))}
-            </div>
-
-            {/* Special Section if any (e.g. Nitrosamines Cohort of Concern, CRO dedicated support) */}
-            {categoryData.specialSection && (
-              <div className="mt-4 p-4 rounded-xl bg-[#F0F7F9] border border-[#1AA3B6]/20">
-                <h3 className="font-bold text-[#084553] text-xs sm:text-sm mb-2">
-                  {categoryData.specialSection.heading}
-                </h3>
-                <div className="space-y-2 text-xs text-slate-700 leading-relaxed">
-                  {categoryData.specialSection.paragraphs.map((sp, sIdx) => (
-                    <p key={sIdx} className="leading-relaxed">{sp}</p>
-                  ))}
-                </div>
-                {categoryData.specialSection.subheading && (
-                  <h4 className="font-bold text-[#084553] text-xs sm:text-[13px] mt-3 mb-1.5">
-                    {categoryData.specialSection.subheading}
-                  </h4>
-                )}
-                {categoryData.specialSection.points && (
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
-                    {categoryData.specialSection.points.map((pt, ptIdx) => (
-                      <li key={ptIdx} className="flex items-center gap-1.5 text-xs text-slate-700 font-medium">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#1AA3B6] shrink-0"></span>
-                        <span>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

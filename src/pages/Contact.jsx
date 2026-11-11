@@ -91,7 +91,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-extrabold text-heading mb-0.5 text-xs">{t('contact.quickResponse')}</h4>
-                  <p className="text-[11px] text-body">{t('contact.quickResponseDesc')}</p>
+                  <p className="text-[11px] text-slate-700">{t('contact.quickResponseDesc')}</p>
                 </div>
               </div>
 
@@ -101,7 +101,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-extrabold text-heading mb-0.5 text-xs">{t('contact.trustedSupport')}</h4>
-                  <p className="text-[11px] text-body">{t('contact.trustedSupportDesc')}</p>
+                  <p className="text-[11px] text-slate-700">{t('contact.trustedSupportDesc')}</p>
                 </div>
               </div>
 
@@ -111,7 +111,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-extrabold text-heading mb-0.5 text-xs">{t('contact.globalReach')}</h4>
-                  <p className="text-[11px] text-body">{t('contact.globalReachDesc')}</p>
+                  <p className="text-[11px] text-slate-700">{t('contact.globalReachDesc')}</p>
                 </div>
               </div>
             </motion.div>
@@ -152,7 +152,7 @@ export default function Contact() {
                     placeholder={t('contact.yourEmail')}
                   />
                   {errors.email && <span className="text-red-500 text-[10px] mt-1 block">Required</span>}
-                  <span className="text-[11px] text-[#5B7280] mt-1.5 ml-1 block">* Must be a valid email address</span>
+                  <span className="text-[11px] text-slate-700 mt-1.5 ml-1 block">* Must be a valid email address</span>
                 </div>
               </div>
 
@@ -192,7 +192,7 @@ export default function Contact() {
                 {errors.message && <span className="text-red-500 text-[10px] mt-1 block">Required</span>}
               </div>
 
-              <div className="flex items-center gap-2 text-slate-400 text-[11px] mb-5">
+              <div className="flex items-center gap-2 text-slate-700 text-[11px] mb-5">
                 <FiLock size={11} />
                 <span>{t('contact.secureInfo')}</span>
               </div>
@@ -246,7 +246,8 @@ export default function Contact() {
                   <h4 className="font-extrabold text-heading text-[18px] mb-1">{t('contact.phone')}</h4>
                   <p className="text-[15px] text-body leading-relaxed">
                     +91 9866074638<br />
-                    +91 8341411731
+                    +91 8341411731<br />
+                    +91 40 23074638
                   </p>
                 </div>
               </div>
@@ -272,7 +273,7 @@ export default function Contact() {
                 <div>
                   <h4 className="font-extrabold text-heading text-[18px] mb-1">{t('contact.businessHours')}</h4>
                   <p className="text-[15px] text-body leading-relaxed">
-                    Mon - Fri: 9:00 AM - 6:00 PM (IST)<br />
+                    Mon-Sat 09:30am to 06:30pm (IST)<br />
                     Saturday & Sunday: Closed
                   </p>
                 </div>

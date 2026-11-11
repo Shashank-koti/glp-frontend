@@ -22,7 +22,7 @@ export default function CompliancePolicies() {
           <h2 className="font-extrabold text-[#12344D] text-2xl sm:text-3xl md:text-4xl tracking-tight mb-4">
             {t('about.policies.title', 'Regulatory Compliance & Usage Policies')}
           </h2>
-          <p className="text-body font-sm text-base sm:text-lmd leading-relaxed">
+          <p className="text-slate-700 font-sm text-base sm:text-lmd leading-relaxed">
             {t('about.policies.desc', 'GLP Pharma Standards adheres to rigorous international quality, ethical, and legal frameworks across all compound synthesis, characterization, and distribution workflows.')}
           </p>
         </div>
@@ -52,7 +52,7 @@ export default function CompliancePolicies() {
                 {t('about.policies.researchTitle', 'Research & Analytical Use Only')}
               </h3>
 
-              <p className="text-body leading-relaxed text-[15px] sm:text-base font-normal mb-6">
+              <p className="text-slate-700 leading-relaxed text-[15px] sm:text-base font-normal mb-6">
                 {t('about.policies.researchDesc', 'All products supplied by GLP Pharma Standards are intended exclusively for research, laboratory and analytical applications. They are not intended for human or animal consumption, therapeutic use, clinical administration or any other unauthorized application.')}
               </p>
             </div>
@@ -80,7 +80,7 @@ export default function CompliancePolicies() {
                 {t('about.policies.complianceTitle', 'Regulated & Controlled Substances Policy')}
               </h3>
 
-              <p className="text-body leading-relaxed text-[14px] sm:text-[16px] font-normal mb-6">
+              <p className="text-slate-700 leading-relaxed text-[14px] sm:text-[16px] font-normal mb-6">
                 {t('about.policies.complianceDesc', 'GLP Pharma Standards does not manufacture, supply, export or otherwise deal in restricted, narcotic, psychotropic, addictive, prohibited or other regulated chemical substances without the applicable licenses, authorizations and regulatory approvals. All transactions involving regulated substances are subject to applicable laws, licensing requirements and internal compliance review.')}
               </p>
             </div>
