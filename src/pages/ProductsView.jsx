@@ -66,28 +66,60 @@ export default function ProductsView() {
         setPageMeta(null);
         setCategoryFilter('All');
         const getCategoryType = (p) => {
-          const catSlug = p.category?.slug?.toLowerCase() || '';
-          const catId = String(p.category_id || p.category?.categoryId || '');
-          const catName = p.category?.categoryName?.toLowerCase() || '';
-          const prodType = p.productType?.toLowerCase() || '';
+          if (!p) return 'reference';
 
-          if (
+          const catSlug = (p.category?.slug || '').toLowerCase();
+          const catName = (p.category?.categoryName || p.category?.category_name || '').toLowerCase();
+          const catId = String(p.category_id || p.category?.categoryId || p.category?.category_id || '');
+          const prodType = (p.productType || '').toLowerCase();
+
+          const mainHeading = (p.mainProduct?.heading || '').toLowerCase();
+          const mainLink = (p.mainProduct?.p_link || '').toLowerCase();
+          const mainCatId = String(p.mainProduct?.category_id || p.mainProduct?.category?.categoryId || '');
+          const mainCatSlug = (p.mainProduct?.category?.slug || '').toLowerCase();
+          const mainCatName = (p.mainProduct?.category?.categoryName || '').toLowerCase();
+
+          const name = (p.name || '').toLowerCase();
+          const synonyms = (p.specifications?.synonyms || '').toLowerCase();
+          const iupac = (p.specifications?.iupacName || '').toLowerCase();
+
+          // 1. Check for Nitroso / Nitrosamine
+          const isNitroso =
             catSlug.includes('nitroso') ||
-            catId === '2' ||
             catName.includes('nitroso') ||
-            prodType.includes('nitroso')
-          ) {
-            return 'nitroso';
-          }
+            catName.includes('nitrosamine') ||
+            catId === '2' ||
+            mainCatId === '2' ||
+            mainCatSlug.includes('nitroso') ||
+            mainCatName.includes('nitroso') ||
+            prodType.includes('nitroso') ||
+            prodType.includes('nitrosamine') ||
+            mainHeading.includes('nitroso') ||
+            mainLink.includes('nitroso') ||
+            /nitroso|nitrosamine/i.test(name) ||
+            /nitroso|nitrosamine/i.test(synonyms) ||
+            /nitroso|nitrosamine/i.test(iupac);
 
-          if (
+          if (isNitroso) return 'nitroso';
+
+          // 2. Check for Isotope / Deuterated / Labelled
+          const isIsotope =
             catSlug.includes('isotope') ||
-            catId === '4' ||
             catName.includes('isotope') ||
-            prodType.includes('isotope')
-          ) {
-            return 'isotope';
-          }
+            catId === '4' ||
+            mainCatId === '4' ||
+            mainCatSlug.includes('isotope') ||
+            mainCatName.includes('isotope') ||
+            prodType.includes('isotope') ||
+            prodType.includes('deuter') ||
+            mainHeading.includes('isotope') ||
+            mainLink.includes('isotope') ||
+            /isotope|deuterated|labelled/i.test(name) ||
+            /-d\d+|-13c\d*|-15n\d*/i.test(name) ||
+            /\b(d\d+|13c\d*|15n\d*)\b/i.test(name) ||
+            /isotope|deuterated/i.test(synonyms);
+
+          if (isIsotope) return 'isotope';
 
           return 'reference';
         };
@@ -123,27 +155,46 @@ export default function ProductsView() {
 
           // Only fetch related nitroso & isotope products if this is API IMPURITIES & REFERENCE STANDARDS
           const fetchedCat = res.data?.pagination?.category || (allProducts.length > 0 ? allProducts[0].category : null);
-          const fetchedCatSlug = fetchedCat?.slug?.toLowerCase() || '';
-          const fetchedCatName = fetchedCat?.categoryName?.toUpperCase() || '';
+          const fetchedCatSlug = (fetchedCat?.slug || '').toLowerCase();
+          const fetchedCatName = (fetchedCat?.categoryName || '').toUpperCase();
           const fetchedCatId = String(fetchedCat?.categoryId || (allProducts.length > 0 ? allProducts[0].category_id : '') || '');
+
+          const fetchedMainProd = res.data?.pagination?.mainProduct;
+          const mainCatId = String(fetchedMainProd?.category_id || fetchedMainProd?.category?.categoryId || '');
+          const mainCatSlug = (fetchedMainProd?.category?.slug || '').toLowerCase();
+
           const isCategoryApiImpurities = fetchedCatSlug === 'api-impurities-and-reference-standards' ||
             fetchedCatId === '1' ||
-            fetchedCatName.includes('API IMPURITIES');
+            fetchedCatName.includes('API IMPURITIES') ||
+            mainCatId === '1' ||
+            mainCatSlug === 'api-impurities-and-reference-standards';
 
           if (isCategoryApiImpurities) {
             // Also fetch related nitroso & isotope products by searching the API name
-            const apiName = subCategory.replace(/-/g, ' ');
+            const headingStr = fetchedMainProd?.heading || '';
+            const rawApiName = headingStr || subCategory.replace(/[-_]+/g, ' ').trim();
+            const searchKeyword = rawApiName.split(';')[0].split(',')[0].trim();
+
             try {
-              const searchRes = await axios.get(`${API_BASE_URL}/products?search=${encodeURIComponent(apiName)}`).catch(() => ({ data: { data: [] } }));
+              const searchRes = await axios.get(`${API_BASE_URL}/products?search=${encodeURIComponent(searchKeyword)}&limit=1000`).catch(() => ({ data: { data: [] } }));
 
-              const existingIds = new Set(allProducts.map(p => p._id));
+              const existingIds = new Set(allProducts.map(p => String(p._id)));
 
-              if (searchRes.data?.data) {
+              if (searchRes.data?.data && Array.isArray(searchRes.data.data)) {
                 searchRes.data.data.forEach(p => {
-                  if (!existingIds.has(p._id)) {
-                    const type = getCategoryType(p);
-                    if (type === 'nitroso' || type === 'isotope') {
-                      existingIds.add(p._id);
+                  const type = getCategoryType(p);
+                  const pIdStr = String(p._id);
+
+                  if (existingIds.has(pIdStr)) {
+                    const existing = allProducts.find(item => String(item._id) === pIdStr);
+                    if (existing && (type === 'nitroso' || type === 'isotope')) {
+                      existing._categoryType = type;
+                    }
+                  } else if (type === 'nitroso' || type === 'isotope') {
+                    const prodName = (p.name || '').toLowerCase();
+                    const kw = searchKeyword.toLowerCase();
+                    if (prodName.includes(kw) || kw.includes(prodName.split(' ')[0])) {
+                      existingIds.add(pIdStr);
                       allProducts.push({ ...p, _categoryType: type });
                     }
                   }
@@ -223,14 +274,19 @@ export default function ProductsView() {
 
   // Determine if current category is API IMPURITIES & REFERENCE STANDARDS
   const currentCategory = pageMeta?.category || (products.length > 0 ? products[0].category : null);
-  const currentCatSlug = currentCategory?.slug?.toLowerCase() || '';
-  const currentCatName = currentCategory?.categoryName?.toUpperCase() || '';
-  const currentCatId = String(currentCategory?.categoryId || (products.length > 0 ? products[0].category_id : '') || '');
+  const currentCatSlug = (currentCategory?.slug || '').toLowerCase();
+  const currentCatName = (currentCategory?.categoryName || currentCategory?.category_name || '').toUpperCase();
+  const currentCatId = String(currentCategory?.categoryId || currentCategory?.category_id || (products.length > 0 ? products[0].category_id : '') || '');
+
+  const mainProdCatId = String(pageMeta?.mainProduct?.category_id || pageMeta?.mainProduct?.category?.categoryId || '');
+  const mainProdCatSlug = (pageMeta?.mainProduct?.category?.slug || '').toLowerCase();
 
   const isApiImpurities = subCategory !== 'search' && (
     currentCatSlug === 'api-impurities-and-reference-standards' ||
     currentCatId === '1' ||
-    currentCatName.includes('API IMPURITIES')
+    currentCatName.includes('API IMPURITIES') ||
+    mainProdCatId === '1' ||
+    mainProdCatSlug === 'api-impurities-and-reference-standards'
   );
 
   const baseForCounts = isApiImpurities ? products : productsMatchingOtherFilters;
@@ -244,9 +300,17 @@ export default function ProductsView() {
 
   const filteredProducts = productsMatchingOtherFilters.filter(product => {
     // Category filter is only applicable for API IMPURITIES & REFERENCE STANDARDS
-    if (isApiImpurities && categoryFilter !== 'All') {
-      const type = product._categoryType || 'reference';
-      return type === categoryFilter;
+    if (isApiImpurities) {
+      if (categoryFilter === 'nitroso') {
+        return product._categoryType === 'nitroso';
+      }
+      if (categoryFilter === 'isotope') {
+        return product._categoryType === 'isotope';
+      }
+      if (categoryFilter === 'reference') {
+        return product._categoryType === 'reference' || !product._categoryType;
+      }
+      return true; // 'All'
     }
     return true;
   });
@@ -536,15 +600,21 @@ export default function ProductsView() {
             {isApiImpurities && (
               <div className="flex flex-col gap-2.5 sm:gap-3">
                 {[
-                  { key: 'All', label: 'Pharmaceutical Reference Standards', icon: <FaFlask size={17} />, count: categoryCounts.All },
+                  { key: 'reference', label: 'Pharmaceutical Reference Standards', icon: <FaFlask size={17} />, count: categoryCounts.reference },
                   { key: 'nitroso', label: 'Possible Nitroso Standards', icon: <TbTestPipe size={17} />, count: categoryCounts.nitroso },
                   { key: 'isotope', label: 'Stable Isotopes', icon: <TbAtom size={17} />, count: categoryCounts.isotope },
                 ].map((filter) => {
-                  const isActive = categoryFilter === filter.key;
+                  const isActive = categoryFilter === filter.key || (filter.key === 'reference' && categoryFilter === 'All');
                   return (
                     <button
                       key={filter.key}
-                      onClick={() => setCategoryFilter(filter.key)}
+                      onClick={() => {
+                        if (categoryFilter === filter.key) {
+                          setCategoryFilter('All');
+                        } else {
+                          setCategoryFilter(filter.key);
+                        }
+                      }}
                       className={`w-full flex items-center justify-between px-3 sm:px-4 py-2 sm:py-2.5 rounded-[14px] sm:rounded-[16px] transition-all duration-300 border-2 cursor-pointer ${isActive
                         ? 'bg-white border-[#084553] shadow-sm'
                         : 'bg-white border-gray-100 hover:border-gray-200'

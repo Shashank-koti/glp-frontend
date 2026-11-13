@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 export default function GlobalTrust() {
   const { t } = useTranslation();
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-white relative overflow-hidden text-body">
+    <section className="py-8 sm:py-10 lg:py-12 bg-white relative overflow-hidden text-body">
       {/* Abstract World Map Background */}
       <div className="absolute inset-0 text-primary opacity-5">
         <svg className="w-full h-full object-cover" viewBox="0 0 1000 500" preserveAspectRatio="none">

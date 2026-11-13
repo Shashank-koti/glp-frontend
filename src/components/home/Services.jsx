@@ -33,12 +33,12 @@ export default function Services() {
   ];
 
   return (
-    <section className="py-12 sm:py-20 lg:py-32 bg-white relative">
+    <section className="py-8 sm:py-10 lg:py-14 bg-white relative">
       {/* Decorative background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)] opacity-30"></div>
 
       <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-16 gap-4 md:gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 md:mb-10 gap-4 md:gap-6">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-6">
               <span className="w-2 h-2 rounded-full bg-primary"></span>

@@ -236,13 +236,6 @@ export default function ProductCategoriesView() {
         ) : sortedGroups.length === 0 ? (
           groups.length === 0 ? (
             <div className="py-16 sm:py-20 px-6 sm:px-10 flex flex-col items-center justify-center text-center bg-white rounded-2xl border border-[#EAF2F4] shadow-sm max-w-2xl mx-auto my-8">
-              <div className="w-16 h-16 rounded-2xl bg-[#E8F7F9] text-[#1AA3B6] flex items-center justify-center mb-5 shadow-xs border border-[#D0F0F5]">
-                <FiBox className="text-3xl" />
-              </div>
-              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#1AA3B6]/10 text-[#0B7285] text-xs font-bold uppercase tracking-wider mb-3">
-                <span className="w-2 h-2 rounded-full bg-[#1AA3B6] animate-pulse"></span>
-                Working on this products category
-              </span>
               <h3 className="font-extrabold text-[#084553] text-2xl sm:text-3xl mb-2 tracking-tight">
                 We Are Uploading Our Products
               </h3>

@@ -185,7 +185,7 @@ export default function Hero() {
       </div>
 
       {/* Spacer to push following content down so it's not hidden by the overlapping bar */}
-      <div className="h-32 md:h-24 bg-background w-full"></div>
+      <div className="h-16 md:h-12 bg-background w-full"></div>
     </div>
   );
 }

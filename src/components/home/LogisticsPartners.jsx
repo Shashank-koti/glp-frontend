@@ -32,7 +32,7 @@ export default function LogisticsPartners() {
   ];
 
   return (
-    <section className="py-18 bg-[#F8FBFC] relative overflow-hidden border-y border-[#EAF2F4]">
+    <section className="py-8 sm:py-10 lg:py-12 bg-[#F8FBFC] relative overflow-hidden border-y border-[#EAF2F4]">
       {/* Background decorations */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 opacity-40 pointer-events-none">
         <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-gradient-to-br from-primary/10 to-transparent blur-3xl"></div>
@@ -40,7 +40,7 @@ export default function LogisticsPartners() {
       </div>
 
       <div className="w-full xl:w-[95%] 2xl:w-[92%] max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

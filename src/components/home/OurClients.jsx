@@ -38,13 +38,13 @@ export default function OurClients() {
   const marqueeItems = clientLogos.length > 0 ? [...clientLogos, ...clientLogos] : [];
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden border-b border-[#EAF2F4]">
+    <section className="py-8 sm:py-10 lg:py-12 bg-white relative overflow-hidden border-b border-[#EAF2F4]">
       {/* Subtle Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 opacity-40 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl h-32 bg-gradient-to-r from-transparent via-primary/5 to-transparent blur-2xl"></div>
       </div>
 
-      <div className="w-full xl:w-[95%] 2xl:w-[92%] max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-12">
+      <div className="w-full xl:w-[95%] 2xl:w-[92%] max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-6 sm:mb-8">
         <div className="text-center max-w-3xl mx-auto">
           <motion.h3
             initial={{ opacity: 0, y: 20 }}

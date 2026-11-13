@@ -44,9 +44,9 @@ export default function NewlySynthesizedProducts() {
   }, []);
 
   return (
-    <section className="py-16 bg-background relative overflow-hidden">
+    <section className="py-8 sm:py-10 lg:py-12 bg-background relative overflow-hidden">
       <div className="w-full xl:w-[95%] 2xl:w-[100%] max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col items-center mb-12">
+        <div className="flex flex-col items-center mb-8">
           <span className="text-primary font-semibold tracking-wider uppercase mb-2 text-sm">{t('home.newProducts.latestInnovations')}</span>
           <h2 className="font-bold text-[#0a192f] text-center relative text-3xl md:text-4xl">
             {t('home.newProducts.title')}
