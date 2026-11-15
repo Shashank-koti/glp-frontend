@@ -16,7 +16,7 @@ export default function LifeAtGLP() {
             className="w-full lg:w-1/2"
           >
             <span className="text-[#1AA3B6] font-extrabold tracking-widest uppercase mb-3 block text-sm">{t('careers.life.culture')}</span>
-            <h2 className="font-extrabold text-[#12344D] mb-6 tracking-tight text-4xl md:text-5xl">
+            <h2 className="font-extrabold text-[#12344D] mb-6 tracking-tight text-2xl md:text-3xl">
               {t('careers.life.title')}
             </h2>
 

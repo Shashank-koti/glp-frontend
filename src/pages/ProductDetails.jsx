@@ -700,8 +700,8 @@ export default function ProductDetails() {
                     })(), isSimilarProducts: true
                   },
                   { icon: <FiTag size={16} />, label: 'Synonyms', value: product.synonyms || product.specifications?.synonyms || product.name },
-                  { icon: <FiCommand size={16} />, label: 'Molecular Formula', value: product.molecularFormula || 'C12H19NOO' },
-                  { icon: <FiLock size={16} />, label: 'Molecular Weight', value: product.molecularWeight || '260.29' },
+                  { icon: <FiCommand size={16} />, label: 'Molecular Formula', value: product.molecularFormula || 'NA' },
+                  { icon: <FiLock size={16} />, label: 'Molecular Weight', value: `${product.molecularWeight} g/mol` || 'NA' },
                   { icon: <FiCheckCircle size={16} />, label: 'Purity (HPLC / GC / LCMS)', value: product.purity || '>98%', highlight: true },
                   { icon: <FiAperture size={16} />, label: 'Appearance', value: product.appearance || 'White Powder' },
                   { icon: <BsSnow size={16} />, label: 'Storage', value: product.storage || '2-8°C Refrigerator' },

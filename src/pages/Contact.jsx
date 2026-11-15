@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { FiMapPin, FiPhone, FiMail, FiGlobe, FiClock, FiLock, FiArrowRight, FiHeadphones, FiShield } from 'react-icons/fi';
+import { FiMapPin, FiPhone, FiPhoneCall, FiMail, FiGlobe, FiClock, FiLock, FiArrowRight, FiHeadphones, FiShield } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -229,10 +230,11 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-extrabold text-heading text-[18px] mb-1">{t('contact.ourLocation')}</h4>
-                  <p className="text-[15px] text-body leading-relaxed">
-                    Plot No:1, Shakti Puram Phase-2,<br />
-                    Prashanti Nagar, Industrial Estate(IE), Kukatpally,<br />
-                    Hyderabad, Telangana, India, PIN: 500072
+                  <p className="text-[14.5px] sm:text-[15px] text-body leading-relaxed">
+                    Plot No: 1, Shakti Puram Phase-2,<br />
+                    Prashanti Nagar, Industrial Estate (IE),<br />
+                    Kukatpally, Hyderabad,<br />
+                    Telangana, India, PIN: 500072
                   </p>
                 </div>
               </div>
@@ -243,12 +245,45 @@ export default function Contact() {
                   <FiPhone size={18} />
                 </div>
                 <div>
-                  <h4 className="font-extrabold text-heading text-[18px] mb-1">{t('contact.phone')}</h4>
-                  <p className="text-[15px] text-body leading-relaxed">
-                    +91 9866074638<br />
-                    +91 8341411731<br />
-                    +91 40 23074638
-                  </p>
+                  <h4 className="font-extrabold text-heading text-[18px] mb-2">{t('contact.phone')}</h4>
+                  <div className="space-y-2">
+                    {/* Landline / Telephone */}
+                    <div className="flex items-center gap-2.5">
+                      <FiPhoneCall className="text-[#0B7285] shrink-0 text-[15px]" title="Telephone" />
+                      <a
+                        href="tel:+914023074638"
+                        className="text-[14.5px] sm:text-[15px] font-semibold text-slate-800 hover:text-[#1AA3B6] transition-colors"
+                      >
+                        +91 40 23074638
+                      </a>
+                    </div>
+
+                    {/* Mobile 1 (WhatsApp) */}
+                    <div className="flex items-center gap-2.5">
+                      <FaWhatsapp className="text-[#25D366] shrink-0 text-[16px]" title="WhatsApp" />
+                      <a
+                        href="https://wa.me/919866074638"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[14.5px] sm:text-[15px] font-semibold text-slate-800 hover:text-[#1AA3B6] transition-colors"
+                      >
+                        +91 9866074638
+                      </a>
+                    </div>
+
+                    {/* Mobile 2 (WhatsApp) */}
+                    <div className="flex items-center gap-2.5">
+                      <FaWhatsapp className="text-[#25D366] shrink-0 text-[16px]" title="WhatsApp" />
+                      <a
+                        href="https://wa.me/918341411731"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[14.5px] sm:text-[15px] font-semibold text-slate-800 hover:text-[#1AA3B6] transition-colors"
+                      >
+                        +91 8341411731
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -260,7 +295,12 @@ export default function Contact() {
                 <div>
                   <h4 className="font-extrabold text-heading text-[18px] mb-1">{t('contact.email')}</h4>
                   <p className="text-[15px] text-body leading-relaxed">
-                    info@glppharmastandards.com
+                    <a
+                      href="mailto:info@glppharmastandards.com"
+                      className="hover:text-[#1AA3B6] transition-colors"
+                    >
+                      info@glppharmastandards.com
+                    </a>
                   </p>
                 </div>
               </div>
@@ -272,9 +312,9 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-extrabold text-heading text-[18px] mb-1">{t('contact.businessHours')}</h4>
-                  <p className="text-[15px] text-body leading-relaxed">
+                  <p className="text-[14.5px] sm:text-[15px] text-body leading-relaxed">
                     Mon-Sat 09:30am to 06:30pm (IST)<br />
-                    Saturday & Sunday: Closed
+                    Sunday: Closed
                   </p>
                 </div>
               </div>

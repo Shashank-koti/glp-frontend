@@ -1,7 +1,9 @@
 import { Link, useLocation } from 'react-router-dom';
-import { FiMail, FiPhone, FiMapPin, FiLinkedin, FiInstagram, FiFacebook } from 'react-icons/fi';
+import { FiMail, FiPhone, FiPhoneCall, FiMapPin, FiLinkedin, FiInstagram, FiFacebook } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 import navImg from "/navImg.png";
+import { FaPhone } from 'react-icons/fa';
+import { BsTelephone, BsTelephoneFill } from 'react-icons/bs';
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -115,7 +117,7 @@ export default function Footer() {
                   <FiMapPin size={13} />
                 </div>
                 <span className="text-[13.5px] sm:text-[14px] leading-relaxed text-slate-200 group-hover:text-white transition-colors break-words">
-                  Plot No:1, Shakti Puram Phase-2, Prashanti Nagar,<br />Industrial Estate(IE), Kukatpally, Hyderabad,<br />Telangana, India, PIN: 500072
+                  Plot No: 1, Shakti Puram Phase-2,<br />Prashanti Nagar, Industrial Estate (IE),<br />Kukatpally, Hyderabad,<br />Telangana, India, PIN: 500072
                 </span>
               </li>
               <li className="flex items-center gap-3 group cursor-pointer">
@@ -123,6 +125,12 @@ export default function Footer() {
                   <FiPhone size={13} />
                 </div>
                 <a href="tel:+919866074638" className="text-[13.5px] sm:text-[14px] text-slate-200 group-hover:text-white transition-colors">+91 9866074638</a>
+              </li>
+              <li className="flex items-center gap-3 group cursor-pointer">
+                <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">
+                  <BsTelephoneFill size={13} />
+                </div>
+                <a href="tel:+914023074638" className="text-[13.5px] sm:text-[14px] text-slate-200 group-hover:text-white transition-colors">+91 40 23074638</a>
               </li>
               <li className="flex items-center gap-3 group cursor-pointer">
                 <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">

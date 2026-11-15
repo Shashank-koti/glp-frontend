@@ -21,7 +21,6 @@ export default function CompanyIntro() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-7 space-y-5 sm:space-y-6"
           >
-
             {/* Heading */}
             <div>
               <h2 className="font-extrabold text-heading  text-xl sm:text-2xl md:text-3xl">
