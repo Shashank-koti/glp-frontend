@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import { FiMapPin, FiPhone, FiPhoneCall, FiMail, FiGlobe, FiClock, FiLock, FiArrowRight, FiHeadphones, FiShield } from 'react-icons/fi';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FiMapPin, FiPhone, FiMail, FiGlobe, FiClock, FiLock, FiArrowRight, FiHeadphones, FiShield, FiSmartphone } from 'react-icons/fi';
+import { TbDeviceLandlinePhone } from 'react-icons/tb';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -233,8 +233,8 @@ export default function Contact() {
                   <p className="text-[14.5px] sm:text-[15px] text-body leading-relaxed">
                     Plot No: 1, Shakti Puram Phase-2,<br />
                     Prashanti Nagar, Industrial Estate (IE),<br />
-                    Kukatpally, Hyderabad,<br />
-                    Telangana, India, PIN: 500072
+                    Kukatpally,<br />
+                    Hyderabad, Telangana, India, PIN: 500072
                   </p>
                 </div>
               </div>
@@ -248,37 +248,39 @@ export default function Contact() {
                   <h4 className="font-extrabold text-heading text-[18px] mb-2">{t('contact.phone')}</h4>
                   <div className="space-y-2">
                     {/* Landline / Telephone */}
-                    <div className="flex items-center gap-2.5">
-                      <FiPhoneCall className="text-[#0B7285] shrink-0 text-[15px]" title="Telephone" />
+                    <div className="flex items-center gap-2.5 h-6">
+                      <span className="w-5 h-5 flex items-center justify-center shrink-0 text-[#0B7285]">
+                        <TbDeviceLandlinePhone size={17} />
+                      </span>
                       <a
                         href="tel:+914023074638"
-                        className="text-[14.5px] sm:text-[15px] font-semibold text-slate-800 hover:text-[#1AA3B6] transition-colors"
+                        className="font-heading text-[14.5px] sm:text-[15px] font-semibold text-slate-800 hover:text-[#1AA3B6] transition-colors leading-none tabular-nums [font-feature-settings:'tnum']"
                       >
                         +91 40 23074638
                       </a>
                     </div>
 
-                    {/* Mobile 1 (WhatsApp) */}
-                    <div className="flex items-center gap-2.5">
-                      <FaWhatsapp className="text-[#25D366] shrink-0 text-[16px]" title="WhatsApp" />
+                    {/* Mobile 1 */}
+                    <div className="flex items-center gap-2.5 h-6">
+                      <span className="w-5 h-5 flex items-center justify-center shrink-0 text-[#0B7285]">
+                        <FiSmartphone size={16} />
+                      </span>
                       <a
-                        href="https://wa.me/919866074638"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[14.5px] sm:text-[15px] font-semibold text-slate-800 hover:text-[#1AA3B6] transition-colors"
+                        href="tel:+919866074638"
+                        className="font-heading text-[14.5px] sm:text-[15px] font-semibold text-slate-800 hover:text-[#1AA3B6] transition-colors leading-none tabular-nums [font-feature-settings:'tnum']"
                       >
                         +91 9866074638
                       </a>
                     </div>
 
-                    {/* Mobile 2 (WhatsApp) */}
-                    <div className="flex items-center gap-2.5">
-                      <FaWhatsapp className="text-[#25D366] shrink-0 text-[16px]" title="WhatsApp" />
+                    {/* Mobile 2 */}
+                    <div className="flex items-center gap-2.5 h-6">
+                      <span className="w-5 h-5 flex items-center justify-center shrink-0 text-[#0B7285]">
+                        <FiSmartphone size={16} />
+                      </span>
                       <a
-                        href="https://wa.me/918341411731"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[14.5px] sm:text-[15px] font-semibold text-slate-800 hover:text-[#1AA3B6] transition-colors"
+                        href="tel:+918341411731"
+                        className="font-heading text-[14.5px] sm:text-[15px] font-semibold text-slate-800 hover:text-[#1AA3B6] transition-colors leading-none tabular-nums [font-feature-settings:'tnum']"
                       >
                         +91 8341411731
                       </a>

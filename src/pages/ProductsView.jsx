@@ -37,6 +37,15 @@ const HexagonIcon = () => (
   </div>
 );
 
+
+const sortProductsByCatNo = (list) => {
+  return [...list].sort((a, b) => {
+    const aCat = (a.specifications?.catalogueNumber || a.catalogueNumber || "").trim();
+    const bCat = (b.specifications?.catalogueNumber || b.catalogueNumber || "").trim();
+    return aCat.localeCompare(bCat, undefined, { numeric: true, sensitivity: "base" });
+  });
+};
+
 export default function ProductsView() {
   const { t } = useTranslation();
   const { subCategory } = useParams();
@@ -131,10 +140,10 @@ export default function ProductsView() {
           url = `${API_BASE_URL}/products?search=${encodeURIComponent(escapedQuery)}`;
           const res = await axios.get(url);
           if (res.data.success) {
-            setProducts(res.data.data.map(p => ({
+            setProducts(sortProductsByCatNo(res.data.data.map(p => ({
               ...p,
               _categoryType: getCategoryType(p)
-            })));
+            }))));
             if (res.data.pagination) setPageMeta(res.data.pagination);
           } else {
             setProducts([]);
@@ -205,7 +214,7 @@ export default function ProductsView() {
             }
           }
 
-          setProducts(allProducts);
+          setProducts(sortProductsByCatNo(allProducts));
         }
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -213,10 +222,10 @@ export default function ProductsView() {
         try {
           const fallbackRes = await axios.get(`${API_BASE_URL}/products?category=${encodeURIComponent(subCategory)}`);
           if (fallbackRes.data?.success && fallbackRes.data?.data?.length > 0) {
-            setProducts(fallbackRes.data.data.map(p => ({
+            setProducts(sortProductsByCatNo(fallbackRes.data.data.map(p => ({
               ...p,
               _categoryType: getCategoryType(p)
-            })));
+            }))));
             if (fallbackRes.data.pagination) setPageMeta(fallbackRes.data.pagination);
             return;
           }
@@ -489,7 +498,7 @@ export default function ProductsView() {
               (() => {
                 const fallbackParas = (pageMeta?.mainProduct?.content ||
                   pageMeta?.category?.description ||
-                  "Explore our comprehensive range of high-quality pharmaceutical impurities and reference standards designed for precise analytical research."
+                  `Explore our extensive range of high-quality ${categoryData?.title || displaySubCategoryStr} impurities and reference standards, developed to support accurate analytical testing and pharmaceutical research.`
                 ).split(/\n+/).filter(Boolean);
 
                 if (fallbackParas.length <= 1) {
@@ -821,7 +830,7 @@ export default function ProductsView() {
 
                 {/* Title */}
                 <div className="text-center mb-1 select-text cursor-text">
-                  <h3 className="font-bold text-[#1AA3B6] text-[15px] leading-snug min-h-[40px] flex items-center justify-center line-clamp-2 hover:text-heading select-text cursor-text">
+                  <h3 className="font-bold text-[#0B7285] text-[15px] leading-snug min-h-[40px] flex items-center justify-center line-clamp-2 hover:text-heading select-text cursor-text">
                     {product.name?.split(';')[0]}
                   </h3>
                 </div>

@@ -134,7 +134,7 @@ export default function ServiceList() {
         "These services are intended to assist pharmaceutical manufacturers, CROs and analytical teams with research documentation and the preparation of supporting information for regulatory submissions."
       ],
       actionText: "Enquire About Stability & Documentation Support",
-      image: "/images/services_regulatory.png",
+      image: "/images/Stability_Studies.png",
       icon: FiClipboard
     }
   ];

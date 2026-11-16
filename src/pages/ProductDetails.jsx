@@ -71,7 +71,7 @@ export default function ProductDetails() {
       }
     };
 
-    checkUserLocation();
+    // checkUserLocation();
   }, []);
 
   const handleQuoteChange = (e) => {
@@ -425,7 +425,9 @@ export default function ProductDetails() {
         <div className="p-4 pt-0">
           <div className="w-full h-px bg-[#F0F6F8] mb-3"></div>
           <p className="text-slate-700 text-[13px] leading-relaxed font-normal">
-            <span className="font-bold text-heading">{product.name}</span> is a premium-grade reference standard synthesized specifically for advanced analytical research, method validation, and quality control. This highly purified compound undergoes rigorous characterization to ensure consistent reliability in demanding laboratory environments.
+            <span className="font-bold text-heading">{product.name}</span> is a premium-grade reference standard synthesized specifically for advanced analytical research, method validation, and quality control. This highly purified compound undergoes rigorous characterization to ensure consistent reliability and accuracy in demanding pharmaceutical requirements. <br /><br />
+
+            GLP Pharma Standards supplies Amiodarone N-Oxide with complete analytical / characterization data along with a detailed COA. This product will be supplied in custom pack sizes as per client's requirement. Please contact us for more details.
           </p>
         </div>
       </div>

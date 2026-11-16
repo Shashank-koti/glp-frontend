@@ -1,9 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
-import { FiMail, FiPhone, FiPhoneCall, FiMapPin, FiLinkedin, FiInstagram, FiFacebook } from 'react-icons/fi';
+import { FiMail, FiMapPin, FiLinkedin, FiInstagram, FiFacebook, FiSmartphone } from 'react-icons/fi';
+import { TbDeviceLandlinePhone } from 'react-icons/tb';
 import { useTranslation } from 'react-i18next';
 import navImg from "/navImg.png";
-import { FaPhone } from 'react-icons/fa';
-import { BsTelephone, BsTelephoneFill } from 'react-icons/bs';
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -120,17 +119,26 @@ export default function Footer() {
                   Plot No: 1, Shakti Puram Phase-2,<br />Prashanti Nagar, Industrial Estate (IE),<br />Kukatpally, Hyderabad,<br />Telangana, India, PIN: 500072
                 </span>
               </li>
+              {/* Telephone */}
               <li className="flex items-center gap-3 group cursor-pointer">
                 <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">
-                  <FiPhone size={13} />
+                  <TbDeviceLandlinePhone size={14} />
                 </div>
-                <a href="tel:+919866074638" className="text-[13.5px] sm:text-[14px] text-slate-200 group-hover:text-white transition-colors">+91 9866074638</a>
+                <a href="tel:+914023074638" className="font-heading text-[13.5px] sm:text-[14px] text-slate-200 group-hover:text-white transition-colors leading-none tabular-nums [font-feature-settings:'tnum']">+91 40 23074638</a>
               </li>
+              {/* Mobile 1 */}
               <li className="flex items-center gap-3 group cursor-pointer">
                 <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">
-                  <BsTelephoneFill size={13} />
+                  <FiSmartphone size={13} />
                 </div>
-                <a href="tel:+914023074638" className="text-[13.5px] sm:text-[14px] text-slate-200 group-hover:text-white transition-colors">+91 40 23074638</a>
+                <a href="tel:+919866074638" className="font-heading text-[13.5px] sm:text-[14px] text-slate-200 group-hover:text-white transition-colors leading-none tabular-nums [font-feature-settings:'tnum']">+91 9866074638</a>
+              </li>
+              {/* Mobile 2 */}
+              <li className="flex items-center gap-3 group cursor-pointer">
+                <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">
+                  <FiSmartphone size={13} />
+                </div>
+                <a href="tel:+918341411731" className="font-heading text-[13.5px] sm:text-[14px] text-slate-200 group-hover:text-white transition-colors leading-none tabular-nums [font-feature-settings:'tnum']">+91 8341411731</a>
               </li>
               <li className="flex items-center gap-3 group cursor-pointer">
                 <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">
