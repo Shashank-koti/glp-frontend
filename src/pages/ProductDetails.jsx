@@ -141,12 +141,16 @@ export default function ProductDetails() {
     // Check if document exists on product object
     const docObj =
       typeKey === 'msds'
-        ? product.documents?.msds
+        ? (product.documents?.msds || product.documentSummary?.msds)
         : typeKey === 'draft-coa'
-          ? product.documents?.draftCoa
-          : product.documents?.coa;
+          ? (product.documents?.draftCoa || product.documentSummary?.draftCoa)
+          : (product.documents?.coa || product.documentSummary?.coa);
 
-    const isAvailable = Boolean(docObj?.url);
+    const isAvailable = Boolean(
+      docObj?.url ||
+      docObj?.available ||
+      (typeKey === 'msds' ? product.hasMsds : typeKey === 'draft-coa' ? product.hasDraftCoa : product.hasCoa)
+    );
 
     if (!isAvailable) {
       setDownloadNotice({
@@ -158,7 +162,8 @@ export default function ProductDetails() {
     }
 
     // Trigger download endpoint from backend
-    const downloadEndpoint = `${API_BASE_URL}/products/${product.slug || product._id}/download/${typeKey}`;
+    const slugOrId = product.slug || product.p_link || product._id;
+    const downloadEndpoint = `${API_BASE_URL}/products/${encodeURIComponent(slugOrId)}/download/${typeKey}`;
     window.open(downloadEndpoint, '_blank');
   };
 
@@ -425,9 +430,9 @@ export default function ProductDetails() {
         <div className="p-4 pt-0">
           <div className="w-full h-px bg-[#F0F6F8] mb-3"></div>
           <p className="text-slate-700 text-[13px] leading-relaxed font-normal">
-            <span className="font-bold text-heading">{product.name}</span> is a premium-grade reference standard synthesized specifically for advanced analytical research, method validation, and quality control. This highly purified compound undergoes rigorous characterization to ensure consistent reliability and accuracy in demanding pharmaceutical requirements. <br /><br />
+            <span className="font-bold text-heading">{product.name} | {product.casNumber}</span> is a premium-grade reference standard synthesized specifically for advanced analytical research, method validation, and quality control. This highly purified compound undergoes rigorous characterization to ensure consistent reliability and accuracy in demanding pharmaceutical requirements. <br /><br />
 
-            GLP Pharma Standards supplies Amiodarone N-Oxide with complete analytical / characterization data along with a detailed COA. This product will be supplied in custom pack sizes as per client's requirement. Please contact us for more details.
+            GLP Pharma Standards supplies {product.name} | {product.casNumber} with complete analytical / characterization data along with a detailed COA. This product will be supplied in custom pack sizes as per client's requirement. Please contact us for more details.
           </p>
         </div>
       </div>
@@ -525,11 +530,6 @@ export default function ProductDetails() {
               {renderImageCard()}
             </div>
 
-            {/* Description Accordion (Desktop only, hidden on mobile) */}
-            <div className="hidden lg:block">
-              {renderDescriptionAccordion()}
-            </div>
-
             {/* Pricing Section (Premium Redesign) - Hidden for Indian IPs */}
             {!isIndianUser && (
               <div className="bg-gradient-to-b from-white to-[#F8FBFC] rounded-2xl shadow-lg border border-[#EAF2F4] p-6 relative overflow-hidden mt-8 ring-1 ring-black/5">
@@ -539,7 +539,7 @@ export default function ProductDetails() {
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1AA3B6] to-[#0B7285] flex items-center justify-center text-white shadow-md">
                     <FiDollarSign size={20} />
                   </div>
-                  <h2 className="text-[19px] font-extrabold text-heading tracking-tight">Quantities & Pricing</h2>
+                  <h2 className="text-[19px] font-extrabold text-heading tracking-tight">Pack Sizes & Pricing</h2>
                 </div>
 
                 <div className="flex flex-col gap-3">
@@ -669,6 +669,45 @@ export default function ProductDetails() {
                 </button>
               </div>
             </div>
+
+            {/* Features Block (Two rows, 2 items per row) */}
+            {/* <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-sm border border-[#EAF2F4] p-2 flex flex-col divide-y divide-slate-100">
+              
+              <div className="flex flex-row divide-x divide-slate-100">
+                {[
+                  { icon: <FiGlobe size={18} />, title: 'Global Compliance', desc: 'Meeting international regulatory standards' },
+                  { icon: <BsShieldCheck size={18} />, title: 'Reliable Quality', desc: 'Strict quality control at every step' },
+                ].map((feat, i) => (
+                  <div key={i} className="flex items-start gap-3 p-4 flex-1 w-1/2 hover:bg-background transition-colors rounded-xl">
+                    <div className="w-9 h-9 rounded-full bg-[#084553] flex-shrink-0 flex items-center justify-center text-white border border-[#DDF8FB]">
+                      {feat.icon}
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-heading text-[12px] mb-1">{feat.title}</h3>
+                      <p className="text-[11px] text-slate-700 leading-tight pr-1">{feat.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div> */}
+
+            {/* Row 2 */}
+            {/* <div className="flex flex-row divide-x divide-slate-100">
+                {[
+                  { icon: <FiHeadphones size={18} />, title: 'Expert Support', desc: 'Technical assistance from our experts' },
+                  { icon: <FiClock size={18} />, title: 'On-time Delivery', desc: 'Committed to reliable and secure delivery' },
+                ].map((feat, i) => (
+                  <div key={i} className="flex items-start gap-3 p-4 flex-1 w-1/2 hover:bg-background transition-colors rounded-xl">
+                    <div className="w-9 h-9 rounded-full bg-[#084553] flex-shrink-0 flex items-center justify-center text-white border border-[#DDF8FB]">
+                      {feat.icon}
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-heading text-[12px] mb-1">{feat.title}</h3>
+                      <p className="text-[11px] text-slate-700 leading-tight pr-1">{feat.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div> */}
           </div>
 
           {/* Right Column (Specifications & Details) */}
@@ -692,13 +731,17 @@ export default function ProductDetails() {
                   { icon: <TbHexagon size={18} />, label: 'CAS Number', value: product.casNumber || 'N/A' },
                   {
                     icon: <LuHexagon size={16} />, label: 'Alternate CAS', value: (() => {
-                      const list = product.alternateCas || product.specifications?.alternateCas || product.similarProducts;
-                      if (Array.isArray(list)) {
-                        const valid = list.filter(item => item && String(item).trim() !== 'NA' && String(item).trim() !== 'N/A');
-                        return valid.length > 0 ? valid : 'NA';
+                      const rawList = product.alternateCas || product.specifications?.alternateCas || product.similarProducts;
+                      let items = [];
+                      if (Array.isArray(rawList)) {
+                        items = rawList.flatMap(item => typeof item === 'string' ? item.split(/[,;]+/) : [item]);
+                      } else if (typeof rawList === 'string') {
+                        items = rawList.split(/[,;]+/);
                       }
-                      if (list && String(list).trim() !== 'NA' && String(list).trim() !== 'N/A') return list;
-                      return 'NA';
+                      const valid = items
+                        .map(item => String(item).trim())
+                        .filter(item => item && item !== 'NA' && item !== 'N/A' && item !== '-' && item !== 'null' && item !== 'undefined');
+                      return valid.length > 0 ? valid : 'NA';
                     })(), isSimilarProducts: true
                   },
                   { icon: <FiTag size={16} />, label: 'Synonyms', value: product.synonyms || product.specifications?.synonyms || product.name },
@@ -722,15 +765,20 @@ export default function ProductDetails() {
                     <div className={`text-[12px] sm:text-[15px] font-semibold flex-1 min-w-0 text-left sm:pl-2 break-all sm:break-words ${spec.highlight ? 'text-[#1AA3B6] text-[13px] sm:text-[15px] bg-[#DDF8FB] px-2 sm:px-3 py-1 rounded-lg self-center border border-[#DDF8FB] shadow-sm inline-block' : 'text-heading'}`}>
                       {spec.isSimilarProducts && spec.value !== 'NA' ? (
                         <div className="flex flex-wrap gap-2">
-                          {(Array.isArray(spec.value) ? spec.value : [spec.value]).map((simProd, idx, arr) => (
-                            <Link
-                              key={idx}
-                              to={`/products/${encodeURIComponent(simProd.split('(')[0].trim())}`}
-                              className="text-[#1AA3B6] hover:underline"
-                            >
-                              {simProd}{idx < arr.length - 1 ? ',' : ''}
-                            </Link>
-                          ))}
+                          {(Array.isArray(spec.value) ? spec.value : [spec.value]).map((simProd, idx, arr) => {
+                            const trimmed = String(simProd).trim();
+                            const casMatch = trimmed.match(/\d{2,7}-\d{2}-\d/);
+                            const targetSlug = casMatch ? casMatch[0] : trimmed.split('(')[0].trim();
+                            return (
+                              <Link
+                                key={idx}
+                                to={`/products/${encodeURIComponent(targetSlug)}`}
+                                className="text-[#1AA3B6] hover:underline"
+                              >
+                                {trimmed}{idx < arr.length - 1 ? ',' : ''}
+                              </Link>
+                            );
+                          })}
                         </div>
                       ) : (
                         spec.value
@@ -741,25 +789,16 @@ export default function ProductDetails() {
               </div>
             </div>
 
-            {/* Mobile Product Description (Shows only on mobile, after tech specs) */}
-            <div className="block lg:hidden">
+            {/* Product Description */}
+            <div>
               {renderDescriptionAccordion()}
             </div>
 
             {/* Important Notes */}
             <div className="flex flex-col gap-4">
-              {/* Usage Note */}
-              <div className="bg-orange-50 border border-orange-100 rounded-2xl p-5 shadow-sm">
-                <h3 className="text-[13px] font-bold text-orange-600 uppercase tracking-wider mb-2 flex items-center gap-2">
-                  <FiInfo size={16} /> Usage Note
-                </h3>
-                <p className="text-[14px] text-body font-medium leading-relaxed">
-                  This Product is For Laboratory, Research and Analytical Use Only. Not intended for diagnostic, therapeutic or consumption purposes in humans or animals.
-                </p>
-              </div>
 
               {/* Regulatory Description */}
-              <div className="bg-[#DDF8FB] border border-[#DDF8FB] rounded-2xl p-5 shadow-sm">
+              <div className="bg-[#DDF8FB] border border-[#DDF8FB] rounded-2xl p-2 shadow-sm">
                 <h3 className="text-[13px] font-bold text-[#1AA3B6] uppercase tracking-wider mb-2 flex items-center gap-2">
                   <BsShieldCheck size={16} /> Regulatory Description
                 </h3>
@@ -769,7 +808,7 @@ export default function ProductDetails() {
               </div>
 
               {/* Disclaimer */}
-              <div className="bg-rose-50 border border-rose-100 rounded-2xl p-5 shadow-sm">
+              <div className="bg-rose-50 border border-rose-100 rounded-2xl p-2 shadow-sm">
                 <h3 className="text-[13px] font-bold text-rose-600 uppercase tracking-wider mb-2 flex items-center gap-2">
                   <FiInfo size={16} /> Disclaimer
                 </h3>
@@ -777,26 +816,17 @@ export default function ProductDetails() {
                   The PASL product information reflects existing knowledge at the time of webpage creation. The purchaser or user is responsible for verifying item accuracy at the time of order, as specifications may change without notice.
                 </p>
               </div>
-            </div>
 
-            {/* Features Block */}
-            <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-sm border border-[#EAF2F4] p-2 flex flex-col md:flex-row justify-between items-center divide-y md:divide-y-0 md:divide-x divide-slate-100">
-              {[
-                { icon: <FiGlobe size={18} />, title: 'Global Compliance', desc: 'Meeting international regulatory standards' },
-                { icon: <BsShieldCheck size={18} />, title: 'Reliable Quality', desc: 'Strict quality control at every step' },
-                { icon: <FiHeadphones size={18} />, title: 'Expert Support', desc: 'Technical assistance from our experts' },
-                { icon: <FiClock size={18} />, title: 'On-time Delivery', desc: 'Committed to reliable and secure delivery' },
-              ].map((feat, i) => (
-                <div key={i} className="flex items-start gap-3 p-4 flex-1 w-full hover:bg-background transition-colors rounded-xl">
-                  <div className="w-9 h-9 rounded-full bg-[#084553] flex-shrink-0 flex items-center justify-center text-white border border-[#DDF8FB]">
-                    {feat.icon}
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-heading text-[12px] mb-1">{feat.title}</h3>
-                    <p className="text-[11px] text-slate-700 leading-tight pr-1">{feat.desc}</p>
-                  </div>
-                </div>
-              ))}
+
+              {/* Usage Note */}
+              <div className="bg-orange-50 border border-orange-100 rounded-2xl p-2 shadow-sm">
+                <h3 className="text-[13px] font-bold text-orange-600 uppercase tracking-wider mb-2 flex items-center gap-2">
+                  <FiInfo size={16} /> Usage Note
+                </h3>
+                <p className="text-[14px] text-body font-medium leading-relaxed">
+                  This Product is For Laboratory, Research and Analytical Use Only. Not intended for diagnostic, therapeutic or consumption purposes in humans or animals.
+                </p>
+              </div>
             </div>
 
           </div>
