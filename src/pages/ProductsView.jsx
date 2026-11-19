@@ -245,7 +245,7 @@ export default function ProductsView() {
                     } else if (type === 'nitroso' || type === 'isotope') {
                       const prodName = (p.name || '').toLowerCase();
                       const kw = searchKeyword.toLowerCase();
-                      if (prodName.includes(kw) || kw.includes(prodName.split(' ')[0])) {
+                      if (kw.length >= 3 && prodName.includes(kw)) {
                         existingIds.add(pIdStr);
                         allProducts.push({ ...p, _categoryType: type });
                       }

@@ -182,26 +182,95 @@ export const categoryContent = {
   }
 };
 
+// Exact slug and alias mapping for dedicated categories
+const CATEGORY_SLUG_MAP = {
+  // 1. Nitroso Impurities
+  'nitroso-impurities': 'nitroso-impurities',
+  'nitroso-impurity': 'nitroso-impurities',
+  'nitroso': 'nitroso-impurities',
+  'nitrosamines': 'nitroso-impurities',
+  'nitrosamine': 'nitroso-impurities',
+  'nitrosamine-impurities': 'nitroso-impurities',
+  'ndsr-impurities': 'nitroso-impurities',
+  'ndsri': 'nitroso-impurities',
+  'ndsris': 'nitroso-impurities',
+
+  // 2. Peptides
+  'peptides': 'peptides',
+  'peptide': 'peptides',
+  'peptide-impurities': 'peptides',
+  'peptide-related-impurities': 'peptides',
+
+  // 3. Isotope Labelled Compounds
+  'isotope-labelled-compounds': 'isotope-labelled-compounds',
+  'isotope-labeled-compounds': 'isotope-labelled-compounds',
+  'isotope-compounds': 'isotope-labelled-compounds',
+  'stable-isotope-labelled-compounds': 'isotope-labelled-compounds',
+  'stable-isotopes': 'isotope-labelled-compounds',
+  'stable-isotope': 'isotope-labelled-compounds',
+  'isotopes': 'isotope-labelled-compounds',
+  'isotope': 'isotope-labelled-compounds',
+
+  // 4. Metabolites
+  'metabolites': 'metabolites',
+  'metabolite': 'metabolites',
+  'drug-metabolites': 'metabolites',
+  'drug-metabolite': 'metabolites',
+
+  // 5. CRO Molecules
+  'cro-molecules': 'cro-molecules',
+  'cro-molecule': 'cro-molecules',
+  'cro': 'cro-molecules',
+
+  // 6. Phytochemicals
+  'phyto-chemicals': 'phyto-chemicals',
+  'phytochemicals': 'phyto-chemicals',
+  'phyto-chemical': 'phyto-chemicals',
+  'phytochemical': 'phyto-chemicals',
+
+  // 7. Intermediates
+  'intermediates': 'intermediates',
+  'intermediate': 'intermediates',
+  'pharmaceutical-intermediates': 'intermediates',
+
+  // 8. Catalysts
+  'catalysts': 'catalysts',
+  'catalyst': 'catalysts',
+
+  // 9. Fine Chemicals
+  'fine-chemicals': 'fine-chemicals',
+  'fine-chemical': 'fine-chemicals',
+
+  // 10. Agro Chemicals
+  'agro-chemicals': 'agro-chemicals',
+  'agrochemicals': 'agro-chemicals',
+  'agro-chemical': 'agro-chemicals',
+  'agrochemical': 'agro-chemicals',
+
+  // 11. API Impurities and Reference Standards
+  'api-impurities-and-reference-standards': 'api-impurities-and-reference-standards',
+  'api-impurities-and-pharmaceutical-reference-standards': 'api-impurities-and-reference-standards',
+  'api-impurities': 'api-impurities-and-reference-standards',
+  'api-impurity': 'api-impurities-and-reference-standards',
+  'pharmaceutical-reference-standards': 'api-impurities-and-reference-standards',
+  'reference-standards': 'api-impurities-and-reference-standards',
+};
+
 // Normalizer function to retrieve category content by slug or name
 export function getCategoryContent(identifier) {
   if (!identifier) return null;
-  const clean = String(identifier).trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const clean = String(identifier).trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+  // Exact map lookup
+  const mappedKey = CATEGORY_SLUG_MAP[clean];
+  if (mappedKey && categoryContent[mappedKey]) {
+    return categoryContent[mappedKey];
+  }
 
   // Direct lookup
-  if (categoryContent[clean]) return categoryContent[clean];
-
-  // Specific alias mappings
-  if (clean.includes('nitroso') || clean.includes('nitrosamine')) return categoryContent['nitroso-impurities'];
-  if (clean.includes('peptide')) return categoryContent['peptides'];
-  if (clean.includes('isotope')) return categoryContent['isotope-labelled-compounds'];
-  if (clean.includes('metabolite')) return categoryContent['metabolites'];
-  if (clean.includes('cro')) return categoryContent['cro-molecules'];
-  if (clean.includes('phyto')) return categoryContent['phyto-chemicals'];
-  if (clean.includes('intermediate')) return categoryContent['intermediates'];
-  if (clean.includes('catalyst')) return categoryContent['catalysts'];
-  if (clean.includes('fine')) return categoryContent['fine-chemicals'];
-  if (clean.includes('agro')) return categoryContent['agro-chemicals'];
-  if (clean.includes('api') || clean.includes('impurity') || clean.includes('standard')) return categoryContent['api-impurities-and-reference-standards'];
+  if (categoryContent[clean]) {
+    return categoryContent[clean];
+  }
 
   return null;
 }
