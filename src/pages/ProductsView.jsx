@@ -149,72 +149,116 @@ export default function ProductsView() {
             setProducts([]);
           }
         } else {
-          // Fetch main subproducts
-          url = `${API_BASE_URL}/products/${subCategory}/subproducts`;
-          const res = await axios.get(url);
-          let allProducts = [];
-          if (res.data.success) {
-            // Tag each product with its type
-            allProducts = res.data.data.map(p => ({
-              ...p,
-              _categoryType: getCategoryType(p)
-            }));
-            if (res.data.pagination) setPageMeta(res.data.pagination);
-          }
+          const isDedicatedCategory = Boolean(getCategoryContent(subCategory)) &&
+            (subCategory || '').toLowerCase() !== 'api-impurities-and-reference-standards';
 
-          // Only fetch related nitroso & isotope products if this is API IMPURITIES & REFERENCE STANDARDS
-          const fetchedCat = res.data?.pagination?.category || (allProducts.length > 0 ? allProducts[0].category : null);
-          const fetchedCatSlug = (fetchedCat?.slug || '').toLowerCase();
-          const fetchedCatName = (fetchedCat?.categoryName || '').toUpperCase();
-          const fetchedCatId = String(fetchedCat?.categoryId || (allProducts.length > 0 ? allProducts[0].category_id : '') || '');
+          if (isDedicatedCategory) {
+            // For dedicated categories, fetch from BOTH the category query and subproducts endpoint
+            // to ensure every impurity created under this category (regardless of parent API) is loaded
+            const [catRes, subProdRes] = await Promise.allSettled([
+              axios.get(`${API_BASE_URL}/products?category=${encodeURIComponent(subCategory)}&limit=2000`),
+              axios.get(`${API_BASE_URL}/products/${subCategory}/subproducts?limit=2000`)
+            ]);
 
-          const fetchedMainProd = res.data?.pagination?.mainProduct;
-          const mainCatId = String(fetchedMainProd?.category_id || fetchedMainProd?.category?.categoryId || '');
-          const mainCatSlug = (fetchedMainProd?.category?.slug || '').toLowerCase();
+            const mergedMap = new Map();
 
-          const isCategoryApiImpurities = fetchedCatSlug === 'api-impurities-and-reference-standards' ||
-            fetchedCatId === '1' ||
-            fetchedCatName.includes('API IMPURITIES') ||
-            mainCatId === '1' ||
-            mainCatSlug === 'api-impurities-and-reference-standards';
-
-          if (isCategoryApiImpurities) {
-            // Also fetch related nitroso & isotope products by searching the API name
-            const headingStr = fetchedMainProd?.heading || '';
-            const rawApiName = headingStr || subCategory.replace(/[-_]+/g, ' ').trim();
-            const searchKeyword = rawApiName.split(';')[0].split(',')[0].trim();
-
-            try {
-              const searchRes = await axios.get(`${API_BASE_URL}/products?search=${encodeURIComponent(searchKeyword)}&limit=1000`).catch(() => ({ data: { data: [] } }));
-
-              const existingIds = new Set(allProducts.map(p => String(p._id)));
-
-              if (searchRes.data?.data && Array.isArray(searchRes.data.data)) {
-                searchRes.data.data.forEach(p => {
-                  const type = getCategoryType(p);
-                  const pIdStr = String(p._id);
-
-                  if (existingIds.has(pIdStr)) {
-                    const existing = allProducts.find(item => String(item._id) === pIdStr);
-                    if (existing && (type === 'nitroso' || type === 'isotope')) {
-                      existing._categoryType = type;
-                    }
-                  } else if (type === 'nitroso' || type === 'isotope') {
-                    const prodName = (p.name || '').toLowerCase();
-                    const kw = searchKeyword.toLowerCase();
-                    if (prodName.includes(kw) || kw.includes(prodName.split(' ')[0])) {
-                      existingIds.add(pIdStr);
-                      allProducts.push({ ...p, _categoryType: type });
-                    }
-                  }
-                });
+            if (catRes.status === 'fulfilled' && catRes.value.data?.success && Array.isArray(catRes.value.data.data)) {
+              catRes.value.data.data.forEach(p => {
+                const id = String(p._id || p.id);
+                mergedMap.set(id, { ...p, _categoryType: getCategoryType(p) });
+              });
+              if (catRes.value.data.pagination) {
+                setPageMeta(catRes.value.data.pagination);
               }
-            } catch (e) {
-              console.error('Error fetching related products:', e);
             }
-          }
 
-          setProducts(sortProductsByCatNo(allProducts));
+            if (subProdRes.status === 'fulfilled' && subProdRes.value.data?.success && Array.isArray(subProdRes.value.data.data)) {
+              subProdRes.value.data.data.forEach(p => {
+                const id = String(p._id || p.id);
+                if (!mergedMap.has(id)) {
+                  mergedMap.set(id, { ...p, _categoryType: getCategoryType(p) });
+                }
+              });
+              if (subProdRes.value.data.pagination) {
+                setPageMeta(prev => ({
+                  ...prev,
+                  ...subProdRes.value.data.pagination,
+                  total: mergedMap.size,
+                  count: mergedMap.size,
+                }));
+              }
+            }
+
+            const allProducts = Array.from(mergedMap.values());
+            setProducts(sortProductsByCatNo(allProducts));
+          } else {
+            // Fetch main subproducts
+            url = `${API_BASE_URL}/products/${subCategory}/subproducts`;
+            const res = await axios.get(url);
+            let allProducts = [];
+            if (res.data.success) {
+              // Tag each product with its type
+              allProducts = res.data.data.map(p => ({
+                ...p,
+                _categoryType: getCategoryType(p)
+              }));
+              if (res.data.pagination) setPageMeta(res.data.pagination);
+            }
+
+            // Only fetch related nitroso & isotope products if this is API IMPURITIES & REFERENCE STANDARDS
+            const fetchedCat = res.data?.pagination?.category || (allProducts.length > 0 ? allProducts[0].category : null);
+            const fetchedCatSlug = (fetchedCat?.slug || '').toLowerCase();
+            const fetchedCatName = (fetchedCat?.categoryName || '').toUpperCase();
+            const fetchedCatId = String(fetchedCat?.categoryId || (allProducts.length > 0 ? allProducts[0].category_id : '') || '');
+
+            const fetchedMainProd = res.data?.pagination?.mainProduct;
+            const mainCatId = String(fetchedMainProd?.category_id || fetchedMainProd?.category?.categoryId || '');
+            const mainCatSlug = (fetchedMainProd?.category?.slug || '').toLowerCase();
+
+            const isCategoryApiImpurities = fetchedCatSlug === 'api-impurities-and-reference-standards' ||
+              fetchedCatId === '1' ||
+              fetchedCatName.includes('API IMPURITIES') ||
+              mainCatId === '1' ||
+              mainCatSlug === 'api-impurities-and-reference-standards';
+
+            if (isCategoryApiImpurities) {
+              // Also fetch related nitroso & isotope products by searching the API name
+              const headingStr = fetchedMainProd?.heading || '';
+              const rawApiName = headingStr || subCategory.replace(/[-_]+/g, ' ').trim();
+              const searchKeyword = rawApiName.split(';')[0].split(',')[0].trim();
+
+              try {
+                const searchRes = await axios.get(`${API_BASE_URL}/products?search=${encodeURIComponent(searchKeyword)}&limit=1000`).catch(() => ({ data: { data: [] } }));
+
+                const existingIds = new Set(allProducts.map(p => String(p._id)));
+
+                if (searchRes.data?.data && Array.isArray(searchRes.data.data)) {
+                  searchRes.data.data.forEach(p => {
+                    const type = getCategoryType(p);
+                    const pIdStr = String(p._id);
+
+                    if (existingIds.has(pIdStr)) {
+                      const existing = allProducts.find(item => String(item._id) === pIdStr);
+                      if (existing && (type === 'nitroso' || type === 'isotope')) {
+                        existing._categoryType = type;
+                      }
+                    } else if (type === 'nitroso' || type === 'isotope') {
+                      const prodName = (p.name || '').toLowerCase();
+                      const kw = searchKeyword.toLowerCase();
+                      if (prodName.includes(kw) || kw.includes(prodName.split(' ')[0])) {
+                        existingIds.add(pIdStr);
+                        allProducts.push({ ...p, _categoryType: type });
+                      }
+                    }
+                  });
+                }
+              } catch (e) {
+                console.error('Error fetching related products:', e);
+              }
+            }
+
+            setProducts(sortProductsByCatNo(allProducts));
+          }
         }
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -346,6 +390,46 @@ export default function ProductsView() {
     ? `Search results for pharmaceutical impurity standards matching "${searchQueryParam}" from GLP Pharma Standards.`
     : (categoryData ? `${categoryData.subtitle}. ${categoryData.paragraphs[0]}` : `Buy high-purity ${displaySubCategoryStr} impurity standards, metabolites, and analytical reference standards under ${displayCategoryName} from GLP Pharma Standards.`);
 
+  const renderFilterControls = (isFullWidth = false) => (
+    <div
+      className={`flex flex-col sm:flex-row sm:flex-wrap xl:flex-nowrap sm:items-center justify-between gap-3 sm:gap-4 ${isFullWidth ? 'w-full' : isApiImpurities ? 'mb-4 sm:mb-6' : 'mb-0'
+        }`}
+    >
+      {/* Product Count Pill */}
+      <div className="shrink-0 bg-[#F8FBFC] text-[#084553] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl flex items-center gap-2 font-bold border border-[#EAF2F4] shadow-xs w-full sm:w-auto justify-center text-[12.5px] sm:text-[13px]">
+        <FaFlask className="text-[14px] sm:text-[15px] text-[#1AA3B6]" />
+        <span>
+          {filteredProducts.length} {filteredProducts.length === 1 ? 'Product' : 'Products'} Found
+        </span>
+      </div>
+
+      {/* Stock Status Filter Buttons: Mobile 2x2 Grid, Tablet/Desktop Flex Row */}
+      <div className="grid grid-cols-2 gap-1.5 w-full sm:flex sm:flex-row sm:w-auto bg-[#F8FBFC] sm:bg-white rounded-xl p-1.5 sm:p-1 border border-gray-200 shadow-xs shrink-0">
+        {[
+          { type: 'All', icon: <FiBox size={14} /> },
+          { type: 'In Stock', icon: <FiCheckCircle size={14} /> },
+          { type: 'Custom Synthesis', icon: <FiTool size={14} /> },
+          { type: 'Under Synthesis', icon: <FiClock size={14} /> },
+        ].map(({ type, icon }) => {
+          const isActive = availabilityFilter === type;
+          return (
+            <button
+              key={type}
+              onClick={() => setAvailabilityFilter(type)}
+              className={`shrink-0 flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-2 sm:py-1.5 text-[11.5px] sm:text-[12px] font-bold rounded-lg transition-all duration-200 cursor-pointer whitespace-nowrap ${isActive
+                ? 'bg-[#1AA3B6] text-white shadow-sm'
+                : 'text-[#12344D] hover:bg-white sm:hover:bg-[#084553]/10'
+                }`}
+            >
+              <span className="shrink-0">{icon}</span>
+              <span className="whitespace-nowrap">{type}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-[#fafbfc] font-sans pb-16 ">
       <SEO
@@ -394,10 +478,13 @@ export default function ProductsView() {
       </div>
 
       {/* Hero & Filters Grid */}
-      <div className="w-full xl:w-[98%] 2xl:w-[100%] max-w-[1700px] mx-auto px-3 sm:px-6 lg:px-8 pt-2 sm:pt-4 pb-8 sm:pb-16 flex flex-col lg:flex-row gap-6 lg:gap-8 items-center mb-4 sm:mb-8">
+      <div className={`w-full xl:w-[98%] 2xl:w-[100%] max-w-[1700px] mx-auto px-3 sm:px-6 lg:px-8 pt-2 sm:pt-4 ${isApiImpurities
+        ? 'pb-8 sm:pb-16 flex flex-col lg:flex-row gap-6 lg:gap-8 items-center mb-4 sm:mb-8'
+        : 'pb-6 sm:pb-10 flex flex-col gap-5 sm:gap-6 items-start mb-4 sm:mb-6'
+        }`}>
 
-        {/* Left Side: Premium Hero Content */}
-        <div className="w-full lg:w-[46%] xl:w-[48%] flex flex-col items-start px-1 sm:px-2 lg:px-4 xl:px-8">
+        {/* Hero Content (Full screen width for specialized categories, 2-column for API Impurities) */}
+        <div className={`w-full ${isApiImpurities ? 'lg:w-[46%] xl:w-[48%]' : 'w-full'} flex flex-col items-start px-1 sm:px-2 lg:px-4 xl:px-8`}>
 
           {/* Breadcrumb */}
           <div className="flex items-center gap-1.5 sm:gap-2 text-[13px] sm:text-[15px] text-slate-700 font-medium mb-3 sm:mb-6 flex-wrap">
@@ -434,7 +521,7 @@ export default function ProductsView() {
           </div>
 
           {/* Description */}
-          <div className="text-slate-700 text-xs sm:text-[13.5px] max-w-[580px] mb-5 sm:mb-6 leading-relaxed font-normal">
+          <div className={`text-slate-700 text-xs sm:text-[13.5px] ${isApiImpurities ? 'max-w-[580px]' : 'w-full max-w-none'} mb-5 sm:mb-6 leading-relaxed font-normal`}>
             {categoryData ? (
               <div>
                 {!isDescExpanded ? (
@@ -454,7 +541,7 @@ export default function ProductsView() {
                   </>
                 ) : (
                   <>
-                    <div className="max-h-[220px] sm:max-h-[260px] overflow-y-auto pr-2 space-y-2.5 [scrollbar-width:thin] [scrollbar-color:#1AA3B6_#F1F5F9]">
+                    <div className="max-h-[260px] sm:max-h-[320px] overflow-y-auto pr-2 space-y-2.5 [scrollbar-width:thin] [scrollbar-color:#1AA3B6_#F1F5F9]">
                       {categoryData.paragraphs.map((para, idx) => (
                         <p key={idx} className="leading-relaxed text-slate-700">
                           {para}
@@ -518,7 +605,7 @@ export default function ProductsView() {
                   </>
                 ) : (
                   <>
-                    <div className="max-h-[220px] sm:max-h-[260px] overflow-y-auto pr-2 space-y-2.5 [scrollbar-width:thin] [scrollbar-color:#1AA3B6_#F1F5F9]">
+                    <div className="max-h-[260px] sm:max-h-[320px] overflow-y-auto pr-2 space-y-2.5 [scrollbar-width:thin] [scrollbar-color:#1AA3B6_#F1F5F9]">
                       {fallbackParas.map((para, idx) => (
                         <p key={idx} className="leading-relaxed text-slate-700">{para}</p>
                       ))}
@@ -536,77 +623,110 @@ export default function ProductsView() {
             )}
           </div>
 
-          {/* Features Row */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2.5 sm:gap-4 w-full pb-1 lg:pb-0">
+          {/* Bottom Bar: Features beside Filter Controls in ONE row (for all specialized categories) */}
+          {!isApiImpurities ? (
+            <div className="w-full  flex flex-col xl:flex-row xl:items-center justify-between gap-4 sm:gap-6">
 
-            {/* Feature 1 */}
-            <div className="flex items-center gap-2.5 sm:gap-3">
-              <div className="w-[30px] h-[30px] sm:w-[32px] sm:h-[32px] rounded-full bg-[#084553] flex items-center justify-center text-white shrink-0 border border-[#D9E8EC]">
-                <FiShield size={16} className="stroke-[2.5]" />
+              {/* Left Side: Quality Features */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 shrink-0">
+                {/* Feature 1 */}
+                <div className="flex items-center gap-2.5 sm:gap-3">
+                  <div className="w-[30px] h-[30px] sm:w-[32px] sm:h-[32px] rounded-full bg-[#084553] flex items-center justify-center text-white shrink-0 border border-[#D9E8EC]">
+                    <FiShield size={16} className="stroke-[2.5]" />
+                  </div>
+                  <div>
+                    <h4 className="text-[13px] sm:text-[14px] font-bold text-[#12344D]">Reliable Quality</h4>
+                    <p className="text-[11.5px] sm:text-[12px] text-slate-700 font-medium mt-0.5">Stringent quality control processes</p>
+                  </div>
+                </div>
+
+                <div className="hidden sm:block w-px h-8 bg-[#EAF2F4]"></div>
+
+                {/* Feature 2 */}
+                <div className="flex items-center gap-2.5 sm:gap-3">
+                  <div className="w-[30px] h-[30px] sm:w-[32px] sm:h-[32px] rounded-full bg-[#084553] flex items-center justify-center text-white shrink-0 border border-[#D9E8EC]">
+                    <FaFlask size={16} />
+                  </div>
+                  <div>
+                    <h4 className="text-[13px] sm:text-[14px] font-bold text-[#12344D]">Analytical Excellence</h4>
+                    <p className="text-[11.5px] sm:text-[12px] text-slate-700 font-medium mt-0.5">Ensuring accurate results</p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <h4 className="text-[13px] sm:text-[14px] font-bold text-[#12344D]">Reliable Quality</h4>
-                <p className="text-[11.5px] sm:text-[12px] text-slate-700 font-medium mt-0.5">Stringent quality control processes</p>
+
+              {/* Right Side: Beside Features in the same row -> Count & Stock Filters */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
+                {/* Product Count Pill */}
+                <div className="shrink-0 bg-[#F8FBFC] text-[#084553] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl flex items-center gap-2 font-bold border border-[#EAF2F4] shadow-xs justify-center text-[12.5px] sm:text-[13px]">
+                  <FaFlask className="text-[14px] sm:text-[15px] text-[#1AA3B6]" />
+                  <span>
+                    {filteredProducts.length} {filteredProducts.length === 1 ? 'Product' : 'Products'} Found
+                  </span>
+                </div>
+
+                {/* Stock Status Filter Buttons: Mobile 2x2 Grid, Tablet/Desktop Flex Row */}
+                <div className="grid grid-cols-2 gap-1.5 sm:flex sm:flex-row bg-[#F8FBFC] sm:bg-white rounded-xl p-1.5 sm:p-1 border border-gray-200 shadow-xs shrink-0">
+                  {[
+                    { type: 'All', icon: <FiBox size={14} /> },
+                    { type: 'In Stock', icon: <FiCheckCircle size={14} /> },
+                    { type: 'Custom Synthesis', icon: <FiTool size={14} /> },
+                    { type: 'Under Synthesis', icon: <FiClock size={14} /> },
+                  ].map(({ type, icon }) => {
+                    const isActive = availabilityFilter === type;
+                    return (
+                      <button
+                        key={type}
+                        onClick={() => setAvailabilityFilter(type)}
+                        className={`shrink-0 flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-2 sm:py-1.5 text-[11.5px] sm:text-[12px] font-bold rounded-lg transition-all duration-200 cursor-pointer whitespace-nowrap ${isActive
+                          ? 'bg-[#1AA3B6] text-white shadow-sm'
+                          : 'text-[#12344D] hover:bg-white sm:hover:bg-[#084553]/10'
+                          }`}
+                      >
+                        <span className="shrink-0">{icon}</span>
+                        <span className="whitespace-nowrap">{type}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+            </div>
+          ) : (
+            /* For isApiImpurities: Standard features row */
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2.5 sm:gap-4 w-full pb-1 lg:pb-0">
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <div className="w-[30px] h-[30px] sm:w-[32px] sm:h-[32px] rounded-full bg-[#084553] flex items-center justify-center text-white shrink-0 border border-[#D9E8EC]">
+                  <FiShield size={16} className="stroke-[2.5]" />
+                </div>
+                <div>
+                  <h4 className="text-[13px] sm:text-[14px] font-bold text-[#12344D]">Reliable Quality</h4>
+                  <p className="text-[11.5px] sm:text-[12px] text-slate-700 font-medium mt-0.5">Stringent quality control processes</p>
+                </div>
+              </div>
+
+              <div className="hidden sm:block w-px h-8 bg-[#EAF2F4]"></div>
+
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <div className="w-[30px] h-[30px] sm:w-[32px] sm:h-[32px] rounded-full bg-[#084553] flex items-center justify-center text-white shrink-0 border border-[#D9E8EC]">
+                  <FaFlask size={16} />
+                </div>
+                <div>
+                  <h4 className="text-[13px] sm:text-[14px] font-bold text-[#12344D]">Analytical Excellence</h4>
+                  <p className="text-[11.5px] sm:text-[12px] text-slate-700 font-medium mt-0.5">Ensuring accurate results</p>
+                </div>
               </div>
             </div>
-
-            <div className="hidden sm:block w-px h-8 bg-[#EAF2F4]"></div>
-
-            {/* Feature 2 */}
-            <div className="flex items-center gap-2.5 sm:gap-3">
-              <div className="w-[30px] h-[30px] sm:w-[32px] sm:h-[32px] rounded-full bg-[#084553] flex items-center justify-center text-white shrink-0 border border-[#D9E8EC]">
-                <FaFlask size={16} />
-              </div>
-              <div>
-                <h4 className="text-[13px] sm:text-[14px] font-bold text-[#12344D]">Analytical Excellence</h4>
-                <p className="text-[11.5px] sm:text-[12px] text-slate-700 font-medium mt-0.5">Ensuring accurate results</p>
-              </div>
-            </div>
-          </div>
+          )}
 
         </div>
 
-        {/* Right Side: Filters */}
-        <div className="w-full lg:w-[54%] xl:w-[52%]">
-          <div className="bg-white rounded-[20px] sm:rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 p-3.5 sm:p-5 md:p-6">
+        {/* Right Side: Filters (Only for API Impurities & Reference Standards) */}
+        {isApiImpurities && (
+          <div className="w-full lg:w-[54%] xl:w-[52%]">
+            <div className="bg-white rounded-[20px] sm:rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 p-3.5 sm:p-5 md:p-6">
+              {renderFilterControls(false)}
 
-            {/* Top Row: Count & Stock Status Filter */}
-            <div className={`flex flex-col sm:flex-row sm:flex-wrap xl:flex-nowrap sm:items-center justify-between gap-3 sm:gap-4 ${isApiImpurities ? 'mb-4 sm:mb-6' : 'mb-0'}`}>
-
-              {/* Product Count Pill */}
-              <div className="shrink-0 bg-[#F8FBFC] text-[#084553] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl flex items-center gap-2 font-bold border border-[#EAF2F4] shadow-xs w-full sm:w-auto justify-center text-[12.5px] sm:text-[13px]">
-                <FaFlask className="text-[14px] sm:text-[15px] text-[#1AA3B6]" />
-                <span>{filteredProducts.length} {filteredProducts.length === 1 ? 'Product' : 'Products'} Found</span>
-              </div>
-
-              {/* Stock Status Filter Buttons: Mobile 2x2 Grid, Tablet/Desktop Flex Row */}
-              <div className="grid grid-cols-2 gap-1.5 w-full sm:flex sm:flex-row sm:w-auto bg-[#F8FBFC] sm:bg-white rounded-xl p-1.5 sm:p-1 border border-gray-200 shadow-xs shrink-0">
-                {[
-                  { type: 'All', icon: <FiBox size={14} /> },
-                  { type: 'In Stock', icon: <FiCheckCircle size={14} /> },
-                  { type: 'Custom Synthesis', icon: <FiTool size={14} /> },
-                  { type: 'Under Synthesis', icon: <FiClock size={14} /> },
-                ].map(({ type, icon }) => {
-                  const isActive = availabilityFilter === type;
-                  return (
-                    <button
-                      key={type}
-                      onClick={() => setAvailabilityFilter(type)}
-                      className={`shrink-0 flex items-center justify-center gap-1.5 px-2.5 sm:px-3 py-2 sm:py-1.5 text-[11.5px] sm:text-[12px] font-bold rounded-lg transition-all duration-200 cursor-pointer whitespace-nowrap ${isActive
-                        ? 'bg-[#1AA3B6] text-white shadow-sm'
-                        : 'text-[#12344D] hover:bg-white sm:hover:bg-[#084553]/10'
-                        }`}
-                    >
-                      <span className="shrink-0">{icon}</span>
-                      <span className="whitespace-nowrap">{type}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Category Filters List (Only for API Impurities & Reference Standards) */}
-            {isApiImpurities && (
+              {/* Category Filters List */}
               <div className="flex flex-col gap-2.5 sm:gap-3">
                 {[
                   { key: 'reference', label: 'Pharmaceutical Reference Standards', icon: <FaFlask size={17} />, count: categoryCounts.reference },
@@ -644,10 +764,9 @@ export default function ProductsView() {
                   );
                 })}
               </div>
-            )}
-
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <div className="w-full xl:w-[98%] 2xl:w-[96%] max-w-[1700px] mx-auto px-3 sm:px-4 lg:px-6">
@@ -750,30 +869,37 @@ export default function ProductsView() {
                       </div>
                     );
                   })()}
-                  <div className="flex items-center gap-2">
-                    <div className="relative group/wishlist">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    {/* Wishlist */}
+                    <div className="relative flex items-center justify-center group/wishlist">
                       <button
+                        type="button"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
                           toggleWishlist(product);
                         }}
-                        className={`p-1.5 rounded-md transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md ${isInWishlist(product._id)
+                        className={`w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md cursor-pointer ${isInWishlist(product._id)
                           ? 'bg-rose-50 text-rose-500 border border-rose-200 shadow-sm'
-                          : 'bg-[#E8F4F6] text-[#0B7285] hover:bg-rose-50 hover:text-rose-500'
+                          : 'bg-[#E8F4F6] text-[#0B7285] border border-transparent hover:bg-rose-50 hover:text-rose-500'
                           }`}
                         title={isInWishlist(product._id) ? "Remove from Wishlist" : "Add to Wishlist"}
                       >
-                        <FiHeart size={16} className={isInWishlist(product._id) ? "fill-rose-500" : ""} />
+                        <FiHeart size={15} className={isInWishlist(product._id) ? "fill-rose-500" : ""} />
                       </button>
-                      <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#12344D] text-white text-[10px] font-bold py-1 px-2 rounded opacity-0 group-hover/wishlist:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50 shadow-sm">
+                      <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#0f2333] text-white text-[10px] sm:text-[10.5px] font-semibold py-1.5 px-2.5 rounded-md opacity-0 group-hover/wishlist:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap z-50 shadow-md leading-none">
                         {isInWishlist(product._id) ? 'In Wishlist' : 'Add to Wishlist'}
-                        <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[#12344D] rotate-45"></div>
+                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0f2333] rotate-45"></div>
                       </span>
                     </div>
-                    <ProductShareButton product={product} />
-                    <div className="relative group/whatsapp">
+
+                    {/* Share */}
+                    <ProductShareButton product={product} className="flex items-center justify-center" />
+
+                    {/* WhatsApp */}
+                    <div className="relative flex items-center justify-center group/whatsapp">
                       <button
+                        type="button"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -781,17 +907,20 @@ export default function ProductsView() {
                           const text = `GLP Pharma Product Details:\n\nProduct: ${product.name?.split(';')[0] || 'N/A'}\nCAT No.: ${product.specifications?.catalogueNumber || product.catalogueNumber || 'N/A'}\nCAS No.: ${product.specifications?.casNumber || product.casNumber || 'N/A'}\nMolecular Formula: ${product.specifications?.molecularFormula || product.molecularFormula || 'N/A'}\nMolecular Weight: ${product.specifications?.molecularWeight || product.molecularWeight || 'N/A'}\nCategory: ${(product.category?.categoryName || product.category || 'N/A').replace('API IMPURITIES & REFERENCE STANDARDS', 'API Impurities & Reference Standards')}\nAPI Family: ${product.mainProduct?.heading || product.mainProduct?.name || 'N/A'}\nAvailability: ${product.availability || 'In Stock'}\n\nView Product: ${url}`;
                           window.open(`https://wa.me/919866074638?text=${encodeURIComponent(text)}`, '_blank');
                         }}
-                        className="p-1.5 rounded-md transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white"
+                        className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg border border-transparent transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white cursor-pointer"
                       >
-                        <FaWhatsapp size={16} />
+                        <FaWhatsapp size={15} />
                       </button>
-                      <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#12344D] text-white text-[10px] font-bold py-1 px-2 rounded opacity-0 group-hover/whatsapp:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50 shadow-sm">
+                      <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#0f2333] text-white text-[10px] sm:text-[10.5px] font-semibold py-1.5 px-2.5 rounded-md opacity-0 group-hover/whatsapp:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap z-50 shadow-md leading-none">
                         WhatsApp Enquiry
-                        <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[#12344D] rotate-45"></div>
+                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0f2333] rotate-45"></div>
                       </span>
                     </div>
-                    <div className="relative group/compare">
+
+                    {/* Compare */}
+                    <div className="relative flex items-center justify-center group/compare">
                       <button
+                        type="button"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -801,13 +930,13 @@ export default function ProductsView() {
                             addToCompare(product);
                           }
                         }}
-                        className={`p-1.5 rounded-md transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md ${compareItems.some(item => item._id === product._id) ? 'bg-[#1AA3B6] text-white' : 'bg-[#E8F4F6] text-[#0B7285] hover:bg-[#1AA3B6] hover:text-white'}`}
+                        className={`w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg border border-transparent transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md cursor-pointer ${compareItems.some(item => item._id === product._id) ? 'bg-[#1AA3B6] text-white shadow-sm' : 'bg-[#E8F4F6] text-[#0B7285] hover:bg-[#1AA3B6] hover:text-white'}`}
                       >
-                        <LuPanelRightDashed size={16} />
+                        <LuPanelRightDashed size={15} />
                       </button>
-                      <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#12344D] text-white text-[10px] font-bold py-1 px-2 rounded opacity-0 group-hover/compare:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50 shadow-sm">
-                        Add To Compare
-                        <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[#12344D] rotate-45"></div>
+                      <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#0f2333] text-white text-[10.5px] font-semibold py-1.5 px-2.5 rounded-md opacity-0 group-hover/compare:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap z-50 shadow-md leading-none">
+                        {compareItems.some(item => item._id === product._id) ? 'Remove From Compare' : 'Add To Compare'}
+                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0f2333] rotate-45"></div>
                       </span>
                     </div>
                   </div>

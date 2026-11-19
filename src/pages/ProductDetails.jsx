@@ -490,7 +490,7 @@ export default function ProductDetails() {
           <div className="flex flex-col md:flex-row justify-center items-center w-full">
             <div className="w-full flex flex-col items-center">
               {/* Breadcrumb */}
-              <div className="flex justify-center items-center gap-2 text-[15px] text-slate-700 font-medium mb-6 flex-wrap">
+              <div className="flex justify-center items-center gap-2 text-[15px] text-slate-700 font-medium mb-3 flex-wrap">
                 <Link to="/" className="text-slate-600 hover:text-[#1AA3B6] transition-colors">Home</Link>
                 <FiChevronRight className="text-slate-400 text-[14px] " />
                 <Link to={`/product-categories-view/${product.category?.slug || 'api-impurities-and-reference-standards'}`} className="text-slate-600 hover:text-[#1AA3B6] transition-colors">{(typeof product.category === 'string' ? product.category : product.category?.categoryName || 'API Impurities').replace('API IMPURITIES & REFERENCE STANDARDS', 'API Impurities & Reference Standards').replace('API IMPURITIES AND REFERENCE STANDARDS', 'API Impurities and Reference Standards').replace('API IMPURITIES', 'API Impurities')}</Link>
@@ -504,7 +504,7 @@ export default function ProductDetails() {
                 <span className="text-[#1AA3B6] font-semibold truncate max-w-[200px] sm:max-w-[400px]">{product.name?.split(';')[0]}</span>
               </div>
 
-              <h1 className="font-extrabold text-heading mb-2 text-center tracking-tight drop-shadow-sm text-3xl md:text-4xl w-full">
+              <h1 className="font-extrabold text-heading text-center tracking-tight drop-shadow-sm text-xl md:text-2xl w-full">
                 {product.name?.split(';')[0]}&nbsp;|&nbsp;{product.casNumber.split(';')[0]}
               </h1>
             </div>
@@ -761,7 +761,7 @@ export default function ProductDetails() {
                       </div>
                       <span className="text-[11px] sm:text-[15px] font-bold text-slate-800 tracking-wide">{spec.label}</span>
                     </div>
-                    <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-1 sm:-ml-16 shrink-0"></div>
+                    <div className="block w-[1.5px] h-5 bg-slate-300 group-hover/row:bg-[#1AA3B6]/50 transition-colors mx-1 sm:-ml-24 shrink-0"></div>
                     <div className={`text-[12px] sm:text-[15px] font-semibold flex-1 min-w-0 text-left sm:pl-2 break-all sm:break-words ${spec.highlight ? 'text-[#1AA3B6] text-[13px] sm:text-[15px] bg-[#DDF8FB] px-2 sm:px-3 py-1 rounded-lg self-center border border-[#DDF8FB] shadow-sm inline-block' : 'text-heading'}`}>
                       {spec.isSimilarProducts && spec.value !== 'NA' ? (
                         <div className="flex flex-wrap gap-2">
@@ -800,10 +800,22 @@ export default function ProductDetails() {
               {/* Regulatory Description */}
               <div className="bg-[#DDF8FB] border border-[#DDF8FB] rounded-2xl p-2 shadow-sm">
                 <h3 className="text-[13px] font-bold text-[#1AA3B6] uppercase tracking-wider mb-2 flex items-center gap-2">
-                  <BsShieldCheck size={16} /> Regulatory Description
+                  <BsShieldCheck size={16} /> Analytical Data Included
                 </h3>
                 <p className="text-[14px] text-body font-medium leading-relaxed">
-                  <span className="font-extrabold text-heading">{product.name?.split(';')[0]}</span> Impurity is supplied with detailed characterization data compliant with regulatory guidelines.
+                  GLP Pharma Standards provides <span className="font-extrabold text-heading">{product.name?.split(';')[0]}</span> with 1H-NMR / D2O Exchange, Mass, HPLC / GC, IR, Potency by TGA / Moisture Content and Certificate of Analysis (COA). This characterization data is compliant with regulatory guidelines.
+
+                  <br />Additional data like 13C-NMR, 2D NMR, COSY, GC-MS / LC-MS, CHNS, SOR, XRD, Structural Elucidation Report (SER) etc. will be provided upon request.
+                </p>
+              </div>
+
+              {/* Usage Note */}
+              <div className="bg-orange-50 border border-orange-100 rounded-2xl p-2 shadow-sm">
+                <h3 className="text-[13px] font-bold text-orange-600 uppercase tracking-wider mb-2 flex items-center gap-2">
+                  <FiInfo size={16} /> Usage Note
+                </h3>
+                <p className="text-[14px] text-body font-medium leading-relaxed">
+                  This Product is For Laboratory, Research and Analytical Use Only. Not intended for diagnostic, therapeutic or consumption purposes in humans or animals.
                 </p>
               </div>
 
@@ -817,18 +829,7 @@ export default function ProductDetails() {
                 </p>
               </div>
 
-
-              {/* Usage Note */}
-              <div className="bg-orange-50 border border-orange-100 rounded-2xl p-2 shadow-sm">
-                <h3 className="text-[13px] font-bold text-orange-600 uppercase tracking-wider mb-2 flex items-center gap-2">
-                  <FiInfo size={16} /> Usage Note
-                </h3>
-                <p className="text-[14px] text-body font-medium leading-relaxed">
-                  This Product is For Laboratory, Research and Analytical Use Only. Not intended for diagnostic, therapeutic or consumption purposes in humans or animals.
-                </p>
-              </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -853,30 +854,37 @@ export default function ProductDetails() {
                     <span className={`w-1.5 h-1.5 rounded-full ${(rel.availability || 'In Stock').toLowerCase() === 'in stock' ? 'bg-white animate-pulse' : 'bg-orange-500'}`}></span>
                     {rel.availability || 'In Stock'}
                   </span>
-                  <div className="flex items-center gap-2">
-                    <div className="relative group/wishlist">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    {/* Wishlist */}
+                    <div className="relative flex items-center justify-center group/wishlist">
                       <button
+                        type="button"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
                           toggleWishlist(rel);
                         }}
-                        className={`p-1.5 rounded-md transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md ${isInWishlist(rel._id)
+                        className={`w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md cursor-pointer ${isInWishlist(rel._id)
                           ? 'bg-rose-50 text-rose-500 border border-rose-200 shadow-sm'
-                          : 'bg-[#E8F4F6] text-[#0B7285] hover:bg-rose-50 hover:text-rose-500'
+                          : 'bg-[#E8F4F6] text-[#0B7285] border border-transparent hover:bg-rose-50 hover:text-rose-500'
                           }`}
                         title={isInWishlist(rel._id) ? "Remove from Wishlist" : "Add to Wishlist"}
                       >
-                        <FiHeart size={16} className={isInWishlist(rel._id) ? "fill-rose-500" : ""} />
+                        <FiHeart size={15} className={isInWishlist(rel._id) ? "fill-rose-500" : ""} />
                       </button>
-                      <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#12344D] text-white text-[10px] font-bold py-1 px-2 rounded opacity-0 group-hover/wishlist:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50 shadow-sm">
+                      <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#0f2333] text-white text-[10px] sm:text-[10.5px] font-semibold py-1.5 px-2.5 rounded-md opacity-0 group-hover/wishlist:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap z-50 shadow-md leading-none">
                         {isInWishlist(rel._id) ? 'In Wishlist' : 'Add to Wishlist'}
-                        <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[#12344D] rotate-45"></div>
+                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0f2333] rotate-45"></div>
                       </span>
                     </div>
-                    <ProductShareButton product={rel} />
-                    <div className="relative group/whatsapp">
+
+                    {/* Share */}
+                    <ProductShareButton product={rel} className="flex items-center justify-center" />
+
+                    {/* WhatsApp */}
+                    <div className="relative flex items-center justify-center group/whatsapp">
                       <button
+                        type="button"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -884,17 +892,20 @@ export default function ProductDetails() {
                           const text = `GLP Pharma Product Details:\n\nProduct: ${rel.name?.split(';')[0] || 'N/A'}\nCAT No.: ${rel.specifications?.catalogueNumber || rel.catalogueNumber || 'N/A'}\nCAS No.: ${rel.specifications?.casNumber || rel.casNumber || 'N/A'}\nMolecular Formula: ${rel.specifications?.molecularFormula || rel.molecularFormula || 'N/A'}\nMolecular Weight: ${rel.specifications?.molecularWeight || rel.molecularWeight || 'N/A'}\nCategory: ${(rel.category?.categoryName || rel.category || 'N/A').replace('API IMPURITIES & REFERENCE STANDARDS', 'API Impurities & Reference Standards')}\nAPI Family: ${rel.mainProduct?.heading || rel.mainProduct?.name || 'N/A'}\nAvailability: ${rel.availability || 'In Stock'}\n\nView Product: ${url}`;
                           window.open(`https://wa.me/919866074638?text=${encodeURIComponent(text)}`, '_blank');
                         }}
-                        className="p-1.5 rounded-md transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white"
+                        className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg border border-transparent transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white cursor-pointer"
                       >
-                        <FaWhatsapp size={16} />
+                        <FaWhatsapp size={15} />
                       </button>
-                      <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#12344D] text-white text-[10px] font-bold py-1 px-2 rounded opacity-0 group-hover/whatsapp:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50 shadow-sm">
+                      <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#0f2333] text-white text-[10px] sm:text-[10.5px] font-semibold py-1.5 px-2.5 rounded-md opacity-0 group-hover/whatsapp:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap z-50 shadow-md leading-none">
                         WhatsApp Enquiry
-                        <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[#12344D] rotate-45"></div>
+                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0f2333] rotate-45"></div>
                       </span>
                     </div>
-                    <div className="relative group/compare">
+
+                    {/* Compare */}
+                    <div className="relative flex items-center justify-center group/compare">
                       <button
+                        type="button"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -904,13 +915,13 @@ export default function ProductDetails() {
                             addToCompare(rel);
                           }
                         }}
-                        className={`p-1.5 rounded-md transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md ${compareItems.some(item => item._id === rel._id) ? 'bg-[#1AA3B6] text-white' : 'bg-[#E8F4F6] text-[#0B7285] hover:bg-[#1AA3B6] hover:text-white'}`}
+                        className={`w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg border border-transparent transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md cursor-pointer ${compareItems.some(item => item._id === rel._id) ? 'bg-[#1AA3B6] text-white' : 'bg-[#E8F4F6] text-[#0B7285] hover:bg-[#1AA3B6] hover:text-white'}`}
                       >
-                        <LuPanelRightDashed size={16} />
+                        <LuPanelRightDashed size={15} />
                       </button>
-                      <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#12344D] text-white text-[10px] font-bold py-1 px-2 rounded opacity-0 group-hover/compare:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50 shadow-sm">
+                      <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#0f2333] text-white text-[10.5px] font-semibold py-1.5 px-2.5 rounded-md opacity-0 group-hover/compare:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap z-50 shadow-md leading-none">
                         {compareItems.some(item => item._id === rel._id) ? 'Remove From Compare' : 'Add To Compare'}
-                        <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[#12344D] rotate-45"></div>
+                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0f2333] rotate-45"></div>
                       </span>
                     </div>
                   </div>

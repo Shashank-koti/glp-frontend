@@ -12,7 +12,9 @@ export const categoryContent = {
       'Pharmaceutical impurity reference standards are characterized compounds used to identify, quantify and monitor specific impurities during analytical testing. They play an important role in impurity profiling, analytical method development, method validation, stability-indicating studies and routine quality control.',
       'For API manufacturers, these standards support process-related impurity investigations and impurity control strategies. For formulation manufacturers, they help evaluate degradation products and monitor product stability. CROs and analytical laboratories use impurity standards to develop and validate methods such as HPLC, UPLC, GC and LC-MS.',
       'GLP Pharma Standards offers an extensive portfolio of API impurities, degradation impurities, process-related impurities, pharmaceutical reference standards, working standards and secondary standards.',
-      'Our compounds are supplied with a Certificate of Analysis and relevant analytical characterization data, according to product availability and requirements. We also offer custom synthesis, isolation and characterization of impurities that are not readily available commercially.'
+      'Our compounds are supplied with a Certificate of Analysis and relevant analytical characterization data, according to product availability and requirements. We also offer custom synthesis, isolation and characterization of impurities that are not readily available commercially.',
+      'GLP Pharma Standards offers impurity reference standards compliant with USP, EP, BP, IP, JP and other major pharmacopoeias.',
+      'Explore our extensive range of API Impurities & Pharmaceutical Reference Standards below.'
     ],
     ctaText: 'Explore Our API Impurities & Reference Standards Catalogue'
   },
@@ -164,6 +166,19 @@ export const categoryContent = {
       'Supply is subject to product availability, regulatory requirements, and technical feasibility.'
     ],
     ctaText: 'Enquire About Agrochemical Research Materials'
+  },
+
+  'phytochemicals': {
+    slug: 'phytochemicals',
+    title: 'Phytochemicals & Natural Product Reference Standards',
+    subtitle: 'Research Materials for Natural Product Analysis',
+    paragraphs: [
+      'Phytochemicals are naturally occurring chemical constituents found in plants. They include alkaloids, flavonoids, terpenoids, glycosides, phenolic compounds and other classes of natural substances.',
+      'These compounds are used in natural product research, botanical analysis, phytochemical profiling, analytical method development and quality assessment of plant-derived materials.',
+      'GLP Pharma Standards supplies selected phytochemical reference materials and natural product research compounds for pharmaceutical, analytical and academic research applications.',
+      'Our offerings support the identification, characterization and quantitative analysis of plant-derived chemical constituents.'
+    ],
+    ctaText: 'Explore Phytochemicals & Natural Product Standards'
   }
 };
 

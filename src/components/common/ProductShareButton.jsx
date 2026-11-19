@@ -80,7 +80,7 @@ export default function ProductShareButton({ product, className = "", align = "r
 
   return (
     <div
-      className={`relative inline-block ${className}`}
+      className={`relative flex items-center justify-center ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -92,14 +92,14 @@ export default function ProductShareButton({ product, className = "", align = "r
           e.stopPropagation();
           setIsOpen(prev => !prev);
         }}
-        className={`p-1.5 rounded-md transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md cursor-pointer ${isOpen
+        className={`w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg border border-transparent transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md cursor-pointer ${isOpen
             ? 'bg-[#1AA3B6] text-white shadow-sm'
             : 'bg-[#E8F4F6] text-[#0B7285] hover:bg-[#1AA3B6] hover:text-white'
           }`}
         title="Share Product"
         aria-label="Share Product"
       >
-        <FiShare2 size={16} />
+        <FiShare2 size={15} />
       </button>
 
       {/* Share Dropdown Menu on Hover / Active */}

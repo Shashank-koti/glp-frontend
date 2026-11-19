@@ -303,23 +303,6 @@ export default function ProductCategoriesView() {
         )}
       </div>
 
-      {/* Category In-Depth Overview from Word Document */}
-      {matchedCategory && (
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 pb-12 pt-4">
-          <div className="bg-white rounded-2xl p-5 sm:p-7 border border-[#EAF2F4] shadow-sm">
-            <h2 className="font-bold text-[#084553] text-lg sm:text-xl mb-3">
-              {matchedCategory.title}
-            </h2>
-
-            <div className="space-y-2.5 text-slate-700 leading-relaxed text-xs sm:text-[13.5px]">
-              {matchedCategory.paragraphs.map((p, idx) => (
-                <p key={idx} className="leading-relaxed">{p}</p>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
       <style dangerouslySetInnerHTML={{
         __html: `
         .scrollbar-hide::-webkit-scrollbar {

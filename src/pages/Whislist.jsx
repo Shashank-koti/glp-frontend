@@ -55,7 +55,7 @@ const Whislist = () => {
       <div className="max-w-[1600px] w-full mx-auto flex-1 flex flex-col">
 
         {/* Top Breadcrumbs / Back Navigation */}
-        <div className="mb-6">
+        <div className="mb-4">
           <Link
             to="/product-categories-view/api-impurities-and-reference-standards"
             className="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-[#1AA3B6] transition-colors"
@@ -66,22 +66,22 @@ const Whislist = () => {
         </div>
 
         {/* Page Header Bar */}
-        <div className="bg-white rounded-2xl border border-[#D9E8EC] p-4 sm:p-8 mb-6 sm:mb-8 shadow-[0_4px_20px_rgba(26,163,182,0.04)] flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
+        <div className="bg-white rounded-2xl border border-[#D9E8EC] p-2 sm:p-4 mb-6 sm:mb-8 shadow-[0_4px_20px_rgba(26,163,182,0.04)] flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
           <div className="flex items-center gap-3 sm:gap-4">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#DDF8FB] rounded-2xl flex items-center justify-center text-[#1AA3B6] shadow-sm shrink-0">
-              <FiHeart size={28} className="fill-[#1AA3B6]/20" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#DDF8FB] rounded-2xl flex items-center justify-center text-[#1AA3B6] shadow-sm shrink-0">
+              <FiHeart size={16} className="fill-[#1AA3B6]/20" />
             </div>
             <div>
               <div className="flex items-center gap-3">
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-[#084553] tracking-tight">
+                <h1 className="text-lg sm:text-xl font-extrabold text-[#084553] tracking-tight">
                   My Wishlist
                 </h1>
                 <span className="px-3 py-0.5 rounded-full text-xs font-bold bg-[#E8F4F6] text-[#0B7285] border border-[#DDF8FB]">
                   {displayItems.length} {displayItems.length === 1 ? 'item' : 'items'}
                 </span>
               </div>
-              <p className="text-slate-700 text-sm mt-1">
-                Keep track of reference standards, peptides, and impurities of your interest.
+              <p className="text-slate-700 text-xs mt-1">
+                Keep track of reference standards and impurities of your interest.
               </p>
             </div>
           </div>
@@ -89,9 +89,9 @@ const Whislist = () => {
           {/* Clear All Button */}
           <button
             onClick={clearWishlist}
-            className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 rounded-xl border border-red-100 transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-bold text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 rounded-xl border border-red-100 transition-all cursor-pointer"
           >
-            <FiTrash2 size={16} />
+            <FiTrash2 size={14} />
             Clear Wishlist
           </button>
         </div>
@@ -111,31 +111,37 @@ const Whislist = () => {
                   <span className={`w-1.5 h-1.5 rounded-full ${(product.availability || 'In Stock').toLowerCase() === 'in stock' ? 'bg-white animate-pulse' : 'bg-orange-500'}`}></span>
                   {product.availability || 'In Stock'}
                 </span>
-                <div className="flex items-center gap-2">
-                  <div className="relative group/wishlist">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  {/* Wishlist */}
+                  <div className="relative flex items-center justify-center group/wishlist">
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
                         toggleWishlist(product);
                       }}
-                      className={`p-1.5 rounded-md transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md ${
-                        isInWishlist(product._id || product.id)
-                          ? 'bg-rose-50 text-rose-500 border border-rose-200 shadow-sm'
-                          : 'bg-[#E8F4F6] text-[#0B7285] hover:bg-rose-50 hover:text-rose-500'
-                      }`}
+                      className={`w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md cursor-pointer ${isInWishlist(product._id || product.id)
+                        ? 'bg-rose-50 text-rose-500 border border-rose-200 shadow-sm'
+                        : 'bg-[#E8F4F6] text-[#0B7285] border border-transparent hover:bg-rose-50 hover:text-rose-500'
+                        }`}
                       title={isInWishlist(product._id || product.id) ? "Remove from Wishlist" : "Add to Wishlist"}
                     >
-                      <FiHeart size={16} className={isInWishlist(product._id || product.id) ? "fill-rose-500" : ""} />
+                      <FiHeart size={15} className={isInWishlist(product._id || product.id) ? "fill-rose-500" : ""} />
                     </button>
-                    <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#12344D] text-white text-[10px] font-bold py-1 px-2 rounded opacity-0 group-hover/wishlist:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50 shadow-sm">
+                    <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#0f2333] text-white text-[10px] sm:text-[10.5px] font-semibold py-1.5 px-2.5 rounded-md opacity-0 group-hover/wishlist:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap z-50 shadow-md leading-none">
                       {isInWishlist(product._id || product.id) ? 'In Wishlist' : 'Add to Wishlist'}
-                      <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[#12344D] rotate-45"></div>
+                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0f2333] rotate-45"></div>
                     </span>
                   </div>
-                  <ProductShareButton product={product} />
-                  <div className="relative group/whatsapp">
+
+                  {/* Share */}
+                  <ProductShareButton product={product} className="flex items-center justify-center" />
+
+                  {/* WhatsApp */}
+                  <div className="relative flex items-center justify-center group/whatsapp">
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -143,17 +149,20 @@ const Whislist = () => {
                         const text = `GLP Pharma Product Details:\n\nProduct: ${product.name?.split(';')[0] || 'N/A'}\nCAT No.: ${product.specifications?.catalogueNumber || product.catalogueNumber || 'N/A'}\nCAS No.: ${product.specifications?.casNumber || product.casNumber || 'N/A'}\nMolecular Formula: ${product.specifications?.molecularFormula || product.molecularFormula || 'N/A'}\nMolecular Weight: ${product.specifications?.molecularWeight || product.molecularWeight || 'N/A'}\nCategory: ${(product.category?.categoryName || product.category || 'N/A').replace('API IMPURITIES & REFERENCE STANDARDS', 'API Impurities & Reference Standards')}\nAPI Family: ${product.mainProduct?.heading || product.mainProduct?.name || 'N/A'}\nAvailability: ${product.availability || 'In Stock'}\n\nView Product: ${url}`;
                         window.open(`https://wa.me/919866074638?text=${encodeURIComponent(text)}`, '_blank');
                       }}
-                      className="p-1.5 rounded-md transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white"
+                      className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg border border-transparent transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white cursor-pointer"
                     >
-                      <FaWhatsapp size={16} />
+                      <FaWhatsapp size={15} />
                     </button>
-                    <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#12344D] text-white text-[10px] font-bold py-1 px-2 rounded opacity-0 group-hover/whatsapp:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50 shadow-sm">
+                    <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#0f2333] text-white text-[10px] sm:text-[10.5px] font-semibold py-1.5 px-2.5 rounded-md opacity-0 group-hover/whatsapp:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap z-50 shadow-md leading-none">
                       WhatsApp Enquiry
-                      <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[#12344D] rotate-45"></div>
+                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0f2333] rotate-45"></div>
                     </span>
                   </div>
-                  <div className="relative group/compare">
+
+                  {/* Compare */}
+                  <div className="relative flex items-center justify-center group/compare">
                     <button
+                      type="button"
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -164,13 +173,13 @@ const Whislist = () => {
                           addToCompare(product);
                         }
                       }}
-                      className={`p-1.5 rounded-md transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md ${compareItems.some(item => (item._id || item.id) === (product._id || product.id)) ? 'bg-[#1AA3B6] text-white' : 'bg-[#E8F4F6] text-[#0B7285] hover:bg-[#1AA3B6] hover:text-white'}`}
+                      className={`w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg border border-transparent transition-all duration-300 active:scale-90 hover:scale-110 hover:shadow-md cursor-pointer ${compareItems.some(item => (item._id || item.id) === (product._id || product.id)) ? 'bg-[#1AA3B6] text-white' : 'bg-[#E8F4F6] text-[#0B7285] hover:bg-[#1AA3B6] hover:text-white'}`}
                     >
-                      <LuPanelRightDashed size={16} />
+                      <LuPanelRightDashed size={15} />
                     </button>
-                    <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#12344D] text-white text-[10px] font-bold py-1 px-2 rounded opacity-0 group-hover/compare:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50 shadow-sm">
-                      Add To Compare
-                      <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-[#12344D] rotate-45"></div>
+                    <span className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#0f2333] text-white text-[10.5px] font-semibold py-1.5 px-2.5 rounded-md opacity-0 group-hover/compare:opacity-100 transition-all duration-200 pointer-events-none whitespace-nowrap z-50 shadow-md leading-none">
+                      {compareItems.some(item => (item._id || item.id) === (product._id || product.id)) ? 'Remove From Compare' : 'Add To Compare'}
+                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0f2333] rotate-45"></div>
                     </span>
                   </div>
                 </div>
