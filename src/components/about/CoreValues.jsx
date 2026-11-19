@@ -75,21 +75,21 @@ export default function CoreValues() {
   ];
 
   return (
-    <section className="py-16 md:py-24 lg:py-28 bg-[#F8FBFC] relative overflow-hidden border-t border-border/50">
+    <section className="py-10 sm:py-12 lg:py-14 bg-white relative overflow-hidden border-t border-[#EAF2F4]">
       {/* Subtle Scientific Background Elements */}
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #1AA3B6 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
       <div className="absolute -top-32 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute -bottom-32 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
 
-      <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-14 md:mb-18">
+      <div className="w-full max-w-[1500px] xl:w-[96%] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-7 sm:mb-9">
           <motion.div
             variants={titleVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
           >
-            <h2 className="font-extrabold text-[#12344D] mb-4 text-2xl sm:text-3xl md:text-4xl tracking-tight">
+            <h2 className="font-extrabold text-[#12344D] mb-2 text-2xl sm:text-3xl md:text-[2rem] tracking-tight">
               {t('about.values.title')}
             </h2>
           </motion.div>
@@ -100,7 +100,7 @@ export default function CoreValues() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5"
         >
           {values.map((val, idx) => {
             const Icon = val.icon;
@@ -108,18 +108,18 @@ export default function CoreValues() {
               <motion.div
                 key={idx}
                 variants={cardVariants}
-                whileHover={{ y: -6 }}
+                whileHover={{ y: -4 }}
                 transition={{ type: "tween", duration: 0.25 }}
                 className="group relative h-full flex flex-col"
               >
-                <div className="relative bg-white p-7 sm:p-8 rounded-2xl h-full border border-border/80 group-hover:border-primary/50 transition-all duration-300 shadow-[0_4px_20px_rgb(0,0,0,0.03)] group-hover:shadow-[0_16px_36px_rgba(26,163,182,0.12)] flex flex-col justify-between">
+                <div className="relative bg-gradient-to-br from-[#F8FBFC] to-white p-5 sm:p-6 rounded-2xl h-full border border-[#EAF2F4] group-hover:border-primary/50 transition-all duration-300 shadow-[0_4px_20px_rgb(0,0,0,0.03)] group-hover:shadow-[0_16px_36px_rgba(26,163,182,0.12)] flex flex-col justify-between">
                   <div>
                     {/* Top Row: Icon + Value Tag */}
-                    <div className="flex items-center justify-between mb-6">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${val.iconBg} transition-all duration-300 group-hover:scale-105 shadow-sm`}>
-                        <Icon className="text-2xl" />
+                    <div className="flex items-center justify-between mb-4">
+                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center border ${val.iconBg} transition-all duration-300 group-hover:scale-105 shadow-sm`}>
+                        <Icon className="text-xl" />
                       </div>
-                      <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${val.badgeBg}`}>
+                      <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full ${val.badgeBg}`}>
                         {val.tag}
                       </span>
                     </div>

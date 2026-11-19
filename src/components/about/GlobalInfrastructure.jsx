@@ -87,45 +87,45 @@ export default function GlobalInfrastructure() {
   ];
 
   return (
-    <section className="py-16 md:py-24 lg:py-28 bg-white relative overflow-hidden border-t border-border/50">
+    <section className="py-10 sm:py-12 lg:py-14 bg-white relative overflow-hidden border-t border-[#EAF2F4]">
       {/* Decorative gradient accents */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
 
-      <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+      <div className="w-full max-w-[1500px] xl:w-[96%] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-14 md:mb-18">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+        <div className="text-center max-w-3xl mx-auto mb-7 sm:mb-9">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-2.5">
             <FiAward className="text-sm" />
             Key Advantages
           </div>
-          <h2 className="font-extrabold text-[#12344D] text-2xl sm:text-3xl md:text-4xl tracking-tight mb-4">
+          <h2 className="font-extrabold text-[#12344D] text-2xl sm:text-3xl md:text-[2rem] tracking-tight mb-2.5">
             Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#084553]">GLP Pharma Standards?</span>
           </h2>
-          <p className="text-slate-700 font-medium text-base sm:text-lg leading-relaxed">
+          <p className="text-slate-700 font-medium text-sm sm:text-base leading-relaxed">
             Our commitment to scientific accuracy, comprehensive analytical characterization and responsive technical support has helped us earn the trust of over 1,100 clients across more than 50 countries.
           </p>
         </div>
 
         {/* Top 4 Metrics Ribbon */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-14 md:mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-7 sm:mb-9">
           {stats.map((stat, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.4 }}
-              className="bg-gradient-to-br from-[#F8FBFC] to-white border border-[#E2E8F0] p-3 rounded-2xl text-center shadow-sm hover:shadow-md hover:border-primary/40 transition-all duration-300"
+              transition={{ delay: i * 0.08, duration: 0.35 }}
+              className="bg-gradient-to-br from-[#F8FBFC] to-white border border-[#E2E8F0] p-3 rounded-xl text-center shadow-xs hover:shadow-sm hover:border-primary/40 transition-all duration-300"
             >
-              <div className="font-black text-transparent bg-clip-text bg-gradient-to-br from-[#1AA3B6] to-[#084553] text-1xl sm:text-2xl lg:text-3xl mb-1.5">
+              <div className="font-black text-transparent bg-clip-text bg-gradient-to-br from-[#1AA3B6] to-[#084553] text-xl sm:text-2xl lg:text-[28px] mb-0.5">
                 {stat.number}
               </div>
-              <div className="text-[#12344D] font-bold text-sm sm:text-md leading-tight">
+              <div className="text-[#12344D] font-bold text-xs sm:text-sm leading-tight">
                 {stat.label}
               </div>
-              <div className="text-slate-600 text-xs mt-1 font-medium">
+              <div className="text-slate-500 text-[11px] sm:text-xs mt-0.5 font-medium">
                 {stat.sub}
               </div>
             </motion.div>
@@ -138,7 +138,7 @@ export default function GlobalInfrastructure() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5"
         >
           {advantages.map((adv, idx) => {
             const Icon = adv.icon;
@@ -146,12 +146,12 @@ export default function GlobalInfrastructure() {
               <motion.div
                 key={idx}
                 variants={itemVariants}
-                className="group relative bg-[#F8FBFC] hover:bg-white rounded-2xl p-6 sm:p-7 border border-[#E2E8F0] hover:border-primary/40 shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_28px_rgba(26,163,182,0.1)] transition-all duration-300 flex flex-col justify-between"
+                className="group relative bg-[#F8FBFC] hover:bg-white rounded-2xl p-5 sm:p-6 border border-[#E2E8F0] hover:border-primary/40 shadow-2xs hover:shadow-xs transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-white border border-[#E2E8F0] shadow-xs flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                      <Icon className="text-xl" />
+                  <div className="flex items-center justify-between mb-3.5">
+                    <div className="w-10 h-10 rounded-xl bg-white border border-[#E2E8F0] shadow-xs flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                      <Icon className="text-lg" />
                     </div>
                     <span className="text-[11px] font-bold uppercase tracking-wider text-primary/80 bg-primary/10 px-2.5 py-1 rounded-full">
                       {adv.highlight}

@@ -231,9 +231,9 @@ export default function Contact() {
                 <div>
                   <h4 className="font-extrabold text-heading text-[18px] mb-1">{t('contact.ourLocation')}</h4>
                   <p className="text-[14.5px] sm:text-[15px] text-body leading-relaxed">
-                    Plot No: 1, Shakti Puram Phase-2,<br />
-                    Prashanti Nagar, Industrial Estate (IE),<br />
-                    Kukatpally,<br />
+                    Plot No: 1, Shakti Puram Phase-2,
+                    Prashanti Nagar, Industrial Estate (IE),
+                    Kukatpally,
                     Hyderabad, Telangana, India, PIN: 500072
                   </p>
                 </div>
@@ -296,12 +296,18 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="font-extrabold text-heading text-[18px] mb-1">{t('contact.email')}</h4>
-                  <p className="text-[15px] text-body leading-relaxed">
+                  <p className="text-[15px] text-body leading-relaxed flex flex-col">
                     <a
                       href="mailto:info@glppharmastandards.com"
                       className="hover:text-[#1AA3B6] transition-colors"
                     >
                       info@glppharmastandards.com
+                    </a>
+                    <a
+                      href="mailto:rnd@glppharmastandards.com"
+                      className="hover:text-[#1AA3B6] transition-colors"
+                    >
+                      rnd@glppharmastandards.com
                     </a>
                   </p>
                 </div>

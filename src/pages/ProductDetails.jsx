@@ -530,8 +530,8 @@ export default function ProductDetails() {
               {renderImageCard()}
             </div>
 
-            {/* Pricing Section (Premium Redesign) - Hidden for Indian IPs */}
-            {!isIndianUser && (
+            {/* Pricing Section (Disabled for now) */}
+            {/* {!isIndianUser && (
               <div className="bg-gradient-to-b from-white to-[#F8FBFC] rounded-2xl shadow-lg border border-[#EAF2F4] p-6 relative overflow-hidden mt-8 ring-1 ring-black/5">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-[#1AA3B6] opacity-[0.05] rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
 
@@ -542,29 +542,32 @@ export default function ProductDetails() {
                   <h2 className="text-[19px] font-extrabold text-heading tracking-tight">Pack Sizes & Pricing</h2>
                 </div>
 
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-2">
                   {(product.pricingTiers && product.pricingTiers.length > 0
-                    ? product.pricingTiers.map(t => ({
-                      unit: t.size,
-                      price: Number(t.price).toFixed(2),
-                      highlight: Boolean(t.isBestValue),
-                      badge: t.isBestValue ? 'Best Value' : null,
-                      desc: t.description || 'Standard pack'
-                    }))
+                    ? product.pricingTiers.map(t => {
+                      const hasPrice = t.price !== undefined && t.price !== null && t.price !== '' && !isNaN(Number(t.price)) && Number(t.price) > 0;
+                      return {
+                        unit: t.size || t.unit,
+                        price: hasPrice ? Number(t.price).toFixed(2) : null,
+                        highlight: Boolean(t.isBestValue),
+                        badge: t.isBestValue ? 'Best Value' : null,
+                        desc: t.description || 'Standard pack'
+                      };
+                    })
                     : [
-                      { unit: '100 mg', price: ((product?.casNumber?.charCodeAt(0) || 45) * 1.5).toFixed(2), highlight: false, desc: 'For initial testing' },
-                      { unit: '1 g', price: ((product?.casNumber?.charCodeAt(0) || 45) * 8.5).toFixed(2), highlight: false, desc: 'Standard lab pack' },
-                      { unit: '1 kg', price: ((product?.casNumber?.charCodeAt(0) || 45) * 45.0).toFixed(2), highlight: true, badge: 'Best Value', desc: 'Bulk production scale' }
+                      { unit: '25 mg', price: null, highlight: false },
+                      { unit: '50 mg', price: null, highlight: false },
+                      { unit: '100 mg', price: null, highlight: true, badge: 'Popular' }
                     ]
                   ).map((tier, idx) => (
                     <div
                       key={idx}
                       onClick={() => {
-                        setQuoteFormType('checkout');
+                        setQuoteFormType(tier.price ? 'checkout' : 'quote');
                         setQuoteFormData({ ...quoteFormData, message: `I would like to request a quote for ${tier.unit} of ${product.name?.split(';')[0]} (CAS: ${product.casNumber}).` });
                         setShowQuoteForm(true);
                       }}
-                      className={`group rounded-xl p-3 flex items-center justify-between cursor-pointer transition-all duration-300 relative overflow-hidden ${tier.highlight ? 'border border-[#1AA3B6]/30 bg-[#1AA3B6]/[0.02] shadow-[0_2px_10px_rgba(26,163,182,0.05)] hover:bg-[#1AA3B6]/[0.05]' : 'border border-[#EAF2F4] bg-white hover:border-[#1AA3B6]/50 hover:shadow-sm'}`}
+                      className={`group rounded-xl p-1.5 flex items-center justify-between cursor-pointer transition-all duration-300 relative overflow-hidden ${tier.highlight ? 'border border-[#1AA3B6]/30 bg-[#1AA3B6]/[0.02] shadow-[0_2px_10px_rgba(26,163,182,0.05)] hover:bg-[#1AA3B6]/[0.05]' : 'border border-[#EAF2F4] bg-white hover:border-[#1AA3B6]/50 hover:shadow-sm'}`}
                     >
                       {tier.highlight && (
                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#1AA3B6] to-[#0B7285]"></div>
@@ -579,22 +582,27 @@ export default function ProductDetails() {
                             </span>
                           )}
                         </div>
-                        <span className="text-slate-700 text-[12px] font-medium mt-0.5">{tier.desc}</span>
                       </div>
 
                       <div className="flex flex-col items-end pr-2">
-                        <span className={`text-[21px] font-black tracking-tight ${tier.highlight ? 'text-[#1AA3B6]' : 'text-heading'}`}>
-                          ${tier.price}
-                        </span>
-                        <span className="text-[10px] text-[#1AA3B6] font-bold opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-wider flex items-center gap-1">
-                          proceed to check out <FiChevronRight size={10} />
+                        {tier.price ? (
+                          <span className={`text-[20px] font-black tracking-tight ${tier.highlight ? 'text-[#1AA3B6]' : 'text-heading'}`}>
+                            ${tier.price}
+                          </span>
+                        ) : (
+                          <span className="text-[13px] sm:text-[14px] font-bold text-[#0B7285] bg-[#E8F4F6] px-2.5 py-1 rounded-lg border border-[#1AA3B6]/20 group-hover:bg-[#1AA3B6] group-hover:text-white transition-colors">
+                            (On Request)
+                          </span>
+                        )}
+                        <span className="text-[10px] text-[#1AA3B6] font-bold opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-wider flex items-center gap-1 mt-0.5">
+                          {tier.price ? 'proceed to check out' : 'request quote'} <FiChevronRight size={10} />
                         </span>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-            )}
+            )} */}
 
             {/* Download Documents */}
             <div className="flex flex-col gap-2.5">

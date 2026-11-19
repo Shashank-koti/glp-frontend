@@ -37,7 +37,7 @@ const floatVariants = {
 export default function AboutHero() {
   const { t } = useTranslation();
   return (
-    <section className="relative pt-8da sm:pt-12 pb-3 sm:pb-5 bg-white overflow-hidden">
+    <section className="relative pt-8 sm:pt-12 pb-6 sm:pb-8 lg:pb-10 bg-white overflow-hidden">
       <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
 
         {/* Stunning Visual Composition */}
