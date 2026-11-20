@@ -427,7 +427,7 @@ export default function Navbar() {
               {[
                 { name: t('navbar.services') || 'Services', path: '/services' },
                 { name: 'Quick Enquiry', path: '/quick-enquiry' },
-                { name: t('navbar.gallery'), path: '/gallery' }
+                // { name: t('navbar.gallery'), path: '/gallery' }
               ].map((item) => (
                 <Link
                   key={item.name}
@@ -635,7 +635,7 @@ export default function Navbar() {
                 <Link to="/services" className="text-heading hover:text-primary py-3 border-b border-border transition-colors" onClick={() => setIsOpen(false)}>{t('navbar.services') || 'Services'}</Link>
                 <Link to="/quick-enquiry" className="text-heading hover:text-primary py-3 border-b border-border transition-colors" onClick={() => setIsOpen(false)}>Quick Enquiry</Link>
 
-                <Link to="/gallery" className="text-heading hover:text-primary py-3 border-b border-border transition-colors" onClick={() => setIsOpen(false)}>Gallery</Link>
+                {/* <Link to="/gallery" className="text-heading hover:text-primary py-3 border-b border-border transition-colors" onClick={() => setIsOpen(false)}>Gallery</Link> */}
 
                 <Link to="/compare" className="flex items-center justify-between text-heading hover:text-primary py-3 border-b border-border transition-colors" onClick={() => setIsOpen(false)}>
                   <span>Compare Products</span>

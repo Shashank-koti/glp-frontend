@@ -1034,6 +1034,34 @@ export default function ProductsView() {
             ))}
           </div>
         )}
+
+        {/* Custom Synthesis / RFQ Quick Enquiry Banner */}
+        <Link
+          to="/quick-enquiry"
+          className="mt-10 mb-4 block group cursor-pointer"
+        >
+          <div className="bg-gradient-to-r from-[#F0F9FA] via-[#F8FBFC] to-white border border-[#D0E7EC] rounded-2xl p-2 sm:p-3 transition-all duration-300 shadow-2xs hover:shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="flex items-start sm:items-center gap-3.5">
+              <div className="w-10 h-10 rounded-xl bg-[#084553] text-[#5CE1E6] flex items-center justify-center shrink-0 transition-colors duration-300">
+                <FaFlask className="text-md" />
+              </div>
+              <div>
+                <h3 className="font-extrabold text-[#084553] text-sm sm:text-base transition-colors flex items-center gap-1.5">
+                  Didn't find your required Impurity / Related Standard?
+                </h3>
+                <p className="text-slate-600 text-xs sm:text-[13.5px] mt-0.5 leading-relaxed">
+                  Send us your Product Name, CAS Number &amp; Structure to <span className="font-semibold text-[#0B7285] underline">info@glppharmastandards.com</span> or submit an RFQ Request. GLP Pharma Standards can synthesize and supply it for you.
+                </p>
+              </div>
+            </div>
+            <div className="shrink-0 w-full md:w-auto">
+              <span className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#0B7285] group-hover:bg-[#1AA3B6] text-white font-bold text-xs sm:text-sm transition-colors shadow-xs">
+                <FiMail size={15} />
+                Submit Quick Enquiry
+              </span>
+            </div>
+          </div>
+        </Link>
       </div>
     </div>
   );

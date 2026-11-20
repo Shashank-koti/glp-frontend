@@ -1,6 +1,5 @@
 import AboutHero from '../components/about/AboutHero';
 import MissionVision from '../components/about/MissionVision';
-import OurLegacy from '../components/about/OurLegacy';
 import CoreValues from '../components/about/CoreValues';
 import GlobalInfrastructure from '../components/about/GlobalInfrastructure';
 import CompliancePolicies from '../components/about/CompliancePolicies';
@@ -15,7 +14,6 @@ export default function About() {
         canonical="/about"
       />
       <AboutHero />
-      <OurLegacy />
       <MissionVision />
       <CoreValues />
       <GlobalInfrastructure />

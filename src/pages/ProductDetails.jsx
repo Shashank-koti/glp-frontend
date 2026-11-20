@@ -16,7 +16,7 @@ import SEO from '../components/common/SEO';
 import {
   FiBox, FiTag, FiSend, FiShoppingCart, FiInfo, FiChevronRight,
   FiCheckCircle, FiLock, FiCommand, FiAperture,
-  FiGlobe, FiHeadphones, FiClock, FiArrowLeft, FiX, FiClipboard, FiChevronDown, FiDollarSign, FiHeart
+  FiGlobe, FiHeadphones, FiClock, FiArrowLeft, FiX, FiClipboard, FiChevronDown, FiDollarSign, FiHeart, FiMail
 } from 'react-icons/fi';
 import {
   BsShieldCheck, BsSnow, BsFileEarmarkText, BsClipboardData
@@ -26,6 +26,66 @@ import {
 } from 'react-icons/lu';
 import { TbHexagon, TbCertificate } from 'react-icons/tb';
 import { FaFlask, FaBalanceScale, FaWhatsapp } from 'react-icons/fa';
+
+const GENERIC_CATEGORY_SLUGS = new Set([
+  'nitroso-impurities',
+  'nitroso',
+  'api-impurities-and-reference-standards',
+  'peptides',
+  'isotope-labelled-compounds',
+  'metabolites',
+  'drug-metabolites',
+  'phytochemicals',
+  'pharmaceutical-intermediates',
+  'intermediates',
+  'catalysts',
+  'fine-chemicals',
+  'agro-chemicals',
+  'cro-molecules',
+]);
+
+const isGenericCategory = (slugOrHeading = '') => {
+  const s = String(slugOrHeading).toLowerCase().trim();
+  if (!s) return true;
+  if (GENERIC_CATEGORY_SLUGS.has(s)) return true;
+  return (
+    s.includes('nitroso') ||
+    s.includes('nitrosamine') ||
+    s.includes('isotope') ||
+    s.includes('peptide') ||
+    s.includes('metabolite') ||
+    s.includes('phytochemical') ||
+    s.includes('intermediate') ||
+    s.includes('catalyst') ||
+    s.includes('fine chemical') ||
+    s.includes('agro chemical') ||
+    s.includes('cro molecule') ||
+    s === 'api impurities' ||
+    s === 'api impurities & reference standards'
+  );
+};
+
+const extractApiName = (name = '') => {
+  if (!name) return '';
+  let clean = name.split(';')[0].split(',')[0].trim();
+  // Strip Nitroso prefixes (e.g. "N- Nitroso ", "N-Nitroso-", "4-Nitroso ")
+  clean = clean.replace(/^(?:N\s*[-–—]\s*|O\s*[-–—]\s*)?Nitroso\s*[-–—]?\s*/i, '');
+  clean = clean.replace(/^(?:\d+\s*[-–—]\s*)?Nitroso\s*[-–—]?\s*/i, '');
+  // Strip Isotope prefixes
+  clean = clean.replace(/^(?:Deuterated|Isotope(?:\s+Labelled)?|Stable\s+Isotope)\s+/i, '');
+  clean = clean.replace(/^\[(?:13C\d*|15N\d*|D\d*|\s*,)+\]\s*/i, '');
+  // Strip Desmethyl prefixes
+  clean = clean.replace(/^(?:N\s*[-–—]\s*)?Desmethyl\s+/i, '');
+  clean = clean.replace(/^(?:N\s*[-–—]\s*)?Desethyl\s+/i, '');
+  clean = clean.replace(/^(?:N\s*[-–—]\s*)?Demethyl\s+/i, '');
+  // Strip Impurity suffixes
+  clean = clean.replace(/\s+(?:EP|USP|BP|IP|JP)?\s*(?:Related\s+Compound|Impurity|Reference\s+Standard|Standard|Metabolite|Intermediate)\s+[A-Za-z0-9\-]+$/i, '');
+  clean = clean.replace(/\s+(?:EP|USP|BP|IP|JP)?\s*(?:Related\s+Compound|Impurity|Reference\s+Standard|Standard|Metabolite|Intermediate)$/i, '');
+  // Strip trailing isotope tags (e.g. "-d3", " D4", " (D6)")
+  clean = clean.replace(/[-_\s]+d\d+$/i, '');
+  clean = clean.replace(/\s*\([D\d]+\)$/i, '');
+  return clean.trim();
+};
 
 export default function ProductDetails() {
   const { t } = useTranslation();
@@ -40,6 +100,7 @@ export default function ProductDetails() {
   const { addToCompare, compareItems, removeFromCompare } = useCompare();
   const { user } = useAuth();
   const [showAuthAlert, setShowAuthAlert] = useState(false);
+  const [pendingDownload, setPendingDownload] = useState('Document');
   const [showQuoteForm, setShowQuoteForm] = useState(false);
   const [quoteFormType, setQuoteFormType] = useState('quote');
   const [quoteFormData, setQuoteFormData] = useState({
@@ -138,33 +199,24 @@ export default function ProductDetails() {
       label = 'COA';
     }
 
-    // Check if document exists on product object
-    const docObj =
-      typeKey === 'msds'
-        ? (product.documents?.msds || product.documentSummary?.msds)
-        : typeKey === 'draft-coa'
-          ? (product.documents?.draftCoa || product.documentSummary?.draftCoa)
-          : (product.documents?.coa || product.documentSummary?.coa);
-
-    const isAvailable = Boolean(
-      docObj?.url ||
-      docObj?.available ||
-      (typeKey === 'msds' ? product.hasMsds : typeKey === 'draft-coa' ? product.hasDraftCoa : product.hasCoa)
-    );
-
-    if (!isAvailable) {
+    // 1. If user is not logged in: display login prompt and open auth modal
+    if (!user) {
+      setPendingDownload(label);
+      setShowAuthAlert(true);
       setDownloadNotice({
-        type: 'info',
-        message: `${label} is currently not available for this product batch. You can request a quote or contact our analytical team.`,
+        type: 'warning',
+        docLabel: label,
+        message: `Please log in to download ${label}.`,
       });
-      setTimeout(() => setDownloadNotice(null), 6000);
       return;
     }
 
-    // Trigger download endpoint from backend
-    const slugOrId = product.slug || product.p_link || product._id;
-    const downloadEndpoint = `${API_BASE_URL}/products/${encodeURIComponent(slugOrId)}/download/${typeKey}`;
-    window.open(downloadEndpoint, '_blank');
+    // 2. If user is already logged in: display "We are updating it, request us for the document."
+    setDownloadNotice({
+      type: 'info',
+      docLabel: label,
+      message: 'We are updating it, request us for the document.',
+    });
   };
 
   useEffect(() => {
@@ -216,14 +268,69 @@ export default function ProductDetails() {
           // Increment view count in the background
           apiClient.post(`/products/${encodeURIComponent(currentProduct.slug || actualSlug)}/view`).catch(err => console.error("View count error", err));
 
-          const mainLink = currentProduct.mainProduct?.p_link || currentProduct.mainProduct?.slug;
-          if (mainLink) {
+          const mainHeading = currentProduct.mainProduct?.heading || '';
+          const mainLink = currentProduct.mainProduct?.p_link || currentProduct.mainProduct?.slug || '';
+
+          // Determine the target API name (avoid using generic category slugs like 'nitroso-impurities')
+          let targetApiName = '';
+          if (mainHeading && !isGenericCategory(mainHeading) && !isGenericCategory(mainLink)) {
+            targetApiName = mainHeading;
+          } else {
+            targetApiName = extractApiName(currentProduct.name);
+          }
+
+          if (targetApiName) {
+            const requests = [
+              apiClient.get(`/products/${encodeURIComponent(targetApiName)}/subproducts?limit=1000`).catch(() => null),
+              apiClient.get(`/products?search=${encodeURIComponent(targetApiName)}&limit=1000`).catch(() => null)
+            ];
+
+            Promise.all(requests)
+              .then(([subProdRes, searchRes]) => {
+                const mergedMap = new Map();
+                const lowerApi = targetApiName.toLowerCase();
+
+                const addValidItems = (list) => {
+                  if (!Array.isArray(list)) return;
+                  list.forEach(p => {
+                    if (!p || String(p._id) === String(currentProduct._id)) return;
+                    const pName = (p.name || '').toLowerCase();
+                    const pHeading = (p.mainProduct?.heading || '').toLowerCase();
+                    const pLink = (p.mainProduct?.p_link || p.mainProduct?.slug || '').toLowerCase();
+
+                    // Ensure the product belongs to this API family
+                    const isMatch =
+                      pHeading === lowerApi ||
+                      pLink === lowerApi ||
+                      pName.includes(lowerApi);
+
+                    if (isMatch) {
+                      mergedMap.set(String(p._id), p);
+                    }
+                  });
+                };
+
+                if (subProdRes?.data?.success && Array.isArray(subProdRes.data.data)) {
+                  addValidItems(subProdRes.data.data);
+                }
+                if (searchRes?.data?.success && Array.isArray(searchRes.data.data)) {
+                  addValidItems(searchRes.data.data);
+                }
+
+                let related = Array.from(mergedMap.values());
+                related.sort((a, b) => {
+                  const catA = a.specifications?.catalogueNumber || a.catalogueNumber || '';
+                  const catB = b.specifications?.catalogueNumber || b.catalogueNumber || '';
+                  return catA.localeCompare(catB, undefined, { numeric: true, sensitivity: 'base' });
+                });
+                setRelatedProducts(related);
+              })
+              .catch(err => console.error("Error fetching related products:", err));
+          } else if (mainLink && !isGenericCategory(mainLink)) {
             apiClient.get(`/products/${encodeURIComponent(mainLink)}/subproducts`)
               .then(relRes => {
                 if (relRes.data?.success && relRes.data.data) {
-                  // Filter out the current product itself
                   let related = relRes.data.data.filter(p => p._id !== currentProduct._id);
-                  // Sort by catalogue number
                   related.sort((a, b) => {
                     const catA = a.specifications?.catalogueNumber || a.catalogueNumber || '';
                     const catB = b.specifications?.catalogueNumber || b.catalogueNumber || '';
@@ -505,7 +612,7 @@ export default function ProductDetails() {
               </div>
 
               <h1 className="font-extrabold text-heading text-center tracking-tight drop-shadow-sm text-xl md:text-2xl w-full">
-                {product.name?.split(';')[0]}&nbsp;|&nbsp;{product.casNumber.split(';')[0]}
+                {product.name?.split(';')[0]}&nbsp;| CAS :&nbsp;{product.casNumber.split(';')[0]}
               </h1>
             </div>
           </div>
@@ -606,43 +713,65 @@ export default function ProductDetails() {
 
             {/* Download Documents */}
             <div className="flex flex-col gap-2.5">
-              <div className="flex flex-row gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   type="button"
                   onClick={() => handleDownload('MSDS')}
                   className="flex-1 bg-[#E8F4F6] border border-[#1AA3B6] shadow-md hover:shadow-lg rounded-xl py-3 px-4 flex items-center justify-center gap-2 hover:bg-[#1AA3B6] hover:text-white transition-all group cursor-pointer"
                 >
-                  <BsFileEarmarkText size={18} className="text-[#1AA3B6] group-hover:text-white" />
-                  <span className="text-[#0B7285] font-bold text-[13px] group-hover:text-white">Download MSDS</span>
+                  {!user ? (
+                    <FiLock size={16} className="text-[#0B7285] group-hover:text-white shrink-0" />
+                  ) : (
+                    <BsFileEarmarkText size={18} className="text-[#1AA3B6] group-hover:text-white shrink-0" />
+                  )}
+                  <span className="text-[#0B7285] font-bold text-[13px] group-hover:text-white">
+                    {!user ? 'Login to Download MSDS' : 'Download MSDS'}
+                  </span>
                 </button>
                 <button
                   type="button"
                   onClick={() => handleDownload((product.availability || 'In Stock').toLowerCase() === 'in stock' ? 'COA' : 'Draft COA')}
                   className="flex-1 bg-[#E8F4F6] border border-[#1AA3B6] shadow-md hover:shadow-lg rounded-xl py-3 px-4 flex items-center justify-center gap-2 hover:bg-[#1AA3B6] hover:text-white transition-all group cursor-pointer"
                 >
-                  <TbCertificate size={18} className="text-[#1AA3B6] group-hover:text-white" />
+                  {!user ? (
+                    <FiLock size={16} className="text-[#0B7285] group-hover:text-white shrink-0" />
+                  ) : (
+                    <TbCertificate size={18} className="text-[#1AA3B6] group-hover:text-white shrink-0" />
+                  )}
                   <span className="text-[#0B7285] font-bold text-[13px] group-hover:text-white">
-                    {(product.availability || 'In Stock').toLowerCase() === 'in stock' ? 'Download COA' : 'Draft COA'}
+                    {!user
+                      ? ((product.availability || 'In Stock').toLowerCase() === 'in stock' ? 'Login to Download COA' : 'Login to Download Draft COA')
+                      : ((product.availability || 'In Stock').toLowerCase() === 'in stock' ? 'Download COA' : 'Draft COA')}
                   </span>
                 </button>
               </div>
 
               {downloadNotice && (
-                <div className="p-3 bg-amber-50/90 border border-amber-300 text-amber-900 rounded-xl text-xs flex items-center justify-between shadow-sm animate-fadeIn">
+                <div className="p-3.5 bg-amber-50/95 border border-amber-300 text-amber-900 rounded-xl text-xs sm:text-[13px] flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 shadow-sm animate-fadeIn">
                   <div className="flex items-center gap-2">
-                    <FiInfo className="text-amber-600 shrink-0" size={16} />
-                    <span className="leading-snug">{downloadNotice.message}</span>
+                    <FiInfo className="text-amber-600 shrink-0" size={17} />
+                    <span className="font-medium leading-snug">{downloadNotice.message}</span>
                   </div>
                   <button
                     type="button"
                     onClick={() => {
+                      if (!user) {
+                        setPendingDownload(downloadNotice.docLabel || 'Document');
+                        setShowAuthAlert(true);
+                        return;
+                      }
+                      const reqDoc = downloadNotice.docLabel || 'Document';
                       setDownloadNotice(null);
                       setQuoteFormType('quote');
+                      setQuoteFormData(prev => ({
+                        ...prev,
+                        message: `Please provide the ${reqDoc} document for ${product.name?.split(';')[0]} (CAT No: ${product.specifications?.catalogueNumber || product.catalogueNumber || 'N/A'}, CAS: ${product.specifications?.casNumber || product.casNumber || 'N/A'}).`
+                      }));
                       setShowQuoteForm(true);
                     }}
-                    className="ml-3 px-2.5 py-1 bg-[#0B7285] hover:bg-[#084553] text-white rounded-lg font-semibold text-[11px] whitespace-nowrap cursor-pointer transition-colors"
+                    className="self-end sm:self-auto px-3.5 py-1.5 bg-[#0B7285] hover:bg-[#084553] text-white rounded-lg font-bold text-xs whitespace-nowrap cursor-pointer transition-colors shadow-2xs"
                   >
-                    Request Quote
+                    {!user ? 'Log In' : 'Request Document'}
                   </button>
                 </div>
               )}
@@ -1024,6 +1153,34 @@ export default function ProductDetails() {
               </div>
             ))}
           </div>
+
+          {/* Custom Synthesis / RFQ Quick Enquiry Banner */}
+          <Link
+            to="/quick-enquiry"
+            className="mt-10 mb-4 block group cursor-pointer"
+          >
+            <div className="bg-gradient-to-r from-[#F0F9FA] via-[#F8FBFC] to-white border border-[#D0E7EC] rounded-2xl p-2 sm:p-3 transition-all duration-300 shadow-2xs hover:shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <div className="flex items-start sm:items-center gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-[#084553] text-[#5CE1E6] flex items-center justify-center shrink-0 transition-colors duration-300">
+                  <FaFlask className="text-md" />
+                </div>
+                <div>
+                  <h3 className="font-extrabold text-[#084553] text-sm sm:text-base transition-colors flex items-center gap-1.5">
+                    Didn't find your required Impurity / Related Standard?
+                  </h3>
+                  <p className="text-slate-600 text-xs sm:text-[13.5px] mt-0.5 leading-relaxed">
+                    Send us your Product Name, CAS Number &amp; Structure to <span className="font-semibold text-[#0B7285] underline">info@glppharmastandards.com</span> or submit an RFQ Request. GLP Pharma Standards can synthesize and supply it for you.
+                  </p>
+                </div>
+              </div>
+              <div className="shrink-0 w-full md:w-auto">
+                <span className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-[#0B7285] group-hover:bg-[#1AA3B6] text-white font-bold text-xs sm:text-sm transition-colors shadow-xs">
+                  <FiMail size={15} />
+                  Submit Quick Enquiry
+                </span>
+              </div>
+            </div>
+          </Link>
         </div>
       )}
 
@@ -1176,14 +1333,14 @@ export default function ProductDetails() {
 
                 <div className="flex flex-col gap-3">
                   <button
-                    onClick={() => navigate('/login')}
-                    className="w-full py-3.5 bg-primary hover:bg-[#0B7285] text-white rounded-xl font-bold shadow-md transition-all duration-300"
+                    onClick={() => navigate(`/login?redirect=${encodeURIComponent(window.location.pathname)}`)}
+                    className="w-full py-3.5 bg-primary hover:bg-[#0B7285] text-white rounded-xl font-bold shadow-md transition-all duration-300 cursor-pointer"
                   >
                     Log In to Download
                   </button>
                   <button
-                    onClick={() => navigate('/register')}
-                    className="w-full py-3.5 bg-[#F0F7F9] hover:bg-[#EAF2F4] text-primary rounded-xl font-bold transition-all duration-300 border border-[#EAF2F4]"
+                    onClick={() => navigate(`/register?redirect=${encodeURIComponent(window.location.pathname)}`)}
+                    className="w-full py-3.5 bg-[#F0F7F9] hover:bg-[#EAF2F4] text-primary rounded-xl font-bold transition-all duration-300 border border-[#EAF2F4] cursor-pointer"
                   >
                     Create an Account
                   </button>

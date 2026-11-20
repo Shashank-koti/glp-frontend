@@ -5,7 +5,7 @@ import {
   LuShieldCheck, LuZap, LuHeadphones, LuAward,
   LuUser, LuMail, LuBuilding, LuPhone, LuGlobe,
   LuPackage, LuFlaskConical, LuHash, LuBox,
-  LuArrowRight, LuLock, LuSend
+  LuArrowRight, LuLock, LuSend, LuFileText
 } from 'react-icons/lu';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
@@ -24,7 +24,8 @@ export default function QuickEnquiry() {
     productName: '',
     chemicalName: '',
     casNo: '',
-    quantity: ''
+    quantity: '',
+    description: ''
   });
 
   const [submitError, setSubmitError] = useState('');
@@ -57,7 +58,10 @@ export default function QuickEnquiry() {
         chemicalName: formData.chemicalName,
         casNo: formData.casNo,
         quantity: formData.quantity,
-        message: formData.message || `Chemical: ${formData.chemicalName || 'N/A'}, CAS: ${formData.casNo || 'N/A'}, Qty: ${formData.quantity || 'N/A'}`
+        description: formData.description,
+        message: formData.description
+          ? `${formData.description}\n\n[Details: Chemical: ${formData.chemicalName || 'N/A'}, CAS: ${formData.casNo || 'N/A'}, Qty: ${formData.quantity || 'N/A'}]`
+          : `Chemical: ${formData.chemicalName || 'N/A'}, CAS: ${formData.casNo || 'N/A'}, Qty: ${formData.quantity || 'N/A'}`
       }, {
         headers: {
           Authorization: `Bearer ${user.token}`
@@ -68,7 +72,8 @@ export default function QuickEnquiry() {
         setSubmitSuccess(true);
         setFormData({
           fullName: '', email: '', companyName: '', contactNumber: '',
-          country: '', productName: '', chemicalName: '', casNo: '', quantity: ''
+          country: '', productName: '', chemicalName: '', casNo: '', quantity: '',
+          description: ''
         });
       }
     } catch (err) {
@@ -296,7 +301,7 @@ export default function QuickEnquiry() {
                   </div>
 
                   <div className="flex flex-col">
-                    <label className="text-[13px] font-bold text-body mb-1.5 ml-1">CAS No<span className="text-red-500 ml-0.5">*</span></label>
+                    <label className="text-[13px] font-bold text-body mb-1.5 ml-1">CAS No</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
                         <LuHash size={18} />
@@ -306,8 +311,7 @@ export default function QuickEnquiry() {
                         name="casNo"
                         value={formData.casNo}
                         onChange={handleChange}
-                        required
-                        placeholder="CAS No"
+                        placeholder="CAS No (Optional)"
                         className="w-full pl-11 pr-4 py-2.5 bg-background/50 border border-border rounded-xl text-body focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#1AA3B6]/10 focus:border-[#1AA3B6] transition-all duration-300 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:border-border text-sm"
                       />
                     </div>
@@ -327,6 +331,23 @@ export default function QuickEnquiry() {
                         required
                         placeholder="Quantity (e.g., 10 g, 1 Kg)"
                         className="w-full pl-11 pr-4 py-2.5 bg-background/50 border border-border rounded-xl text-body focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#1AA3B6]/10 focus:border-[#1AA3B6] transition-all duration-300 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:border-border text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col">
+                    <label className="text-[13px] font-bold text-body mb-1.5 ml-1">Description</label>
+                    <div className="relative">
+                      <div className="absolute top-3 left-0 pl-4 flex items-start pointer-events-none text-slate-400">
+                        <LuFileText size={18} />
+                      </div>
+                      <textarea
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        rows={2}
+                        placeholder="Description / Additional Requirments"
+                        className="w-full pl-11 pr-4 py-2.5 bg-background/50 border border-border rounded-xl text-body focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#1AA3B6]/10 focus:border-[#1AA3B6] transition-all duration-300 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.05)] hover:border-border text-sm resize-none"
                       />
                     </div>
                   </div>

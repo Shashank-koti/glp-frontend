@@ -6,7 +6,7 @@ export default function MissionVision() {
   const { t } = useTranslation();
 
   return (
-    <section className="py-10 sm:py-12 lg:py-14 bg-white relative overflow-hidden border-t border-[#EAF2F4]">
+    <section className="py-20 sm:py-22 lg:py-26 bg-white relative overflow-hidden border-t border-[#EAF2F4]">
       {/* Background radial accent */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-[#1AA3B6]/5 to-[#084553]/5 rounded-full blur-[100px] pointer-events-none"></div>
 

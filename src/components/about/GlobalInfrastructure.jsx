@@ -39,43 +39,36 @@ export default function GlobalInfrastructure() {
       icon: FiClock,
       title: "11+ Years Synthesis Experience",
       desc: "Proven track record in synthesizing, isolating, and supplying pharmaceutical impurity reference standards.",
-      highlight: "11+ Years"
     },
     {
       icon: FiPackage,
       title: "20,000+ Standards in Ready Stock",
       desc: "Extensive inventory of API impurities and pharmaceutical reference materials maintained for immediate dispatch worldwide.",
-      highlight: "20,000+ Stock"
     },
     {
       icon: FiAward,
       title: "Specialized Nitrosamine & Custom Capabilities",
       desc: "Dedicated expertise in nitrosamines (NDSRIs), peptides, stable isotopes, and challenging multi-step custom synthesis.",
-      highlight: "NDSRI & Custom"
     },
     {
       icon: FiFileText,
       title: "Comprehensive Analytical Characterization",
       desc: "Complete documentation including CoA and Structure Elucidation Reports (SER) backed by HPLC, GC, LC-MS/MS, 1H/13C NMR, and XRD.",
-      highlight: "CoA & SER"
     },
     {
       icon: FiCpu,
       title: "Isolation & Unknown Impurity Elucidation",
       desc: "Specialized isolation and analytical elucidation of complex degradation products and process-related unknowns.",
-      highlight: "Structure Elucidation"
     },
     {
       icon: FiHeadphones,
       title: "Responsive Technical Support",
       desc: "Prompt and dedicated support from experienced doctoral scientists and analytical chemists for every client inquiry.",
-      highlight: "Rapid Turnaround"
     },
     {
       icon: FiGlobe,
       title: "Global Reach Across 50+ Countries",
       desc: "Supplying export-compliant reference materials to 1,100+ pharmaceutical manufacturers and CROs across 6 continents.",
-      highlight: "50+ Countries"
     }
   ];
 
@@ -87,7 +80,7 @@ export default function GlobalInfrastructure() {
   ];
 
   return (
-    <section className="py-10 sm:py-12 lg:py-14 bg-white relative overflow-hidden border-t border-[#EAF2F4]">
+    <section className="py-18 sm:py-20 lg:py-24 bg-white relative overflow-hidden border-t border-[#EAF2F4]">
       {/* Decorative gradient accents */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
@@ -149,18 +142,14 @@ export default function GlobalInfrastructure() {
                 className="group relative bg-[#F8FBFC] hover:bg-white rounded-2xl p-5 sm:p-6 border border-[#E2E8F0] hover:border-primary/40 shadow-2xs hover:shadow-xs transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-3.5">
-                    <div className="w-10 h-10 rounded-xl bg-white border border-[#E2E8F0] shadow-xs flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                  <div className="flex  gap-3 mb-3">
+                    <div className="w-8 h-8 rounded-xl bg-white border border-[#E2E8F0] shadow-xs flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                       <Icon className="text-lg" />
                     </div>
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-primary/80 bg-primary/10 px-2.5 py-1 rounded-full">
-                      {adv.highlight}
-                    </span>
+                    <h3 className="font-bold text-[#12344D] text-lg mb-2 group-hover:text-primary transition-colors">
+                      {adv.title}
+                    </h3>
                   </div>
-
-                  <h3 className="font-bold text-[#12344D] text-lg mb-2 group-hover:text-primary transition-colors">
-                    {adv.title}
-                  </h3>
 
                   <p className="text-slate-700 text-sm sm:text-[14.5px] leading-relaxed font-normal">
                     {adv.desc}

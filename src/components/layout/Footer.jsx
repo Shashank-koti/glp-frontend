@@ -120,31 +120,58 @@ export default function Footer() {
                 </span>
               </li>
               {/* Telephone */}
-              <li className="flex items-center gap-3 group cursor-pointer">
+              <li className="flex items-center gap-3 group">
                 <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">
                   <TbDeviceLandlinePhone size={14} />
                 </div>
-                <a href="tel:+914023074638" className="font-heading text-[13.5px] sm:text-[14px] text-slate-200 group-hover:text-white transition-colors leading-none tabular-nums [font-feature-settings:'tnum']">+91 40 23074638</a>
+                <a
+                  href="tel:+914023074638"
+                  className="font-heading text-[13.5px] sm:text-[14px] text-slate-200 group-hover:text-white hover:text-[#5CE1E6] transition-colors leading-none tabular-nums [font-feature-settings:'tnum']"
+                >
+                  +91 40 23074638
+                </a>
               </li>
-              {/* Mobile 1 */}
-              <li className="flex items-center gap-3 group cursor-pointer">
-                <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">
+
+              {/* Mobile Numbers */}
+              <li className="flex items-start gap-3 group">
+                <div className="mt-0.5 w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">
                   <FiSmartphone size={13} />
                 </div>
-                <a href="tel:+919866074638" className="font-heading text-[13.5px] sm:text-[14px] text-slate-200 group-hover:text-white transition-colors leading-none tabular-nums [font-feature-settings:'tnum']">+91 9866074638</a>
-              </li>
-              {/* Mobile 2 */}
-              <li className="flex items-center gap-3 group cursor-pointer">
-                <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">
-                  <FiSmartphone size={13} />
+                <div className="flex flex-col gap-1.5">
+                  <a
+                    href="tel:+919866074638"
+                    className="font-heading text-[13.5px] sm:text-[14px] text-slate-200 group-hover:text-white hover:text-[#5CE1E6] transition-colors leading-none tabular-nums [font-feature-settings:'tnum']"
+                  >
+                    +91 9866074638
+                  </a>
+                  <a
+                    href="tel:+918341411731"
+                    className="font-heading text-[13.5px] sm:text-[14px] text-slate-200 group-hover:text-white hover:text-[#5CE1E6] transition-colors leading-none tabular-nums [font-feature-settings:'tnum']"
+                  >
+                    +91 8341411731
+                  </a>
                 </div>
-                <a href="tel:+918341411731" className="font-heading text-[13.5px] sm:text-[14px] text-slate-200 group-hover:text-white transition-colors leading-none tabular-nums [font-feature-settings:'tnum']">+91 8341411731</a>
               </li>
-              <li className="flex items-center gap-3 group cursor-pointer">
-                <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">
+
+              {/* Email */}
+              <li className="flex items-start gap-3 group">
+                <div className="mt-0.5 w-7 h-7 rounded-lg bg-white/10 border border-white/15 shadow-sm flex items-center justify-center text-[#5CE1E6] group-hover:bg-[#1AA3B6] group-hover:text-white transition-all duration-300 shrink-0">
                   <FiMail size={13} />
                 </div>
-                <a href="mailto:info@glppharmastandards.com" className="text-[13px] sm:text-[14px] text-slate-200 group-hover:text-white transition-colors break-all sm:break-normal">info@glppharmastandards.com</a>
+                <div className="flex flex-col gap-1.5">
+                  <a
+                    href="mailto:info@glppharmastandards.com"
+                    className="text-[13px] sm:text-[14px] text-slate-200 group-hover:text-white hover:text-[#5CE1E6] transition-colors break-all sm:break-normal"
+                  >
+                    info@glppharmastandards.com
+                  </a>
+                  <a
+                    href="mailto:rnd@glppharmastandards.com"
+                    className="text-[13px] sm:text-[14px] text-slate-200 group-hover:text-white hover:text-[#5CE1E6] transition-colors break-all sm:break-normal"
+                  >
+                    rnd@glppharmastandards.com
+                  </a>
+                </div>
               </li>
             </ul>
           </div>

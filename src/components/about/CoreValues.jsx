@@ -40,7 +40,6 @@ export default function CoreValues() {
       icon: FiCrosshair,
       title: t('about.values.v1Title', 'Precision'),
       desc: t('about.values.v1Desc', 'Maintaining scientific accuracy in every compound identification, synthesis, characterization and documentation.'),
-      tag: 'Scientific Accuracy',
       accentColor: 'from-[#1AA3B6] to-[#084553]',
       iconBg: 'bg-[#1AA3B6]/10 text-[#1AA3B6] border-[#1AA3B6]/30',
       badgeBg: 'bg-[#1AA3B6]/10 text-[#1AA3B6]'
@@ -49,7 +48,6 @@ export default function CoreValues() {
       icon: FiDroplet,
       title: t('about.values.v2Title', 'Purity'),
       desc: t('about.values.v2Desc', 'Purity Striving to deliver high-purity research materials suitable for our client’s intended R&D and analytical applications.'),
-      tag: 'Analytical Quality',
       accentColor: 'from-[#0B7285] to-[#12344D]',
       iconBg: 'bg-[#0B7285]/10 text-[#0B7285] border-[#0B7285]/30',
       badgeBg: 'bg-[#0B7285]/10 text-[#0B7285]'
@@ -58,7 +56,6 @@ export default function CoreValues() {
       icon: FiShield,
       title: t('about.values.v3Title', 'Integrity'),
       desc: t('about.values.v3Desc', 'Building lasting customer confidence through transparent communication, responsible business practices and reliable technical support.'),
-      tag: 'Transparency & Trust',
       accentColor: 'from-[#12344D] to-[#084553]',
       iconBg: 'bg-[#12344D]/10 text-[#12344D] border-[#12344D]/30',
       badgeBg: 'bg-[#12344D]/10 text-[#12344D]'
@@ -67,7 +64,6 @@ export default function CoreValues() {
       icon: FiTrendingUp,
       title: t('about.values.v4Title', 'Scientific Excellence'),
       desc: t('about.values.v4Desc', 'Adapting to changing regulations, customer demands and technological innovations that challenge the pharma industry.'),
-      tag: 'Innovation',
       accentColor: 'from-[#084553] to-[#1AA3B6]',
       iconBg: 'bg-[#084553]/10 text-[#084553] border-[#084553]/30',
       badgeBg: 'bg-[#084553]/10 text-[#084553]'
@@ -75,7 +71,7 @@ export default function CoreValues() {
   ];
 
   return (
-    <section className="py-10 sm:py-12 lg:py-14 bg-white relative overflow-hidden border-t border-[#EAF2F4]">
+    <section className="py-20 sm:py-22 lg:py-26 bg-white relative overflow-hidden border-t border-[#EAF2F4]">
       {/* Subtle Scientific Background Elements */}
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #1AA3B6 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
       <div className="absolute -top-32 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -115,18 +111,16 @@ export default function CoreValues() {
                 <div className="relative bg-gradient-to-br from-[#F8FBFC] to-white p-5 sm:p-6 rounded-2xl h-full border border-[#EAF2F4] group-hover:border-primary/50 transition-all duration-300 shadow-[0_4px_20px_rgb(0,0,0,0.03)] group-hover:shadow-[0_16px_36px_rgba(26,163,182,0.12)] flex flex-col justify-between">
                   <div>
                     {/* Top Row: Icon + Value Tag */}
-                    <div className="flex items-center justify-between mb-4">
-                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center border ${val.iconBg} transition-all duration-300 group-hover:scale-105 shadow-sm`}>
+                    <div className="flex flex-row gap-4 mb-4">
+                      <div className={`w-8 h-9 rounded-xl flex items-center justify-center border ${val.iconBg} transition-all duration-300 group-hover:scale-105 shadow-sm`}>
                         <Icon className="text-xl" />
                       </div>
-                      <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full ${val.badgeBg}`}>
-                        {val.tag}
-                      </span>
+                      <h3 className="font-bold text-[#12344D] mb-3 group-hover:text-primary transition-colors">
+                        {val.title}
+                      </h3>
                     </div>
 
-                    <h3 className="font-bold text-[#12344D] mb-3 text-xl group-hover:text-primary transition-colors">
-                      {val.title}
-                    </h3>
+
                     <p className="text-slate-700 leading-relaxed text-sm sm:text-[14.5px] font-normal">
                       {val.desc}
                     </p>

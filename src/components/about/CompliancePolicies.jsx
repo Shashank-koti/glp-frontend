@@ -6,7 +6,7 @@ export default function CompliancePolicies() {
   const { t } = useTranslation();
 
   return (
-    <section className="py-10 sm:py-12 lg:py-14 bg-white relative overflow-hidden border-t border-[#EAF2F4]">
+    <section className="py-14 sm:py-18 lg:py-20 bg-white relative overflow-hidden border-t border-[#EAF2F4]">
       {/* Background accents */}
       <div className="absolute top-1/2 left-0 w-72 h-72 bg-primary/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2"></div>
       <div className="absolute top-1/2 right-0 w-72 h-72 bg-[#084553]/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2"></div>
@@ -39,18 +39,14 @@ export default function CompliancePolicies() {
             className="bg-gradient-to-br from-[#F8FBFC] to-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 border border-[#EAF2F4] shadow-[0_8px_30px_rgba(8,69,83,0.04)] hover:shadow-[0_16px_40px_rgba(26,163,182,0.08)] transition-all duration-300 flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-600">
+              <div className="flex gap-3 mb-4">
+                <div className="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-600">
                   <FiAlertTriangle className="text-xl" />
                 </div>
-                <span className="text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                  Mandatory Notice
-                </span>
+                <h3 className="font-extrabold text-[#12344D] text-lg sm:text-xl mb-3">
+                  {t('about.policies.researchTitle', 'Research & Analytical Use Only')}
+                </h3>
               </div>
-
-              <h3 className="font-extrabold text-[#12344D] text-lg sm:text-xl mb-3">
-                {t('about.policies.researchTitle', 'Research & Analytical Use Only')}
-              </h3>
 
               <p className="text-slate-700 leading-relaxed text-sm sm:text-[14.5px] font-normal mb-4">
                 {t('about.policies.researchDesc', 'All products supplied by GLP Pharma Standards are intended exclusively for research, laboratory and analytical applications. They are not intended for human or animal consumption, therapeutic use, clinical administration or any other unauthorized application.')}
@@ -67,18 +63,14 @@ export default function CompliancePolicies() {
             className="bg-gradient-to-br from-[#F8FBFC] to-white rounded-2xl sm:rounded-3xl p-6 sm:p-7 border border-[#EAF2F4] shadow-[0_8px_30px_rgba(8,69,83,0.04)] hover:shadow-[0_16px_40px_rgba(26,163,182,0.08)] transition-all duration-300 flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-10 h-10 rounded-xl bg-[#084553]/10 border border-[#084553]/20 flex items-center justify-center text-[#084553]">
+              <div className="flex gap-3 mb-4">
+                <div className="w-8 h-8 rounded-xl bg-[#084553]/10 border border-[#084553]/20 flex items-center justify-center text-[#084553]">
                   <FiShield className="text-xl" />
                 </div>
-                <span className="text-xs font-bold text-[#084553] bg-[#084553]/10 border border-[#084553]/20 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                  Statutory Protocol
-                </span>
+                <h3 className="font-extrabold text-[#12344D] text-lg sm:text-xl mb-3">
+                  {t('about.policies.complianceTitle', 'Regulated & Controlled Substances Policy')}
+                </h3>
               </div>
-
-              <h3 className="font-extrabold text-[#12344D] text-lg sm:text-xl mb-3">
-                {t('about.policies.complianceTitle', 'Regulated & Controlled Substances Policy')}
-              </h3>
 
               <p className="text-slate-700 leading-relaxed text-sm sm:text-[14.5px] font-normal mb-4">
                 {t('about.policies.complianceDesc', 'GLP Pharma Standards does not manufacture, supply, export or otherwise deal in restricted, narcotic, psychotropic, addictive, prohibited or other regulated chemical substances without the applicable licenses, authorizations and regulatory approvals. All transactions involving regulated substances are subject to applicable laws, licensing requirements and internal compliance review.')}
